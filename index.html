@@ -122,9 +122,14 @@ button.chapter-btn[data-level="l4"] {
 }
 
     </style>
+    </script>
 </head>
 <!-- RIFERIMENTO_BLOCCO: PART_2_STUDIO_PANEL -->
 <body>
+    <!-- INTERFACCIA BOTTONE DI LOGIN/LOGOUT AUTOMATICO -->
+    <div style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+        </div>
+    </div>
 
 <div style="display: flex; gap: 30px; justify-content: center; align-items: flex-start; max-width: 1600px; margin: 0 auto; width: 100%; flex-wrap: wrap;">
  
@@ -366,5 +371,35 @@ button.chapter-btn[data-level="l4"] {
      });
  }
 </script>
+                 <!-- NETLIFY IDENTITY SECURITY LOGIC ENGINE -->
+    <script>
+      // 1. All'avvio, controlla se lo studente è registrato ed è loggato
+      netlifyIdentity.on('init', user => {
+        if (!user) {
+          // Se non è loggato, blocca l'interazione e apre il box di login
+          netlifyIdentity.open();
+          document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+            el.style.pointerEvents = 'none'; // Disattiva i click sui test
+            el.style.opacity = '0.4';       // Opacizza i cassetti
+          });
+        }
+      });
+
+      // 2. Quando lo studente esegue con successo il login
+      netlifyIdentity.on('login', user => {
+        netlifyIdentity.close(); // Chiude la finestra di login
+        // Ripristina l'interattività totale del portale
+        document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+          el.style.pointerEvents = 'auto';
+          el.style.opacity = '1';
+        });
+        console.log("Welcome back student:", user.email);
+      });
+
+      // 3. Se lo studente clicca su Logout, blocca nuovamente la dashboard
+      netlifyIdentity.on('logout', () => {
+        window.location.reload(); // Ricarica la pagina per riattivare la barriera
+      });
+    </script>
 </body>
 </html>
