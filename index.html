@@ -127,9 +127,10 @@ button.chapter-btn[data-level="l4"] {
 <!-- RIFERIMENTO_BLOCCO: PART_2_STUDIO_PANEL -->
 <body>
     <!-- INTERFACCIA BOTTONE DI LOGIN/LOGOUT AUTOMATICO -->
-    <div style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
-        </div>
-    </div>
+    <div
+  data-netlify-identity-menu
+  style="position:fixed;top:20px;right:20px;z-index:99999;">
+</div>
 
 <div style="display: flex; gap: 30px; justify-content: center; align-items: flex-start; max-width: 1600px; margin: 0 auto; width: 100%; flex-wrap: wrap;">
  
@@ -369,46 +370,39 @@ button.chapter-btn[data-level="l4"] {
              panel.style.maxHeight = panel.scrollHeight + "px";
          }
      });
- }
-</script>
-       <!-- NETLIFY IDENTITY SECURITY LOGIC ENGINE - BLOCCO TOTALMENTE FORZATO -->
+ }    <!-- NETLIFY IDENTITY SECURITY LOGIC ENGINE - FORCE SECURE -->
     <script>
-      // Forzatura inizializzazione immediata all'apertura del browser
-      document.addEventListener("DOMContentLoaded", function() {
-        if (window.netlifyIdentity) {
-          window.netlifyIdentity.init({
-            APIUrl: 'https://netlify.app'
-          });
-
-          // Controllo rigoroso dello stato utente
-          const currentUser = window.netlifyIdentity.currentUser();
-          if (!currentUser) {
-            // Se l'utente non è autenticato, applica subito la barriera visiva
-            document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
-              el.style.pointerEvents = 'none';
-              el.style.opacity = '0.3';
-            });
-            // Forza l'apertura del box di login grafico al centro dello schermo
-            setTimeout(() => { window.netlifyIdentity.open(); }, 500);
-          }
-        }
+      // 1. Inizializzazione immediata con le credenziali del tuo database server
+      netlifyIdentity.init({
+        APIUrl: 'https://netlify.app'
       });
 
-      // Gestione dinamica degli eventi di Login e Logout
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('login', user => {
-          window.netlifyIdentity.close();
-          document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+      // 2. Esegui il blocco istantaneo prima che la pagina mostri i test
+      const user = netlifyIdentity.currentUser();
+      if (!user) {
+         // Se non loggato, congela i click e opacizza i cassetti
+         document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+            el.style.pointerEvents = 'none';
+            el.style.opacity = '0.2';
+         });
+         // Forza l'apertura immediata della finestra di Login/Registrazione
+         setTimeout(() => { netlifyIdentity.open(); }, 300);
+      }
+
+      // 3. Quando l'utente effettua il login, sblocca la dashboard
+      netlifyIdentity.on('login', user => {
+         netlifyIdentity.close();
+         document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
             el.style.pointerEvents = 'auto';
             el.style.opacity = '1';
-          });
-        });
+         });
+      });
 
-        window.netlifyIdentity.on('logout', () => {
-          window.location.reload();
-        });
-      }
+      // 4. Se l'utente clicca su logout, riattiva la barriera
+      netlifyIdentity.on('logout', () => {
+         window.location.reload();
+      });
     </script>
-
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </body>
 </html>
