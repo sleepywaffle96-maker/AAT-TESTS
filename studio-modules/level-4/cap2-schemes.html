@@ -1,141 +1,170 @@
-<!-- BLOCCO 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 2: AMAC Costing Schemes | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 2: Drafting & Interpreting Statements (Visual Schemes)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON DETTAGLIO BADGE ARANCIONE BRAND CORRELATO */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --t-green: #10b981;
-            --t-red: #ef4444;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --card-bg: #FAFAFA;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.2rem;
-            margin-top: 0;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.5rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
-        h2 {
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-top: 1.5rem;
+        .visual-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-sizing: border-box;
         }
-        .t-account {
-            width: 100%;
-            margin: 1rem 0;
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.02);
-            border-radius: 6px;
-            overflow: hidden;
+        .visual-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--l3-cyan-dark);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.25rem;
         }
-        .t-account th {
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--primary);
-            padding: 0.5rem;
-            border-bottom: 2px solid var(--primary);
+        .flow-diagram-box {
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            padding: 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #E2E8F0;
+            overflow-x: auto;
+            margin: 1.5rem 0;
         }
-        .t-account td {
-            padding: 0.6rem;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .t-account td:first-child {
-            border-right: 2px solid var(--border-glass);
+        .financial-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .financial-table th { background-color: var(--l3-cyan-dark); color: #FFFFFF; padding: 0.75rem; font-size: 0.85rem; border: 1px solid var(--l3-cyan-dark); }
+        .financial-table td { border: 1px solid var(--border-color); padding: 0.75rem; font-size: 0.9rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
+            .flow-diagram-box { background: #F8FAFC; color: #000; border: 1px solid #CBD5E1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>AMAC Costing Models & Structures</h1>
-            <p style="color: var(--text-muted)">Visual computational frameworks for Activity-Based allocations and Target engineering grids.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Drafting & Interpreting Statements - Chapter 2 Visual Schemes</h1>
+            </div>
 
-            <h2>1. Activity-Based Costing (ABC) Allocation Process Map</h2>
-            <p style="color: var(--text-muted)">The logical breakdown of tracing costs from pools down to product units via specific operational drivers.</p>
-            
-            <table class="t-account">
+            <h2>Scheme 2.1: Key International Accounting Standards (IAS / IFRS)</h2>
+            <div class="grid-container">
+                <div class="visual-card">
+                    <div class="visual-card-title">IAS 16 - Tangible Assets (PPE)</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Governs Property, Plant, and Equipment cost tracking and updates.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--l3-cyan-dark); margin-top:0.5rem; margin-bottom:0;">📌 Rule: Upward value shifts build a Revaluation Reserve outside P&L balances.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">IAS 38 - Intangible Assets</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Establishes strict boundaries for non-monetary asset lines handling.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--danger-color); margin-top:0.5rem; margin-bottom:0;">⚠️ Trap: Expense Research costs immediately. Capitalize Development expenses only.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">IAS 37 - Provisions & Risks</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Determines lines criteria for logging future corporate financial exposure hazards.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--success-color); margin-top:0.5rem; margin-bottom:0;">🛡️ Target: Present legal obligation + probable outflow = Log formal Provision cells.</p>
+                </div>
+            </div>
+            <h2>Scheme 2.2: IAS 7 Statement of Cash Flows Architecture</h2>
+            <div class="flow-diagram-box">
+========================================================================================
+                      STATUTORY LIQUIDITY SEPARATION ENGINE
+========================================================================================
+
+ [OPERATING ACTIVITIES SECTION] 
+   • Starts from Operating Profit. Adjusts out non-cash adjustments (Depreciation, Provisions).
+   • Tracks Working Capital shifts: Inventory variations, Receivables/Payables cells changes.
+         ↓
+ [INVESTING ACTIVITIES SECTION]
+   • Captures non-current assets transactions. Cash inflows from selling equipment.
+   • Cash outflows spent buying long-term intangibles or plant property (PPE).
+         ↓
+ [FINANCING ACTIVITIES SECTION]
+   • Tracks structural funding shifts. Cash inflows from issuing new share capital stakes.
+   • Cash outflows paid out to settle long-term bank loans or finance lease lines.
+
+----------------------------------------------------------------------------------------
+ CRITICAL EXAM BOUNDARY: Dividend payments can sit in Operating or Financing flows.
+ BONUS SHARES TRAP: Zero impact on this sheet. SOCIE capitalization shift only.
+========================================================================================
+            </div>
+            <h2>Scheme 2.3: Core Ratio Equations Framework</h2>
+            <table class="financial-table">
                 <thead>
                     <tr>
-                        <th style="text-align: left;">Overhead Pool Name</th>
-                        <th>Associated Cost Driver</th>
-                        <th>Calculation for Driver Rate</th>
+                        <th style="text-align: left; width: 220px;">Financial Ratio Vector</th>
+                        <th style="text-align: left; width: 320px;">Statutory Mathematical Formula</th>
+                        <th style="text-align: left;">Strategic Accounting Diagnostic Core</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="color:var(--text-main)"><strong>Machine Setups Pool</strong></td>
-                        <td>Number of Production Setups</td>
-                        <td style="color:var(--primary)">Total Setup Cost / Total Number of Setups</td>
+                        <td style="font-weight: 600;">ROCE %</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">(Operating Profit / Capital Employed) * 100</td>
+                        <td>Measures asset efficiency. Capital Employed = Equity + Long-Term Liabilities.</td>
+                    </tr>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">Quick Ratio (Acid Test)</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">(Current Assets - Inventory) / Current Liabilities</td>
+                        <td>Isolates baseline short-term solvency by excluding less liquid inventory cells.</td>
                     </tr>
                     <tr>
-                        <td style="color:var(--text-main)"><strong>Quality Inspection Pool</strong></td>
-                        <td>Number of Quality Inspections</td>
-                        <td style="color:var(--secondary)">Total Inspection Cost / Total Inspections Logged</td>
+                        <td style="font-weight: 600;">Gearing Ratio %</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">(Long-Term Debt / Total Capital Employed) * 100</td>
+                        <td>Measures long-term debt risk exposure. Denominator must include both debt and equity.</td>
                     </tr>
-                    <tr>
-                        <td style="color:var(--text-main)"><strong>Material Handling Pool</strong></td>
-                        <td>Number of Material Components Ordered</td>
-                        <td style="color:var(--t-green)">Total Handling Cost / Total Component Orders</td>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">Interest Cover</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Operating Profit / Finance Costs Interest Expense</td>
+                        <td>Tracks capacity to pay debt charges. High ratio indicates strong security shields.</td>
                     </tr>
                 </tbody>
             </table>
-<!-- BLOCCO 2 -->
-            <h2>2. Target Cost Gap Framework Matrix</h2>
-            <p style="color: var(--text-muted)">Visual representation of pricing strategies versus manufacturing capabilities.</p>
-            
-            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1.5rem;">
-                <pre style="color: var(--text-muted); font-family: monospace; font-size: 0.95rem; margin: 0; line-height: 1.6;">
-Competitive Market Selling Price Target ...................     £150.00
-Less: Target Profit Margin Required (25%) .................    - £37.50
-<strong>Maximum Allowable Target Cost</strong> ............................     <strong>£112.50</strong>
 
-Current Estimated Manufacturing Capability Cost ..........     £128.00
-Target Allowable Cost Constraint .........................    -£112.50
-═══════════════════════════════════════════════════════════════════════
-<strong>THE COST GAP (Value Engineering Target)</strong> ..................      <strong>£15.50</strong>
-                </pre>
-            </div>
-        </div>
-    </div>
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
