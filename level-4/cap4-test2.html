@@ -3,307 +3,909 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>External Auditing - Test Two</title>
+    <title>AAT Level 4 - Chapter 4: Business Tax (Test Two)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO CON CONNOTAZIONE ETICHETTA ARANCIONE BRAND */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
+        }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span {
+            color: #64748B;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #calc-close-btn {
+            background: transparent;
+            border: none;
+            color: #EF4444;
             font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+
+        #calc-screen {
+            width: 100%;
+            height: 45px;
+            background: #000000;
+            border-radius: 8px;
+            color: #00FFFF;
+            text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: right;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #00FFFF;
+            box-sizing: border-box;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">External Auditing - Test Two</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: BUSINESS TAX (TEST TWO)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (Rollover Relief) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">1. A limited company disposes of a factory building, generating a significant chargeable capital gain, and immediately reinvests the full proceeds into a new operating warehouse. Which statutory relief defers the gain?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Terminal Loss Relief allocation checks.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Rollover Relief, which reduces the acquisition cost baseline of the new replacement asset.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> Deducting 100% immediate Annual Investment Allowance (AIA).</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Rollover Relief permits corporate entities to defer the tax payment on a capital gain from qualifying business assets by rolling it directly into the base cost of a replacement asset.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            An auditor sets the performance materiality threshold for an entity. The overall financial statement materiality is calculated as £60,000. Following standard practice, performance materiality is set at 75% of overall materiality. Calculate this adjusted threshold:<br>
-            Performance Materiality: £ <input type="text" id="ans1" placeholder="0.00">
+            <!-- QUESTION 2: TIPO "multi-select" (Special Rate Pool Additions) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the statutory statement regarding asset sorting across Capital Allowance frameworks.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Capital expenditures tracking long-life equipment, air conditioning units, or lift installations must be allocated to the corporate 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="special">
+                            <option value="">-- Target Pool --</option>
+                            <option value="main">Main pooling framework base</option>
+                            <option value="special">Special Rate Pool framework base</option>
+                        </select> 
+                        which applies a restricted Writing Down Allowance (WDA) equivalent to exactly 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="6">
+                            <option value="">-- Rate --</option>
+                            <option value="6">6% per period on a reducing baseline</option>
+                            <option value="18">18% per period on a reducing baseline</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Building integral features and assets with a long operational lifespan are restricted by HMRC, shifting them away from the 18% Main Pool down to the 6% Special Rate Pool.
+                </div>
+            </div>
+
+            <!-- QUESTION 3: TIPO "radio" (Group Relief Principles) -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">3. Within a 75% corporate group configuration, how can a subsidiary company utilize a current-year trading loss under standard group tax optimization options?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> Surrender the loss via Group Relief to offset the taxable profits of a profitable group member company.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> Capitalize the losses straight into the parent company’s development asset lines.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> Request an immediate cash refund equivalent to the standard quarterly VAT ceiling.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Group Relief parameters allow corporate group members to surrender active current-year losses to profitable group entities, optimizing tax metrics across the entire structure.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "multi-input" (Corporation Tax Payment Deadlines) -->
+            <div class="question-tab" data-qindex="4" data-type="multi-input">
+                <div class="task-instruction-text">4. A standard small limited company closes its fiscal accounting period on 31 December. Input the exact number of months and days following the period end before the compulsory corporation tax cash payment must reach HMRC.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Statutory Small Corporate Payment Target</th>
+                                <th style="width: 250px;">Time Threshold Allocation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Number of full calendar months required</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="9" placeholder="0"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">Additional exact number of days required</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="1" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> For non-large entities, corporation tax payments are due exactly 9 months and 1 day after the close of the accounting period (e.g., by 1 October for a December year-end).
+                </div>
+            </div>
+
+            <!-- QUESTION 5: TIPO "radio" (Quarterly Instalments Threshold) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">5. What corporate condition forces a limited company to abandon year-end single payment schedules and submit corporation tax through mandatory Quarterly Instalments?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> Registering any disallowable customer entertainment cost inside the accounts receivable sheets.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> Becoming classified by legislation as a Large Company, with taxable profits crossing the statutory profit limit threshold.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> Operating any single asset tracking pool utilizing the 6% writing down allowance rate.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Companies classified as 'Large' (standard profit cap baseline of £1.5 million, partitioned by the number of associated companies) must pay liabilities through quarterly instalments.
+                </div>
+            </div>
+            <!-- QUESTION 6: TIPO "multi-select" (Indexation Allowance Restriction) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the corporate capital statement regarding inflationary adjustments rules.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        When computing corporate chargeable gains on capital assets held for several years, accountants apply the Indexation Allowance up to a legislative boundary 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="frozen">
+                            <option value="">-- Regulation Status --</option>
+                            <option value="continuous">That tracks inflation continuously up to disposal date</option>
+                            <option value="frozen">Permanently frozen by legislation in December 2017</option>
+                        </select> 
+                        meaning that no inflation factors scale up the asset cost 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="after">
+                            <option value="">-- Window --</option>
+                            <option value="before">Before the original acquisition date</option>
+                            <option value="after">After that statutory historical freeze point</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Corporate Indexation Allowance freeze rule dictates that inflation reliefs stop compounding in December 2017. Any market inflation beyond that point provides zero tax cost shields.
+                </div>
+            </div>
+
+            <!-- QUESTION 2: TIPO "radio" (Associated Companies Trap) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">7. A limited company operates 3 active corporate subsidiaries under its control. How does this structural configuration impact the threshold limits for determining quarterly instalments payment dates?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> The baseline profit cap threshold increases by 25% for every single associated member.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> The statutory profit limits (e.g. £1.5m baseline) must be divided equally by the number of associated companies.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> It triggers an automatic exemption from standard HMRC digital data auditing checks.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Associated company rules prevent corporate groups from breaking up activities to exploit lower tax brackets. Statutory size ceilings are divided strictly by the total number of connected firms.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "multi-select" (Research and Development Tax Reliefs) -->
+            <div class="question-tab" data-qindex="8" data-type="multi-select">
+                <div class="task-instruction-text">8. Complete the statement describing innovative corporate expenditure tax incentives.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Under the specialized tax relief incentives for Small and Medium Enterprises (SMEs), qualifying Research and Development (R&amp;D) operational expenditures grant an enhanced deduction factor that reduces 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="trading">
+                            <option value="">-- Profit Target --</option>
+                            <option value="trading">Taxable corporate trading profits</option>
+                            <option value="revaluation">SOCIE revaluation reserve cells</option>
+                        </select> 
+                        shielding company investments in 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="scientific">
+                            <option value="">-- Focus --</option>
+                            <option value="scientific">Scientific and innovative technological advancements</option>
+                            <option value="hospitality">Client hospitality and general marketing campaigns</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> UK corporate R&amp;D tax credits offer an enhanced statutory deduction rate on qualified scientific testing costs, significantly dropping corporate tax exposures for tech businesses.
+                </div>
+            </div>
+
+            <!-- QUESTION 9: TIPO "radio" (Withholding Tax / Double Taxation) -->
+            <div class="question-tab" data-qindex="9" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">9. A UK limited company receives overseas dividend income that has already been subject to foreign deductions at source. What mechanism avoids a dual tax charge on identical cash flows?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="A"> Writing off the foreign tax as a flexible cash budget variance.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="B"> Capitalizing the international tax straight into non-current property assets.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="C"> Double Taxation Relief (DTR), allowing a credit for foreign tax paid up to the UK corporation tax limit.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Double Taxation Relief treaties shield firms operating globally, allowing foreign withholding taxes to act as a tax credit up to the equivalent UK tax exposure limit.
+                </div>
+            </div>
+            <!-- QUESTION 10: TIPO "multi-input" (Enhanced R&D Sme Calculation) -->
+            <div class="question-tab" data-qindex="10" data-type="multi-input">
+                <div class="task-instruction-text">10. An SME experiences a qualifying science laboratory research spending of £10,000. Assume the corporate tax rules grant a supplementary tax enhancement deduction rate of 86%. Calculate the extra deduction amount that the firm can write off *in addition* to the original expenditure.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">HMRC Supplementary R&amp;D SME Incentives Parameter</th>
+                                <th style="width: 250px;">Calculated Tax Write-Off (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Extra enhanced tax deduction value layer (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="8600" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The extra tax write-off is calculated as: £10,000 original spending × 86% statutory enhancement rate = £8,600 extra tax deduction. The total tax deduction becomes £18,600.
+                </div>
+            </div>
+            <!-- QUESTION 11: TIPO "radio" (Rollover Relief Replacement Windows) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">11. To secure a valid Rollover Relief claim on a factory land disposal, within what legislative window must the company acquire the new replacement asset?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> Strictly within 6 calendar months preceding the disposal date cell.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> A statutory timeframe ranging from 12 months before up to 36 months after the disposal date.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> Indefinitely, as long as the asset stays inside the main pooling registry.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> HMRC mandates a specific reinvestment frame for rollover claims: the replacement business asset must be bought within 1 year before or up to 3 years after the initial asset disposal date.
+                </div>
+            </div>
+            <!-- QUESTION 12: TIPO "multi-select" (Terminal Loss Claims Mechanics) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the corporate statutory analysis addressing final trade termination options.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        If a company permanently ceases trading activities and registers a loss in its final 12 months, it can file an extended 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="terminal">
+                            <option value="">-- Relief Class --</option>
+                            <option value="group">Group relief claim</option>
+                            <option value="terminal">Terminal loss relief claim</option>
+                        </select> 
+                        to carry back those unabsorbed losses to offset total taxable profits of the preceding 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="3">
+                            <option value="">-- Window Scope --</option>
+                            <option value="3">3 years on a LIFO baseline sequence</option>
+                            <option value="5">5 years on a FIFO baseline sequence</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Terminal Loss Relief expands normal carry-back rules upon permanent trade cessation. It allows the final year's losses to claw back profits from the preceding 3 years on a Last-In, First-Out (LIFO) order.
+                </div>
+            </div>
+            <!-- QUESTION 13: TIPO "radio" (Capital Allowizations Structures Leases) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">13. A limited company acquires plant equipment through a standard long-term Finance Lease arrangement. Under current tax guidelines, who is legally entitled to claim the Capital Allowances?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> The lessee company (the user), provided the lease passes the standard long funding lease criteria rules.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> The lessor bank exclusively, regardless of corporate contract mappings.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Capital allowances are canceled and replaced by automated flexible budget flexes.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Under Long Funding Lease frameworks, a firm holding equipment under finance lease contracts can claim the Capital Allowances directly, replacing accounting depreciation.
+                </div>
+            </div>
+            <!-- QUESTION 14: TIPO "multi-select" -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the technical description exposing partial reinvestment rollover traps.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        When a limited company reinvests only a portion of its asset disposal proceeds into a new replacement asset, full rollover relief is blocked and the un-reinvested cash balance triggers an immediate 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="chargeable">
+                            <option value="">-- Gain Status --</option>
+                            <option value="chargeable">Chargeable gain exposure up to the cash kept</option>
+                            <option value="exempt">Exempt revaluation reserve adjustment</option>
+                        </select> 
+                        which must be loaded onto the current period corporate 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="tax">
+                            <option value="">-- Reporting --</option>
+                            <option value="tax">Tax computation schedule return</option>
+                            <option value="suspense">Suspense ledger double-entry lines</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Partial reinvestment splits tax shields. Any cash proceeds retained by the company and not spent on the replacement business asset are taxed immediately as a chargeable gain.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "radio" -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. While the corporation tax payment deadline has its unique timing rules, what is the statutory deadline for submitting the formal CT600 Corporate Tax Return to HMRC?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> Exactly 9 months and 1 day following the period end date cell.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> Exactly 12 months following the end of the corporate accounting period.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> Capped at 30 days following the publication of Companies House accounts.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Corporate Return Filing vs Payment Trap isolates the two distinct dates. Small payments must reach HMRC within 9 months and 1 day, but the formal CT600 return can be submitted up to 12 months after the period end.
+                </div>
+            </div>
+
+        </form>
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            If a business introduces an exceptionally strong, automated cloud ledger tracking system, the auditor determines that internal controls are effective. What direct effect does this have on the Control Risk assessment?<br>
-            Control Risk will be: <select id="ans2"><option value="">Select</option><option value="correct">Decreased (Lowered)</option><option value="w">Increased</option><option value="w">Kept completely unchanged</option></select>
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            An auditor matches a selection of sales invoices dispatched during the last 5 days of the financial year to the corresponding goods dispatch notes (GDNs). Which financial ledger assertion is primarily under review here?<br>
-            Assertion Type: <select id="ans3"><option value="">Select</option><option value="w">Existence</option><option value="correct">Cut-off</option><option value="w">Completeness</option></select>
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            The revision team extracts a sample of purchase orders and performs a detailed recalculation of the trade discount allocations on the matching supplier invoices. This substantive procedure is defined as a:<br>
-            Procedure Category: <select id="ans4"><option value="">Select</option><option value="w">Test of Control</option><option value="w">Substantive Analytical Procedure</option><option value="correct">Test of Detail</option></select>
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A corporate limited entity reports a cost of sales figure of £900,000 and closing inventory balances of £75,000. Calculate the Inventory Turnover ratio to evaluate operational movement consistency:<br>
-            Inventory Turnover: <input type="text" id="ans5" placeholder="0.0"> times
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            The risk that a material misstatement could occur in a financial statement ledger balance, assuming that there were no related internal controls or audit checks in place, is defined as:<br>
-            Risk Category: <select id="ans6"><option value="">Select</option><option value="correct">Inherent Risk</option><option value="w">Control Risk</option><option value="w">Detection Risk</option></select>
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            An external auditor uses statistical software to perform a regression analysis on delivery truck fuel expenses against recorded logbook mileage data across the year. This method is classified as a:<br>
-            Procedure Category: <select id="ans7"><option value="">Select</option><option value="w">Test of Control</option><option value="correct">Substantive Analytical Procedure</option><option value="w">Risk Assessment Procedure</option></select>
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            Under ISA 501, if an auditor is unable to attend the physical year-end inventory count due to unforeseen travel restrictions, they can skip this requirement entirely if the client guarantees the inventory tracking software is accurate.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans8"><option value="">Select</option><option value="w">True</option><option value="correct">False</option></select>
-        </div>
-    </div>
-          
-    <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            An auditor applies a sampling technique where every individual pound (£1) inside a ledger population has an equal opportunity of selection, automatically causing larger monetary transactions to have a higher chance of being picked. What selection methodology is being applied?<br>
-            Methodology Type: <select id="ans9"><option value="">Select</option><option value="w">Haphazard Selection</option><option value="w">Block Selection</option><option value="correct">Monetary Unit Sampling</option></select>
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            A corporate client experiences a massive warehouse flood 3 weeks after the financial year-end balance sheet date, destroying £400,000 worth of stock. Under IAS 10 and ISA 560 guidelines, how should this material subsequent event be treated in the current financial statements?<br>
-            Event Treatment: <select id="ans10"><option value="">Select</option><option value="w">As an adjusting event (Alter the stock valuation figures)</option><option value="correct">As a non-adjusting event (Provide a descriptive disclosure note)</option><option value="w">Completely ignored until the next reporting period</option></select>
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            An auditor uncovers a cash fraud scheme orchestrated by a senior director. Although the monetary value of the fraud is small and below planning materiality thresholds, it must still be reported immediately to management because it involves a qualitative breach of trust.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans11"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            The audit team is verifying a company's legal title to its administrative office buildings. Which specific audit procedure provides the most reliable elements of audit evidence regarding the assertion of rights and obligations?<br>
-            Audit Procedure: <select id="ans12"><option value="">Select</option><option value="w">Asking the company accountant during a verbal interview</option><option value="correct">Inspecting official land registry title deeds held by external solicitors</option><option value="w">Performing a analytical recalculation of building depreciation</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            A business client refuses to provide access to its subsidiary ledger records or inventory counts, preventing the audit firm from obtaining sufficient appropriate audit evidence. The potential effects are material and pervasive. State the type of audit opinion required:<br>
-            Opinion Type: <select id="ans13"><option value="">Select</option><option value="w">Qualified Opinion</option><option value="w">Adverse Opinion</option><option value="correct">Disclaimer of Opinion ("We do not express an opinion")</option></select>
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            An accounting firm conducts the first-year audit for a client. Because the team has no historical benchmark data or audit documentation regarding the client's opening balances, which risk component is primarily increased?<br>
-            Risk Component: <select id="ans14"><option value="">Select</option><option value="correct">Inherent Risk</option><option value="w">Control Risk</option><option value="w">Detection Risk</option></select>
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            When an external auditor determines that a client's financial statements provide a true and fair view of the company's performance in all material aspects, they issue a report with an:<br>
-            Opinion Category: <select id="ans15"><option value="">Select</option><option value="correct">Unmodified (Unqualified) Opinion</option><option value="w">Qualified Opinion</option><option value="w">Adverse Opinion</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    tabs.forEach(tab => tab.classList.remove('active'));
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    updateNavigationDisplay();
+}
+
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        icons.forEach(icon => icon.textContent = '');
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
-    }
-
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
-
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '45000' || val === '45000.00');
-        } else if (currentQ === 2) {
-            isCorrect = (document.getElementById('ans2').value === 'correct');
-        } else if (currentQ === 3) {
-            isCorrect = (document.getElementById('ans3').value === 'correct');
-        } else if (currentQ === 4) {
-            isCorrect = (document.getElementById('ans4').value === 'correct');
-        } else if (currentQ === 5) {
-            let val = document.getElementById('ans5').value.trim();
-            isCorrect = (val === '12' || val === '12.0' || val === '12.00');
-        } else if (currentQ === 6) {
-            isCorrect = (document.getElementById('ans6').value === 'correct');
-        } else if (currentQ === 7) {
-            isCorrect = (document.getElementById('ans7').value === 'correct');
-        } else if (currentQ === 8) {
-            isCorrect = (document.getElementById('ans8').value === 'correct');
-        } else if (currentQ === 9) {
-            isCorrect = (document.getElementById('ans9').value === 'correct');
-        } else if (currentQ === 10) {
-            isCorrect = (document.getElementById('ans10').value === 'correct');
-        } else if (currentQ === 11) {
-            isCorrect = (document.getElementById('ans11').value === 'correct');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            isCorrect = (document.getElementById('ans13').value === 'correct');
-        } else if (currentQ === 14) {
-            isCorrect = (document.getElementById('ans14').value === 'correct');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
-        }
-
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) box.className = "option-box correct-answer-highlight";
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = field.getAttribute('data-ans');
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter4_Test2_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
