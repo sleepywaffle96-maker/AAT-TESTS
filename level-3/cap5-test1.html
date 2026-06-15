@@ -43,7 +43,6 @@
             box-sizing: border-box;
             position: relative;
         }
-
         .test-header-row {
             display: flex;
             justify-content: space-between;
@@ -125,7 +124,6 @@
             padding: 0.75rem;
             font-size: 0.95rem;
         }
-
         .numeric-field, .multi-input-field, .multi-select-field, .select-input {
             width: 100%;
             padding: 0.45rem;
@@ -195,7 +193,6 @@
         .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
         .hidden { display: none !important; }
 
-        /* OSBORNE CALC STRUCTURAL DESIGN ELEMENTS */
         #calc-toggle-trigger {
             position: fixed;
             bottom: 30px;
@@ -296,6 +293,11 @@
 
     <div class="test-container">
         <div class="test-header-row">
+            <div class="test-title">UNIT: BUSINESS AWARENESS - CHAPTER 5: PROFESSIONAL ETHICS FOR ACCOUNTANTS (TEST ONE)</div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+
             <!-- QUESTION 1: TIPO "multi-select" (Official IESBA Principles) -->
             <div class="question-tab active" data-qindex="1" data-type="multi-select">
                 <div class="task-instruction-text">1. Complete the statements regarding the fundamental ethical principles defined by the global IESBA guidelines.</div>
