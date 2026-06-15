@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAT Level 3 Advanced Diploma - Chapter 5 Summary</title>
+    <title>AAT Level 3 - Chapter 5: Professional Ethics for Accountants (Cheat Sheet)</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 3 - PALETTE AZZURRO CIANO ED AREA RECAP FINALE */
         :root {
             --bg-dark-external: #0B0F19;
             --bubble-white-bg: #FFFFFF;
@@ -14,83 +15,89 @@
             --l3-cyan-light: #E0F2FE;
             --text-dark: #1F2937;
             --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
         }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark-external);
             color: var(--text-dark);
             margin: 0;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             line-height: 1.7;
         }
         .studio-container { max-width: 1000px; margin: 0 auto; }
         .white-bubble-container {
             background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2.5rem;
+            padding: 3.5rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.25);
             border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        .financial-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-        .financial-table th { background-color: var(--l3-cyan-dark); color: #FFFFFF; padding: 0.75rem; font-size: 0.85rem; border: 1px solid var(--l3-cyan-dark); }
-        .financial-table td { border: 1px solid var(--border-color); padding: 0.75rem; font-size: 0.9rem; }
+        .summary-card {
+            background-color: var(--l3-cyan-light);
+            border-left: 5px solid var(--l3-cyan-primary);
+            padding: 1.5rem;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 2rem;
+        }
+        .trap-summary-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEE2E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        h2 { color: var(--l3-cyan-primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
+        }
     </style>
 </head>
 <body>
     <div class="studio-container">
         <div class="white-bubble-container">
             <div style="margin-bottom: 2rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 1rem;">
-                <span style="background: var(--l3-cyan-primary); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 3 ADVANCED</span>
-                <h1 style="font-size: 1.6rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 5: Professional Ethics Critical Summary</h1>
+                <span style="background: var(--l3-cyan-primary); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 3 RECAP</span>
+                <h1 style="font-size: 1.75rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 5: Professional Ethics Quick Cheat Sheet</h1>
             </div>
 
-            <!-- SCATOLA DEI PRINCIPI CHIAVE -->
-            <div style="background-color: var(--l3-cyan-light); border-left: 4px solid var(--l3-cyan-primary); padding: 1.2rem; border-radius: 6px; margin-bottom: 2rem;">
-                <strong style="color: var(--l3-cyan-dark); font-size: 1rem;">🎯 THE PROFESSIONAL ACCOUNTANT'S CORE RESPONSIBILITY FRAMEWORK:</strong>
-                <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem; margin-bottom: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
-                    1. The Public Interest: An accountant's overriding duty is to protect the public interest, which ranks above client or employer loyalty.<br>
-                    2. POCA Mandate: Failure to disclose money laundering = Up to 5 years imprisonment.<br>
-                    3. Tipping Off Mandate: Alerting a suspect under SAR investigation = Up to 5 years imprisonment.
+            <div class="summary-card">
+                <strong style="color: var(--l3-cyan-dark); font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🎯 CORE ETHICAL TAXONOMY MEMORY BLOCK:</strong>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
+                    • 5 Principles: Integrity, Objectivity, Competence & Due Care, Confidentiality, Professional Behaviour.<br>
+                    • 5 Threats: Self-Interest, Self-Review, Advocacy, Familiarity, Intimidation.<br>
+                    • AML Offenses: Failure to Disclose (Max 5 Years) | Tipping Off (Max 5 Years).
                 </p>
             </div>
-            <!-- TABELLA RIFERIMENTO LEGGI STATUTARIE -->
-            <table class="financial-table">
-                <thead>
-                    <tr style="background: #0284C7; color: #FFFFFF;">
-                        <th style="text-align: left;">Statutory UK Legislation Act</th>
-                        <th>Core Impact on Accounting Databases</th>
-                        <th>Regulatory Penalty Compliance Focus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">Proceeds of Crime Act (POCA)</td>
-                        <td>Mandates Customer Due Diligence (CDD) and automatic SAR creation.</td>
-                        <td style="color:#DC2626; font-weight:700;">Criminal prosecution for non-disclosure or tipping off.</td>
-                    </tr>
-                    <tr style="background: #FAFAFA;">
-                        <td style="font-weight: 600; text-align: left;">Data Protection Act / GDPR</td>
-                        <td>Protects confidentiality; bars unencrypted storage of payroll or client accounts.</td>
-                        <td>Massive corporate fines calculated as a percentage of global turnover.</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600; text-align: left;">Bribery Act</td>
-                        <td>Criminalizes corporate failure to prevent commercial bribery within workflows.</td>
-                        <td>Unlimited corporate fines and director disqualification structures.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2>1. Anti-Money Laundering Regulations (POCA)</h2>
+            <ul>
+                <li><strong>Gatekeeper Duty:</strong> Accountants operate within the "regulated sector" and must identify clients (CDD) using authoritative documentation (passports, registries) before executing any trade agreements.</li>
+                <li><strong>Suspicion Pipeline:</strong> Internal team alerts must be centralized through the appointed <strong>MLRO</strong>, who handles the submission of formal <strong>Suspicious Activity Reports (SARs)</strong> directly to the <strong>National Crime Agency (NCA)</strong>.</li>
+                <li><strong>Legal Sanction Limits:</strong> Hiding evidence of laundering or failing to disclose a suspicion carries up to 5 years imprisonment. Alerting a suspect of an active SAR audit (Tipping Off) carries an identical 5-year criminal sentence.</li>
+            </ul>
 
-            <!-- SEZIONE SINTESI OPERATIVA REVISIONE EXAM-DAY -->
-            <div style="background: #FAFAFA; border: 1px solid #E5E7EB; border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
-                <strong style="color: #111827; display: block; margin-bottom: 0.5rem; font-size: 1rem;">🎯 STRATEGIC ETHICS EXAM-DAY CHECKLIST:</strong>
-                <ul style="font-size: 0.95rem; line-height: 1.6; padding-left: 1.5rem; margin: 0; color: #4B5563;">
-                    <li><strong>Identify the Override:</strong> When an exam question involves suspected money laundering or tax evasion, confidentiality is legally overridden by the Proceeds of Crime Act. You must report, not stay silent.</li>
-                    <li><strong>The Anonymity Consultation Rule:</strong> If consulting the AAT technical support line about an internal dilemma, you must keep all client names anonymous to protect basic data protection compliance laws.</li>
-                    <li><strong>Safeguard or Resign:</strong> If internal corporate directors refuse to log a transaction adjustment or alter fraudulent data entries, and safeguards fail, the final professional step is formal **Resignment** from the engagement.</li>
+            <h2>2. Corporate Data Safety & Public Disclosures</h2>
+            <ul>
+                <li><strong>DPA / GDPR Compliance:</strong> Commercial accounting databases must capture and process private records lawfully, transparently, securely against hacks, and keep data only for specified legal compliance timelines.</li>
+                <li><strong>Bribery Act Controls:</strong> Criminalizes the acts of giving, receiving, or failing to prevent a commercial bribe within corporate management hierarchies, enforcing strict organizational liability.</li>
+                <li><strong>PIDA Whistleblowing:</strong> Provides comprehensive employment protection against retaliation if an accountant must bypass compromised internal boards to report illegalities to public oversight bodies.</li>
+            </ul>
+            <div class="trap-summary-box">
+                <strong style="color: #DC2626; font-size: 1rem; display: block; margin-bottom: 0.5rem;">⚠️ ADVANCED EXAM TRAPS RECAP (INVISIBLE ERRORS):</strong>
+                <ul>
+                    <li><strong>The Inadvertent Clarification Trap:</strong> Never confront a client or ask for details after identifying clear fraud lines. Any change in behavior that alerts the target constitutes criminal <strong>Tipping Off</strong>.</li>
+                    <li><strong>The Privilege Illusion:</strong> Client confidentiality is never absolute. The principle is completely overridden by legal obligations under POCA; data cannot be withheld from HMRC or the NCA.</li>
+                    <li><strong>The Safeguard Flaw:</strong> Automated controls are not safeguards if the threat remains unaddressed. Safeguards must actively eliminate or minimize risk. If a threat cannot be mitigated, the member must **decline or resign**.</li>
                 </ul>
             </div>
-        </div>
-    </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
