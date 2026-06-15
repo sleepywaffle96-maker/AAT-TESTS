@@ -1,119 +1,104 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 7: IASC Evaluation Summary | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 7: Cash & Treasury Management (Cheat Sheet)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --panel-bg: rgba(0, 242, 254, 0.05);
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.7;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.3rem;
-        }
-        .formula-panel {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
+        .summary-card {
+            background-color: var(--l3-cyan-light);
+            border-left: 5px solid var(--l3-cyan-primary);
+            padding: 1.5rem;
             border-radius: 0 6px 6px 0;
+            margin-bottom: 2rem;
         }
-        .formula-title {
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
+        .trap-summary-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEE2E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .formula-text {
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-        li {
-            margin-bottom: 0.5rem;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>IASC Systems Evaluation Core Reference</h1>
-            <p style="color: var(--text-muted)">Essential parameters, framework definitions, and formulas for internal system audit tasks.</p>
-
-            <h2>1. Investment Financial Break-Even Metrics</h2>
-            <div class="formula-panel">
-                <div class="formula-title">The Simple Capital Payback Period</div>
-                <div class="formula-text">Payback Period = Upfront Capital Outlay Cost / Net Annual Operating Cash Savings</div>
-                <p style="margin: 0.4rem 0 0 0; font-size: 0.9rem; color: var(--text-muted)">The resulting value shows the exact timeline required for an accounting platform upgrade to recover its initial implementation costs.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 2rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 1rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 4 RECAP</span>
+                <h1 style="font-size: 1.75rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 7: Cash and Treasury Quick Cheat Sheet</h1>
             </div>
 
-            <h2>2. Value for Money (VFM) Framework Checklist</h2>
-            <div class="formula-panel">
-                <p style="margin: 0; color: var(--text-muted)"><strong>Economy:</strong> Minimizing the financial cost of input resources required for the upgrade while maintaining quality standards (spending less).</p>
-                <p style="margin: 0.3rem 0 0 0; color: var(--text-muted)"><strong>Efficiency:</strong> Maximizing the volume of accurate system outputs generated relative to the resource inputs consumed (spending well).</p>
-                <p style="margin: 0.3rem 0 0 0; color: var(--text-muted)"><strong>Effectiveness:</strong> Ensuring the new control infrastructure directly fulfills the organization's strategic compliance and safety goals (spending wisely).</p>
+            <div class="summary-card">
+                <strong style="color: var(--l3-cyan-dark); font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🎯 CTMN LIQUIDITY & FORECASTING RECAP BLOCK:</strong>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
+                    • Treasury Triangle: Security (Capital) &lt;-&gt; Liquidity (Speed) &lt;-&gt; Yield (Return).<br>
+                    • Receipts Pipeline: Gross Sales Base -&gt; Subtract Bad Debt % FIRST -&gt; Apply Monthly Lag %.<br>
+                    • Absolute Omissions: Depreciation, Provisions, Amortization = Zero entry in columns.
+                </p>
             </div>
-
-            <h2>3. Critical Internal Audit Parameters</h2>
+            <h2>1. Cash Budgeting & Lead-Lag Adjustments</h2>
             <ul>
-                <li><strong>Three-Way Invoice Match:</strong> An essential internal control verification process that reconciles a supplier's Purchase Invoice against the company's original Purchase Order (PO) and its corresponding Goods Received Note (GRN) before authorizing a cash disbursement.</li>
-                <li><strong>Segregation of Duties:</strong> Splitting up key duties across a transaction workflow so that no single staff member can process, record, and authorize a payment from start to finish.</li>
-                <li><strong>Audit Trail logs:</strong> Automatic, chronological database records that log the exact user identity, timestamp, and machine terminal behind every ledger adjustment or entry modification.</li>
-                <li><strong>System Resilience:</strong> The ability of a financial software network to maintain data security, prevent access breaches, and restore accounting entries after unexpected utility failures or cyber incidents.</li>
+                <li><strong>Value Convention Rules:</strong> Cash forecasts monitor absolute physical bank transactions. All sales and purchases entries must be loaded using GROSS values (including VAT).</li>
+                <li><strong>Timing Isolations:</strong> Heavy statutory tax settlements (VAT quarterly, Corporation Tax) and structural equipment cash transactions must map strictly to their target calendar date cells.</li>
+                <li><strong>Centralized Pooling Advantages:</strong> PULLing individual divisional bank profiles into a singular corporate centralized pool optimizes baseline cash weights and reduces loan costs.</li>
             </ul>
-        </div>
-    </div>
+
+            <h2>2. Surplus Investments & Funding Deficits</h2>
+            <ul>
+                <li><strong>Sovereign Protections:</strong> Treasury Bills (T-Bills) provide absolute capital safety backed by governments, issued at a standard discount baseline.</li>
+                <li><strong>Divisional Liquidity Autonomy:</strong> Certificates of Deposit (CDs) generate competitive yields while providing active secondary trading market exit paths.</li>
+                <li><strong>Deficit Coverage Mechanics:</strong> Unplanned liquidity gaps deploy commercial bank overdrafts (flexible short-term daily interest scomputi) or committed Revolving Credit Facilities (RCF).</li>
+            </ul>
+            <div class="trap-summary-box">
+                <strong style="color: #DC2626; font-size: 1rem; display: block; margin-bottom: 0.5rem;">⚠️ ADVANCED EXAM TRAPS RECAP (INVISIBLE ERRORS):</strong>
+                <ul>
+                    <li><strong>The Depreciation Schedulation Fault:</strong> Included book accounting depreciation inside the payments track. Depreciation is a non-cash adjustments element with zero cash drain.</li>
+                    <li><strong>The Premature Lag Distribution Slip:</strong> Distributed full sales figures across subsequent months before extracting uncollectible bad debts. Bad debts must clear the pool **before** applying lag percentages.</li>
+                    <li><strong>The Net Scheme Value Error:</strong> Keyed in net invoice figures inside standard cash forecasts. Cash budgets track bank balance lines, forcing the deployment of **gross amounts (including VAT)**.</li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
