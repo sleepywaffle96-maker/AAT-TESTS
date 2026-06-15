@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAT Level 3 - Chapter 5: Ethics for Accountants (Test Two)</title>
+    <title>AAT Level 3 - Chapter 5: Professional Ethics for Accountants (Test Two)</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         /* DESIGN SYSTEM LIVELLO 3 - PALETTE AZZURRO CIANO ED APPENDICE TECNICA RIGIDA */
@@ -66,7 +66,6 @@
             color: var(--l3-cyan-dark);
             font-weight: 600;
         }
-
         .question-tab {
             display: none;
             flex-direction: column;
@@ -125,7 +124,6 @@
             padding: 0.75rem;
             font-size: 0.95rem;
         }
-
         .numeric-field, .multi-input-field, .multi-select-field, .select-input {
             width: 100%;
             padding: 0.45rem;
@@ -195,7 +193,6 @@
         .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
         .hidden { display: none !important; }
 
-        /* OSBORNE CALC WINDOW SCHEDULING BUILD */
         #calc-toggle-trigger {
             position: fixed;
             bottom: 30px;
@@ -278,6 +275,12 @@
             box-sizing: border-box;
         }
 
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
         @media print {
             body { background: #FFFFFF; padding: 0; margin: 0; }
             .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
@@ -290,365 +293,363 @@
 
     <div class="test-container">
         <div class="test-header-row">
-            <div class="test-title">UNIT: ETHICS FOR ACCOUNTANTS (TEST TWO)</div>
+            <div class="test-title">UNIT: BUSINESS AWARENESS - CHAPTER 5: PROFESSIONAL ETHICS FOR ACCOUNTANTS (TEST TWO)</div>
             <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
         </div>
         <form id="quiz-form" onsubmit="event.preventDefault();">
-            <!-- QUESTION 1: TIPO "radio" (Conflict of Interest Dilemma) -->
+            <!-- QUESTION 1: TIPO "radio" (Integrity Definition Trap) -->
             <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
-                <div class="task-instruction-text">1. A practice is requested to perform bookkeeping services for two aggressive local corporate retailers who are currently locked in an active legal battle. Which path strictly fulfills AAT ethical rules?</div>
+                <div class="task-instruction-text">1. Under the strict guidelines of the IESBA code, what is the exact operational requirement established by the principle of Integrity?</div>
                 <div class="task-interactive-body">
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q1" value="A"> Accept both client contracts without revealing the conflict to maximize internal revenue streams.</span>
+                        <span class="option-label"><input type="radio" name="q1" value="A"> To maintain absolute silence even when discovering internal corporate tax evasion or asset fraud.</span>
                         <span class="feedback-icon"></span>
                     </label>
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q1" value="B"> Disclose the conflict to both entities, secure informed written consent, and implement strict operational data firewalls (Chinese Walls).</span>
+                        <span class="option-label"><input type="radio" name="q1" value="B"> To be straightforward, honest, and completely truthful, ensuring a member is never associated with reporting that contains materially false information.</span>
                         <span class="feedback-icon"></span>
                     </label>
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q1" value="C"> Automatically drop the smaller customer to maintain loyalty with the highest-paying enterprise.</span>
+                        <span class="option-label"><input type="radio" name="q1" value="C"> To process all double-entry ledger adjustments using the automated cash scheme parameters.</span>
                         <span class="feedback-icon"></span>
                     </label>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Conflicts of interest do not command automatic refusal. The firm must evaluate significance, perform transparency disclosures, secure explicit client consents, and ensure separate personnel teams and locked sub-folders.
+                    <strong>Solution Note:</strong> Integrity forces professional accountants to remain honest and straightforward. The manual explicitly states that a member must never be associated with misleading or false statements.
                 </div>
             </div>
 
-            <!-- QUESTION 2: TIPO "multi-select" (Integrity vs Management Deceit) -->
+            <!-- QUESTION 2: TIPO "multi-select" (Objectivity & Verifiable Data) -->
             <div class="question-tab" data-qindex="2" data-type="multi-select">
-                <div class="task-instruction-text">2. Complete the analytical description regarding forced window-dressing directives.</div>
+                <div class="task-instruction-text">2. Complete the statement regarding the core operational application of Objectivity.</div>
                 <div class="task-interactive-body">
                     <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
-                        A company director orders you to deliberately defer logging an operational invoice of £15,000 until the next period to show a larger draft profit. Following this order violates the fundamental principle of 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="integrity">
-                            <option value="">-- Choose Principle --</option>
-                            <option value="integrity">Integrity (Truthful reporting)</option>
-                            <option value="confidentiality">Confidentiality</option>
+                        The principle of Objectivity mandates that a professional accountant must not allow bias, conflict of interest, or the undue influence of others to override 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="judgments">
+                            <option value="">-- Element --</option>
+                            <option value="judgments">Professional or business judgments</option>
+                            <option value="confidentiality">Absolute client confidentiality clauses</option>
                         </select>. 
-                        An AAT accountant cannot knowingly be associated with financial statements that are false or 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="misleading">
-                            <option value="">-- Condition --</option>
-                            <option value="misleading">Misleading by omission</option>
-                            <option value="external">Subject to external audits</option>
+                        Consequently, all financial assessments processed inside the worksheets must rely strictly on 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="verifiable">
+                            <option value="">-- Data Type --</option>
+                            <option value="verifiable">Objective, verifiable data</option>
+                            <option value="qualitative">Qualitative management estimates</option>
                         </select>.
                     </p>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Integrity demands that members must not knowingly sign off or be associated with reports, returns, or summaries where information is materially false, misleading, or obscured by omission.
+                    <strong>Solution Note:</strong> Objectivity bars any bias or third-party pressure from clouding accounting entries. Financial assessments must rest unalterably on objective, verifiable data tracks.
                 </div>
             </div>
 
-            <!-- QUESTION 3: TIPO "radio" (The Precedence of Public Interest) -->
+            <!-- QUESTION 3: TIPO "radio" (Familiarity Threat Scenario) -->
             <div class="question-tab" data-qindex="3" data-type="radio" data-correct="C">
-                <div class="task-instruction-text">3. When a certified accounting practitioner faces an unresolvable operational conflict between loyalty to an employer and protecting the public from massive financial deceit, what parameter takes absolute priority?</div>
+                <div class="task-instruction-text">3. An accountant is assigned to audit the final accounts and corporate records of an enterprise owned and managed by a close relative. What category of threat applies?</div>
                 <div class="task-interactive-body">
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q3" value="A"> Strict compliance with the corporate manager's internal private directives.</span>
+                        <span class="option-label"><input type="radio" name="q3" value="A"> Self-Interest Threat</span>
                         <span class="feedback-icon"></span>
                     </label>
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q3" value="B"> Protecting the ongoing annual retention fee profile of the accounting practice.</span>
+                        <span class="option-label"><input type="radio" name="q3" value="B"> Advocacy Threat</span>
                         <span class="feedback-icon"></span>
                     </label>
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q3" value="C"> The Public Interest, which commands truthfulness to preserve market trust and legal compliance care.</span>
+                        <span class="option-label"><input type="radio" name="q3" value="C"> Familiarity Threat</span>
                         <span class="feedback-icon"></span>
                     </label>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> A distinguishing mark of the accountancy profession is its explicit acceptance of its responsibility to act in the public interest, overriding narrow commercial corporate loyalty lines.
+                    <strong>Solution Note:</strong> Due to a long or close personal relationship with a client or employer, an accountant will be too sympathetic to their interests, triggering a Familiarity Threat.
                 </div>
             </div>
 
-            <!-- QUESTION 4: TIPO "multi-select" (Continuous Professional Competence Rules) -->
+            <!-- QUESTION 4: TIPO "multi-select" (Advocacy Threat Criteria) -->
             <div class="question-tab" data-qindex="4" data-type="multi-select">
-                <div class="task-instruction-text">4. Complete the operational regulatory statement concerning skills maintenance.</div>
+                <div class="task-instruction-text">4. Complete the analytical definition regarding promotional-driven accounting hazards.</div>
                 <div class="task-interactive-body">
                     <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
-                        Failing to perform structured Continuing Professional Development (CPD) and inadvertently implementing an outdated version of tax legislation on a client's tax return is a direct breach of 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="competence">
-                            <option value="">-- Choose Principle --</option>
-                            <option value="competence">Professional Competence and Due Care</option>
-                            <option value="behaviour">Professional Behaviour</option>
-                        </select>. 
-                        Accountants must take active steps to ensure that their workers possess 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="appropriate">
-                            <option value="">-- Training --</option>
-                            <option value="appropriate">Appropriate training and supervision</option>
-                            <option value="minimum">Minimum basic entry criteria</option>
-                        </select>.
-                    </p>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Professional Competence requires maintaining an expert level of skills and knowledge. Working without legislative updates or supervision introduces severe professional negligence exposure.
-                </div>
-            </div>
-
-            <!-- QUESTION 5: TIPO "radio" (Professional Behaviour Violations) -->
-            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
-                <div class="task-instruction-text">5. An accounting technician makes highly exaggerated, unprovable claims regarding their practice capabilities while posting derogatory text against a direct competitor. What core principle is violated?</div>
-                <div class="task-interactive-body">
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q5" value="A"> Technical Confidentiality</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q5" value="B"> Professional Behaviour</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q5" value="C"> Operational Objectivity</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Professional Behaviour commands that members must avoid any marketing or commentary conduct that brings discredit or reputational damage to the accounting profession.
-                </div>
-            </div>
-            <!-- QUESTION 6: TIPO "radio" (Self-Interest Threat Identification) -->
-            <div class="question-tab" data-qindex="6" data-type="radio" data-correct="B">
-                <div class="task-instruction-text">6. A bookkeeper is offered an engagement where the final professional fee depends entirely on the size of the tax reduction achieved for the client. What category of threat does this create?</div>
-                <div class="task-interactive-body">
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q6" value="A"> Advocacy Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q6" value="B"> Self-Interest Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q6" value="C"> Intimidation Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Contingent fees create a direct financial interest in the outcome, causing a Self-Interest Threat that compromises professional objectivity.
-                </div>
-            </div>
-
-            <!-- QUESTION 7: TIPO "multi-select" (Self-Review Threat Parameters) -->
-            <div class="question-tab" data-qindex="7" data-type="multi-select">
-                <div class="task-instruction-text">7. Complete the description of independent review conflicts inside a professional firm.</div>
-                <div class="task-interactive-body">
-                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
-                        Accepting a commercial engagement to audit or verify a series of ledger data summaries that you compiled yourself earlier in the year triggers a severe 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="self-review">
+                        Acting as a legal advocate for an audit client in a corporate restructuring execution or high-stakes legal dispute triggers an 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="advocacy">
                             <option value="">-- Choose Threat --</option>
+                            <option value="advocacy">Advocacy Threat</option>
                             <option value="self-review">Self-Review Threat</option>
-                            <option value="familiarity">Familiarity Threat</option>
-                        </select> 
-                        because you cannot assess your own work with absolute objectivity. To reduce this risk, the firm must implement an 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="independent">
-                            <option value="">-- Safeguard --</option>
-                            <option value="internal">Internal advocate partner</option>
-                            <option value="independent">Independent review team separate from drafting</option>
-                        </select>.
-                    </p>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> A Self-Review Threat occurs when an accountant evaluates the results of a previous judgment or service performed by themselves. Safeguards require a completely separate team or external review.
-                </div>
-            </div>
-            <!-- QUESTION 8: TIPO "radio" (Advocacy Threat Core Mechanism) -->
-            <div class="question-tab" data-qindex="8" data-type="radio" data-correct="B">
-                <div class="task-instruction-text">8. An accountant acts as a high-profile promoter for a corporate client during a public equity funding dispute, making aggressive statements to support the client's position. Which threat is active?</div>
-                <div class="task-interactive-body">
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q8" value="A"> Intimidation Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q8" value="B"> Advocacy Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q8" value="C"> Familiarity Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> An Advocacy Threat occurs when an accountant promotes a client’s position to the point that their independent objectivity is compromised, aligning their views too closely with the client's corporate aims.
-                </div>
-            </div>
-
-            <!-- QUESTION 9: TIPO "multi-select" (Familiarity Threat Boundaries) -->
-            <div class="question-tab" data-qindex="9" data-type="multi-select">
-                <div class="task-instruction-text">9. Complete the statement regarding long-term client relationship risks.</div>
-                <div class="task-interactive-body">
-                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
-                        Accepting lavish personal hospitality, expensive sports vouchers, or luxury items from a close, long-standing client generates a 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="familiarity">
-                            <option value="">-- Choose Threat --</option>
-                            <option value="familiarity">Familiarity Threat</option>
                             <option value="intimidation">Intimidation Threat</option>
                         </select> 
-                        because the practitioner becomes overly sympathetic to the client's interest. The mandatory safeguard to protect professional standing is to 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="decline">
-                            <option value="">-- Action --</option>
-                            <option value="accept">Accept and report as bonus</option>
-                            <option value="decline">Politely decline the offer</option>
-                        </select> immediately.
-                    </p>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Close relationships or significant gifts foster familiarity, which compromises professional detachment. Gifts that are not trivial or inconsequential must be declined.
-                </div>
-            </div>
-            <!-- QUESTION 10: TIPO "radio" (Intimidation Threat Coercion) -->
-            <div class="question-tab" data-qindex="10" data-type="radio" data-correct="C">
-                <div class="task-instruction-text">10. A company director explicitly threatens to replace the external accounting firm unless the practitioner agrees to hide an unauthorized director loan balance. What threat is active here?</div>
-                <div class="task-interactive-body">
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q10" value="A"> Self-Interest Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q10" value="B"> Advocacy Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q10" value="C"> Intimidation Threat</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Coercion, explicit pressures, or threats of dismissal prevent an accountant from acting objectively, creating an Intimidation Threat. The accountant must document the event and escalate the matter.
-                </div>
-            </div>
-
-            <!-- QUESTION 11: TIPO "multi-select" (Whistleblowing Statutory Framework) -->
-            <div class="question-tab" data-qindex="11" data-type="multi-select">
-                <div class="task-instruction-text">11. Complete the statements regarding protected disclosure procedures under UK ethical guidance.</div>
-                <div class="task-interactive-body">
-                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
-                        When an accountant uncovers internal fraud and reports it externally to protect the public, this action is protected under the 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="pida">
-                            <option value="">-- Framework --</option>
-                            <option value="pida">Public Interest Disclosure Act (PIDA)</option>
-                            <option value="gdpr">Data Protection Act (GDPR)</option>
-                        </select> 
-                        framework. This statutory safeguard shields the employee from commercial reprisal provided the disclosure is made in the 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="public">
-                            <option value="">-- Interest --</option>
-                            <option value="private">Private interest of directors</option>
-                            <option value="public">Public Interest</option>
+                        because you are promoting a client’s or employer’s position to the point that 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="compromised">
+                            <option value="">-- Outcome --</option>
+                            <option value="compromised">Objectivity is compromised</option>
+                            <option value="strengthened">Confidentiality is strengthened</option>
                         </select>.
                     </p>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Whistleblowing under PIDA protects workers from unfair dismissal or commercial detriment if they report serious workplace wrongdoings in good faith and in the public interest.
+                    <strong>Solution Note:</strong> Advocacy occurs when an accountant defends or promotes a client's stance too aggressively, making independent, unbiased professional evaluation impossible.
                 </div>
             </div>
-            <!-- QUESTION 12: TIPO "radio" (Sustainable Accounting Ethical Duty) -->
-            <div class="question-tab" data-qindex="12" data-type="radio" data-correct="B">
-                <div class="task-instruction-text">12. An accountant is asked to intentionally adjust an enterprise's environmental waste metrics within an annual report to mask non-compliance. Which statement is correct?</div>
+            <!-- QUESTION 5: TIPO "radio" (The Regulated Sector Gatekeepers) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">5. Under the Proceeds of Crime Act (POCA), accountants operate within the "regulated sector". What is their statutory mandate under this framework?</div>
                 <div class="task-interactive-body">
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q12" value="A"> The accountant should comply since environmental data does not impact the double-entry ledger.</span>
+                        <span class="option-label"><input type="radio" name="q5" value="A"> To balance the extended trial balance sheets colonna per colonna before monthly audits.</span>
                         <span class="feedback-icon"></span>
                     </label>
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q12" value="B"> The accountant must refuse as falsifying non-financial ESG metrics directly violates the principle of Integrity.</span>
+                        <span class="option-label"><input type="radio" name="q5" value="B"> To act as gatekeepers against financial crime, implementing rigid internal compliance mechanisms.</span>
                         <span class="feedback-icon"></span>
                     </label>
                     <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q12" value="C"> The accountant should follow the instructions but transfer the risk to the internal audit folder.</span>
+                        <span class="option-label"><input type="radio" name="q5" value="C"> To unconditionally maintain confidentiality even when clear evidence of drug trafficking is uncovered.</span>
                         <span class="feedback-icon"></span>
                     </label>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Non-financial data and ESG reporting are subject to the same strict principles of Integrity and transparency as financial statements.
+                    <strong>Solution Note:</strong> POCA legally mandates accounting professionals inside the regulated sector to act as active gatekeepers to identify, trap, and report suspicious transactions.
                 </div>
             </div>
 
-            <!-- QUESTION 13: TIPO "multi-select" (Chinese Walls Infrastructure) -->
-            <div class="question-tab" data-qindex="13" data-type="multi-select">
-                <div class="task-instruction-text">13. Complete the statement regarding data firewalls used during customer conflicts.</div>
+            <!-- QUESTION 6: TIPO "multi-select" (Failure to Disclose Offense) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the statutory statement regarding criminal liabilities defined by anti-money laundering regulations.</div>
                 <div class="task-interactive-body">
                     <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
-                        When a firm handles two commercial competitors simultaneously, information barriers called 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="chinese">
-                            <option value="">-- Safeguard --</option>
-                            <option value="chinese">Chinese Walls</option>
-                            <option value="holding">Holding Walls</option>
-                        </select> 
-                        must be deployed. This requires using 
-                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="separate">
-                            <option value="">-- Management --</option>
-                            <option value="shared">Shared ledger profiles</option>
-                            <option value="separate">Separate staff teams and digital access restrictions</option>
-                        </select> to safeguard corporate confidentiality.
+                        Discovering clear evidence of illegal cash laundering inside the sales books but failing to submit an alert report triggers the criminal offense of 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="failure">
+                            <option value="">-- Offense --</option>
+                            <option value="failure">Failure to Disclose</option>
+                            <option value="tipping">Tipping Off</option>
+                        </select>. 
+                        Under UK statutory criminal legislation, a conviction for this specific omission carries a maximum penalty of up to 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="5">
+                            <option value="">-- Penalty --</option>
+                            <option value="2">2 years imprisonment</option>
+                            <option value="5">5 years imprisonment</option>
+                        </select>.
                     </p>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Chinese Walls establish strict operational separation between conflicting engagement teams to maintain confidentiality and avoid a breach of objectivity.
-                </div>
-            </div>
-            <!-- QUESTION 14: TIPO "radio" (AAT Disciplinary Panel Reach) -->
-            <div class="question-tab" data-qindex="14" data-type="radio" data-correct="A">
-                <div class="task-instruction-text">14. If a member is found guilty of a severe deliberate ethical breach, which sanction represents the maximum penalty the AAT Disciplinary Committee can apply?</div>
-                <div class="task-interactive-body">
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q14" value="A"> Expulsion from membership and removal of practicing licenses.</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q14" value="B"> Committing the practitioner to a maximum 2-year prison sentence.</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                    <label class="option-box">
-                        <span class="option-label"><input type="radio" name="q14" value="C"> Issuing an informal verbal warning kept private from database records.</span>
-                        <span class="feedback-icon"></span>
-                    </label>
-                </div>
-                <div class="global-feedback-msg hidden"></div>
-                <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Professional bodies handle regulatory and administrative sanctions. Severe misconduct results in Expulsion, stripping membership status and canceling local practice permits.
+                    <strong>Solution Note:</strong> Failing to escalate a verified suspicion of money laundering within the regulated sector constitutes a severe criminal offense punishable by a maximum of 5 years in prison.
                 </div>
             </div>
 
-            <!-- QUESTION 15: TIPO "multi-input" (Ethical Disciplinary Outcomes) -->
-            <div class="question-tab" data-qindex="15" data-type="multi-input">
-                <div class="task-instruction-text">15. Review AAT disciplinary outcomes. Complete the formal outcomes associated with proven ethical misconduct breaches by a member.</div>
+            <!-- QUESTION 7: TIPO "radio" (The Role of the MLRO) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">7. What is the regulatory purpose of appointing an internal Money Laundering Reporting Officer (MLRO) within an accounting practice?</div>
                 <div class="task-interactive-body">
-                    <table class="financial-table">
-                        <thead>
-                            <tr>
-                                <th style="text-align: left;">Proven Disciplinary Breach Level</th>
-                                <th style="width: 300px;">Regulatory Disciplinary Action Outcome</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left;">Minor technical compliance negligence oversight</td>
-                                <td><input type="text" class="multi-input-field" data-ans="Reprimand" placeholder="Sanction word..."></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;">Severe deliberate concealment or criminal fraud act</td>
-                                <td><input type="text" class="multi-input-field" data-ans="Expulsion" placeholder="Sanction word..."></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> To sign off on voluntary registration thresholds for small cash traders.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> To manage public promotional marketing events for the corporate group.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> To serve as a central compliance director who evaluates all internal staff alerts regarding suspicious economic activities.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
                 </div>
                 <div class="global-feedback-msg hidden"></div>
                 <div class="solution-note-panel hidden">
-                    <strong>Solution Note:</strong> Minor professional slip-ups result in an official Reprimand or a warning notice. Active falsification, fraud, or deliberate breaches trigger an immediate Expulsion and revocation of practice licenses.
+                    <strong>Solution Note:</strong> Accounting firms must appoint an internal compliance director (the MLRO) to centralize, process, and evaluate staff suspicions before external escalation.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "multi-select" (SAR & National Crime Agency) -->
+            <div class="question-tab" data-qindex="8" data-type="multi-select">
+                <div class="task-instruction-text">8. Complete the statement regarding the reporting hierarchy for financial crimes.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        If a gatekeeper technician suspects money laundering or fraud, they must submit a formal, independent 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="sar">
+                            <option value="">-- Document --</option>
+                            <option value="sar">Suspicious Activity Report (SAR)</option>
+                            <option value="credit">Credit Adjustment Note</option>
+                        </select> 
+                        directly to the 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="nca">
+                            <option value="">-- Target Authority --</option>
+                            <option value="hmrc">HM Revenue & Customs (HMRC)</option>
+                            <option value="nca">National Crime Agency (NCA)</option>
+                        </select> via the firm's internal MLRO.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Standard AML procedures dictate that formal SAR forms must be securely routed through the MLRO straight to the National Crime Agency (NCA).
+                </div>
+            </div>
+            <!-- QUESTION 9: TIPO "radio" (Bribery Act Liabilities) -->
+            <div class="question-tab" data-qindex="9" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">9. Which UK legislation directly criminalizes the acts of giving, receiving, or failing to prevent a bribe within corporate management hierarchies?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="A"> The Public Interest Disclosure Act (PIDA)</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="B"> The Bribery Act</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="C"> The Data Protection Act / GDPR</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Bribery Act strictly criminalizes giving, receiving, or failing to prevent a bribe, establishing severe corporate responsibility for management boards.
+                </div>
+            </div>
+
+            <!-- QUESTION 10: TIPO "multi-select" (Whistleblowing Retaliation Protection) -->
+            <div class="question-tab" data-qindex="10" data-type="multi-select">
+                <div class="task-instruction-text">10. Complete the description of external whistleblowing governance rules.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        When internal company structures refuse to resolve explicit ledger illegalities, professionals can evaluate whistleblowing avenues under the 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="pida">
+                            <option value="">-- Framework Act --</option>
+                            <option value="pida">Public Interest Disclosure Act (PIDA)</option>
+                            <option value="poca">Proceeds of Crime Act (POCA)</option>
+                        </select>, 
+                        which provides structural protection against 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="retaliation">
+                            <option value="">-- Protection --</option>
+                            <option value="retaliation">Employment retaliation or unfair dismissal</option>
+                            <option value="audit">Mandatory local audit procedures</option>
+                        </select> for reporting to authorized public bodies.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> PIDA acts as a legal shield, granting comprehensive whistleblowing defense to safeguard workers from employer victimisation or contract termination.
+                </div>
+            </div>
+            <!-- QUESTION 11: TIPO "radio" (The Inadvertent Tipping Off Trap) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">11. Core Exam Trap: Confronting a corporate client to request clarification or explanations after discovering clear signs of fraud or money laundering legally constitutes what?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> A standard application of Professional Competence and Due Care.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> The severe criminal offense of Tipping Off, punishable by up to 5 years imprisonment.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> A baseline safeguard that eliminates threats to compliance.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Tipping Off Inadvertent Disclosure Trap highlights that alerting a client or changing behavior in a way that suggests a trace is active is a serious crime under UK law.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "multi-select" (Confidentiality vs Legal Override Trap) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the analytical trap breakdown regarding absolute confidentiality parameters.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Never assume that client confidentiality is absolute. The principle of confidentiality is completely 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="overridden">
+                            <option value="">-- Condition --</option>
+                            <option value="preserved">Preserved unconditionally</option>
+                            <option value="overridden">Overridden by statutory legal obligations</option>
+                        </select> 
+                        under POCA. An accountant cannot withhold data from 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="bodies">
+                            <option value="">-- Authorities --</option>
+                            <option value="bodies">HMRC or the National Crime Agency</option>
+                            <option value="directors">The company's managing directors</option>
+                        </select> during an asset investigation.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Deontological confidentiality rules crumble before statutory legal mandates. Members are legally forced to supply data during financial crime investigations.
+                </div>
+            </div>
+            <!-- QUESTION 13: TIPO "radio" (Confusing Safeguards with Threat Reductions) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">13. Core Exam Trap: If a serious threat to ethical compliance cannot be actively eliminated or reduced to an acceptable level by strong safeguards, what is the only valid choice?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> Log the entry while keeping an automated backup control on a separate local drive.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> Disclose the matter verbally to an independent commercial competitor.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Decline or resign from the assignment completely.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> A classic conceptual flaw is confusing an automated spreadsheet check with a threat reduction. If an ethical threat cannot be neutralized via strong safeguards, you must decline or resign.
+                </div>
+            </div>
+
+            <!-- QUESTION 14: TIPO "multi-select" (GDPR Data Processing Controls) -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the data protection governance statements.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Under the Data Protection Act / GDPR, private client data managed by accounting firms must be processed lawfully and 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="transparently">
+                            <option value="">-- Condition --</option>
+                            <option value="transparently">Transparently across all workflows</option>
+                            <option value="anonymously">Anonymously without record histories</option>
+                        </select>, 
+                        kept strictly secure against leaks, and held only for 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="specified">
+                            <option value="">-- Purpose --</option>
+                            <option value="specified">Specified, legal compliance purposes</option>
+                            <option value="infinite">Infinite commercial marketing use</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> GDPR forces strict governance: data must be managed transparently, locked against digital leaks, and held exclusively for specified legal compliance tasks.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "radio" (AAT Compliance Prosecution) -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. What severe regulatory outcome can occur if an AAT professional member is prosecuted for an unmitigated deliberate breach of the professional code?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> A minor verbal suggestion kept private from official disciplinary files.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> Disciplinary prosecution, absolute loss of practice license, and severe regulatory fines.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> Mandatory reallocation into the automated cash accounting pool.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Advanced diploma unit rules state that an active breach triggers official disciplinary prosecution, stripping membership titles and canceling local practice permits.
                 </div>
             </div>
 
