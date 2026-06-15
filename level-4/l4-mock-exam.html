@@ -29,6 +29,7 @@
             margin: 0;
             padding-top: 80px;
         }
+        /* CORREZIONE CROMATICA LIVELLO 4 - FORZATURA ARANCIONE BRAND SEZIONI */
         .exam-top-bar {
             position: fixed;
             top: 0;
@@ -36,7 +37,7 @@
             width: 100%;
             height: 65px;
             background-color: #111827;
-            border-bottom: 2px solid var(--l2-emerald-primary);
+            border-bottom: 2px solid #F97316; /* Cambiato in Arancione Livello 4 */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -44,6 +45,7 @@
             box-sizing: border-box;
             z-index: 1000;
         }
+
         .top-bar-title {
             color: #FFFFFF;
             font-weight: 700;
@@ -100,10 +102,10 @@
             transition: all 0.15s ease;
         }
         .tab-trigger-btn:hover { background: #E5E7EB; }
-        .tab-trigger-btn.active {
+       .tab-trigger-btn.active {
             background: var(--bubble-white-bg);
-            color: var(--l2-emerald-primary);
-            border-top: 3px solid var(--l2-emerald-primary);
+            color: #F97316 !important; /* Testo attivo Arancione */
+            border-top: 3px solid #F97316 !important; /* Linea superiore attiva Arancione */
             padding-bottom: calc(0.6rem + 2px);
             margin-bottom: -2px;
         }
@@ -280,8 +282,8 @@
                     <button type="button" class="ctrl-btn btn-secondary" id="btn-next" onclick="navNext()">Next ➡️</button>
                 </div>
                 <div>
-                    <button type="button" class="ctrl-btn btn-danger" onclick="resetExam()">Reset</button>
-                    <button type="button" class="ctrl-btn btn-success" onclick="submitExam()">Submit</button>
+                    <button type="button" class="ctrl-btn btn-danger" onclick="resetExam()">🔄 Reset</button>
+                    <button type="button" class="ctrl-btn btn-success" onclick="submitExam()">🏆 Submit</button>
                 </div>
             </div>
 
@@ -289,7 +291,7 @@
             <div class="exam-results-card hidden" id="results-card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:2px solid #E5E7EB; padding-bottom:0.5rem;">
                     <h2 style="color:#111827; margin:0; font-size:1.3rem;">Official Performance Report</h2>
-                    <button type="button" class="ctrl-btn btn-secondary" onclick="window.print()">Download as PDF (A4 Print)</button>
+                    <button type="button" class="ctrl-btn btn-secondary" onclick="window.print()">📄Download as PDF (A4 Print)</button>
                 </div>
                 <div class="results-grid">
                     <div class="result-metric">
@@ -338,130 +340,364 @@
 <script>
 const questionsDatabase = [
     {
-        id: 1, chapter: 1, type: "input", points: 10,
-        instruction: "Calculate Group Retained Earnings inside a Consolidated Statement of Financial Position.",
+        id: 1,
+        chapter: 1,
+        type: "input",
+        points: 15,
+        instruction: "Under AMA principles, a firm uses Activity-Based Costing (ABC). Total machinery setup overhead costs are £40,000, and the total number of setups (cost driver) is 200. Compute the budgeted Activity Cost Driver Rate per setup.",
         content: `
-        <div style="margin-bottom:0.5rem;">Parent Co owns 80% of Subsidiary Co. At year-end, Parent Co's separate retained earnings are £120,000. Subsidiary Co's retained earnings grew by £30,000 post-acquisition. Enter the final consolidated Group Retained Earnings balance (£) to be presented.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q1" data-ans="144000" placeholder="0" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">AMA Activity-Based Costing Framework</th>
+                        <th style="width: 250px;">Calculated Driver Rate (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Cost Driver Rate per Machinery Setup (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="200" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Consolidated Retained Earnings = Parent Retained Earnings (£120,000) + Parent Share of Subsidiary Post-Acquisition Retained Earnings (80% * £30,000 = £24,000) = £144,000."
+        solution: "Activity Cost Driver Rate = Total Activity Cost Pool / Total Cost Driver Volume. Calculation: £40,000 / 200 setups = £200 per setup."
     },
     {
-        id: 2, chapter: 2, type: "input", points: 10,
-        instruction: "Extract Cash Generated from Operations under IAS 7 Statement of Cash Flows.",
+        id: 2,
+        chapter: 1,
+        type: "select",
+        points: 10,
+        instruction: "Complete the short-term strategic throughput evaluation statement under target optimization criteria.",
         content: `
-        <div style="margin-bottom:0.5rem;">A company records an operating profit of £85,000. The period income statement notes a Depreciation expense of £12,000. During the year, inventory balances increased by £4,000, and trade receivables fell by £2,500. Enter the Net Cash Generated from Operations (£).</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q2" data-ans="95500" placeholder="0" style="border:none; width:100%;">
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                When identifying manufacturing production blockages under the Theory of Constraints, an asset that restricts total factory throughput velocity is defined as a 
+                <select class="multi-select-field" data-ans="bottleneck">
+                    <option value="">-- Select Term --</option>
+                    <option value="variance">Budget variance allocation</option>
+                    <option value="bottleneck">Bottleneck resource element</option>
+                </select> 
+                and operations must focus on maximizing the contribution per bottleneck 
+                <select class="multi-select-field" data-ans="hour">
+                    <option value="">-- Select Metric --</option>
+                    <option value="hour">Hour of utilized machine capacity</option>
+                    <option value="unit">Raw material unit weight addition</option>
+                </select>.
+            </div>
         `,
-        explanation: "Operating Profit (£85,000) + Depreciation adjustment (+£12,000) - Inventory increase (-£4,000) + Receivables decrease (+£2,500) = £95,500."
+        solution: "A bottleneck dictates total system velocity. To maximize profitability under constraint environments, production scheduling must prioritize products generating the highest throughput return per bottleneck hour."
     },
     {
-        id: 3, chapter: 3, type: "input", points: 10,
-        instruction: "Calculate the Direct Material Yield Variance inside management reports.",
+        id: 3,
+        chapter: 1,
+        type: "input",
+        points: 15,
+        instruction: "A project requires an initial cash investment of £100,000 and generates a single forecasted cash inflow of £110,000 at the end of Year 1. Assume the company's cost of capital discount factor is exactly 5% (discount multiplier = 0.9524). Compute the Net Present Value (NPV) of this investment.",
         content: `
-        <div style="margin-bottom:0.5rem;">The standard material input requirement to output 100 units of product Z is 500 kg at £4/kg. During May, the production unit processed 5,200 kg of materials to deliver 1,000 finished units of Z. Enter the total Material Yield Variance value (£), tracking absolute standard cost variance.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q3" data-ans="800" placeholder="0" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">AMA Capital Investment Appraisal Matrix</th>
+                        <th style="width: 250px;">Net Present Value (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Calculated Project NPV (Round to nearest integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="4764" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Standard input for 1,000 units = 5,000 kg. Actual input used = 5,200 kg. Variance in quantity = 200 kg Adverse. At standard price: 200 kg * £4/kg = £800 (Adverse)."
+        solution: "Present Value of Inflow = £110,000 × 0.9524 = £104,764. Net Present Value = PV of Inflows - Initial Investment = £104,764 - £100,000 = £4,764."
     },
     {
-        id: 4, chapter: 4, type: "input", points: 10,
-        instruction: "Compute Return on Capital Employed (ROCE) performance metrics.",
+        id: 4,
+        chapter: 2,
+        type: "input",
+        points: 15,
+        instruction: "Under IAS 1 rules, a corporate group prepares its consolidated account sheets. The parent company acquires 80% of a subsidiary's shares. During the year, the subsidiary generates a net profit of £50,000. Compute the dollar value layer belonging to the Non-Controlling Interest (NCI).",
         content: `
-        <div style="margin-bottom:0.5rem;">A corporation carries an Operating Profit (EBIT) of £42,000. Shareholders' Equity equals £160,000 and Non-Current Liabilities (Long-term bank loans) are £50,000. Enter the Return on Capital Employed (ROCE) as a precise rounded percentage (%) value. Do not input the symbol.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">%</span>
-            <input type="text" class="table-input text-right" name="q4" data-ans="20" placeholder="0" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">DAIF Consolidated Statement of Profit or Loss</th>
+                        <th style="width: 250px;">NCI Profit Share (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Non-Controlling Interest Share Value (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="10000" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Capital Employed = Equity (£160,000) + Non-Current Liabilities (£50,000) = £210,000. ROCE = (Operating Profit £42,000 / Capital Employed £210,000) * 100 = 20%."
+        solution: "NCI holds 100% - 80% = 20% of equity. Non-Controlling Interest profit share = £50,000 total subsidiary profit × 20% allocation rate = £10,000."
     },
     {
-        id: 5, chapter: 5, type: "radio", points: 10,
-        instruction: "Analyze Gearing ratios structure within financial statement analyses.",
+        id: 5,
+        chapter: 2,
+        type: "select",
+        points: 10,
+        instruction: "Complete the financial reporting description addressing group unrealized profit adjustments across inventory items.",
         content: `
-        <div style="margin-bottom:0.5rem;">If a limited company issues £100,000 in new long-term debentures to fully redeem £100,000 worth of ordinary share equity, what immediate structural impact will occur on the company's Gearing Ratio?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q5" value="A"> Gearing ratio will increase significantly.</label>
-            <label class="option-label"><input type="radio" name="q5" value="B"> Gearing ratio will decrease significantly.</label>
-            <label class="option-label"><input type="radio" name="q5" value="C"> Gearing ratio will remain perfectly unchanged.</label>
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                When a parent company sells goods to a subsidiary at a margin and these items remain inside close stocks at year-end, the group accountant must remove the 
+                <select class="multi-select-field" data-ans="pup">
+                    <option value="">-- Adjustment Term --</option>
+                    <option value="pup">Provision for Unrealized Profit (PUP)</option>
+                    <option value="allowance">Annual investment allowance allocation</option>
+                </select> 
+                to prevent artificial consolidation overstatements across group retained earnings and 
+                <select class="multi-select-field" data-ans="inventory">
+                    <option value="">-- Target Line --</option>
+                    <option value="inventory">Group closing inventory asset values</option>
+                    <option value="liabilities">Long-term deferred tax liability pools</option>
+                </select>.
+            </div>
         `,
-        correct: "A",
-        explanation: "Gearing measures long-term debt relative to total capital structures (Debt / [Debt + Equity]). Swapping equity for long-term debt increases the numerator and leaves the denominator stable, driving the gearing ratio upwards."
+        solution: "Intragroup paper profits on items still held within the group boundaries must be deleted via a PUP adjustment, reducing consolidated inventory assets and group retained reserves."
     },
     {
-        id: 6, chapter: 1, type: "radio", points: 10,
-        instruction: "Identify the correct accounting treatment for Intra-group trading eliminations.",
+        id: 6,
+        chapter: 2,
+        type: "input",
+        points: 15,
+        instruction: "A limited company reports a Net Profit after Tax of £30,000 and has a total Equity Share Capital base of £150,000. Calculate the Return on Equity (ROE) efficiency percentage factor (enter strictly the integer percentage value).",
         content: `
-        <div style="margin-bottom:0.5rem;">When preparing a Consolidated Statement of Profit or Loss, how should intra-group sales and purchases executed between the Parent and Subsidiary companies be treated?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q6" value="A"> They must be fully eliminated from both the consolidated Revenue and Cost of Sales figures.</label>
-            <label class="option-label"><input type="radio" name="q6" value="B"> They must be aggregated and disclosed as an auxiliary current asset line item.</label>
-            <label class="option-label"><input type="radio" name="q6" value="C"> They are left unadjusted to preserve separate statutory legal entities trail balances.</label>
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">DAIF Interpretation of Ratios Metric</th>
+                        <th style="width: 250px;">Resulting Efficiency (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Return on Equity percentage rate (Input integer value only)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="20" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        correct: "A",
-        explanation: "A group is viewed as a single economic entity. Internal intra-group trading does not represent trade with external entities and must be 100% eliminated by deducting the internal trade value from both consolidated Revenue and Cost of Sales."
+        solution: "ROE Formula = (Net Profit after Tax / Total Equity Share Capital) × 100. Calculation: (£30,000 / £150,000) × 100 = 20% efficiency return."
     },
     {
-        id: 7, chapter: 2, type: "input", points: 10,
-        instruction: "Calculate Cash Flows from Investing Activities under IAS 7.",
+        id: 7,
+        chapter: 3,
+        type: "select",
+        points: 10,
+        instruction: "Complete the risk governance statement addressing internal control breakdowns under IASC guidelines.",
         content: `
-        <div style="margin-bottom:0.5rem;">During the fiscal year, a company purchases a new factory asset for £250,000 cash. Symmetrically, it sells an old machine tool for £15,000 cash (carrying value was £12,000). Enter the net cash outflow (£) from Investing Activities. Do not include negative symbols, just the absolute value.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q7" data-ans="235000" placeholder="0" style="border:none; width:100%;">
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                When a single senior executive holds unrestricted access to both initiate bank payments and complete general ledger reconciliations, this represents a severe failure in 
+                <select class="multi-select-field" data-ans="segregation">
+                    <option value="">-- Control Principle --</option>
+                    <option value="segregation">Segregation of duties parameters</option>
+                    <option value="minimisation">Data minimisation security frameworks</option>
+                </select> 
+                which introduces a critical opportunity for undetected corporate 
+                <select class="multi-select-field" data-ans="fraud">
+                    <option value="">-- System Threat --</option>
+                    <option value="variance">Flexible cost budget variance logging</option>
+                    <option value="fraud">Fraud, misappropriation, or reporting distortion</option>
+                </select>.
+            </div>
         `,
-        explanation: "Cash outflows for non-current asset purchase (-£250,000) + Cash inflows from disposal proceeds (+£15,000) = Net cash outflow of £235,000. Real disposal profit/loss adjustments sit inside operations."
+        solution: "No individual should control multiple consecutive phases of a financial transaction. Separating duties provides an internal validation shield that prevents errors or fraud."
     },
     {
-        id: 8, chapter: 3, type: "input", points: 10,
-        instruction: "Extract advanced Labour Efficiency Variances data arrays.",
+        id: 8,
+        chapter: 4,
+        type: "input",
+        points: 15,
+        instruction: "A large corporate company buys plant machinery for £10,000 during the fiscal tax year. Assume the current corporate tax parameters grant a standard Annual Investment Allowance (AIA) rate of 100% writing-down write-off for qualifying additions. Calculate the absolute capital allowance deduction value available to reduce the current period taxable profits pool.",
         content: `
-        <div style="margin-bottom:0.5rem;">The standard time allocated to manufacture one luxury desk is 4 hours at a standard rate of £15 per hour. To output 200 desks, workers logged 840 actual hours. Calculate the total Labour Efficiency Variance (£).</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q8" data-ans="600" placeholder="0" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">BSTX Statutory Capital Allowances Matrix</th>
+                        <th style="width: 250px;">Tax Write-Off (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Calculated AIA capital deduction value (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="10000" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Standard hours required: 200 * 4 = 800 hours. Actual hours worked = 840. Discrepancy = 40 hours Adverse. Financial impact evaluated at standard rate: 40 hours * £15/hr = £600 (Adverse)."
+        solution: "Qualifying additions within the corporate AIA cap ceiling are written off completely at 100% in the purchase period. Calculation: £10,000 addition × 100% flat allowance rate = £10,000 tax deduction."
     },
     {
-        id: 9, chapter: 4, type: "input", points: 10,
-        instruction: "Compute Asset Turnover efficiency utilization operational ratios.",
+        id: 9,
+        chapter: 4,
+        type: "select",
+        points: 10,
+        instruction: "Select the statutory tax adjustment required to convert accounting profit into taxable trading profit.",
         content: `
-        <div style="margin-bottom:0.5rem;">A retail operation delivers revenue turnover of £480,000. Total non-current assets equal £150,000 and net current assets (working capital) equal £50,000. Calculate the Asset Turnover ratio expressed precisely as a number of times (e.g., 2.4).</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">x</span>
-            <input type="text" class="table-input text-right" name="q9" data-ans="2.4" placeholder="0.0" style="border:none; width:100%;">
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                To extract corporate taxable trading profits from historical accounts figures, standard accounting depreciation charges must be 
+                <select class="multi-select-field" data-ans="added">
+                    <option value="">-- Adjustment A --</option>
+                    <option value="added">Added back onto net accounting profits</option>
+                    <option value="deducted">Deducted from net accounting profits</option>
+                </select> 
+                and subsequently replaced by HMRC approved 
+                <select class="multi-select-field" data-ans="allowances">
+                    <option value="">-- Adjustment B --</option>
+                    <option value="allowances">Capital allowances writing down rules</option>
+                    <option value="variances">Flexible budget variance log lines</option>
+                </select>.
+            </div>
         `,
-        explanation: "Capital Employed = Non-Current Assets (£150,000) + Net Current Assets (£50,000) = £200,000. Asset Turnover = Revenue (£480,000) / Capital Employed (£200,000) = 2.4 times."
+        solution: "Commercial accounting depreciation is disallowable under statutory tax codes. It must be added back onto the profit pool and replaced by capital allowances."
     },
     {
-        id: 10, chapter: 5, type: "radio", points: 10,
-        instruction: "Evaluate transfer pricing methodologies boundaries inside corporate groups.",
+        id: 10,
+        chapter: 5,
+        type: "input",
+        points: 15,
+        instruction: "An individual taxpayer registers an Adjusted Net Income of £110,000 during the tax year. Assume the maximum initial standard personal allowance is £12,570, tapered downwards by £1 for every £2 earned above the £100,000 threshold baseline. Compute the individual's remaining available Adjusted Personal Allowance.",
         content: `
-        <div style="margin-bottom:0.5rem;">Which transfer pricing strategy is generally preferred by international corporate group audit lines to maximize decentralized subsidiary accountability while matching tax compliance (arm's length principle)?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q10" value="A"> Market-based transfer pricing.</label>
-            <label class="option-label"><input type="radio" name="q10" value="B"> Actual variable cost transfer pricing.</label>
-            <label class="option-label"><input type="radio" name="q10" value="C"> Full absorption administrative cost-plus pricing.</label>
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">PLTX Personal Allowance Taper Trap Tracker</th>
+                        <th style="width: 250px;">Remaining Allowance (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Adjusted Personal Allowance Value (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="7570" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        correct: "A",
-        explanation: "Market-based pricing reflects the true opportunity cost of transfers and mirrors transactions executed with independent entities, protecting decentralized performance audits and fully satisfying international tax compliance matrices."
+        solution: "Excess income = £110,000 - £100,000 = £10,000. Taper deduction = £10,000 / 2 = £5,000. Remaining allowance = £12,570 - £5,000 = £7,570."
+    },
+    {
+        id: 11,
+        chapter: 5,
+        type: "select",
+        points: 10,
+        instruction: "Complete the capital gains tax analysis describing sliding percentage metrics for individuals.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Under Personal Tax criteria, while disposals of standard commercial shares attract regular CGT percentage brackets, capital profits derived from secondary residential property assets face a legislative 
+                <select class="multi-select-field" data-ans="surcharge">
+                    <option value="">-- Rate Impact --</option>
+                    <option value="exemption">Tax-free baseline exemption shield</option>
+                    <option value="surcharge">Surcharge applying higher percentage bands</option>
+                </select> 
+                which must be settled within tight days boundaries following property 
+                <select class="multi-select-field" data-ans="completion">
+                    <option value="">-- Event --</option>
+                    <option value="completion">Completion payment date</option>
+                    <option value="valuation">Initial survey valuation date</option>
+                </select>.
+            </div>
+        `,
+        solution: "Secondary residential gains face a specialized surcharge rate. Taxpayers must report and pay this liability within strict statutory windows from the completion date."
+    },
+    {
+        id: 12,
+        chapter: 6,
+        type: "input",
+        points: 15,
+        instruction: "An external audit team planning a corporate review establishes a quantitative planning materiality threshold of £50,000. Due to moderate control risks, the audit partner sets performance materiality at exactly 70% of overall materiality. Compute the performance materiality buffer limit.",
+        content: `
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">EXAU Planning &amp; Risk Materiality Extraction</th>
+                        <th style="width: 250px;">Materiality Limit (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Calculated Performance Materiality Layer (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="35000" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        `,
+        solution: "Performance Materiality = Overall Materiality × Selected Percentage Factor. Calculation: £50,000 overall planning materiality × 70% safety factor = £35,000."
+    },
+    {
+        id: 13,
+        chapter: 7,
+        type: "select",
+        points: 10,
+        instruction: "Complete the statement explaining the three core pillars inside the corporate Treasury Investment Triangle.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                The primary objectives guiding corporate treasury investments are Security (safety of capital) and Liquidity (speed of conversion). Maximizing these two pillars forces an investment trade-off that decreases the third pillar, which is 
+                <select class="multi-select-field" data-ans="yield">
+                    <option value="">-- Select Pillar --</option>
+                    <option value="yield">Yield (maximizing the interest return rate)</option>
+                    <option value="allowance">Allowance (maximizing statutory tax pools)</option>
+                </select> 
+                because secure liquid options always carry 
+                <select class="multi-select-field" data-ans="lower">
+                    <option value="">-- Select Return --</option>
+                    <option value="lower">Lower interest return percentages</option>
+                    <option value="higher">Higher speculative capital gains</option>
+                </select>.
+            </div>
+        `,
+        solution: "The Treasury Triangle balances Security, Liquidity, and Yield. Risk-free government treasury instruments maximize safety and liquidity but generate the lowest yields."
+    },
+    {
+        id: 14,
+        chapter: 7,
+        type: "input",
+        points: 15,
+        instruction: "A treasury department locks a surplus cash balance of £50,000 inside a short-term bank deposit account that guarantees a simple interest return rate of exactly 6% per annum. Calculate the total interest profit generated if the cash is held for exactly 3 months.",
+        content: `
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">CTMN Treasury Cash Yield Return Component</th>
+                        <th style="width: 250px;">Earned Interest (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Total interest profit earned at maturity (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="750" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        `,
+        solution: "Annual simple interest = £50,000 × 6% = £3,000. For a 3-month fraction period (quarter of a year), the pro-rata calculation is: £3,000 × (3 / 12) = £750 interest profit."
+    },
+    {
+        id: 15,
+        chapter: 8,
+        type: "input",
+        points: 15,
+        instruction: "At the close of the period, a firm logs total annual credit sales of £1,460,000 and holds a remaining trade receivables ledger balance of £120,000. Assuming a standard 365-day tax calendar base, compute the Days Sales Outstanding (DSO) collection efficiency metric.",
+        content: `
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">CRDM Credit Control Performance KPI</th>
+                        <th style="width: 250px;">Timeline (Days)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Days Sales Outstanding (Round to nearest integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="30" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        `,
+        solution: "DSO Formula = (Total Trade Receivables / Total Credit Sales) × 365. Calculation: (£120,000 / £1,460,000) × 365 = 0.08219 × 365 = 30 days exactly."
     }
 ];
 
