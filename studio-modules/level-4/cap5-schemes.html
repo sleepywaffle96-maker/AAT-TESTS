@@ -1,174 +1,170 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 5: DAIF Consolidated Schemes | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 5: Personal Tax (Visual Schemes)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON DETTAGLIO BADGE ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --t-green: #10b981;
-            --t-red: #ef4444;
-            --accent-blue: #3b82f6;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --card-bg: #FAFAFA;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-top: 1.5rem;
-        }
-        .matrix-table {
-            width: 100%;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.5rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin: 1.5rem 0;
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.01);
+        }
+        .visual-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
+            padding: 1.5rem;
+            box-sizing: border-box;
         }
-        .matrix-table th {
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--primary);
-            padding: 0.8rem;
-            text-align: left;
-            border-bottom: 2px solid var(--primary);
-            font-size: 0.95rem;
+        .visual-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--l3-cyan-dark);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.25rem;
         }
-        .matrix-table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.95rem;
-            color: var(--text-muted);
+        .flow-diagram-box {
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            padding: 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #E2E8F0;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        .financial-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .financial-table th { background-color: var(--l3-cyan-dark); color: #FFFFFF; padding: 0.75rem; font-size: 0.85rem; border: 1px solid var(--l3-cyan-dark); }
+        .financial-table td { border: 1px solid var(--border-color); padding: 0.75rem; font-size: 0.9rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
+            .flow-diagram-box { background: #F8FAFC; color: #000; border: 1px solid #CBD5E1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>DAIF Standard Group Consolidation Workings</h1>
-            <p style="color: var(--text-muted)">The essential step-by-step mathematical working sheets required to draft consolidated statements under IFRS rules.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Personal Tax - Chapter 5 Visual Schemes</h1>
+            </div>
 
-            <h2>1. Working 2: Full Goodwill Valuation Schedule (IFRS 3)</h2>
-            <p style="color: var(--text-muted)">The standardized structure used to calculate goodwill at the acquisition date, including fair value adjustments.</p>
-            
-            <table class="matrix-table">
+            <h2>Scheme 5.1: Taxable Income Allocation Schedules</h2>
+            <div class="grid-container">
+                <div class="visual-card">
+                    <div class="visual-card-title">1. Non-Savings Income</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Processed first in the tax allocation pipeline layer.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--l3-cyan-dark); margin-top:0.5rem; margin-bottom:0;">📌 Includes: Employment Salaries, Trading Profits, and Property Rental margins.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">2. Savings Income</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Processed second after non-savings bands space is determined.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--l3-cyan-dark); margin-top:0.5rem; margin-bottom:0;">📌 Includes: Bank Interest received and building society savings interest distributions.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">3. Dividend Income</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Processed last in the progressive tax calculation framework stack.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--danger-color); margin-top:0.5rem; margin-bottom:0;">⚠️ Warning: Tax-free allowance still consumes basic tax band limits space.</p>
+                </div>
+            </div>
+            <h2>Scheme 5.2: Personal Allowance Taper Mechanism</h2>
+            <div class="flow-diagram-box">
+========================================================================================
+                      ADJUSTED NET INCOME CONTROL MATRIX
+========================================================================================
+
+ [ADJUSTED NET INCOME &lt;= £100,000] 
+   • Full statutory Personal Allowance threshold granted automatically.
+   • Safety Shield: Max allowance baseline (standardly £12,570) offsets taxable income.
+         ↓
+ [ADJUSTED NET INCOME &gt; £100,000]
+   • Mandatory Taper Trigger: Reduce allowance by £1 for every £2 of excess income cells.
+   • Reduction Equation: (Adjusted Net Income - £100,000) / 2
+         ↓
+ [ADJUSTED NET INCOME &gt;= £125,140]
+   • Allowance completely vanishes. Personal Allowance balance reaches zero.
+   • Tax Exposure: 100% of net income cells loaded onto progressive tax bands.
+
+----------------------------------------------------------------------------------------
+ P11D ENGINE: Company car value = Manufacturer official list price × CO2 emissions %.
+ DISCOUNTS EXCLUSION: Internal corporate purchase discounts are disallowable here.
+========================================================================================
+            </div>
+            <h2>Scheme 5.3: National Insurance Contributions (NIC) Classes Matrix</h2>
+            <table class="financial-table">
                 <thead>
                     <tr>
-                        <th>Goodwill Component Breakdown</th>
-                        <th>Parent Share (£)</th>
-                        <th>Consolidated Pool Total (£)</th>
+                        <th style="text-align: left; width: 220px;">NIC Regulatory Class</th>
+                        <th style="text-align: left; width: 280px;">Employment Status Application</th>
+                        <th style="text-align: left;">Statutory Levy Allocation & Mechanics</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="color:var(--text-main)">Purchase Consideration Transferred by Parent Company</td>
-                        <td>520,000</td>
-                        <td></td>
+                        <td style="font-weight: 600;">Class 1 Primary</td>
+                        <td>Employed Individuals (Employees)</td>
+                        <td>Deducted directly from payroll earnings via PAYE on progressive cash thresholds.</td>
+                    </tr>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">Class 1 Secondary</td>
+                        <td>Corporate Employers</td>
+                        <td>Paid by the company on employee cash earnings above the secondary limit threshold.</td>
                     </tr>
                     <tr>
-                        <td style="color:var(--text-main)">Add: Fair Value of the Non-Controlling Interest (NCI) at Acquisition</td>
-                        <td>140,000</td>
-                        <td></td>
+                        <td style="font-weight: 600;">Class 2</td>
+                        <td>Self-Employed (Sole Traders)</td>
+                        <td>Statutory small flat-rate weekly charge collected to preserve benefit rights.</td>
                     </tr>
-                    <tr style="border-bottom: 2px solid var(--secondary); background: rgba(255,255,255,0.02)">
-                        <td><strong>Total Combined Value Pool</strong></td>
-                        <td></td>
-                        <td style="color:var(--primary)"><strong>660,000</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Less: Subsidiary Net Identifiable Assets at Acquisition:</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>- Ordinary Share Capital Baseline Value</td>
-                        <td></td>
-                        <td>(250,000)</td>
-                    </tr>
-                    <tr>
-                        <td>- Retained Earnings at Acquisition Date Milestone</td>
-                        <td></td>
-                        <td>(190,000)</td>
-                    </tr>
-                    <tr>
-                        <td>- Land Fair Value Revaluation Surplus Adjustments</td>
-                        <td></td>
-                        <td>(40,000)</td>
-                    </tr>
-                    <tr style="background: rgba(16, 185, 129, 0.05); border-top: 2px solid var(--t-green);">
-                        <td style="color:var(--t-green)"><strong>FINAL ASSET GOODWILL ARISING (Carried to SoFP Assets)</strong></td>
-                        <td></td>
-                        <td style="color:var(--primary)"><strong>180,000</strong></td>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600; color: var(--danger-color);">Class 4</td>
+                        <td>Self-Employed (Sole Traders)</td>
+                        <td>Profit-based percentage scaled across net adjusted business trading income fields.</td>
                     </tr>
                 </tbody>
             </table>
-<!-- RIFERIMENTO_BLOCCO: 2 -->
-            <h2>2. Working 5: Group Retained Earnings Calculation</h2>
-            <p style="color: var(--text-muted)">Advanced working model to calculate consolidated retained profits, accounting for post-acquisition shares and PUP adjustments.</p>
-            
-            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1.5rem; overflow-x: auto;">
-                <pre style="color: var(--text-muted); font-family: monospace; font-size: 0.95rem; margin: 0; line-height: 1.6;">
-Parent Company Retained Earnings Balance (100% Core) .........     £920,000
-Add: Group Share of Subsidiary Post-Acquisition Profit:
-     Subsidiary Retained Earnings at Reporting Date . £265,000
-     Less: Subsidiary Retained Earnings at Acquisition -£190,000
-     Total Subsidiary Post-Acquisition Profit Pool ..  £75,000
-     Group Allocation Share (80% Parent Share) ..............    + £60,000
-Less: Provision for Unrealised Profit (PUP: Parent Selling) ..    -  £4,200
-Less: Accumulated Goodwill Impairment Surcharges (Group Share)    -  £6,000
-════════════════════════════════════════════════════════════════════════════
-<strong>CONSOLIDATED RETAINED EARNINGS BALANCE (Carried to Equity)</strong> ...    <strong>£969,800</strong>
-                </pre>
-            </div>
-            
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 242, 254, 0.05); border-radius: 6px; border: 1px solid var(--border-glass)">
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text-main);"><strong>Consolidation Rule Reminder:</strong> If the Subsidiary was the selling entity in the intra-group transaction, the PUP adjustment must be deducted from Working 3 (Subsidiary Net Assets), reducing both the Parent's and the NCI's shares proportionately rather than impacting Working 5 directly.</p>
-            </div>
-        </div>
-    </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
