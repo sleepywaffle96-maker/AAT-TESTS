@@ -1,126 +1,104 @@
-<!-- BLOCCO 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 2: AMAC Costing Summary | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 2: Drafting & Interpreting Statements (Cheat Sheet)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --panel-bg: rgba(0, 242, 254, 0.05);
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.7;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.3rem;
-        }
-        .formula-panel {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
+        .summary-card {
+            background-color: var(--l3-cyan-light);
+            border-left: 5px solid var(--l3-cyan-primary);
+            padding: 1.5rem;
             border-radius: 0 6px 6px 0;
+            margin-bottom: 2rem;
         }
-        .formula-title {
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
+        .trap-summary-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEE2E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .formula-text {
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-        li {
-            margin-bottom: 0.4rem;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>AMAC Advanced Costing Calculations</h1>
-            <p style="color: var(--text-muted)">Core mathematical formulas required for Activity-Based, Target, and Throughput exams.</p>
-
-            <h2>1. Activity-Based Costing Rates Formula</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Cost Driver Rate (CDR)</div>
-                <div class="formula-text">CDR = Total Financial Cost of Pool / Total Volume of Selected Cost Driver</div>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 2rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 1rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 4 RECAP</span>
+                <h1 style="font-size: 1.75rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 2: Financial Statements Quick Cheat Sheet</h1>
             </div>
 
-            <h2>2. Throughput Metric Equations</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Throughput Contribution Per Unit</div>
-                <div class="formula-text">Throughput = Selling Price - Direct Material Cost ONLY</div>
+            <div class="summary-card">
+                <strong style="color: var(--l3-cyan-dark); font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🎯 DAIF REGULATORY & PERFORMANCE MEMORY BLOCK:</strong>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
+                    • IAS 38 Rules: Research = Expense immediately | Development = Capitalize asset if viable.<br>
+                    • ROCE Formula: Operating Profit / (Total Equity + Long-Term Debt) * 100.<br>
+                    • Gearing Split: Interest-Bearing Debt / (Total Equity + Interest-Bearing Debt) * 100.
+                </p>
             </div>
-            <div class="formula-panel">
-                <div class="formula-title">Throughput Accounting Ratio (TA Ratio)</div>
-                <div class="formula-text">TA Ratio = (Throughput Per Bottleneck Hour) / (Factory Cost Per Bottleneck Hour)</div>
-                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: var(--text-muted)">A product is financially viable only if the TA Ratio is greater than 1.0.</p>
-            </div>
-
-            <h2>3. Target Metric Equations</h2>
-            <div class="formula-panel">
-                <div class="formula-text">Target Cost = Competitive Market Price - Required Strategic Profit Margin</div>
-            </div>
-
-            <h2>4. Strategic Costing Cheat Sheet</h2>
+            <h2>1. Standards Implementation (IAS/IFRS Framework)</h2>
             <ul>
-                <li><strong>The Bottleneck Resource:</strong> The absolute limiting resource or machine that acts as the constraint hindering structural output speed.</li>
-                <li><strong>Factory Costs:</strong> Include all operating costs (Direct labor, overheads, rent, utilities) except direct raw materials.</li>
-                <li><strong>Value Engineering:</strong> Systematic analysis aimed at reducing a component's structural cost gap without reducing overall quality.</li>
+                <li><strong>IAS 16 Property, Plant, Equipment:</strong> Asset fair value revaluations must bypass the P&L and transfer directly into the Statement of Changes in Equity (SOCIE) under Revaluation Reserve.</li>
+                <li><strong>IAS 37 Provisions and Risks:</strong> Provisions require a present obligation arising from past events, where an outflow of cash resources is probable and reliably estimable.</li>
+                <li><strong>IAS 7 Statement of Cash Flows:</strong> Segregates transactional cells into Operating flows (starting from Operating Profit), Investing flows (PPE purchases/sales), and Financing flows (shares and bank loan adjustments).</li>
             </ul>
-        </div>
-    </div>
+
+            <h2>2. Financial Diagnostics & Ratio Metrics</h2>
+            <ul>
+                <li><strong>Profitability & Efficiency:</strong> Asset Turnover (Revenue / Capital Employed) evaluates sales generation volume relative to total funding bases.</li>
+                <li><strong>Liquidity & Solvency:</strong> Acid Test (Current Assets minus Inventory divided by Current Liabilities) strips less liquid cell structures to extract exact short-term safety parameters.</li>
+                <li><strong>Long-Term Debt Exposure:</strong> Gearing monitors long-term risk. Interest Cover maps the net capacity to clear ongoing finance costs out of operating profit cells.</li>
+            </ul>
+            <div class="trap-summary-box">
+                <strong style="color: #DC2626; font-size: 1rem; display: block; margin-bottom: 0.5rem;">⚠️ ADVANCED EXAM TRAPS RECAP (INVISIBLE ERRORS):</strong>
+                <ul>
+                    <li><strong>The Research Capitalization Fault:</strong> Capitalized testing costs under IAS 38. Research lines can never build asset balances and must clear through the P&L immediately.</li>
+                    <li><strong>The Gearing Denominator Split Error:</strong> Forgot to add long-term loans inside the denominator pool. Gearing relies strictly on the total capital employed base.</li>
+                    <li><strong>The SOCIE Bonus Issue Illusion:</strong> Logged a bonus share issue as a liquid transaction inside the Statement of Cash Flows. Bonus issues capitalize existing reserves with zero net cash generation.</li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
