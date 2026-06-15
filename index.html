@@ -120,6 +120,42 @@ button.chapter-btn[data-level="l4"] {
     color: #9a3412 !important;
     font-weight: 700 !important;
 }
+        #auth-panel{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:99999;
+
+    background:#162238;
+    border:1px solid #2dd4bf;
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    box-shadow:0 0 20px rgba(0,0,0,.35);
+    min-width:140px;
+}
+
+#auth-panel .auth-title{
+    color:#2dd4bf;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:8px;
+    text-align:center;
+}
+
+#auth-panel a{
+    display:block;
+    color:white !important;
+    text-decoration:none;
+    padding:4px 0;
+    font-weight:600;
+}
+
+#auth-panel a:hover{
+    color:#2dd4bf !important;
+}
 
     </style>
     </script>
@@ -127,9 +163,9 @@ button.chapter-btn[data-level="l4"] {
 <!-- RIFERIMENTO_BLOCCO: PART_2_STUDIO_PANEL -->
 <body>
     <!-- INTERFACCIA BOTTONE DI LOGIN/LOGOUT AUTOMATICO -->
-    <div
-  data-netlify-identity-menu
-  style="position:fixed;top:20px;right:20px;z-index:99999;">
+   <div id="auth-panel">
+    <div class="auth-title">ACCOUNT</div>
+    <div data-netlify-identity-menu></div>
 </div>
 
 <div style="display: flex; gap: 30px; justify-content: center; align-items: flex-start; max-width: 1600px; margin: 0 auto; width: 100%; flex-wrap: wrap;">
