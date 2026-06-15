@@ -89,38 +89,58 @@
         .topic-list a { color: #475569; text-decoration: none; font-size: 13px; display: flex; align-items: center; font-weight: 500; }
         .icon-bullet { margin-right: 10px; color: var(--aat-cyan); font-weight: bold; font-size: 14px; }
         .module-nav-container { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-     /* COLORI DEI LINK INTERNI DIVISI PER LIVELLO - SELEZIONE DIRETTA */
+    /* ==========================================================================
+   INIEZIONE FORZATURA COLORI COMPONENTI TENDINA PER LIVELLO 
+   ========================================================================== */
 
-/* 1. Tutto ciò che si trova dentro il primo blocco (Livello 2 - Verde) */
-#quiz-form .level-section:first-of-type .tests-panel .topic-list li a,
-.chapters-panel:first-of-type .tests-panel .topic-list li a {
+/* --- 1. LIVELLO 2 (VERDE DECISE CORREZIONI) --- */
+.chapters-panel:nth-of-type(1) .tests-panel .topic-list li a,
+button.level-btn:nth-of-type(1) ~ .chapters-panel .tests-panel .topic-list li a,
+.level-section:nth-of-type(1) .topic-list li a {
     color: #059669 !important;
     font-weight: 600 !important;
 }
-#quiz-form .level-section:first-of-type .tests-panel .topic-list li .icon-bullet,
-.chapters-panel:first-of-type .tests-panel .topic-list li .icon-bullet {
+.chapters-panel:nth-of-type(1) .tests-panel .topic-list li a:hover,
+.level-section:nth-of-type(1) .topic-list li a:hover {
+    color: #047857 !important;
+    text-decoration: underline !important;
+}
+.chapters-panel:nth-of-type(1) .tests-panel .topic-list li .icon-bullet,
+.level-section:nth-of-type(1) .topic-list li .icon-bullet {
     color: #10B981 !important;
 }
 
-/* 2. Tutto ciò che si trova dentro il secondo blocco (Livello 3 - Azzurro) */
-.level-section:nth-of-type(2) .tests-panel .topic-list li a,
-.chapters-panel:nth-of-type(2) .tests-panel .topic-list li a {
+/* --- 2. LIVELLO 3 (AZZURRO DECISE CORREZIONI) --- */
+.chapters-panel:nth-of-type(2) .tests-panel .topic-list li a,
+button.level-btn:nth-of-type(2) ~ .chapters-panel .tests-panel .topic-list li a,
+.level-section:nth-of-type(2) .topic-list li a {
     color: #0284C7 !important;
     font-weight: 600 !important;
 }
-.level-section:nth-of-type(2) .tests-panel .topic-list li .icon-bullet,
-.chapters-panel:nth-of-type(2) .tests-panel .topic-list li .icon-bullet {
+.chapters-panel:nth-of-type(2) .tests-panel .topic-list li a:hover,
+.level-section:nth-of-type(2) .topic-list li a:hover {
+    color: #0369A1 !important;
+    text-decoration: underline !important;
+}
+.chapters-panel:nth-of-type(2) .tests-panel .topic-list li .icon-bullet,
+.level-section:nth-of-type(2) .topic-list li .icon-bullet {
     color: #0EA5E9 !important;
 }
 
-/* 3. Tutto ciò che si trova dentro l'ultimo blocco (Livello 4 - Arancione) */
-.level-section:last-of-type .tests-panel .topic-list li a,
-.chapters-panel:last-of-type .tests-panel .topic-list li a {
+/* --- 3. LIVELLO 4 (ARANCIONE DECISE CORREZIONI) --- */
+.chapters-panel:nth-of-type(3) .tests-panel .topic-list li a,
+button.level-btn:nth-of-type(3) ~ .chapters-panel .tests-panel .topic-list li a,
+.level-section:nth-of-type(3) .topic-list li a {
     color: #EA580C !important;
     font-weight: 600 !important;
 }
-.level-section:last-of-type .tests-panel .topic-list li .icon-bullet,
-.chapters-panel:last-of-type .tests-panel .topic-list li .icon-bullet {
+.chapters-panel:nth-of-type(3) .tests-panel .topic-list li a:hover,
+.level-section:nth-of-type(3) .topic-list li a:hover {
+    color: #C2410C !important;
+    text-decoration: underline !important;
+}
+.chapters-panel:nth-of-type(3) .tests-panel .topic-list li .icon-bullet,
+.level-section:nth-of-type(3) .topic-list li .icon-bullet {
     color: #F97316 !important;
 }
     </style>
