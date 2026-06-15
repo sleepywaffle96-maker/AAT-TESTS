@@ -1,196 +1,170 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 3: AMAC Variance Schemes | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 3: Internal Systems & Controls (Visual Schemes)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON DETTAGLIO BADGE ARANCIONE BRAND CORRELATO */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --t-green: #10b981;
-            --t-red: #ef4444;
-            --accent-blue: #3b82f6;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --card-bg: #FAFAFA;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-top: 1.5rem;
-        }
-        .matrix-table {
-            width: 100%;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.5rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin: 1.5rem 0;
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.01);
+        }
+        .visual-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
+            padding: 1.5rem;
+            box-sizing: border-box;
         }
-        .matrix-table th {
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--primary);
-            padding: 0.8rem;
-            text-align: left;
-            border-bottom: 2px solid var(--primary);
-            font-size: 0.95rem;
+        .visual-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--l3-cyan-dark);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.25rem;
         }
-        .matrix-table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.95rem;
-            color: var(--text-muted);
+        .flow-diagram-box {
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            padding: 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #E2E8F0;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        .financial-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .financial-table th { background-color: var(--l3-cyan-dark); color: #FFFFFF; padding: 0.75rem; font-size: 0.85rem; border: 1px solid var(--l3-cyan-dark); }
+        .financial-table td { border: 1px solid var(--border-color); padding: 0.75rem; font-size: 0.9rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
+            .flow-diagram-box { background: #F8FAFC; color: #000; border: 1px solid #CBD5E1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>AMAC Advanced Control Statements & Variance Mappings</h1>
-            <p style="color: var(--text-muted)">Visual reconciliation sheets and structural breakdowns for advanced operational performance audits.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Internal Accounting Systems and Controls - Chapter 3 Visual Schemes</h1>
+            </div>
 
-            <h2>1. Comprehensive Operating Statement (Reconciliation Model)</h2>
-            <p style="color: var(--text-muted)">The official AAT reporting pro-forma used to adjust budgeted profit to actual net profit by factoring in all operational variances.</p>
-            
-            <table class="matrix-table">
+            <h2>Scheme 3.1: The Three Layers of Internal Controls</h2>
+            <div class="grid-container">
+                <div class="visual-card">
+                    <div class="visual-card-title">1. Preventative Controls</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Designed to block transactions anomalies or active fraud before execution loops take place.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--success-color); margin-top:0.5rem; margin-bottom:0;">🛡️ Core Metric: Segregation of Duties (SoD) and restricted access permissions.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">2. Detective Controls</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Designed to identify errors or operational gaps immediately after transaction cycles occur.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--l3-cyan-dark); margin-top:0.5rem; margin-bottom:0;">📌 Core Metric: Independent ledger reconciliations and physical counts audits.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">3. Corrective Controls</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Designed to resolve Exceptions and restore infrastructure status after gaps trigger anomalies alerts.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--danger-color); margin-top:0.5rem; margin-bottom:0;">⚠️ Core Metric: Error correction protocols and business continuity backups plans.</p>
+                </div>
+            </div>
+            <h2>Scheme 3.2: Corporate Internal Control Risk Pipeline</h2>
+            <div class="flow-diagram-box">
+========================================================================================
+                      INTERNAL CONTROL INTEGRITY & THREAT MAP
+========================================================================================
+
+ [TRANSACTION INPUT PROCESS] 
+   • ERP Validation Rules (Range checks, hash totals, mandatory field masks).
+   • Security Target: Block erroneous or fragmented financial entries at entry stage.
+         ↓
+ [PROCESS SEGREGATION STAGE]
+   • Split operational roles: Authorization vs Execution vs Ledger Reconciliation.
+   • Vulnerability Barrier: Broken instantly if executive Management Override triggers.
+         ↓
+ [COLLUSION RISK THREAT AREA]
+   • Collaborative fraud execution executed by two or more internal employees.
+   • Audit Target: Implement independent background logs reviews to detect anomalies.
+
+----------------------------------------------------------------------------------------
+ COST-BENEFIT MANDATE: Cost of Control must be less than Expected Financial Loss Risk.
+ EXP. RISK FORMULA: Potential Monetary Deficit (£) × Risk Probability Factor (%).
+========================================================================================
+            </div>
+            <h2>Scheme 3.3: Systems Evaluation & Efficiency Frameworks</h2>
+            <table class="financial-table">
                 <thead>
                     <tr>
-                        <th>Variance Reconciliation Component</th>
-                        <th style="color: var(--t-green)">Favourable (£)</th>
-                        <th style="color: var(--t-red)">Adverse (£)</th>
-                        <th>Total Balance (£)</th>
+                        <th style="text-align: left; width: 220px;">Control Evaluation Focus</th>
+                        <th style="text-align: left; width: 320px;">Technical System Control Measure</th>
+                        <th style="text-align: left;">Strategic Efficiency & Compliance Target</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="color:var(--text-main)"><strong>Budgeted Net Profit Baseline Target</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td><strong>60,000</strong></td>
+                        <td style="font-weight: 600;">Data Integrity Footprint</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Permanent Digital Audit Trails Logs</td>
+                        <td>Captures user IDs, timestamps, and previous data records to guarantee trace transparency.</td>
+                    </tr>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">System Over-Engineering</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Cost-Benefit Proportionality Review</td>
+                        <td>Prevents installing complex controls for low-risk pools where implementation hours waste revenue.</td>
                     </tr>
                     <tr>
-                        <td>Sales Volume Contribution Variance</td>
-                        <td>3,500</td>
-                        <td></td>
-                        <td>+3,500</td>
+                        <td style="font-weight: 600;">Team Performance KPIs</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Processing Deadlines & Collection Ratios</td>
+                        <td>Monitors finance department efficiency to identify operational bottlenecks and tracking errors.</td>
                     </tr>
-                    <tr style="background: rgba(255,255,255,0.02)">
-                        <td style="color:var(--secondary)"><strong>Flexed Budget Profit Baseline</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td><strong>63,500</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Material Price Variance</td>
-                        <td></td>
-                        <td>2,400</td>
-                        <td>-2,400</td>
-                    </tr>
-                    <tr>
-                        <td>Material Mix Variance</td>
-                        <td>1,100</td>
-                        <td></td>
-                        <td>+1,100</td>
-                    </tr>
-                    <tr>
-                        <td>Material Yield Variance</td>
-                        <td></td>
-                        <td>1,800</td>
-                        <td>-1,800</td>
-                    </tr>
-                    <tr>
-                        <td>Labour Rate Variance</td>
-                        <td></td>
-                        <td>1,200</td>
-                        <td>-1,200</td>
-                    </tr>
-                    <tr>
-                        <td>Labour Efficiency Variance</td>
-                        <td>4,000</td>
-                        <td></td>
-                        <td>+4,000</td>
-                    </tr>
-                    <tr>
-                        <td>Fixed Overhead Expenditure Variance</td>
-                        <td>500</td>
-                        <td></td>
-                        <td>+500</td>
-                    </tr>
-                    <tr style="background: rgba(16, 185, 129, 0.05); border-top: 2px solid var(--t-green);">
-                        <td style="color:var(--t-green)"><strong>ACTUAL NET PROFIT ACHIEVED</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td style="color:var(--primary)"><strong>63,700</strong></td>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">Statutory Protection</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Aligned Corporate Security Policies</td>
+                        <td>Protects ledger databases against hacks, ensuring ongoing alignment with Data Protection/GDPR rules.</td>
                     </tr>
                 </tbody>
             </table>
-<!-- RIFERIMENTO_BLOCCO: 2 -->
-            <h2>2. Comprehensive Planning & Operational Variance Deconstruction Map</h2>
-            <p style="color: var(--text-muted)">Visual representation of variance splitting. This model isolates non-controllable budget planning errors from controllable operational execution.</p>
-            
-            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1.5rem; overflow-x: auto;">
-                <pre style="color: var(--text-muted); font-family: monospace; font-size: 0.95rem; margin: 0; line-height: 1.6;">
-[ <strong>Original Standard Budget</strong> ] ──► e.g., Material Standard set at £10.00/Kg
-              │
-              ├─► <strong>PLANNING VARIANCE</strong> (Adverse £1.50/Kg)
-              │   Market price surged nationwide due to new trade tariffs.
-              ▼
-[ <strong>Revised Realistic Standard</strong> ] ──► Recalculated at £11.50/Kg (Non-controllable baseline)
-              │
-              ├─► <strong>OPERATIONAL VARIANCE</strong> (Favourable £0.50/Kg)
-              │   Local Procurement Manager negotiated a bulk contract at £11.00/Kg.
-              ▼
-[ <strong>Actual Results Achieved</strong> ] ───► Finished production at £11.00/Kg actual cost.
-                </pre>
-            </div>
-            
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.05); border-radius: 6px; border: 1px solid var(--border-glass)">
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text-main);"><strong>Analytical Insight:</strong> A traditional audit would show an absolute variance of £1.00 Adverse (£10.00 standard vs £11.00 actual), penalizing the purchasing team. Deconstruction reveals that the manager performed efficiently, saving £0.50 per Kg against realistic market conditions.</p>
-            </div>
-        </div>
-    </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
