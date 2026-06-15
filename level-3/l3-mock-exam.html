@@ -29,6 +29,7 @@
             margin: 0;
             padding-top: 80px;
         }
+        /* CORREZIONE CROMATICA LIVELLO 3 - FORZATURA AZZURRO EDITORIALE SEZIONI */
         .exam-top-bar {
             position: fixed;
             top: 0;
@@ -36,7 +37,7 @@
             width: 100%;
             height: 65px;
             background-color: #111827;
-            border-bottom: 2px solid var(--l2-emerald-primary);
+            border-bottom: 2px solid #0284C7; /* Cambiato in Azzurro Livello 3 */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -44,6 +45,7 @@
             box-sizing: border-box;
             z-index: 1000;
         }
+
         .top-bar-title {
             color: #FFFFFF;
             font-weight: 700;
@@ -102,8 +104,8 @@
         .tab-trigger-btn:hover { background: #E5E7EB; }
         .tab-trigger-btn.active {
             background: var(--bubble-white-bg);
-            color: var(--l2-emerald-primary);
-            border-top: 3px solid var(--l2-emerald-primary);
+            color: #0284C7 !important; /* Testo attivo Azzurro */
+            border-top: 3px solid #0284C7 !important; /* Linea superiore attiva Azzurro */
             padding-bottom: calc(0.6rem + 2px);
             margin-bottom: -2px;
         }
@@ -338,132 +340,292 @@
 <script>
 const questionsDatabase = [
     {
-        id: 1, chapter: 1, type: "input", points: 10,
-        instruction: "Calculate the second-year depreciation expense charge using the Reducing Balance framework.",
+        id: 1,
+        chapter: 1,
+        type: "input",
+        points: 10,
+        instruction: "An employee uses confidential accounting files to buy shares before a corporate public announcement. Under the AAT Code of Professional Ethics, state which specific fundamental principle has been directly breached.",
         content: `
-        <div style="margin-bottom:0.5rem;">A business purchases a production vehicle on 1 January 2024 for £24,000. The firm applies the Reducing Balance Method of depreciation at a fixed rate of 25% per annum. Enter the precise Depreciation Expense charge (£) to be recorded in the Statement of Profit or Loss for the second financial year ending 31 December 2025.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q1" data-ans="4500" placeholder="0.00" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Ethical Compliance Investigation Field</th>
+                        <th style="width: 300px;">User Statement Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Name of the breached principle (e.g. Integrity, Objectivity, etc.)</td>
+                        <td><input type="text" class="multi-input-field" data-ans="Integrity" placeholder="Type answer..."></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Year 1 Depreciation: £24,000 * 25% = £6,000. NBV at start of Year 2: £24,000 - £6,000 = £18,000. Year 2 Depreciation charge: £18,000 * 25% = £4,500."
+        solution: "Trading on insider accounting details demonstrates dishonesty and lack of fair dealing, violating the foundational principle of Integrity."
     },
     {
-        id: 2, chapter: 1, type: "input", points: 10,
-        instruction: "Calculate the exact Prepayment adjustment required at year-end.",
+        id: 2,
+        chapter: 1,
+        type: "select",
+        points: 10,
+        instruction: "Complete the regulatory compliance statement regarding international anti-money laundering reporting lines.",
         content: `
-        <div style="margin-bottom:0.5rem;">On 1 November 2025, an enterprise pays its annual commercial insurance premium of £3,600 covering a 12-month window to 31 October 2026. Enter the exact Prepayment adjustment amount (£) required at the financial year-end on 31 December 2025.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q2" data-ans="3000" placeholder="0.00" style="border:none; width:100%;">
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                If a bookkeeper identifies suspicious ledger entries that indicate potential money laundering, they must immediately report this event internally to the company's designated 
+                <select class="multi-select-field" data-ans="mlro">
+                    <option value="">-- Select Officer --</option>
+                    <option value="ceo">Chief Executive Officer (CEO)</option>
+                    <option value="mlro">Money Laundering Reporting Officer (MLRO)</option>
+                </select> 
+                rather than warning the client, which would represent the illegal act of 
+                <select class="multi-select-field" data-ans="tipping">
+                    <option value="">-- Select Offence --</option>
+                    <option value="tipping">Tipping-off</option>
+                    <option value="fraud">Fraudulent trading</option>
+                </select>.
+            </div>
         `,
-        explanation: "Premium is £300/month (£3,600 / 12). At 31 Dec, 2 months are consumed. 10 months are prepaid: 10 * £300 = £3,000."
+        solution: "Suspicious transactions must be escalated internally via the MLRO. Warning the customer directly leaks the audit check, triggering a 'tipping-off' criminal offence."
     },
     {
-        id: 3, chapter: 1, type: "input", points: 10,
-        instruction: "Isolate the unpaid consumed cost to form the year-end Accrual correction entry.",
+        id: 3,
+        chapter: 2,
+        type: "input",
+        points: 15,
+        instruction: "A company purchases equipment for £20,000. It applies a reducing balance depreciation framework rate of 20% per annum. Compute the depreciation charge for the second year.",
         content: `
-        <div style="margin-bottom:0.5rem;">A firm's financial year ends on 31 March 2026. The electricity bill is paid quarterly in arrears. The last invoice was settled up to 31 January 2026. On 15 May 2026, the firm receives an electricity bill of £900 covering February, March, and April 2026. Enter the Accrual adjustment (£) required at year-end.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q3" data-ans="600" placeholder="0.00" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">FAPS Year-End Adjustment Extraction</th>
+                        <th style="width: 250px;">Calculated Ledger Value (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Year 2 Depreciation Expense Charge (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="3200" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Bill is £300/month (£900 / 3). For Feb and Mar (2 months), electricity is consumed but unpaid at year-end: 2 * £300 = £600."
+        solution: "Year 1 Charge = £20,000 × 20% = £4,000. Net Book Value end of Year 1 = £20,000 - £4,000 = £16,000. Year 2 Charge = £16,000 × 20% = £3,200."
     },
     {
-        id: 4, chapter: 2, type: "input", points: 10,
-        instruction: "Execute specific write-offs before computing the updated general Allowance balance.",
+        id: 4,
+        chapter: 2,
+        type: "input",
+        points: 15,
+        instruction: "On 31 December, the rent expense account holds a debit total of £6,000. This includes a £1,500 advance invoice payment covering January of the subsequent year. Calculate the adjusted rent expense figure for the current Profit or Loss account.",
         content: `
-        <div style="margin-bottom:0.5rem;">At the end of the trading period, a business has total Trade Receivables of £45,000. The bookkeeper decides to fully write off an irrecoverable debt from client X worth £1,200, and subsequently adjust the general Allowance for Doubtful Debts to be exactly 5% of the remaining receivables pool. Enter the final balance (£) of the adjusted Allowance account.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q4" data-ans="2190" placeholder="0.00" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">FAPS Accruals & Prepayments Adjustment</th>
+                        <th style="width: 250px;">Carrying Value (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Adjusted Current Year Rent Expense (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="4500" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Receivables base: £45,000 - £1,200 = £43,800. General allowance: £43,800 * 5% = £2,190."
+        solution: "The advance payment is a prepayment and must be deducted from current totals: £6,000 ledger balance - £1,500 prepaid portion = £4,500 adjusted expense."
     },
     {
-        id: 5, chapter: 2, type: "radio", points: 10,
-        instruction: "Identify the correct ledger posting path to record a decrease in the general allowance pool.",
+        id: 5,
+        chapter: 2,
+        type: "select",
+        points: 10,
+        instruction: "Select the correct accounting entries required to write off an irrecoverable debt from a customer ledger.",
         content: `
-        <div style="margin-bottom:0.5rem;">When adjusting the general Allowance for Doubtful Debts account at year-end, it is discovered that the opening allowance balance is £1,800 and the newly required allowance is calculated as £1,450. What is the double-entry posting path to record this shift?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q5" value="A"> Debit Allowance for Doubtful Debts £350, Credit Irrecoverable Debts Expense £350</label>
-            <label class="option-label"><input type="radio" name="q5" value="B"> Debit Irrecoverable Debts Expense £350, Credit Allowance for Doubtful Debts £350</label>
-            <label class="option-label"><input type="radio" name="q5" value="C"> Debit Statement of Profit or Loss £1,450, Credit Allowance Account £1,450</label>
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                To permanently eliminate an uncollectible balance from the accounts, the accountant must 
+                <select class="multi-select-field" data-ans="debit">
+                    <option value="">-- Side A --</option>
+                    <option value="debit">Debit Irrecoverable Debts Expense Account</option>
+                    <option value="credit">Credit Irrecoverable Debts Expense Account</option>
+                </select> 
+                and subsequently 
+                <select class="multi-select-field" data-ans="credit">
+                    <option value="">-- Side B --</option>
+                    <option value="debit">Debit Sales Ledger Control Account (SLCA)</option>
+                    <option value="credit">Credit Sales Ledger Control Account (SLCA)</option>
+                </select>.
+            </div>
         `,
-        correct: "A",
-        explanation: "The allowance decreases by £350 (£1,800 - £1,450). To reduce an allowance (credit balance), we Debit the Allowance account and Credit Irrecoverable Debts Expense."
+        solution: "Writing off bad debts requires an expense entry (Debit Irrecoverable Debts) and a corresponding reduction in the outstanding customer asset ledger rows (Credit SLCA)."
     },
     {
-        id: 6, chapter: 3, type: "radio", points: 10,
-        instruction: "Determine the final net profit or loss outcome on the disposal of machinery accounts.",
+        id: 6,
+        chapter: 2,
+        type: "input",
+        points: 15,
+        instruction: "A partnership shares profits in a 3:2 ratio between Partner A and Partner B. The total residual profit available for appropriation is £50,000. Calculate Partner A's shared allocation.",
         content: `
-        <div style="margin-bottom:0.5rem;">An item of machinery bought for £15,000 with accumulated depreciation of £9,000 is sold on credit during the period for £4,800. What is the final net profit or net loss outcome on this disposal transaction inside the accounts?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q6" value="A"> A Net Profit on Disposal of £1,200</label>
-            <label class="option-label"><input type="radio" name="q6" value="B"> A Net Loss on Disposal of £1,200</label>
-            <label class="option-label"><input type="radio" name="q6" value="C"> A Net Loss on Disposal of £6,000</label>
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Partnership Appropriation Matrix Allocation</th>
+                        <th style="width: 250px;">Profit Portion (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Partner A Shared Profit Allocation (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="30000" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        correct: "B",
-        explanation: "Net Book Value (NBV) = £15,000 - £9,000 = £6,000. Sale proceeds = £4,800. Profit/Loss = £4,800 - £6,000 = -£1,200 (Net Loss on Disposal)."
+        solution: "Total ratio parts = 3 + 2 = 5 parts. Partner A allocation = £50,000 × (3 / 5) = £30,000 residual profit portion."
     },
     {
-        id: 7, chapter: 3, type: "input", points: 10,
-        instruction: "Compute the exact monthly pro-rata straight-line depreciation charge.",
+        id: 7,
+        chapter: 3,
+        type: "input",
+        points: 15,
+        instruction: "A production unit establishes a standard material usage of 2 kg per unit at a standard cost of £5 per kg. During the month, it manufactures 1,000 units utilizing exactly 2,100 kg of material. Calculate the Material Usage Variance value.",
         content: `
-        <div style="margin-bottom:0.5rem;">A business operates a policy of depreciating machinery at 20% per annum using the Straight-Line Method, calculated pro-rata on a monthly basis. A new cutting machine is purchased on 1 September 2025 for £18,000. Enter the exact depreciation charge (£) for this machine for the financial year ending 31 December 2025.</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q7" data-ans="1200" placeholder="0.00" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">MATS Variance Cost Evaluation Framework</th>
+                        <th style="width: 250px;">Variance Amount (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Material Usage Variance Value (Integer value only)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="500" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Annual depreciation: £18,000 * 20% = £3,600. Monthly: £300. Owned from 1 Sept to 31 Dec (4 months): 4 * £300 = £1,200."
+        solution: "Standard Usage for actual output = 1,000 units × 2 kg = 2,000 kg. Actual Usage = 2,100 kg. Excess usage = 100 kg (Adverse). Variance value = 100 kg × £5 standard price = £500 Adverse."
     },
     {
-        id: 8, chapter: 4, type: "radio", points: 10,
-        instruction: "Map the correct destination columns for year-end prepayment elements.",
+        id: 8,
+        chapter: 3,
+        type: "select",
+        points: 10,
+        instruction: "Complete the cost behaviour analysis mapping for short-term management decision processes.",
         content: `
-        <div style="margin-bottom:0.5rem;">Inside an Extended Trial Balance (ETB) worksheet, into which specific columns must the ending balance of a Prepayment adjustment be transferred?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q8" value="A"> Statement of Profit or Loss (Debit column)</label>
-            <label class="option-label"><input type="radio" name="q8" value="B"> Statement of Financial Position (Debit column, representing a Current Asset)</label>
-            <label class="option-label"><input type="radio" name="q8" value="C"> Statement of Financial Position (Credit column, representing a Current Liability)</label>
-        </div>
+            <div style="line-height: 2; font-size: 1.05rem;">
+                When evaluating manufacturing output flexes, direct materials and factory line assembly labor are tracked as 
+                <select class="multi-select-field" data-ans="variable">
+                    <option value="">-- Cost Behavior A --</option>
+                    <option value="fixed">Fixed cost elements</option>
+                    <option value="variable">Variable cost elements</option>
+                </select> 
+                while supervisor salaries and commercial factory space leasing represent rigid 
+                <select class="multi-select-field" data-ans="fixed">
+                    <option value="">-- Cost Behavior B --</option>
+                    <option value="fixed">Fixed overhead metrics</option>
+                    <option value="variable">Variable overhead metrics</option>
+                </select>.
+            </div>
         `,
-        correct: "B",
-        explanation: "A prepayment represents an expense paid in advance, which is a Current Asset. Therefore, its final adjusted position must be mapped into the Statement of Financial Position Debit column."
+        solution: "Direct production materials scale directly in proportion to volume (Variable), whereas factory leasing remains a constant capacity charge over the operating window (Fixed)."
     },
     {
-        id: 9, chapter: 5, type: "input", points: 10,
-        instruction: "Calculate the residual profit allocation for individual partners following salary deductions.",
+        id: 9,
+        chapter: 3,
+        type: "input",
+        points: 15,
+        instruction: "An enterprise forecasts a closing cash balance deficit of £2,000 for April. May operations project total physical cash receipts of £15,000 and total physical bank cash payments of £11,000. Compute the forecasted net cash balance at the end of May.",
         content: `
-        <div style="margin-bottom:0.5rem;">A partnership is formed between partner A and partner B. The partnership agreement states that partner A is entitled to an annual salary of £6,000. Residual profits are split in a 3:2 ratio respectively. The net profit for the year before adjustments is £26,000. Enter partner B's definitive final share of residual profit (£).</div>
-        <div style="display:flex; align-items:center; max-width:180px; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden;">
-            <span style="padding:0.4rem 0.6rem; background:#E5E7EB; font-weight:bold; color:#4B5563;">£</span>
-            <input type="text" class="table-input text-right" name="q9" data-ans="8000" placeholder="0.00" style="border:none; width:100%;">
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">MATS Cash Budgeting Control Component</th>
+                        <th style="width: 250px;">Forecasted Balance (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">May Net Closing Bank Balance (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="2000" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        explanation: "Residual profit: £26,000 - £6,000 = £20,000. Partner B's share (2/5): £20,000 * (2 / 5) = £8,000."
+        solution: "May Net Cash Flow = Receipts £15,000 - Payments £11,000 = +£4,000 surplus. May Closing Balance = April Opening Deficit (-£2,000) + May Surplus (+£4,000) = +£2,000 cash balance."
     },
     {
-        id: 10, chapter: 5, type: "radio", points: 10,
-        instruction: "Understand the purpose of the Trade Payables Control Account (TPCA).",
+        id: 10,
+        chapter: 4,
+        type: "input",
+        points: 15,
+        instruction: "A business under the standard UK VAT scheme compiles its quarter-end records. It logs total output VAT collected on sales of £8,500 and total input VAT paid on business expenses of £6,200. Calculate the net tax payment due to HMRC.",
         content: `
-        <div style="margin-bottom:0.5rem;">Where should interest charged on partner drawings be entered inside the formal Partnership Appropriation Account?</div>
-        <div class="options-container">
-            <label class="option-label"><input type="radio" name="q10" value="A"> As a Credit entry/Addition to the net profit because it represents an internal cost recovered from partners</label>
-            <label class="option-label"><input type="radio" name="q10" value="B"> As a Debit entry/Deduction from the net profit because it increases individual partner current accounts</label>
-            <label class="option-label"><input type="radio" name="q10" value="C"> Excluded entirely from the allocation map</label>
-        </div>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">TPFB Statutory VAT Return Sheet</th>
+                        <th style="width: 250px;">Net Tax Due (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Box 5 Net Payment Allocation (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="2300" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
         `,
-        correct: "A",
-        explanation: "Interest on drawings increases the total pool of profit available for appropriation from the partnership's perspective, so it is credited/added to net profit."
+        solution: "Net VAT Payable to HMRC = Output VAT - Input VAT. Calculation: £8,500 collected - £6,200 paid = £2,300 statutory payment liability (Box 5 total)."
+    },
+    {
+        id: 11,
+        chapter: 4,
+        type: "select",
+        points: 10,
+        instruction: "Complete the statutory statement governing HMRC reporting obligations for small business operations.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                A small enterprise generating credit transactions can elect to deploy the specialized VAT Cash Accounting Scheme to adjust reporting boundaries, meaning tax is logged only when 
+                <select class="multi-select-field" data-ans="cash">
+                    <option value="">-- Condition A --</option>
+                    <option value="invoice">The sales invoice is officially raised</option>
+                    <option value="cash">Physical cash cash-in hits the bank account</option>
+                </select> 
+                rather than tracking the transaction on standard 
+                <select class="multi-select-field" data-ans="accrual">
+                    <option value="">-- Condition B --</option>
+                    <option value="accrual">Accrual or invoice-date baselines</option>
+                    <option value="proforma">Pro-forma estimate ledger parameters</option>
+                </select>.
+            </div>
+        `,
+        solution: "The Cash Accounting Scheme helps small business cash flows by calculating VAT liabilities strictly on real cash movements, eliminating tax exposure on unpaid client invoices."
+    },
+    {
+        id: 12,
+        chapter: 4,
+        type: "input",
+        points: 15,
+        instruction: "An individual trader files their quarterly VAT return 45 days past the statutory deadline. HMRC applies a flat-rate regulatory penalty charge of £400 on the late submission. Input the exact monetary penalty level recorded.",
+        content: `
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">TPFB Penalty and Default Surcharge Matrix</th>
+                        <th style="width: 250px;">Penalty Value (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Statutory Late Submission Levy (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="400" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        `,
+        solution: "Late filing or payment defaults trigger automatic flat or sliding penalty tiers under HMRC compliance codes. The undisputed recorded levy is £400."
     }
 ];
 
