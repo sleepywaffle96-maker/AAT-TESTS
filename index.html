@@ -376,16 +376,22 @@ button.chapter-btn[data-level="l4"] {
       netlifyIdentity.init();
 
       // 2. Esegui il blocco istantaneo prima che la pagina mostri i test
-      const user = netlifyIdentity.currentUser();
-      if (!user) {
-         // Se non loggato, congela i click e opacizza i cassetti
-         document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
-            el.style.pointerEvents = 'none';
-            el.style.opacity = '0.2';
-         });
-         // Forza l'apertura immediata della finestra di Login/Registrazione
-         setTimeout(() => { netlifyIdentity.open(); }, 300);
-      }
+     netlifyIdentity.on('init', user => {
+
+  if (!user) {
+
+    document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+      el.style.pointerEvents = 'none';
+      el.style.opacity = '0.2';
+    });
+
+    setTimeout(() => {
+      netlifyIdentity.open();
+    }, 300);
+
+  }
+
+});
 
       // 3. Quando l'utente effettua il login, sblocca la dashboard
       netlifyIdentity.on('login', user => {
