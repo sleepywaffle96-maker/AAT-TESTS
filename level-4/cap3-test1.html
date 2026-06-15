@@ -3,335 +3,927 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Management Accounting: Decision and Control - Test One</title>
+    <title>AAT Level 4 - Chapter 3: Internal Systems & Controls (Test One)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO INTEGRATO CON ETICHETTA ARANCIONE COMPLIANT */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
-        }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        table.osborne-table {
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
             width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        table.osborne-table th {
-            background-color: #f2f2f2;
-            text-align: left;
-            font-size: 13px;
-        }
-        table.osborne-table td, table.osborne-table th {
-            border: 1px solid #aaaaaa;
-            padding: 6px;
-            font-size: 13px;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
+        }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span {
+            color: #64748B;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #calc-close-btn {
+            background: transparent;
+            border: none;
+            color: #EF4444;
             font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+
+        #calc-screen {
+            width: 100%;
+            height: 45px;
+            background: #000000;
+            border-radius: 8px;
+            color: #00FFFF;
+            text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: right;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #00FFFF;
+            box-sizing: border-box;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">Management Accounting: Decision and Control - Test One</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: INTERNAL SYSTEMS & CONTROLS (TEST ONE)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (Segregation of Duties) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">1. Which of the following setup configurations represents a proper implementation of the Segregation of Duties (SoD) to mitigate internal fraud risks?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> A single senior employee sets up new suppliers, approves purchases, and executes bank reconciliation journal adjustments.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> The clerk who authorizes a commercial vendor purchase invoice cannot execute the final bank cash payment or reconcile the cash book.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> Automated systems bypass all manual approval requirements for transactions under £10,000.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Segregation of Duties demands splitting core operational phases (Authorization, Execution, and Reconciliation) across separate staff members to block independent fraudulent loops.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            A company needs 500 kg of a specific material for a special one-off contract. This material is currently in stock, having been purchased originally for £8.00 per kg. It has no other use in the business, but could be sold as scrap for £3.50 per kg. The current replacement market price is £9.50 per kg. Calculate the relevant cost of the material for this contract:<br>
-            Relevant Cost: £ <input type="text" id="ans1" placeholder="0.00">
+            <!-- QUESTION 2: TIPO "multi-select" (Information Systems Infrastructure) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the statement describing the technological safeguards required for ledger database validation.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To guarantee ledger data integrity and minimize duplicate records entries, corporate ERP architectures must enforce strict 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="validation">
+                            <option value="">-- Control --</option>
+                            <option value="formatting">Conditional formatting metrics</option>
+                            <option value="validation">Data Validation controls and hash totals</option>
+                        </select> 
+                        while generating permanent, chronological 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="trails">
+                            <option value="">-- Infrastructure --</option>
+                            <option value="trails">Digital audit trails tracking user IDs</option>
+                            <option value="suspense">Suspense accounts reconciliation notes</option>
+                        </select> to capture user actions.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                .75rem;<div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> System validation controls block flawed inputs before database entries occur. Permanent audit trails act as an unalterable digital footprint to monitor adjustments.
+                </div>
+            </div>
+
+            <!-- QUESTION 3: TIPO "radio" (Preventative Controls Classification) -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">3. Under the core framework classifications, restricting physical or digital master data entry access with unique encrypted passwords maps to which control layer?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> Preventative Controls</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> Detective Controls</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> Corrective Controls</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Passwords, physical locks, and role-based permissions are designed to actively block an error or unauthorized transaction before it occurs, mapping to Preventative Controls.
+                </div>
+            </div>
+            <!-- QUESTION 4: TIPO "multi-select" (Detective Control Metrics) -->
+            <div class="question-tab" data-qindex="4" data-type="multi-select">
+                <div class="task-instruction-text">4. Complete the analysis defining control mechanisms used after transactional processing cycles.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        An independent monthly bank reconciliation or a physical warehouse stock count cross-checked with inventory ledgers represents a 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="detective">
+                            <option value="">-- Control Type --</option>
+                            <option value="preventative">Preventative control layer</option>
+                            <option value="detective">Detective control layer</option>
+                        </select> 
+                        because it isolates processing exceptions 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="after">
+                            <option value="">-- Timing --</option>
+                            <option value="before">Before ledger entries execute</option>
+                            <option value="after">After transactional cycles occur</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Reconciliations do not block errors live. They operate after processing cycles to identify gaps and errors, making them Detective Controls.
+                </div>
+            </div>
+
+            <!-- QUESTION 5: TIPO "radio" (Cost-Benefit Thresholds) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">5. A company evaluates an advanced multi-factor authentication control that costs £15,000 to implement annually. The data asset risk it secures has a potential loss impact of £50,000 with an annual historical fraud probability factor of 10%. Is this control justified?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> Yes, because the monetary asset loss (£50,000) exceeds the absolute implementation cost base.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> Yes, because ERP software controls achieve 100% data security guarantees.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> No, because the operational cost of control (£15,000) exceeds the mathematically expected cost of fraud risk (£5,000).</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Expected risk = £50,000 × 10% = £5,000. Since the cost of the control (£15,000) exceeds the risk value, adding this mechanism represents process over-engineering.
+                </div>
+            </div>
+
+            <!-- QUESTION 6: TIPO "multi-select" (The Vulnerability Core Factors) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the statements assessing systemic operational vulnerabilities inside controls frameworks.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        When an authorized high-level director bypasses internal boundary masks to execute a payment, this is called 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="override">
+                            <option value="">-- Phenomenon --</option>
+                            --  <option value="override">Management Override of controls</option>
+                            <option value="collusion">Staff Collusion processes</option>
+                        </select>. 
+                        Conversely, when two or more distinct employees work together to circumvent separate duties systems, the vulnerability represents 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="collusion">
+                            <option value="">-- Phenomenon --</option>
+                            <option value="override">Management Override of controls</option>
+                            <option value="collusion">Internal employee Collusion</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Control networks contain structural vulnerabilities. Solo executive authorization bypasses map to Management Override, while multi-person joint bypasses define Collusion.
+                </div>
+            </div>
+            <!-- QUESTION 7: TIPO "radio" (Team Efficiency Monitoring KPIs) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">7. To monitor and optimize the financial team's operational efficiency, which specific metric serves as an effective departmental Key Performance Indicator (KPI)?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> The total amount of indexation allowance applied to corporate non-current land assets.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> The average processing turnaround time for supplier invoices and purchase ledger matching logs.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> The volume of late submission points accumulated across quarterly VAT returns layers.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Tracking transaction turnover and processing speed allows managers to identify clerical bottlenecks and maintain high data efficiency without over-engineering work steps.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "radio" (The Absolute Security Illusion Trap) -->
+            <div class="question-tab" data-qindex="8" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">8. Core Exam Trap: Recommending a multi-layered control design in a case study audit and guaranteeing it will provide a 100% foolproof defense against internal employee fraud is a flaw because:</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="A"> No control matrix can guarantee absolute security due to inherent system limits, management override, and employee collusion.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="B"> Capital allowances must be calculated using reducing balance WDA percentages first.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="C"> Data validation dropdowns completely eliminate the need for backup file logs.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Absolute Security Illusion trap highlights that perfect, risk-free structures do not exist. Internal accounting environments present inherent structural limits that require ongoing testing.
+                </div>
+            </div>
+
+            <!-- QUESTION 9: TIPO "multi-select" (System Integration Control) -->
+            <div class="question-tab" data-qindex="9" data-type="multi-select">
+                <div class="task-instruction-text">9. Complete the statement assessing database infrastructure connectivity.</div>
+                .75rem;<div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Linking financial modules cleanly with internal manufacturing production logs and automated payroll databases defines 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="integration">
+                            <option value="">-- Infrastructure --</option>
+                            <option value="integration">System Integration framework</option>
+                            <option value="override">Management override permissions</option>
+                        </select> 
+                        which minimizes manual duplicate entries and tracking 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="variances">
+                            <option value="">-- Risk --</option>
+                            <option value="variances">Transactional ledger variances</option>
+                            <option value="allowances">HMRC capital allowances pools</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Integrated databases reduce human manual entry points. This locks data streams and removes reconciliation variance errors between internal departments.
+                </div>
+            </div>
+            <!-- QUESTION 10: TIPO "radio" (Corrective Controls Definition) -->
+            <div class="question-tab" data-qindex="10" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">10. When an automated detective macro spots a ledger data exception and triggers a rolling system backup recovery sequence, this action maps to which control layer?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="A"> Preventative Controls</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="B"> Corrective Controls</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="C"> Inherent Risk Controls</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Corrective controls act after exceptions are discovered. Their primary task is to fix system anomalies and restore operational accounting continuity.
+                </div>
+            </div>
+
+            <!-- QUESTION 11: TIPO "radio" (The Control Over-Engineering Trap) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">11. Core Exam Trap: Implementing a three-stage management authorization chain for low-value employee office stationery or petty cash purchases is a structural mistake because:</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> It increases the risk of staff collusion during transactional cycles.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> Petty cash entries must be written off using standard IAS 38 intangible lines.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> It triggers process over-engineering, where the labor cost of the control exceeds the small financial risk exposure.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Control Over-Engineering trap warns that controls must be proportional. Restricting low-risk areas with complex signatures wastes resources and breaches the cost-benefit balance rule.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "multi-select" (ERP Input Check Parameters) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the description of automated data validation fields built inside accounting software.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Configuring an accounting portal to reject purchase invoices with dates in the future is a standard 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="range">
+                            <option value="">-- Check Type --</option>
+                            <option value="range">Range and reasonableness check</option>
+                            <option value="hash">Hash total reconciliation check</option>
+                        </select> 
+                        designed to block system input errors 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="before">
+                            <option value="">-- Timing --</option>
+                            <option value="before">Before ledger balances process</option>
+                            <option value="after">After reporting cycles conclude</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Range and reasonableness checks validate that transactional data falls within logical financial boundaries, trapping errors before ledger updates occur.
+                </div>
+            </div>
+            <!-- QUESTION 13: TIPO "radio" (The Collusion Risk Threat) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">13. Core Exam Trap: Why is it conceptually flawed to assume that an enterprise system with automated workflows can provide a 100% unbreakable shield against internal fraud?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> Because automated system validation controls do not generate digital audit trails logs.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> Because the operational cost of the control always decreases the company net revenue.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Because no control matrix can eliminate the risks of executive Management Override or secret staff Collusion.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Absolute Security Illusion trap warns that internal checks can be bypassed through internal staff collusion or executive management override. No platform achieves absolute security.
+                </div>
+            </div>
+
+            <!-- QUESTION 14: TIPO "multi-select" (The Control Over-Engineering Flaw) -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the analysis regarding control implementation efficiency and proportional budgeting boundaries.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Recommending a multi-layered manual approval chain involving senior directors for low-value petty cash vouchers represents an exam performance 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="flaw">
+                            <option value="">-- Classification --</option>
+                            <option value="flaw">Flaw of process over-engineering</option>
+                            <option value="success">Success of absolute risk mitigation</option>
+                        </select> 
+                        because the operational cost of implementing that control vastly 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="exceeds">
+                            <option value="">-- Cost-Benefit --</option>
+                            <option value="exceeds">Exceeds the actual monetary risk exposure</option>
+                            <option value="minimizes">Minimizes the expected fraud risk probability</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Control Over-Engineering Flaw warns that control costs must be proportional to risk parameters. Burning professional staff hours on trivial balances breaches basic cost-benefit thresholds.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "radio" (Information Commissioner's Office Penalty Risks) -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. A limited company suffers a catastrophic database leak exposing client financial details because it failed to implement basic cell locking or security safeguards. What public body enforces penalties?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> The public Companies House Enforcement Registry Panel.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> The Information Commissioner's Office (ICO) under Data Protection frameworks.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> The IESBA Professional Accountants Ethics Disciplinary Board.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Reckless database maintenance breaching UK Data Protection Act / GDPR mandates exposes the limited company to punitive statutory prosecutions launched by the ICO.
+                </div>
+            </div>
+
+        </form>
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            A business manufactures a component at a variable cost of £14.00 per unit. Fixed production overheads allocated to each unit are £6.00. An external specialist supplier offers to sell the component to the company for £16.50 per unit. If the component is bought externally, the company will save £2.00 of specific fixed overheads per unit. Calculate the net financial benefit or penalty per unit if the company decides to BUY externally:<br>
-            Amount: £ <input type="text" id="ans2_val" placeholder="0.00"> <select id="ans2_type"><option value="">Select</option><option value="w">Benefit (Save)</option><option value="correct">Penalty (Cost extra)</option></select>
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            A company experiences a severe labor shortage. It manufactures two products, X and Y. Material availability is unrestricted, but machine capacity is limited. Product X provides a contribution of £12.00 and requires 3 machine hours. Product Y provides a contribution of £15.00 and requires 5 machine hours. Calculate the contribution per machine hour for the optimal principal budget factor utilization of Product X:<br>
-            Contribution per Hour (X): £ <input type="text" id="ans3" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            A factory uses Activity-Based Costing (ABC). Total machine setup overhead costs are budgeted at £36,000. The cost driver identified is the number of production runs, which is budgeted at 120 setups for the period. Calculate the predetermined cost driver rate per setup:<br>
-            Cost Driver Rate: £ <input type="text" id="ans4" placeholder="0.00"> per setup
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            Using the ABC cost driver rate computed in Q4, a batch order of Product Z requires exactly 4 separate production machine setups. Calculate the total machine setup overhead cost to be allocated to this specific batch order:<br>
-            Allocated Setup Cost: £ <input type="text" id="ans5" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            A company budgets for 4,000 fixed production overhead hours but actually works 4,200 hours. The predetermined standard fixed overhead absorption rate (OAR) is £8.00 per hour. Actual fixed overheads incurred were £34,000. Calculate the fixed overhead expenditure variance:<br>
-            Fixed Overhead Expenditure Variance: £ <input type="text" id="ans6_val" placeholder="0.00"> <select id="ans6_type"><option value="">Select</option><option value="w">Favourable</option><option value="correct">Adverse</option></select>
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            Using the baseline operational metrics from Q6, calculate the fixed overhead volume variance for the period:<br>
-            Fixed Overhead Volume Variance: £ <input type="text" id="ans7_val" placeholder="0.00"> <select id="ans7_type"><option value="">Select</option><option value="correct">Favourable</option><option value="w">Adverse</option></select>
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            A past sunk cost is an expenditure that has already been incurred due to a historical decision. According to relevant costing principles, sunk costs are completely irrelevant for future management decisions.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans8"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-    <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            A division reports an actual raw material usage of 6,200 kg against a standard allowance of 6,000 kg. The standard price of the material is £4.00 per kg. Calculate the direct material usage variance:<br>
-            Material Usage Variance: £ <input type="text" id="ans9_val" placeholder="0.00"> <select id="ans9_type"><option value="">Select</option><option value="w">Favourable</option><option value="correct">Adverse</option></select>
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            A company uses a target costing approach for a new gadget. The market research establishes a target retail price of £60.00. The business requires a profit margin of 25% on the selling price. Calculate the maximum target cost allowed to manufacture the product:<br>
-            Target Cost: £ <input type="text" id="ans10" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            A manufacturing unit absorbs fixed overheads based on standard capacity. Budgeted capacity was 10,000 labor hours and actual hours worked were 9,500. This drop in operational activity creates which type of variance?<br>
-            Variance Category: <select id="ans11"><option value="">Select</option><option value="w">Adverse Expenditure Variance</option><option value="correct">Adverse Capacity Variance</option><option value="w">Favourable Efficiency Variance</option></select>
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            An enterprise is tracking a product's costs from its initial research phase, through design, manufacturing, distribution, up to its final market withdrawal. This asset management method is known as:<br>
-            Costing Methodology: <select id="ans12"><option value="">Select</option><option value="w">Standard Costing</option><option value="w">Activity-Based Costing</option><option value="correct">Life-Cycle Costing</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            The standard direct labor requirement for a batch is 40 hours at a standard rate of £12.00 per hour. Due to a seasonal wage settlement, the actual rate paid was £12.50 per hour for the 40 hours worked. Calculate the total labor rate variance:<br>
-            Labour Rate Variance: £ <input type="text" id="ans13_val" placeholder="0.00"> <select id="ans13_type"><option value="">Select</option><option value="w">Favourable</option><option value="correct">Adverse</option></select>
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            When analyzing financial structures under a limiting factor scenario, a manager should always prioritize the product that generates the highest contribution per unit of the limiting factor rather than the highest absolute contribution per unit of finished product.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans14"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            An operations department implements a Just-in-Time (JIT) inventory management model. The primary operational objective of a JIT framework is to maximize raw material storage safety buffers to prevent any possible line downtime.<br>
-            Is the statement above True or False?<br>
-            Answer: <select id="ans15"><option value="">Select</option><option value="w">True</option><option value="correct">False</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
-        }
-    }
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    
+    updateNavigationDisplay();
+}
 
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
 
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '1750' || val === '1750.00');
-        } else if (currentQ === 2) {
-            let val = document.getElementById('ans2_val').value.trim();
-            let type = document.getElementById('ans2_type').value;
-            isCorrect = ((val === '0.5' || val === '0.50') && type === 'correct');
-        } else if (currentQ === 3) {
-            let val = document.getElementById('ans3').value.trim();
-            isCorrect = (val === '4' || val === '4.00');
-        } else if (currentQ === 4) {
-            let val = document.getElementById('ans4').value.trim();
-            isCorrect = (val === '300' || val === '300.00');
-        } else if (currentQ === 5) {
-            let val = document.getElementById('ans5').value.trim();
-            isCorrect = (val === '1200' || val === '1200.00');
-        } else if (currentQ === 6) {
-            let val = document.getElementById('ans6_val').value.trim();
-            let type = document.getElementById('ans6_type').value;
-            isCorrect = ((val === '2000' || val === '2000.00') && type === 'correct');
-        } else if (currentQ === 7) {
-            let val = document.getElementById('ans7_val').value.trim();
-            let type = document.getElementById('ans7_type').value;
-            isCorrect = ((val === '1600' || val === '1600.00') && type === 'correct');
-        } else if (currentQ === 8) {
-            isCorrect = (document.getElementById('ans8').value === 'correct');
-        } else if (currentQ === 9) {
-            let val = document.getElementById('ans9_val').value.trim();
-            let type = document.getElementById('ans9_type').value;
-            isCorrect = ((val === '800' || val === '800.00') && type === 'correct');
-        } else if (currentQ === 10) {
-            let val = document.getElementById('ans10').value.trim();
-            isCorrect = (val === '45' || val === '45.00');
-        } else if (currentQ === 11) {
-            isCorrect = (document.getElementById('ans11').value === 'correct');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            let val = document.getElementById('ans13_val').value.trim();
-            let type = document.getElementById('ans13_type').value;
-            isCorrect = ((val === '20' || val === '20.00') && type === 'correct');
-        } else if (currentQ === 14) {
-            isCorrect = (document.getElementById('ans14').value === 'correct');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        
+        icons.forEach(icon => icon.textContent = '');
+        
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
 
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) {
+                box.className = "option-box correct-answer-highlight";
+            }
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const targetAns = field.getAttribute('data-ans');
+            field.value = targetAns;
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter3_Test1_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
