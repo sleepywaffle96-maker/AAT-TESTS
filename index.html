@@ -100,40 +100,25 @@ ul.topic-list.color-l4 li a { color: #EA580C !important; font-weight: 600 !impor
 ul.topic-list.color-l4 li .icon-bullet { color: #F97316 !important; }
 
 /* ==========================================================================
-   FORZATURA TITOLI CAPITOLI TRAMITE RELAZIONE DIRETTA CON LE LISTE INTERNE
+   FORZATURA DEFINITIVA CROMATICA TITOLI CAPITOLI PRINCIPALI TRAMITE ATTRIBUTO
    ========================================================================== */
 
-/* --- 1. SE IL PANNELLO CONTIENE LA LISTA VERDE -> TITOLO VERDE SCURO --- */
-.level-section .chapters-panel:has(.color-l2) button.chapter-btn,
-.chapters-panel:has(.color-l2) button.chapter-btn,
-.tests-panel:has(.color-l2) preceeding-sibling::button.chapter-btn {
+/* --- TITOLI LIVELLO 2 (Verde Scuro Istituzionale) --- */
+button.chapter-btn[data-level="l2"] {
     color: #04583d !important;
     font-weight: 700 !important;
 }
 
-/* --- 2. SE IL PANNELLO CONTIENE LA LISTA AZZURRA -> TITOLO AZZURRO SCURO --- */
-.level-section .chapters-panel:has(.color-l3) button.chapter-btn,
-.chapters-panel:has(.color-l3) button.chapter-btn,
-.tests-panel:has(.color-l3) preceeding-sibling::button.chapter-btn {
+/* --- TITOLI LIVELLO 3 (Azzurro Scuro Deep Blue) --- */
+button.chapter-btn[data-level="l3"] {
     color: #034d75 !important;
     font-weight: 700 !important;
 }
 
-/* --- 3. SE IL PANNELLO CONTIENE LA LISTA ARANCIONE -> TITOLO ARANCIONE SCURO --- */
-.level-section .chapters-panel:has(.color-l4) button.chapter-btn,
-.chapters-panel:has(.color-l4) button.chapter-btn,
-.tests-panel:has(.color-l4) preceeding-sibling::button.chapter-btn {
+/* --- TITOLI LIVELLO 4 (Arancione Scuro Bruciato) --- */
+button.chapter-btn[data-level="l4"] {
     color: #9a3412 !important;
     font-weight: 700 !important;
-}
-
-/* ==========================================================================
-   PROTEZIONE TOTALE IDENTITÀ PULSANTI MOCK EXAM (TESTO BIANCO AD ALTO CONTRASTO)
-   ========================================================================= */
-button.chapter-btn[style*="background-color"],
-button.chapter-btn[style*="background"] {
-    color: #FFFFFF !important;
-    font-weight: 800 !important;
 }
 
     </style>
@@ -183,7 +168,7 @@ button.chapter-btn[style*="background"] {
          <div class="level-section">
              <button class="level-btn">📊 AAT Level 2 Certificate Topics</button>
                     <div class="chapters-panel" id="lista-test-l2">
-            <button class="chapter-btn">Chapter 1: Introduction to Bookkeeping</button>
+            <button class="chapter-btn" data-level="l2">Chapter 1: Introduction to Bookkeeping</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l2">
                     <li><a href="level-2/cap1-test1.html" style="color: #059669 !important; font-weight: 600;"><span class="icon-bullet" style="color: #10B981 !important;">&#128221;</span> Assessment One (Core Ledger Entries)</a></li>
@@ -191,7 +176,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 2: Principles of Bookkeeping Controls</button>
+            <button class="chapter-btn" data-level="l2">Chapter 2: Principles of Bookkeeping Controls</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l2">
                     <li><a href="level-2/cap2-test1.html" style="color: #059669 !important; font-weight: 600;"><span class="icon-bullet" style="color: #10B981 !important;">&#128221;</span> Assessment One (Control Accounts Balance)</a></li>
@@ -199,7 +184,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 3: Principles of Costing</button>
+            <button class="chapter-btn" data-level="l2">Chapter 3: Principles of Costing</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l2">
                     <li><a href="level-2/cap3-test1.html" style="color: #059669 !important; font-weight: 600;"><span class="icon-bullet" style="color: #10B981 !important;">&#128221;</span> Assessment One (Inventory &amp; Labour Elements)</a></li>
@@ -207,7 +192,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 4: Business Environment (BTRN - Part 1)</button>
+            <button class="chapter-btn" data-level="l2">Chapter 4: Business Environment (BTRN - Part 1)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l2">
                     <li><a href="level-2/cap4-test1.html" style="color: #059669 !important; font-weight: 600;"><span class="icon-bullet" style="color: #10B981 !important;">&#128221;</span> Assessment One (Corporate Regulations &amp; Deadlines)</a></li>
@@ -215,7 +200,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 5: Business Environment (BTRN - Part 2)</button>
+            <button class="chapter-btn" data-level="l2">Chapter 5: Business Environment (BTRN - Part 2)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l2">
                     <li><a href="level-2/cap5-test1.html" style="color: #059669 !important; font-weight: 600;"><span class="icon-bullet" style="color: #10B981 !important;">&#128221;</span> Assessment One (Trial Balance &amp; Balance Extractions)</a></li>
@@ -234,7 +219,7 @@ button.chapter-btn[style*="background"] {
          <div class="level-section">
              <button class="level-btn">🔷 AAT Level 3 Diploma Topics</button>
                     <div class="chapters-panel">
-            <button class="chapter-btn">Chapter 1: Business Awareness (BUAW)</button>
+            <button class="chapter-btn" data-level="l3">Chapter 1: Business Awareness (BUAW)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l3">
                     <li><a href="level-3/cap1-test1.html" style="color: #0284C7 !important; font-weight: 600;"><span class="icon-bullet" style="color: #0EA5E9 !important;">&#128221;</span> Assessment One (Ethical Principles)</a></li>
@@ -242,7 +227,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 2: Financial Accounting (FAPS)</button>
+            <button class="chapter-btn" data-level="l3">Chapter 2: Financial Accounting (FAPS)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l3">
                     <li><a href="level-3/cap2-test1.html" style="color: #0284C7 !important; font-weight: 600;"><span class="icon-bullet" style="color: #0EA5E9 !important;">&#128221;</span> Assessment One (Year-end Adjustments)</a></li>
@@ -252,7 +237,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 3: Management Accounting Techniques (MATS)</button>
+            <button class="chapter-btn" data-level="l3">Chapter 3: Management Accounting Techniques (MATS)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l3">
                     <li><a href="level-3/cap3-test1.html" style="color: #0284C7 !important; font-weight: 600;"><span class="icon-bullet" style="color: #0EA5E9 !important;">&#128221;</span> Assessment One (Absorption vs Marginal)</a></li>
@@ -260,7 +245,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 4: Tax Processes for Businesses (TPFB)</button>
+            <button class="chapter-btn" data-level="l3">Chapter 4: Tax Processes for Businesses (TPFB)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l3">
                     <li><a href="level-3/cap4-test1.html" style="color: #0284C7 !important; font-weight: 600;"><span class="icon-bullet" style="color: #0EA5E9 !important;">&#128221;</span> Assessment One (VAT Return Layout)</a></li>
@@ -280,7 +265,7 @@ button.chapter-btn[style*="background"] {
          <div class="level-section">
              <button class="level-btn">🔶 AAT Level 4 Diploma Topics</button>
                     <div class="chapters-panel">
-            <button class="chapter-btn">Chapter 1: Applied Management Accounting (AMA)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 1: Applied Management Accounting (AMA)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap2-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Cash Budgets)</a></li>
@@ -290,7 +275,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 2: Drafting and Interpreting Financial Statements (DAIF)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 2: Drafting and Interpreting Financial Statements (DAIF)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap1-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (IAS/IFRS Formats)</a></li>
@@ -298,7 +283,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 3: Internal Accounting Systems and Controls (IASC)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 3: Internal Accounting Systems and Controls (IASC)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap3-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Systems Failures)</a></li>
@@ -306,7 +291,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 4: Business Tax (BSTX)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 4: Business Tax (BSTX)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap4-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Corporation Tax)</a></li>
@@ -314,7 +299,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 5: Personal Tax (PLTX)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 5: Personal Tax (PLTX)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap5-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Income Tax Bands)</a></li>
@@ -322,7 +307,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 6: External Auditing (EXAU)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 6: External Auditing (EXAU)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap6-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Audit Planning &amp; Risk)</a></li>
@@ -330,7 +315,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 7: Cash and Treasury Management (CTMN)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 7: Cash and Treasury Management (CTMN)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap7-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Liquidity Cycles)</a></li>
@@ -338,7 +323,7 @@ button.chapter-btn[style*="background"] {
                 </ul>
             </div>
 
-            <button class="chapter-btn">Chapter 8: Credit and Debt Management (CRDM)</button>
+            <button class="chapter-btn" data-level="l4">Chapter 8: Credit and Debt Management (CRDM)</button>
             <div class="tests-panel">
                 <ul class="topic-list color-l4">
                     <li><a href="level-4/cap8-test1.html" style="color: #EA580C !important; font-weight: 600;"><span class="icon-bullet" style="color: #F97316 !important;">&#128221;</span> Assessment One (Credit Scoring)</a></li>
