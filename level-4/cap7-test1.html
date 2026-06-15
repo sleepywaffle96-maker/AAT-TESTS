@@ -3,315 +3,874 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Tax - Test One</title>
+    <title>AAT Level 4 - Chapter 7: Cash & Treasury Management (Test One)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO CON CONNOTAZIONE ETICHETTA ARANCIONE BRAND */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span { color: #64748B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        #calc-close-btn { background: transparent; border: none; color: #EF4444; font-weight: bold; cursor: pointer; font-size: 14px; padding: 0; }
+
+        #calc-screen {
+            width: 100%; height: 45px; background: #000000; border-radius: 8px; color: #00FFFF; text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace; text-align: right; padding: 12px; font-size: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid #00FFFF; box-sizing: border-box;
+        }
+
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">Personal Tax (Finance Act) - Test One</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: CASH & TREASURY MANAGEMENT (TEST ONE)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">1. Corporate groups frequently deploy centralized treasury management pooling strategies. What represents the primary strategic advantage of this design configuration?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Giving local division managers total absolute autonomy over short-term bank facility selection.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Aggregating group cash balances to maximize investment interest rates, while minimizing overall borrowing overheads.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> Automatically capitalizing financial lease depreciation straight into the revaluation reserve cells.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Centralization aggregates individual bank lines into a single, heavier capital balance pool. This lets the treasury department negotiate optimal rates and use internal surpluses to fund internal deficits, skipping bank loan spreads.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            An individual has a total non-savings employment income of £42,500. Under the baseline Finance Act rules, they are entitled to a standard Personal Allowance of £12,570. Calculate their net Taxable Income before the application of tax bands:<br>
-            Taxable Income: £ <input type="text" id="ans1" placeholder="0.00">
+            <!-- QUESTION 2: TIPO "multi-select" -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the diagnostic description analyzing corporate cash management trade-offs.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Holding excessive cash balances inside a checking account reduces corporate default risk elements, achieving high 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="liquidity">
+                            <option value="">-- Financial State --</option>
+                            <option value="liquidity">Liquidity and fallback insulation safety</option>
+                            -- <option value="profitability">Profitability and asset optimization returns</option>
+                        </select> 
+                        but it severely drags down overall business 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="profitability">
+                            <option value="">-- Trade-off --</option>
+                            <option value="liquidity">Liquidity because checking interest is capped</option>
+                            <option value="profitability">Profitability because idle cash generates minimal yield</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Liquidity vs Profitability Trade-off highlights that liquid bank cash is a sterile asset under macro inflation. Keeping vast buffers provides security but sacrifices investment returns.
+                </div>
+            </div>
+            <!-- QUESTION 3: TIPO "radio" -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">3. Core Exam Trap: When drafting a sliding monthly corporate Cash Budget, how must accounting depreciation charges on factory machinery be incorporated inside the columns?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> Loaded as a regular operational cash payment on the exact purchase anniversary date cell.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> Distributed proportionally across columns using standard absorption costing allocation percentages.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> Completely omitted from the budget, because depreciation is a non-cash accounting adjustment that causes zero physical bank drain.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Depreciation Cash Budget Trap clarifies that cash budgets track absolute bank line movements. Non-cash adjustments like depreciation or provisions must be entirely excluded from the forecast sheets.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "multi-input" -->
+            <div class="question-tab" data-qindex="4" data-type="multi-input">
+                <div class="task-instruction-text">4. A company forecasts gross credit sales of £50,000 for January. Historical tracking shows that 2% of credit sales default as bad debts and are completely uncollectible. The remaining balance is recovered across subsequent months. Compute the total cash pool baseline available for lagging distribution *after* extracting the bad debt risk.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Cash Budget Receipts Pipeline Extraction</th>
+                                <th style="width: 250px;">Available Cash Pool (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Net credit receivables baseline for lag distribution (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="49000" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Bad Debt Lagging Calculation Flaw states that bad debts must be deducted *before* spreading the lag percentages. Calculation: £50,000 gross sales × 2% bad debt default = £1,000 uncollectible. Net cash pool to distribute = £50,000 - £1,000 = £49,000.
+                </div>
+            </div>
+
+            <!-- QUESTION 5: TIPO "radio" -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">5. When a company operates under a standard VAT scheme, what value convention rule must be applied to the sales receipts entries loaded inside its cash budget?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> All entries must be net of VAT, isolating tax lines completely within a distinct suspense sheet.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> Entries must reflect Gross values (including VAT), because cash budgets record absolute physical bank transactions.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> Entries are adjusted by subtracting the standard 18% reducing balance writing down allowance.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Cash budgets monitor bank line velocity, not accrual revenue. Since customers pay invoice totals, receipts must enter columns as gross figures (including VAT), with subsequent net tax payments isolated on their specific settlement dates.
+                </div>
+            </div>
+            <!-- QUESTION 6: TIPO "multi-select" (Treasury Bills Mechanics) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the strategic description of sovereign short-term cash placement operations.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To secure absolute capital safety for temporary corporate cash surpluses, treasurers purchase short-term Treasury Bills (T-Bills) which are issued by the government at a 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="discount">
+                            <option value="">-- Pricing --</option>
+                            <option value="premium">Premium over nominal value</option>
+                            <option value="discount">Discount relative to par value</option>
+                        </select> 
+                        and provide guaranteed liquidity maturity lines backed by 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="sovereign">
+                            <option value="">-- Security --</option>
+                            <option value="sovereign">Sovereign state protection guarantees</option>
+                            <option value="factoring">CONFIDENTIAL trade factoring loan credits</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Treasury Bills offer a secure capital shelter. They carry no coupon but are sold below par value; at maturity, the government pays the full face value, creating a risk-free discount yield.
+                </div>
+            </div>
+
+            <!-- QUESTION 7: TIPO "radio" (Certificates of Deposit Liquidity) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">7. A company locks surplus balances inside Certificates of Deposit (CDs). Why do CDs provide higher liquidity flexibility compared to a standard bank term deposit account?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> Because they allow daily overdraft drawdowns without interest penalties.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> Because they can be surrender-settled directly with the HMRC tax collection board.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> Because they are negotiable instruments that can be traded on active secondary financial markets if cash is needed early.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Certificates of Deposit are tradable receipts. If an emergency cash deficit arises before the maturity date, the company can sell the asset on the secondary market to recover immediate bank liquidity.
+                </div>
+            </div>
+            <!-- QUESTION 8: TIPO "radio" (Overdraft Flexibility) -->
+            <div class="question-tab" data-qindex="8" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">8. A corporate treasury department faces a sudden, unexpected cash deficit due to a major client delaying payment. Which banking facility provides the optimal short-term flexibility to clear this gap?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="A"> Initiating a new 10-year structural fixed-rate mortgage on property assets.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="B"> Utilizing a bank overdraft facility, which charges expensive interest fees strictly on the daily utilized balance cells.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="C"> Issuing an enhanced R&D supplementary corporation tax credit claim.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Bank overdrafts are perfect short-term safety valves. They can be drawn instantly up to an agreed limit, and interest is calculated daily only on the exact negative balance amount used.
+                </div>
+            </div>
+
+            <!-- QUESTION 9: TIPO "multi-select" (Statutory Payment Timing) -->
+            <div class="question-tab" data-qindex="9" data-type="multi-select">
+                <div class="task-instruction-text">9. Complete the budgetary tracking rule regarding seasonal tax settlement columns.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Unlike smooth recurring utility bills, large lumpy tax liabilities—such as quarterly VAT settlements and Corporation Tax—must be mapped strictly to their 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="target">
+                            <option value="">-- Calendar Cell --</option>
+                            <option value="target">Target chronological payment due dates</option>
+                            <option value="accrued">Accrued monthly amortization columns space</option>
+                        </select> 
+                        to prevent sudden artificial 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="deficits">
+                            <option value="">-- Risk --</option>
+                            <option value="deficits">Deficits that trigger unexpected overdraft fees</option>
+                            <option value="allowances">Allowances updates under HMRC special codes</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Tax Payment Schedulation Fault warns against spreading large tax bills evenly. Cash budgets monitor physical liquidity drops, forcing entries to sit in the exact month the cash leaves the bank.
+                </div>
+            </div>
+            <!-- QUESTION 10: TIPO "radio" (Transaction Forex Risk) -->
+            <div class="question-tab" data-qindex="10" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">10. A UK firm buys raw materials from a US vendor with payment due in US Dollars in 90 days. Which treasury strategy eliminates the transaction risk of currency exchange rate fluctuations?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="A"> Leaving the balance unhedged to exploit favorable spot market rate drops.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="B"> Moving the invoice balance cell straight into a confidential suspense account ledger row.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="C"> Executing a Forward Exchange Contract with a commercial bank to freeze the conversion rate today.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                .75rem;<div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Forward contracts fix the exact currency exchange rate for a future date. This deletes market volatility risks, allowing the team to input a guaranteed gross cash payment value inside the budget.
+                </div>
+            </div>
+
+            <!-- QUESTION 11: TIPO "multi-input" (Compound Investment Math) -->
+            <div class="question-tab" data-qindex="11" data-type="multi-input">
+                <div class="task-instruction-text">11. A treasurer locks a surplus cash balance of £10,000 inside a short-term bank instrument that guarantees a simple interest rate return of exactly 5% per annum. Calculate the total interest profit (£) generated if the capital is held for a fraction period of exactly 6 months.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Treasury Cash Yield Return Factor</th>
+                                <th style="width: 250px;">Generated Profit (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Total interest earned at maturity (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="250" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Annual simple interest = £10,000 × 5% = £500. Since the cash is locked for exactly 6 months (half a year), the calculation is pro-rata: £500 × (6 / 12) = £250 interest profit.
+                </div>
+            </div>
+            <!-- QUESTION 12: TIPO "radio" (Revolving Credit Facility Advantages) -->
+            <div class="question-tab" data-qindex="12" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">12. A multinational corporation secures a committed Revolving Credit Facility (RCF) instead of a standard fixed term loan. What structural safety advantage does an RCF deliver?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="A"> It provides a flexible, guaranteed bank credit line that can be drawn down, repaid, and re-drawn at any time based on shifting operational cash needs.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="B"> It eliminates quarterly VAT payment due dates and schedules.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="C"> It capitalizes accounting depreciation charges automatically.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> An RCF works like a flexible corporate credit card. It guarantees long-term financing availability but charges interest only on the cash amounts actually drawn down by the treasury.
+                </div>
+            </div>
+
+            <!-- QUESTION 13: TIPO "multi-select" (The Liquidity Allocation Triangle) -->
+            <div class="question-tab" data-qindex="13" data-type="multi-select">
+                <div class="task-instruction-text">13. Complete the description of the three core pillars inside the Treasury Investment Triangle.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        The ultimate objectives guiding treasury investments are Security (safety of capital) and Liquidity (speed of withdrawal). Maximizing these two pillars forces a trade-off that drops the third pillar, which is 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="yield">
+                            <option value="">-- Pillar --</option>
+                            <option value="yield">Yield (maximizing the interest return rate)</option>
+                            <option value="allowance">Allowance (maximizing statutory capital write-offs)</option>
+                        </select> 
+                        because secure liquid options always carry 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="lower">
+                            <option value="">-- Consequence --</option>
+                            <option value="lower">Lower interest or return factors</option>
+                            <option value="higher">Higher speculative capital gains</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Treasury Triangle balances Security, Liquidity, and Yield. Risk-free government cash deposits maximize security and liquidity but carry the lowest yields.
+                </div>
+            </div>
+            <!-- QUESTION 14: TIPO "radio" (The Cash vs Profit Accruals Trap) -->
+            <div class="question-tab" data-qindex="14" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">14. Core Exam Trap: A company records a high net accounting profit in its Statement of Profit or Loss but faces a severe overdrawn cash book. What diagnostic explains this discrepancy?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q14" value="A"> The corporation tax rate calculations were omitted.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q14" value="B"> Large flexible budget variances were moved to equity reserves.</span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q14" value="C"> Financial statements use accrual accounting rules, while cash forecasts monitor physical transaction timing (e.g. cash locked in inventory or overdue trade receivables).</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Profit vs Cash Illusion confirms that a business can be profitable on paper but cash-starved if liquid funds are tied up in mounting inventories or unpaid customer ledgers.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "multi-select" (The Lead-Lag Overdraft Calculation Fault) -->
+            <div class="question-tab" data-qindex="15" data-type="multi-select">
+                <div class="task-instruction-text">15. Complete the analytical statement exposing timing calculation errors inside cash budgeting rows.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Failing to account for the standard 30-day payment lag terms extended by industrial material suppliers represents an exam performance 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="trap">
+                            <option value="">-- Classification --</option>
+                            <option value="trap">Trap that creates artificial monthly cash deficits</option>
+                            <option value="success">Success that secures proper liquidity matching</option>
+                        </select> 
+                        because moving costs into the purchase month forces the budget to report premature cash outflows 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="before">
+                            <option value="">-- Timing --</option>
+                            <option value="before">Before the cash actually leaves the banking checking account</option>
+                            <option value="after">After subsequent bad debt provisions clear</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Supplier Lag Miscalculation trap penalizes teams that fail to match transaction timing. Purchase costs must occupy the month of actual bank settlement, not the original invoice date cell.
+                </div>
+            </div>
+
+        </form>
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            A taxpayer receives gross dividend income of £4,500 during the tax year. Following the statutory Dividend Allowance rules, a certain threshold of dividend income is taxed at the special 0% rate. State the maximum value of the basic Dividend Allowance threshold:<br>
-            Dividend Allowance Threshold: £ <input type="text" id="ans2" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            An individual has an adjusted net income of £110,000. Under the Finance Act statutory claws, the standard Personal Allowance of £12,570 is reduced by £1 for every £2 of adjusted net income that exceeds £100,000. Calculate their final available Personal Allowance:<br>
-            Available Personal Allowance: £ <input type="text" id="ans3" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            An employee drives a company-provided car for private commuting. The car has a list price of £24,000 and an official CO2 emissions rating that yields a statutory benefit percentage of 25%. Calculate the gross monetary value of the annual Car Benefit (Benefit in Kind):<br>
-            Car Benefit Value: £ <input type="text" id="ans4" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A self-employed sole trader reports net adjusted trading profits of £34,000 for the tax year. Which class of National Insurance Contributions (NICs) represents the percentage-based contribution assessed directly on these annual self-employed trading profits above the threshold?<br>
-            NICs Classification: <select id="ans5"><option value="">Select</option><option value="w">Class 1 NICs</option><option value="w">Class 2 NICs</option><option value="correct">Class 4 NICs</option></select>
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            A taxpayer sells a residential investment property, realizing a capital gain of £28,000. They have not utilized their Capital Gains Tax (CGT) Annual Exempt Amount, which stands at £3,000. Calculate the net taxable capital gain subject to CGT reporting:<br>
-            Taxable Capital Gain: £ <input type="text" id="ans6" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            An individual disposes of their entire shareholding in a trading company, qualifies for Business Asset Disposal Relief (formerly Entrepreneurs' Relief), and realizes a net capital gain of £150,000. What is the preferential statutory CGT tax rate applied under this specific relief framework?<br>
-            Preferential CGT Rate: <input type="text" id="ans7" placeholder="0"> %
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            Under the UK statutory residence test, if an individual spends more than a specific total number of days in the UK during a tax year, they are automatically classified as a UK tax resident for that period regardless of ties. State this automatic day threshold:<br>
-            Day Threshold: <input type="text" id="ans8" placeholder="0"> days
-        </div>
-    </div>
-
-      <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            A landlord receives gross rental income of £12,000 from a residential property and incurs eligible property repair expenses of £3,500. Calculate the net property income subject to income tax calculations:<br>
-            Net Property Income: £ <input type="text" id="ans9" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            Under the current progressive Income Tax framework, what is the basic rate percentage applied to standard non-savings taxable income that falls within the primary basic rate tax band?<br>
-            Basic Tax Rate: <input type="text" id="ans10" placeholder="0"> %
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            An individual passes away leaving an estate with a total valuation of £450,000. Assuming the estate qualifies for the standard un-transferred Nil Rate Band threshold of £325,000, calculate the value of the estate that is subject to Inheritance Tax (IHT) at the standard 40% rate:<br>
-            Taxable Estate Value: £ <input type="text" id="ans11" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            A taxpayer makes a gross gift aid donation of £200 to an authorized charity. Under the Gift Aid system, what structural adjustment occurs to the taxpayer's personal basic rate tax band limits?<br>
-            Tax Band Adjustment: <select id="ans12"><option value="">Select</option><option value="w">The basic rate band is decreased by £200</option><option value="correct">The basic rate band is expanded by £200</option><option value="w">The personal allowance is automatically doubled</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            An individual earns a gross annual employment salary of £60,000. Because their income exceeds the high income child benefit threshold, they are subject to the High Income Child Benefit Charge. Above what baseline of adjusted net income does this statutory tax clawback start to apply?<br>
-            Income Baseline: £ <input type="text" id="ans13" placeholder="50000">
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            A taxpayer makes an unconditional cash gift of £50,000 directly to their sibling. If the donor survives for at least 7 full years after making this transfer, the gift avoids Inheritance Tax entirely. This specific type of lifetime transfer is classified as a:<br>
-            Transfer Type: <select id="ans14"><option value="">Select</option><option value="w">Chargeable Lifetime Transfer (CLT)</option><option value="correct">Potentially Exempt Transfer (PET)</option><option value="w">Exempt Legacy Distribution</option></select>
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            Under the automated UK tax filing system, the standard statutory deadline for submitting a paper Self-Assessment tax return for a given tax year is 31 October following the end of that tax year.<br>
-            Is the statement above True or False?<br>
-            Answer: <select id="ans15"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    tabs.forEach(tab => tab.classList.remove('active'));
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    updateNavigationDisplay();
+}
+
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        icons.forEach(icon => icon.textContent = '');
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
-    }
-
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
-
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '29930' || val === '29930.00');
-        } else if (currentQ === 2) {
-            let val = document.getElementById('ans2').value.trim();
-            isCorrect = (val === '500' || val === '500.00');
-        } else if (currentQ === 3) {
-            let val = document.getElementById('ans3').value.trim();
-            isCorrect = (val === '7570' || val === '7570.00');
-        } else if (currentQ === 4) {
-            let val = document.getElementById('ans4').value.trim();
-            isCorrect = (val === '6000' || val === '6000.00');
-        } else if (currentQ === 5) {
-            isCorrect = (document.getElementById('ans5').value === 'correct');
-        } else if (currentQ === 6) {
-            let val = document.getElementById('ans6').value.trim();
-            isCorrect = (val === '25000' || val === '25000.00');
-        } else if (currentQ === 7) {
-            let val = document.getElementById('ans7').value.trim();
-            isCorrect = (val === '10');
-        } else if (currentQ === 8) {
-            let val = document.getElementById('ans8').value.trim();
-            isCorrect = (val === '183');
-        } else if (currentQ === 9) {
-            let val = document.getElementById('ans9').value.trim();
-            isCorrect = (val === '8500' || val === '8500.00');
-        } else if (currentQ === 10) {
-            let val = document.getElementById('ans10').value.trim();
-            isCorrect = (val === '20');
-        } else if (currentQ === 11) {
-            let val = document.getElementById('ans11').value.trim();
-            isCorrect = (val === '125000' || val === '125000.00');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            let val = document.getElementById('ans13').value.trim();
-            isCorrect = (val === '50000' || val === '60000');
-        } else if (currentQ === 14) {
-            isCorrect = (document.getElementById('ans14').value === 'correct');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
-        }
-
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) box.className = "option-box correct-answer-highlight";
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = field.getAttribute('data-ans');
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter7_Test1_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
