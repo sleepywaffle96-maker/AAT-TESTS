@@ -1,125 +1,105 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 5: DAIF Consolidated Summary | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 5: Personal Tax (Cheat Sheet)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --panel-bg: rgba(0, 242, 254, 0.05);
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.7;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.3rem;
-        }
-        .formula-panel {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
+        .summary-card {
+            background-color: var(--l3-cyan-light);
+            border-left: 5px solid var(--l3-cyan-primary);
+            padding: 1.5rem;
             border-radius: 0 6px 6px 0;
+            margin-bottom: 2rem;
         }
-        .formula-title {
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
+        .trap-summary-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEE2E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .formula-text {
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-        li {
-            margin-bottom: 0.5rem;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>DAIF Group Consolidation Cheat Sheet</h1>
-            <p style="color: var(--text-muted)">Essential mathematical workflows and adjustment rules for corporate group statements.</p>
-
-            <h2>1. Provision for Unrealised Profit (PUP Formulas)</h2>
-            <div class="formula-panel">
-                <div class="formula-title">PUP Calculation via Profit Mark-up %</div>
-                <div class="formula-text">PUP = Cost Value of Remaining Stock x (Mark-up% / 100)</div>
-            </div>
-            <div class="formula-panel">
-                <div class="formula-title">PUP Calculation via Gross Profit Margin %</div>
-                <div class="formula-text">PUP = Invoiced Value of Remaining Stock x (Margin% / 100)</div>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 2rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 1rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 4 RECAP</span>
+                <h1 style="font-size: 1.75rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 5: Personal Tax Quick Cheat Sheet</h1>
             </div>
 
-            <h2>2. Statutory Corporate Goodwill Balance Equation (IFRS 3)</h2>
-            <div class="formula-panel">
-                <div class="formula-text">Goodwill = Parent Purchase Consideration + Fair Value of NCI - Subsidiary Net Assets at Acquisition</div>
+            <div class="summary-card">
+                <strong style="color: var(--l3-cyan-dark); font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🎯 PLTX TAXATION BALANCES BLOCK:</strong>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
+                    • Pipeline order: Non-Savings (1st) -> Savings (2nd) -> Dividends (3rd).<br>
+                    • Taper rule: If ANI > £100,000, reduce Personal Allowance by £1 for every £2 of excess.<br>
+                    • NIC Classes: Class 1 (Employees/Employers), Class 2 (Flat self-employed), Class 4 (% self-employed).
+                </p>
             </div>
-
-            <h2>3. Closing Non-Controlling Interest (Working 4)</h2>
-            <div class="formula-panel">
-                <div class="formula-text">Closing NCI = NCI Value at Acquisition + (NCI Ownership % x Subsidiary Post-Acquisition Profit)</div>
-            </div>
-
-            <h2>4. Core Group Consolidation Accounting Rules</h2>
+            <h2>1. Income Tax Pipeline & Benefit-in-Kind Calculations</h2>
             <ul>
-                <li><strong>Line-by-Line Aggregation:</strong> Combine 100% of all subsidiary asset and liability lines with the parent's balances. Do not scale them down by the ownership percentage, as the NCI account balances the statement.</li>
-                <li><strong>Pre-Acquisition Profits:</strong> The retained earnings of a subsidiary up to the date of its purchase. These are frozen inside the goodwill calculation and can never be used to distribute dividends.</li>
-                <li><strong>Intra-group Elimination:</strong> Cancel out all internal loan, receivable, and payable balances. They must never appear inside consolidated current assets or current liabilities.</li>
-                <li><strong>Investment in Associate (IAS 28):</strong> Accounted for using a single line in non-current assets: original purchase cost plus the group's share of post-acquisition retained profits.</li>
+                <li><strong>Schedules Separation:</strong> Personal income maps strictly across individual non-savings, savings, and dividend bands. Basic, higher, and additional thresholds scale sequentially.</li>
+                <li><strong>The Personal Allowance vanishing boundary:</strong> If Adjusted Net Income hits £125,140, the tax-free Personal Allowance threshold reaches zero.</li>
+                <li><strong>P11D Company Car evaluation:</strong> Car perks are calculated by taking the manufacturer's official list price and multiplying it by the statutory percentage defined by the vehicle's CO2 g/km emissions.</li>
+                <li><strong>National Insurance splits:</strong> Class 1 Primary handles workforce PAYE scomputi, while Class 4 tracks self-employed adjusted net business profits.</li>
             </ul>
-        </div>
-    </div>
+
+            <h2>2. Capital Gains Tax & Inheritance Tax Baselines</h2>
+            <ul>
+                <li><strong>Individual Capital Gains:</strong> Managed separately from regular income tax. Individuals apply the Annual Exempt Amount (AEA) to net profits and load balances onto progressive CGT scaling brackets.</li>
+                <li><strong>Residential Property Surcharge:</strong> Capital gains derived from secondary domestic residences face higher statutory percentage bands.</li>
+                <li><strong>Inheritance Tax Thresholds:</strong> The Nil Rate Band (NRB) shields estate asset values up to £325,000 at a 0% rate. Lifetime gifts to individuals qualify as Potentially Exempt Transfers (PETs), becoming entirely tax-free after 7 years.</li>
+            </ul>
+            <div class="trap-summary-box">
+                <strong style="color: #DC2626; font-size: 1rem; display: block; margin-bottom: 0.5rem;">⚠️ ADVANCED EXAM TRAPS RECAP (INVISIBLE ERRORS):</strong>
+                <ul>
+                    <li><strong>The Personal Allowance Taper Failure:</strong> Loaded standard allowance deductions on individuals whose Adjusted Net Income exceeds £100,000 without applying the £1 for every £2 taper reduction.</li>
+                    <li><strong>The Corporate Vehicle Discount Illusion:</strong> Utilized the actual corporate net purchase cost for car benefit metrics. HMRC guidelines command the strict application of the official manufacturer's list price.</li>
+                    <li><strong>The Dividend Band Consumption Slip:</strong> Ignored the dividend tax-free allowance when calculating band availability. The dividend allowance consumes space within the basic rate band, pushing subsequent income into higher brackets.</li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
