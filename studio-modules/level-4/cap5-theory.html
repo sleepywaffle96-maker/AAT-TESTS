@@ -1,139 +1,155 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 5: DAIF Consolidated Theory | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 5: Personal Tax (Theory)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --formula-bg: #F8FAFC;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.8;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.5rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-        }
-        h3 {
-            color: var(--secondary);
-            margin-top: 1.5rem;
-        }
-        p, li {
-            color: var(--text-muted);
-            font-size: 1.05rem;
+        .academic-quote {
+            border-left: 5px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
             text-align: justify;
         }
-        strong {
-            color: var(--text-main);
-        }
-        .syllabus-box {
-            border-left: 4px solid var(--accent-green);
-            background: rgba(16, 185, 129, 0.05);
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 2rem;
-        }
-        .exam-tip {
-            border-left: 4px solid var(--accent-orange);
-            background: rgba(245, 158, 11, 0.05);
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
+        .concept-card {
+            background-color: var(--formula-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
             margin: 1.5rem 0;
+        }
+        .trap-box {
+            background-color: #FFF5F5;
+            border-left: 5px solid #EF4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        h2 { color: var(--l3-cyan-primary); font-size: 1.6rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        h3 { color: var(--l3-cyan-dark); font-size: 1.25rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 600; }
+        p { text-align: justify; margin-bottom: 1.8rem; font-size: 1.05rem; }
+        ul, ol { margin-left: 2.5rem; margin-bottom: 1.8rem; }
+        li { margin-bottom: 0.6rem; font-size: 1rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <article class="glass-card">
-            <h1>Drafting & Interpreting Financial Statements (DAIF): Consolidated Financial Statements</h1>
-            <div class="syllabus-box">
-                <p style="margin:0; color:var(--text-main);"><strong>AAT Level 4 Deep-Dive Textbook:</strong> This technical chapter covers the legal, conceptual, and mathematical architecture of limited company group accounts. It focuses on consolidated asset aggregation, Goodwill calculation under IFRS 3, and complex intra-group adjustments under IFRS 10.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Personal Tax - Chapter 5 Theory</h1>
             </div>
 
-            <h2>1. Legal Definitions, Economic Control, and Group Parameters</h2>
-            <p>A corporate group exists when one limited entity (the Parent company) acquires an equity stake in another entity (the Subsidiary company) sufficient to establish operational direction. From a strict legal standpoint, each corporate entity remains a separate legal person. However, to provide a true and fair view to investors, consolidated accounts must override this legal separation, presenting the parent and its subsidiaries as a single global economic entity.</p>
+            <h2>Lesson 5.1: Income Tax Computation Framework & Personal Allowance</h2>
+            <p>
+                Under the UK personal tax framework, individuals are liable to pay Income Tax on their total taxable income generated across a specific tax year. Income must be structured into three distinct legal categories, processed in a strict sequential order: <strong>Non-Savings Income</strong> (employment, trading, and property income), <strong>Savings Income</strong> (bank interest received), and <strong>Dividend Income</strong>.
+            </p>
+            <p>
+                The tax computation pipeline follows precise statutory tracking mechanisms:
+            </p>
+            <ul>
+                <li><strong>Personal Allowance (PA):</strong> Individuals receive a tax-free threshold allowance (standardly £12,570) deducted from net income to establish the Taxable Income baseline.</li>
+                <li><strong>The Personal Allowance Taper Reduction:</strong> If an individual's Adjusted Net Income crosses the statutory threshold of <strong>£100,000</strong>, the Personal Allowance is progressively reduced by <strong>£1 for every £2</strong> of income above that mark, completely vanishing once income hits £125,140.</li>
+                <li><strong>Tax Bands Allocation:</strong> Taxable income is loaded across progressive tax bands: the Basic Rate band, the Higher Rate band, and the Additional Rate band, applying matching percentage escalations to each income schedule.</li>
+            </ul>
+            <h2>Lesson 5.2: Employment Income Benefits (P11D) & National Insurance Classes</h2>
+            <p>
+                When individuals operate as employees, their taxable income extends beyond standard payroll salary. Employers must declare non-cash awards and perks under the statutory <strong>P11D Benefit-in-Kind (BIK)</strong> framework. Advanced technicians must calculate the exact cash equivalent value of these benefits:
+            </p>
+            <ul>
+                <li><strong>Company Cars Benefit:</strong> Calculated by multiplying the vehicle's official list price by a statutory percentage derived directly from the car's carbon emissions (CO2 g/km) efficiency indicators.</li>
+                <li><strong>Beneficial Loans:</strong> If an employer issues an internal loan to a worker at an interest rate below the official statutory rate, the interest savings gap is treated as taxable employment income.</li>
+            </ul>
             
-            <h3>Subsidiaries and the Definition of Control (IFRS 10)</h3>
-            <p>A parent company is legally required to consolidate an investment line-by-line if it possesses **Control** over the investee. Under IFRS 10, control is generally assumed when the parent owns **more than 50%** of the voting equity shares. However, control is formally defined by three elements: power over the investee, exposure or rights to variable returns from its involvement, and the practical ability to use its power to affect the amount of those returns (e.g., controlling the board of directors).</p>
-
-            <h3>Associates and Significant Influence (IAS 28)</h3>
-            <p>An associate is an entity where the parent company does not exercise full control, but holds **Significant Influence**. Significant influence is presumed when the parent holds between **20% and 50%** of the voting equity shares, or participates directly in policy-making processes. Associates are entirely excluded from line-by-line asset consolidation. Instead, they are incorporated into the consolidated Statement of Financial Position (SoFP) using the **Equity Method**, appearing as a single non-current asset line called "Investment in Associates".</p>
-<!-- RIFERIMENTO_BLOCCO: 2 -->
-            <h2>2. Structural Consolidation Steps: Goodwill and Equity Metrics</h2>
-            <p>The core mechanism of consolidation involves taking 100% of the individual assets and liabilities of both the parent and subsidiary and adding them together line-by-line, regardless of the exact percentage owned. The parent's original ledger entry "Investment in Subsidiary" is deleted and replaced by group balances.</p>
-            
-            <h3>Goodwill Acquisition Mechanics (IFRS 3)</h3>
-            <p>**Goodwill** represents the premium paid by the parent company above the fair value of the subsidiary's net identifiable assets at the acquisition milestone date. It reflects intangible value such as brand equity, technical synergy, patent rights, and staff expertise. Goodwill is calculated by taking the purchase consideration transferred by the parent, adding the fair value of the Non-Controlling Interest (NCI), and subtracting the total fair value of the subsidiary's net assets at acquisition. Under IAS 36, goodwill cannot be amortized periodically; it must remain on the consolidated balance sheet as an asset and be audited annually for impairment.</p>
-
-            <h3>The Non-Controlling Interest (NCI)</h3>
-            <p>When a parent purchases less than 100% of a subsidiary's shares (e.g., an 80% stake), the remaining 20% of equity belongs to external shareholders. This share is called the **Non-Controlling Interest**. Because 100% of the subsidiary's assets are consolidated, the NCI acts as an accounting balancing line within the Group Equity section of the SoFP, showing the portion of net assets that does not belong to the parent company.</p>
-
-            <div class="exam-tip">
-                <p style="margin:0; color:var(--text-main);"><strong>AAT Exam Calculation Warning:</strong> In many Level 4 exams, a subsidiary's reserves at the reporting year-end differ from those at the acquisition date due to accumulated trading profits. You must calculate the **Post-Acquisition Profit** change and allocate the parent's and NCI's shares correctly to ensure the group statements balance.</p>
+            <h3>National Insurance Contributions (NIC) Architecture</h3>
+            <p>
+                National Insurance represents an additional public levy collected to fund state welfare systems. It is split into separate regulatory classes based on the individual's employment status:
+            </p>
+            <ul>
+                <li><strong>Class 1 (Primary & Secondary):</strong> Paid on employment earnings. Employees settle Class 1 Primary deductions via PAYE, while employers contribute Class 1 Secondary levies on identical worker payrolls.</li>
+                <li><strong>Class 2 & Class 4:</strong> Enforced strictly on self-employed sole traders. Class 2 represents a small weekly flat-rate charge, whereas Class 4 is a profit-based percentage tracking net adjusted trading income fields.</li>
+            </ul>
+            <div class="academic-quote">
+                "Calculating benefits and NIC requires absolute compliance with annual tax tables. Erroneous benefit evaluations or failure to apply correct threshold caps triggers severe administrative penalties from HMRC during personal tax audits."
             </div>
-<!-- RIFERIMENTO_BLOCCO: 3 -->
-            <h2>3. Elimination of Intra-Group Transactions and Profit Distortions</h2>
-            <p>A corporate group cannot make a profit by trading with itself, nor can it report debts owed to itself as corporate assets. All internal transactions must be fully cancelled upon consolidation.</p>
-            
-            <h3>Intra-Group Receivables and Payables</h3>
-            <p>If the parent company sells goods on credit to the subsidiary, a trade receivable appears on the parent's books, and a matching trade payable appears on the subsidiary's books. On consolidation, these internal balances must be completely eliminated. They must never appear inside group current assets or current liabilities, as they do not represent relationships with external third parties.</p>
+            <h2>Lesson 5.3: Individual Capital Gains Tax (CGT) & Inheritance Tax (IHT)</h2>
+            <p>
+                When an individual disposes of a personal asset (such as shares, land, or secondary residential property) and registers a capital profit, this transaction falls under the **Capital Gains Tax (CGT)** framework. Unlike corporate chargeable gains, individuals process these events completely separated from their regular income tax schedules.
+            </p>
+            <p>
+                The structural calculation of an individual capital gain requires applying allowances and behavioral tax rates:
+            </p>
+            <div class="concept-card" style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; background-color: var(--l3-cyan-light); color: var(--l3-cyan-dark);">
+                <strong>INDIVIDUAL CAPITAL GAINS TAX FRAMEWORK:</strong><br>
+                1. Net Capital Gain = Disposal Proceeds - Acquisition Cost - Disallowed Transfer Expenditures<br>
+                2. Taxable Capital Gain = Net Capital Gain - Annual Exempt Amount (AEA statutory exemption limit)<br>
+                3. CGT Scaling Rates: Basic rate income taxpayers pay lower CGT percentages, while higher or additional rate earners face maximized scaling brackets, with residential properties attracting specific surcharges.
+            </div>
 
-            <h3>Provision for Unrealised Profit (PUP Adjustment)</h3>
-            <p>When an entry within a group sells inventory to another group entry at a profit markup, the selling entity records a transaction profit. However, from a group perspective, no genuine profit is earned until those goods are sold onwards to an external third party. 
-            <br>If any of these intra-group items remain unsold in the buyer's closing inventory at the year-end reporting date, the profit contained within that remaining stock is considered **unrealised**.</p>
-            <p>Management accountants must process a **PUP adjustment** to remove this distortion. The adjustment reduces the consolidated inventory balance to its true historical manufacturing cost and removes the corresponding unrealised profit from group retained earnings.</p>
+            <h3>Inheritance Tax (IHT) Principles</h3>
+            <p>
+                Inheritance Tax is levied on the estate of a deceased person and on certain lifetime transfers. The core framework incorporates precise safety thresholds:
+            </p>
+            <ul>
+                <li><strong>Nil Rate Band (NRB):</strong> The standard tax-free threshold baseline (standardly £325,000) below which an estate pays 0% IHT.</li>
+                <li><strong>Lifetime Transfers:</strong> Gifts made to individuals are classified as Potentially Exempt Transfers (PETs), becoming entirely tax-free if the donor survives for 7 years after the gift event.</li>
+            </ul>
+            <div class="trap-box">
+                <h3 style="color: #DC2626; margin-top: 0; font-size: 1.15rem;">⚠️ Personal Tax Invisible Error Encyclopedia (AAT Core Exam Traps)</h3>
+                <ul>
+                    <li>
+                        <strong>The Personal Allowance Taper Trap:</strong> A major calculation mistake is forgetting to taper the Personal Allowance when Adjusted Net Income passes £100,000. For every £2 of income above this limit, £1 of allowance is permanently lost, which dramatically shifts the tax band loading.
+                    </li>
+                    <li>
+                        <strong>The Company Car List Price Illusion:</strong> When computing car benefits, exam candidates often mistake the actual purchase price paid by the company for the vehicle's list price. Under HMRC rules, you must **always use the manufacturer's official list price**, ignoring any internal corporate discounts.
+                    </li>
+                    <li>
+                        <strong>The Dividend Tax-Free Band Allocation:</strong> Failing to remember that the dividend tax-free allowance still consumes space within the tax bands is a classic exam pitfall. Even though the dividend allowance has a 0% tax rate, it counts toward the basic rate band limit, pushing subsequent income into higher bands.
+                    </li>
+                </ul>
+            </div>
 
-            <h3>Mid-Year Acquisitions and Net Asset Adjustments</h3>
-            <p>When a parent purchases a subsidiary part-way through an accounting period, the subsidiary's full-year results must be pro-rated. Only the profits generated *after* the acquisition date are included in consolidated group reserves. Profits generated prior to the acquisition date are treated as capital and are frozen inside the goodwill calculation, meaning they can never be distributed as dividends to group shareholders.</p>
-        </article>
-    </div>
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
