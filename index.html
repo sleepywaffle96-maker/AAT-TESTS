@@ -373,6 +373,10 @@ button.chapter-btn[data-level="l4"] {
 </script>
                  <!-- NETLIFY IDENTITY SECURITY LOGIC ENGINE -->
     <script>
+              netlifyIdentity.init({
+        APIUrl: 'https://netlify.app'
+      });
+
       // 1. All'avvio, controlla se lo studente è registrato ed è loggato
       netlifyIdentity.on('init', user => {
         if (!user) {
