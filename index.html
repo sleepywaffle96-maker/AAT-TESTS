@@ -404,6 +404,40 @@ button.chapter-btn[data-level="l4"] {
       netlifyIdentity.on('logout', () => {
         window.location.reload(); // Ricarica la pagina per riattivare la barriera
       });
+    </script>    <!-- NETLIFY IDENTITY SECURITY LOGIC ENGINE -->
+    <script>
+      // Inizializzazione ufficiale agganciata al tuo database server Netlify
+      netlifyIdentity.init({
+        APIUrl: 'https://netlify.app'
+      });
+
+      // 1. All'avvio, controlla lo stato dell'utente
+      netlifyIdentity.on('init', user => {
+        if (!user) {
+          // Se non è loggato, blocca i click e forza l'apertura del box di login
+          netlifyIdentity.open();
+          document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+            el.style.pointerEvents = 'none'; // Disattiva i click sui test
+            el.style.opacity = '0.4';       // Opacizza i cassetti
+          });
+        }
+      });
+
+      // 2. Quando lo studente esegue con successo il login
+      netlifyIdentity.on('login', user => {
+        netlifyIdentity.close(); // Chiude la finestra popup
+        // Ripristina l'interattività totale della dashboard
+        document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
+          el.style.pointerEvents = 'auto';
+          el.style.opacity = '1';
+        });
+        console.log("Welcome back student:", user.email);
+      });
+
+      // 3. Se lo studente effettua il logout, riattiva la barriera
+      netlifyIdentity.on('logout', () => {
+        window.location.reload();
+      });
     </script>
 </body>
 </html>
