@@ -3,307 +3,944 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>External Auditing - Test One</title>
+    <title>AAT Level 4 - Chapter 4: Business Tax (Test One)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - LOOK COERENTE CON DETTAGLIO ETICHETTA ARANCIONE BRAND */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span { color: #64748B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        #calc-close-btn { background: transparent; border: none; color: #EF4444; font-weight: bold; cursor: pointer; font-size: 14px; padding: 0; }
+
+        #calc-screen {
+            width: 100%; height: 45px; background: #000000; border-radius: 8px; color: #00FFFF; text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace; text-align: right; padding: 12px; font-size: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid #00FFFF; box-sizing: border-box;
+        }
+
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">External Auditing - Test One</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: BUSINESS TAX (TEST ONE)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (Depreciation Add-Back) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">1. When converting a limited company's net accounting profit into adjusted trading profits for Corporation Tax calculation, how must accounting depreciation be handled?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Subtracted from net profits as a fully allowable tax deduction.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Added back to the net accounting profit in full, because it is strictly disallowable by HMRC.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> Ignored completely, as financial accounting adjustments map automatically to tax pools.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Depreciation Add-Back Oversight trap emphasizes that accounting depreciation is disallowable because companies use distinct internal policies. It must always be added back and replaced by statutory Capital Allowances.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            An audit team calculates performance materiality for a new assignment. Profit before tax is £800,000. Following international guidelines, the firm sets overall planning materiality at 5% of profit before tax. Calculate the baseline planning materiality threshold:<br>
-            Planning Materiality: £ <input type="text" id="ans1" placeholder="0.00">
+            <!-- QUESTION 2: TIPO "multi-select" (Customer Entertaining) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the diagnostic statement regarding business entertainment cost adjustments.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Under HMRC statutory boundaries, staff entertainment outlays are fully allowable, whereas customer entertainment expenses are strictly 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="disallowable">
+                            <option value="">-- Tax Status --</option>
+                            <option value="allowable">Allowable as deductions</option>
+                            <option value="disallowable">Disallowable tax elements</option>
+                        </select> 
+                        and must be 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="added">
+                            <option value="">-- Adjustment --</option>
+                            <option value="added">Added back to net accounting profit</option>
+                            <option value="deducted">Deducted from the taxable income baseline</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Entertainment Split Mistake warns that mixed hospitality profiles require separation. Staff events require zero adjustments, but client entertainment must be added back in full.
+                </div>
+            </div>
+            <!-- QUESTION 3: TIPO "radio" (Main Pool WDA Percentage) -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">3. An asset does not qualify for the 100% Annual Investment Allowance (AIA) and sits inside the Main Pool. What is the statutory Writing Down Allowance (WDA) rate applied on a reducing balance basis?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> A statutory rate of exactly 6%</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> A statutory rate of exactly 18%</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> A statutory rate of exactly 100%</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> HMRC allocates a standard 18% Writing Down Allowance (WDA) to the Main Pool on a reducing balance basis. Integral building features instead transfer to the Special Rate Pool at 6%.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "multi-input" (Capital Allowances Balancing Charge) -->
+            <div class="question-tab" data-qindex="4" data-type="multi-input">
+                <div class="task-instruction-text">4. A limited company disposes of a machinery asset from its Main Pool for £15,000. Before accounting for this event, the remaining Written Down Value (WDV) of the pool was £11,000. Compute the resulting balancing adjustment cell.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">HMRC Pool Adjustment Extraction</th>
+                                <th style="width: 250px;">Resulting Amount (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Resulting Balancing Charge (Input as a positive integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="4000" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Sale Proceeds (£15,000) exceed the pool's Written Down Value (£11,000) by £4,000. This creates a Balancing Charge of £4,000, which increases the company's taxable trading profits.
+                </div>
+            </div>
+            <!-- QUESTION 5: TIPO "radio" (Capital Losses Fencing) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">5. A limited company suffers an unabsorbed capital loss during the fiscal year. Under corporate tax legislation, which statement maps its correct offset allocation?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> It can be used to immediately offset current-year trading profit margins.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> It can only offset corporate capital/chargeable gains, carrying forward indefinitely if unabsorbed.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> It can be reallocated to reduce the quarterly VAT payment liability cell.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Capital Loss Reallocation Flaw reminds us that capital losses have a strict ring-fence. They can never offset trading or rental income; they can only offset current or future chargeable gains.
+                </div>
+            </div>
+
+            <!-- QUESTION 6: TIPO "multi-select" (Charitable Gift Aid Reliefs) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the corporate compliance logic regarding qualifying charitable donations.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Qualifying charitable donations paid by a corporation under Gift Aid represent 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="charges">
+                            <option value="">-- Tax Nature --</option>
+                            <option value="trading">Trading revenue expenditures</option>
+                            <option value="charges">Charges on income metrics</option>
+                        </select> 
+                        and are deducted from total taxable profits, but they can never 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="create">
+                            <option value="">-- Restriction --</option>
+                            <option value="create">Create or expand a trading loss</option>
+                            <option value="offset">Offset future capital gains balances</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Gift Aid contributions are corporate charges on income. They are deducted from total profits, but any excess amount that drops profits below zero cannot be used to generate or increase a tax loss.
+                </div>
+            </div>
+            <!-- QUESTION 7: TIPO "radio" (Special Rate Pool WDA) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">7. A company installs an integral electrical system infrastructure inside its new office building. To which HMRC capital allowance pool does this belong, and what rate applies?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> Special Rate Pool, tracking a restricted Writing Down Allowance (WDA) rate of 6%.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> Main Pool, applying a reducing balance percentage rate of 18%.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> Written off instantly using the research expenditure P&L write-off script.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Building integral features, lift installations, thermal insulation, and long-life assets are directed away from the main track and loaded onto the Special Rate Pool at a 6% WDA rate.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "radio" (Bank Interest Income Schedulation) -->
+            <div class="question-tab" data-qindex="8" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">8. A limited company receives gross bank interest of £2,500 embedded inside its operating accounting revenues. How must this item be reallocated during the corporate tax adjustment process?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="A"> Left untouched inside trading profits, as interest is a revenue element.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="B"> Added back to the net profit baseline as a disallowable corporate overhead cost.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="C"> Deducted from the trading profit block and assessed separately under non-trading interest income schedules.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Non-trading revenues (like interest or rental income) must be stripped out of trading results. They are subtracted from the trading profit line and loaded onto their specific tax schedule.
+                </div>
+            </div>
+            <!-- QUESTION 9: TIPO "multi-select" (AIA Ceiling Restrictions) -->
+            <div class="question-tab" data-qindex="9" data-type="multi-select">
+                <div class="task-instruction-text">9. Complete the capital expenditure analysis regarding standard allocation limits.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        The Annual Investment Allowance (AIA) grants a 100% immediate write-off deduction against qualifying plant and machinery. If capital outlays exceed the maximum annual cap, the excess balance must be transferred to the 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="main">
+                            <option value="">-- Target --</option>
+                            <option value="main">Main Pool or Special Rate Pool</option>
+                            <option value="reserve">Revaluation Reserve capital accounts</option>
+                        </select> 
+                        to receive standard 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="wda">
+                            <option value="">-- Allowance --</option>
+                            <option value="wda">Writing Down Allowance (WDA) deductions</option>
+                            <option value="charge">Automatic balancing charge additions</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Expenditures matching AIA rules clear the tax year immediately up to the legislative ceiling limit. Over-cap assets advance to standard pools to trigger 18% or 6% WDA reducing-balance lines.
+                </div>
+            </div>
+
+            <!-- QUESTION 10: TIPO "radio" (Balancing Allowance Conditions) -->
+            <div class="question-tab" data-qindex="10" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">10. Under what specific operational condition can a Balancing Allowance be legally claimed on a company's general Main Pool capital allowance schedule?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="A"> Every time an asset disposal occurs and proceeds fall below the individual asset cost.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="B"> Only upon the complete cessation/termination of the business trade, where the pool is wound up entirely.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="C"> When accounting depreciation rates match the standard reducing WDA percentage.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Balancing Allowances are restricted for multi-asset general pools. They cannot trigger during ongoing operations, but are allowed exclusively when the entire pool structure terminates.
+                </div>
+            </div>
+            <!-- QUESTION 11: TIPO "radio" (Loss Carry Back Window) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">11. A corporation registers a substantial trading loss during the current year and elects to execute a Carry Back loss relief claim. What is the standard statutory look-back window limit?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> Restricted strictly to the preceding 12-month accounting period.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> Extended across the past 3 fiscal years under standard baseline parameters.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> Traced backward until all accumulated historical points reach zero limits.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> General corporate carry-back mechanisms permit companies to look back exactly 12 months. This offsets losses against the prior year's profits to trigger an HMRC cash tax refund.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "multi-select" (Loss Carry Forward Constraints) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the corporate statement defining loss relief constraints over time.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Unabsorbed trading losses can be carried forward indefinitely to reduce future corporate tax liabilities, but they must be offset strictly against profits generated by the 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="same">
+                            <option value="">-- Target --</option>
+                            <option value="same">Same identical trade line operations</option>
+                            <option value="any">Any non-trading capital gains pool</option>
+                        </select> 
+                        unless structural company 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="ownership">
+                            <option value="">-- Condition --</option>
+                            <option value="ownership">Ownership parameters change under anti-avoidance acts</option>
+                            <option value="points">Filing penalty points accumulate</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Carry forward claims are bound to the underlying trade source. Losses advance to shield future trading results, but major changes in company ownership can block these shields.
+                </div>
+            </div>
+            <!-- QUESTION 10: TIPO "radio" (Special Rate Pool Assets) -->
+            <div class="question-tab" data-qindex="10" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">10. A manufacturing firm purchases new thermal insulation systems and integral features for its corporate headquarters. Into which statutory pool must these capital expenditures be allocated?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="A"> The standard Main Pool asset tracking system.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="B"> Written off immediately as general trade entertainment expenses.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="C"> The Special Rate Pool, receiving a restricted statutory Writing Down Allowance of 6%.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Integral building features, long-life assets, and thermal insulation are restricted under UK tax rules and must sit in the Special Rate Pool with a 6% WDA rate.
+                </div>
+            </div>
+
+            <!-- QUESTION 11: TIPO "multi-select" (Carry Back Loss Claim Mechanics) -->
+            <div class="question-tab" data-qindex="11" data-type="multi-select">
+                <div class="task-instruction-text">11. Complete the tax planning description regarding corporate carry-back loss relief strategies.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To secure an immediate cash tax refund from HMRC during a trading loss period, a company can file a claim to carry back unused losses to offset total taxable profits generated in the preceding 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="12">
+                            <option value="">-- Carry Back Window --</option>
+                            <option value="12">12-month period maximum</option>
+                            <option value="36">36-month period maximum</option>
+                        </select> 
+                        provided a valid current-year claim has been 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="exhausted">
+                            <option value="">-- Condition --</option>
+                            <option value="exhausted">Exhausted or submitted first</option>
+                            <option value="ignored">Ignored completely inside the calculations</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Carry-back relief claims target the preceding 12 months to claw back past corporation tax payments. This requires a current-year relief allocation to be processed first.
+                </div>
+            </div>
+            <!-- QUESTION 12: TIPO "radio" (Non-Trading Income Exclusions) -->
+            <div class="question-tab" data-qindex="12" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">12. A limited company includes commercial property rental receipts inside its main credit ledger. Why must this income line be removed during trading profits tax adjustments?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="A"> Because rental profits are completely exempt from UK Corporation Tax rules.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="B"> Because it represents non-trading income that belongs to a distinct statutory tax schedule.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="C"> To flex the variable cost pools in proportion to manufacturing output volumes.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Rental income, bank interest, and dividends are non-trading elements. They must be deducted from accounting profits and calculated under their specific tax schedules.
+                </div>
+            </div>
+
+            <!-- QUESTION 13: TIPO "multi-input" (Writing Down Allowance Calculation) -->
+            <div class="question-tab" data-qindex="13" data-type="multi-input">
+                <div class="task-instruction-text">13. The Main Pool of an enterprise contains a transitional Written Down Value (WDV) baseline of £100,000 before allowances. No additions or disposals occurred. Calculate the standard Writing Down Allowance (WDA) deduction.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">HMRC Standard Main Pool Allowance Factor</th>
+                                <th style="width: 250px;">Calculated Deduction (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Standard WDA amount for the period (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="18000" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The standard Main Pool WDA rate is 18% on a reducing balance basis. Calculation: £100,000 WDV × 18% = £18,000 statutory tax deduction allowance.
+                </div>
+            </div>
+            <!-- QUESTION 14: TIPO "radio" (Corporate Indexation Allowance Rule) -->
+            <div class="question-tab" data-qindex="14" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">14. When computing a limited company's corporate chargeable capital gain on an asset held since 2010, what parameter restricts the application of the Indexation Allowance?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q14" value="A"> It tracks inflation variations continuously up to the exact asset disposal date.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q14" value="B"> It can expand capital losses to offset current-year general trading profits.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q14" value="C"> It is permanently frozen by legislation, calculating inflation adjustments only up to December 2017 boundaries.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> UK corporate tax rules permanently froze the Indexation Allowance in December 2017. Inflation calculations stop at that historical point, regardless of a later disposal date.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "multi-select" (Carry Forward Loss Relief Rule) -->
+            <div class="question-tab" data-qindex="15" data-type="multi-select">
+                <div class="task-instruction-text">15. Complete the corporate statutory statement governing long-term trading loss management.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Any unabsorbed trading loss remaining at the close of an accounting window can be carried forward automatically to reduce taxable profits generated in future periods by 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="same">
+                            <option value="">-- Trade Scope --</option>
+                            <option value="same">The identical/same trade line only</option>
+                            <option value="any">Any non-trading capital gains pool</option>
+                        </select> 
+                        acting as a secure, ongoing long-term tax 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="shield">
+                            <option value="">-- Operational Impact --</option>
+                            <option value="shield">Shield protecting company cash flows</option>
+                            <option value="variance">Variance error logging entry</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Unabsorbed trading losses carry forward to protect future cash flows, but are ring-fenced to offset future profits generated within the identical trade line.
+                </div>
+            </div>
+
+        </form>
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            The mathematical model for Audit Risk determines that Audit Risk = Inherent Risk &times; Control Risk &times; Detection Risk. If an auditor assesses Inherent Risk as high and Control Risk as high, what directional strategy must be applied to Detection Risk to keep overall Audit Risk low?<br>
-            Detection Risk must be: <select id="ans2"><option value="">Select</option><option value="w">Increased</option><option value="correct">Decreased (Lowered)</option><option value="w">Kept completely unchanged</option></select>
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            During the year-end inventory count, an auditor selects 40 physical stock items from the warehouse floor and traces them back to the company's draft stock sheets. Which specific financial statement assertion is being tested?<br>
-            Assertion Type: <select id="ans3"><option value="">Select</option><option value="w">Existence</option><option value="correct">Completeness</option><option value="w">Valuation and Allocation</option></select>
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            An auditor wishes to test the internal controls within the sales ledger cycle. They select a sample of sales invoices and verify whether each invoice has been signed by the credit control manager. This procedure is legally defined as a:<br>
-            Procedure Category: <select id="ans4"><option value="">Select</option><option value="correct">Test of Control</option><option value="w">Substantive Analytical Procedure</option><option value="w">Test of Detail</option></select>
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A corporate entity has credit sales of £1,200,000 and total closing trade receivables of £240,000. Calculate the Receivables Turnover Ratio to be used during the initial analytical procedures stage:<br>
-            Receivables Turnover: <input type="text" id="ans5" placeholder="0.0"> times
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            The risk that the auditor's substantive procedures will fail to detect a material misstatement that exists in an financial ledger assertion is defined as:<br>
-            Risk Category: <select id="ans6"><option value="">Select</option><option value="w">Inherent Risk</option><option value="w">Control Risk</option><option value="correct">Detection Risk</option></select>
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            When auditing payroll, an auditor compares the current year's total wage expense against the prior year's audited figures, adjusted for inflation and changes in headcount. This structural verification process represents a:<br>
-            Procedure Category: <select id="ans7"><option value="">Select</option><option value="w">Test of Control</option><option value="correct">Substantive Analytical Procedure</option><option value="w">Risk Assessment Procedure</option></select>
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            According to ISA 505 External Confirmations, if a debtor fails to respond to a positive circularization request, the auditor can accept the ledger balance as correct if the client provides a verbal confirmation.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans8"><option value="">Select</option><option value="w">True</option><option value="correct">False</option></select>
-        </div>
-    </div>
-          
-    <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            An auditor extracts a sample from the total population of purchase vouchers. The total number of items is 2,500, and the auditor intends to select every 50th item after a random starting point. What sampling methodology is being applied?<br>
-            Methodology Type: <select id="ans9"><option value="">Select</option><option value="w">Random Selection</option><option value="correct">Systematic Selection</option><option value="w">Haphazard Selection</option></select>
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            A serious material misstatement is discovered regarding an omitted loan liability of £250,000. The effect is material but not pervasive to the financial statements. State the type of modified audit opinion that the auditor must issue:<br>
-            Opinion Type: <select id="ans10"><option value="">Select</option><option value="correct">Qualified Opinion ("Except for")</option><option value="w">Adverse Opinion</option><option value="w">Disclaimer of Opinion</option></select>
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            The working papers prepared by an audit team to document the evidence collected during an assignment remain the legal property of the audit firm, not the client company.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans11"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            An auditor attends the year-end stock count and selects 30 items from the client's inventory inventory list, then physically finds and counts those specific items on the warehouse shelves. Which specific financial statement assertion is being tested?<br>
-            Assertion Type: <select id="ans12"><option value="">Select</option><option value="correct">Existence</option><option value="w">Completeness</option><option value="w">Rights and Obligations</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            A limited company is facing severe cash flow issues, and its bank refuses to renew the overdraft facility. Under ISA 570, the auditor must explicitly evaluate whether there is substantial doubt about the company's ability to continue as a:<br>
-            Accounting Principle: <select id="ans13"><option value="">Select</option><option value="w">Accrual Basis entity</option><option value="correct">Going Concern</option><option value="w">Separate Legal Entity</option></select>
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            An audit firm discovers that a client's internal IT controls are extremely weak, allowing any user to alter historical transaction records. This deficiency will directly increase which component of the audit risk model?<br>
-            Risk Component: <select id="ans14"><option value="">Select</option><option value="w">Inherent Risk</option><option value="correct">Control Risk</option><option value="w">Detection Risk</option></select>
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            During an external audit, the team discovers widespread, systemic fraudulent accounting entries across multiple asset accounts. The total effect is material and completely pervasive, misleading the entire financial report. State the type of opinion required:<br>
-            Opinion Type: <select id="ans15"><option value="">Select</option><option value="w">Qualified Opinion</option><option value="correct">Adverse Opinion</option><option value="w">Disclaimer of Opinion</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    tabs.forEach(tab => tab.classList.remove('active'));
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    updateNavigationDisplay();
+}
+
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        icons.forEach(icon => icon.textContent = '');
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
-    }
-
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
-
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '40000' || val === '40000.00');
-        } else if (currentQ === 2) {
-            isCorrect = (document.getElementById('ans2').value === 'correct');
-        } else if (currentQ === 3) {
-            isCorrect = (document.getElementById('ans3').value === 'correct');
-        } else if (currentQ === 4) {
-            isCorrect = (document.getElementById('ans4').value === 'correct');
-        } else if (currentQ === 5) {
-            let val = document.getElementById('ans5').value.trim();
-            isCorrect = (val === '5' || val === '5.0' || val === '5.00');
-        } else if (currentQ === 6) {
-            isCorrect = (document.getElementById('ans6').value === 'correct');
-        } else if (currentQ === 7) {
-            isCorrect = (document.getElementById('ans7').value === 'correct');
-        } else if (currentQ === 8) {
-            isCorrect = (document.getElementById('ans8').value === 'correct');
-        } else if (currentQ === 9) {
-            isCorrect = (document.getElementById('ans9').value === 'correct');
-        } else if (currentQ === 10) {
-            isCorrect = (document.getElementById('ans10').value === 'correct');
-        } else if (currentQ === 11) {
-            isCorrect = (document.getElementById('ans11').value === 'correct');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            isCorrect = (document.getElementById('ans13').value === 'correct');
-        } else if (currentQ === 14) {
-            isCorrect = (document.getElementById('ans14').value === 'correct');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
-        }
-
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) box.className = "option-box correct-answer-highlight";
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = field.getAttribute('data-ans');
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter4_Test1_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
