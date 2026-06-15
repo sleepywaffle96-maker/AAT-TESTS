@@ -89,16 +89,15 @@
         .topic-list a { color: #475569; text-decoration: none; font-size: 13px; display: flex; align-items: center; font-weight: 500; }
         .icon-bullet { margin-right: 10px; color: var(--aat-cyan); font-weight: bold; font-size: 14px; }
         .module-nav-container { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-   /* FORZATURA DIRETTA DEI COLORI AD ALTRA SPECIFICITÀ TRAMITE ID */
-#lista-test-l2 li a { color: #059669 !important; font-weight: 600 !important; }
-#lista-test-l2 li .icon-bullet { color: #10B981 !important; }
+  /* FORZATURA DIRETTA TRAMITE CLASSE SULLA LISTA TOPIC-LIST */
+ul.topic-list.color-l2 li a { color: #059669 !important; font-weight: 600 !important; }
+ul.topic-list.color-l2 li .icon-bullet { color: #10B981 !important; }
 
-#lista-test-l3 li a { color: #0284C7 !important; font-weight: 600 !important; }
-#lista-test-l3 li .icon-bullet { color: #0EA5E9 !important; }
+ul.topic-list.color-l3 li a { color: #0284C7 !important; font-weight: 600 !important; }
+ul.topic-list.color-l3 li .icon-bullet { color: #0EA5E9 !important; }
 
-#lista-test-l4 li a { color: #EA580C !important; font-weight: 600 !important; }
-#lista-test-l4 li .icon-bullet { color: #F97316 !important; }
-
+ul.topic-list.color-l4 li a { color: #EA580C !important; font-weight: 600 !important; }
+ul.topic-list.color-l4 li .icon-bullet { color: #F97316 !important; }
 
     </style>
 </head>
@@ -149,35 +148,35 @@
              <div class="chapters-panel" id="lista-test-l2">
                  <button class="chapter-btn">Chapter 1: Introduction to Bookkeeping</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-verde">
+                     <ul class="topic-list color-l2">
                          <li><a href="level-2/cap1-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Core Ledger Entries)</a></li>
                          <li><a href="level-2/cap1-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Comprehensive Workflows)</a></li>
                      </ul>
                  </div>
                  <button class="chapter-btn">Chapter 2: Principles of Bookkeeping Controls</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-verde">
+                     <ul class="topic-list color-l2">
                          <li><a href="level-2/cap2-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Control Accounts Balance)</a></li>
                          <li><a href="level-2/cap2-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Suspense Account Reconciliation)</a></li>
                      </ul>
                  </div>
                  <button class="chapter-btn">Chapter 3: Principles of Costing</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-verde">
+                     <ul class="topic-list color-l2">
                          <li><a href="level-2/cap3-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Inventory & Labour Elements)</a></li>
                          <li><a href="level-2/cap3-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Overhead Apportionment)</a></li>
                      </ul>
                  </div>
                  <button class="chapter-btn">Chapter 4: Business Environment (BTRN - Part 1)</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-verde">
+                     <ul class="topic-list color-l2">
                          <li><a href="level-2/cap4-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Corporate Regulations & Deadlines)</a></li>
                          <li><a href="level-2/cap4-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Data Protection & Professionalism)</a></li>
                      </ul>
                  </div>
             <button class="chapter-btn">Chapter 5: Business Environment (BTRN - Part 2)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-verde">
+                <ul class="topic-list color-l2">
                     <li><a href="level-2/cap5-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (DEAD CLIC & Balance Extractions)</a></li>
                     <li><a href="level-2/cap5-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Errors & Suspense Account Reconciliation)</a></li>
                 </ul>
@@ -185,7 +184,7 @@
             </div> 
             <button class="chapter-btn" style="background-color: #047857; color: #FFFFFF; border: 1px solid #059669; font-weight: 800;">🏆 FINAL COMPREHENSIVE MOCK EXAM</button>
             <div class="tests-panel">
-                <ul class="topic-list links-verde">
+                <ul class="topic-list color-l2">
                     <li><a href="level-2/btrn-mock-exam.html"><span class="icon-bullet">&#127942;</span> Launch 60-Min Randomized Final Assessment</a></li>
                 </ul>
         </div>
@@ -193,17 +192,17 @@
 <!-- RIFERIMENTO_BLOCCO: PART_4_LEVEL_3_PANEL -->
          <div class="level-section">
              <button class="level-btn">🔷 AAT Level 3 Diploma Topics</button>
-             <<div class="chapters-panel" id="lista-test-l3">
+             <div class="chapters-panel" id="lista-test-l3">
                   <button class="chapter-btn">Chapter 1: Business Awareness (BUAW)</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-azzurro">
+                     <ul class="topic-list color-l3">
                          <li><a href="level-3/cap5-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Ethical Principles)</a></li>
                          <li><a href="level-3/cap5-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (SOP & AML Scenarios)</a></li>
                      </ul>
                  </div>
                  <button class="chapter-btn">Chapter 2: Financial Accounting (FAPS)</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-azzurro">
+                     <ul class="topic-list color-l3">
                          <li><a href="level-3/cap1-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Year-end Adjustments)</a></li>
                          <li><a href="level-3/cap1-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Partnerships Basis)</a></li>
                          <li><a href="level-3/cap2-test1.html"><span class="icon-bullet">&#128221;</span> Assessment Three (Incomplete Records)</a></li>
@@ -212,14 +211,14 @@
                  </div>
                  <button class="chapter-btn">Chapter 3: Management Accounting Techniques (MATS)</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-azzurro">
+                     <ul class="topic-list color-l3">
                          <li><a href="level-3/cap3-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Absorption vs Marginal)</a></li>
                          <li><a href="level-3/cap3-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Variances Analysis)</a></li>
                      </ul>
                  </div>
                  <button class="chapter-btn">Chapter 4: Tax Processes for Businesses (TPFB)</button>
                  <div class="tests-panel">
-                     <ul class="topic-list links-azzurro">
+                     <ul class="topic-list color-l3">
                          <li><a href="level-3/cap4-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (VAT Return Layout)</a></li>
                          <li><a href="level-3/cap4-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (HMRC Schemes & Rules)</a></li>
                      </ul>
@@ -229,7 +228,7 @@
             <!-- Mock Exam come bolla coordinata Livello 3 -->
             <button class="chapter-btn" style="background-color: #0369A1; color: #FFFFFF; border: 1px solid #0284C7; font-weight: 800;">🏆 FINAL COMPREHENSIVE MOCK EXAM</button>
             <div class="tests-panel">
-                <ul class="topic-list links-azzurro">
+                <ul class="topic-list color-l3">
                     <li><a href="level-3/l3-mock-exam.html"><span class="icon-bullet">&#127942;</span> Launch 60-Min Randomized Final Assessment</a></li>
                 </ul>
             </div>
@@ -241,7 +240,7 @@
                              <!-- CHAPTER 1: AMA (FUSIONE DI BUDGETING E DECISION/CONTROL) -->
             <button class="chapter-btn">Chapter 1: Applied Management Accounting (AMA)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap2-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Cash Budgets)</a></li>
                     <li><a href="level-4/cap2-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Forecasting Models)</a></li>
                     <li><a href="level-4/cap3-test1.html"><span class="icon-bullet">&#128221;</span> Assessment Three (Relevant Costing)</a></li>
@@ -252,7 +251,7 @@
             <!-- CHAPTER 2: DAIF -->
             <button class="chapter-btn">Chapter 2: Drafting and Interpreting Financial Statements (DAIF)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap1-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (IAS/IFRS Formats)</a></li>
                     <li><a href="level-4/cap1-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Group Consolidation)</a></li>
                 </ul>
@@ -261,7 +260,7 @@
             <!-- CHAPTER 3: IASC (SPOSTATO NELL'ORDINE CORRETTO) -->
             <button class="chapter-btn">Chapter 3: Internal Accounting Systems and Controls (IASC)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap3-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Systems Failures)</a></li>
                     <li><a href="level-4/cap3-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Risk Recommendations)</a></li>
                 </ul>
@@ -270,7 +269,7 @@
             <!-- CHAPTER 4: BSTX -->
             <button class="chapter-btn">Chapter 4: Business Tax (BSTX)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap4-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Corporation Tax)</a></li>
                     <li><a href="level-4/cap4-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Capital Allowances)</a></li>
                 </ul>
@@ -279,7 +278,7 @@
             <!-- CHAPTER 5: PLTX -->
             <button class="chapter-btn">Chapter 5: Personal Tax (PLTX)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap5-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Income Tax Bands)</a></li>
                     <li><a href="level-4/cap5-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (CGT & Allowances)</a></li>
                 </ul>
@@ -288,7 +287,7 @@
             <!-- CHAPTER 6: EXAU -->
             <button class="chapter-btn">Chapter 6: External Auditing (EXAU)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap6-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Audit Planning & Risk)</a></li>
                     <li><a href="level-4/cap6-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Substantive Evidence)</a></li>
                 </ul>
@@ -297,7 +296,7 @@
             <!-- CHAPTER 7: CTMN -->
             <button class="chapter-btn">Chapter 7: Cash and Treasury Management (CTMN)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap7-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Liquidity Cycles)</a></li>
                     <li><a href="level-4/cap7-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (FX Risk & Capital)</a></li>
                 </ul>
@@ -306,7 +305,7 @@
             <!-- CHAPTER 8: CRDM -->
             <button class="chapter-btn">Chapter 8: Credit and Debt Management (CRDM)</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/cap8-test1.html"><span class="icon-bullet">&#128221;</span> Assessment One (Credit Scoring)</a></li>
                     <li><a href="level-4/cap8-test2.html"><span class="icon-bullet">&#128221;</span> Assessment Two (Legal & Bad Debt Costs)</a></li>
                 </ul>
@@ -315,7 +314,7 @@
              <!-- Mock Exam come bolla coordinata Livello 4 -->
             <button class="chapter-btn" style="background-color: #9A3412; color: #FFFFFF; border: 1px solid #B45309; font-weight: 800;">🏆 FINAL COMPREHENSIVE MOCK EXAM</button>
             <div class="tests-panel">
-                <ul class="topic-list links-arancione">
+                <ul class="topic-list color-l4">
                     <li><a href="level-4/l4-mock-exam.html"><span class="icon-bullet">&#127942;</span> Launch 60-Min Randomized Final Assessment</a></li>
                 </ul>
 </div>
