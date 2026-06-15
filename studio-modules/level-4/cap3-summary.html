@@ -1,134 +1,104 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 3: AMAC Variance Summary | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 3: Internal Systems & Controls (Cheat Sheet)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --panel-bg: rgba(0, 242, 254, 0.05);
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.7;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.3rem;
-        }
-        .formula-panel {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
+        .summary-card {
+            background-color: var(--l3-cyan-light);
+            border-left: 5px solid var(--l3-cyan-primary);
+            padding: 1.5rem;
             border-radius: 0 6px 6px 0;
+            margin-bottom: 2rem;
         }
-        .formula-title {
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
+        .trap-summary-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEE2E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .formula-text {
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-        li {
-            margin-bottom: 0.5rem;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>AMAC Advanced Variance Formula Cheat Sheet</h1>
-            <p style="color: var(--text-muted)">Essential formulas and mathematical algorithms for advanced operational control exams.</p>
-
-            <h2>1. Planning vs Operational Variance Formula Split</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Material Price Planning Variance</div>
-                <div class="formula-text">Planning Variance = (Original Standard Price - Revised Standard Price) x Revised Standard Quantity</div>
-            </div>
-            <div class="formula-panel">
-                <div class="formula-title">Material Price Operational Variance</div>
-                <div class="formula-text">Operational Variance = (Revised Standard Price - Actual Price) x Actual Quantity Used</div>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 2rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 1rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 4 RECAP</span>
+                <h1 style="font-size: 1.75rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 3: Systems and Controls Quick Cheat Sheet</h1>
             </div>
 
-            <h2>2. Material Mix & Yield Mechanics</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Material Mix Variance</div>
-                <div class="formula-text">Mix Variance = (Actual Quantity in Standard Mix Proportions - Actual Quantity in Actual Mix Proportions) x Standard Price</div>
+            <div class="summary-card">
+                <strong style="color: var(--l3-cyan-dark); font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🎯 IASC RISK & SYSTEMS CONTROL BLOCK:</strong>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
+                    • 3 Layers: Preventative (SoD), Detective (Reconciliation), Corrective (Backups).<br>
+                    • Cost-Benefit: Cost of Control &lt; (Potential Financial Loss × Probability Factor %).<br>
+                    • Vulnerabilities: Management Override & Internal Staff Collusion.
+                </p>
             </div>
-            <div class="formula-panel">
-                <div class="formula-title">Material Yield Variance</div>
-                <div class="formula-text">Yield Variance = (Standard Quantity for Actual Output - Actual Quantity Used in Standard Mix Proportions) x Standard Price</div>
-            </div>
-
-            <h2>3. Direct Labour Variance Matrix</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Labour Rate Variance</div>
-                <div class="formula-text">Labour Rate = (Standard Hourly Rate - Actual Hourly Rate paid) x Actual Hours Worked</div>
-            </div>
-            <div class="formula-panel">
-                <div class="formula-title">Labour Efficiency Variance</div>
-                <div class="formula-text">Labour Efficiency = (Standard Hours allowed for Actual Output - Actual Hours Worked) x Standard Hourly Rate</div>
-            </div>
-
-            <h2>4. Control System Revision Checklist</h2>
+            <h2>1. Control Layers & Infrastructure Safety</h2>
             <ul>
-                <li><strong>Controllability Principle:</strong> Operational managers must only be evaluated on variances that their direct decisions can influence.</li>
-                <li><strong>Attainable Baseline:</strong> A standard target that builds in realistic allowances for normal material shrinkage, minor machine downtime, and human breaks.</li>
-                <li><strong>Variance Interdependency:</strong> Occurs when a decision in one department directly impacts another metric (e.g., buying cheap materials causing an adverse labor efficiency variance).</li>
+                <li><strong>Preventative Mechanisms:</strong> Segregation of Duties dictates that separate individuals must authorize transactions, execute cash payments, and reconcile ledgers.</li>
+                <li><strong>Data Integrity Footprint:</strong> Continuous automated digital audit trails are mandatory to store timestamps, active user IDs, and previous balance histories.</li>
+                <li><strong>Input System Safeguards:</strong> Range boundaries, hash totals, and mandatory cell verification check rules block flawed entries before database corruption can happen.</li>
             </ul>
-        </div>
-    </div>
+
+            <h2>2. Fraud Risk & Financial Team Management</h2>
+            <ul>
+                <li><strong>Cost Proportionality:</strong> Avoid installing heavy manual checks for trivial ledger parameters. Recommending overly complex processing sequences breaks cost-benefit rules.</li>
+                <li><strong>Departmental Productivity:</strong> Finance managers track processing times and invoicing collection ratios as clear performance KPIs to isolate administrative delays.</li>
+                <li><strong>Statutory Compliance:</strong> Ensuring timely corporate accounting filings and data safety practices protects the enterprise against severe ICO database penalties.</li>
+            </ul>
+            <div class="trap-summary-box">
+                <strong style="color: #DC2626; font-size: 1rem; display: block; margin-bottom: 0.5rem;">⚠️ ADVANCED EXAM TRAPS RECAP (INVISIBLE ERRORS):</strong>
+                <ul>
+                    <li><strong>The Absolute Safety Fallacy:</strong> Promising a 100% unbreakable control infrastructure in case studies. Management Override and staff Collusion always restrict absolute security.</li>
+                    <li><strong>The Process Over-Engineering Oversight:</strong> Suggesting multi-tier manual verification tracks for low-value transactions. This burns professional labor costs unnecessarily.</li>
+                    <li><strong>The Automation Security Illusion:</strong> Assuming cloud ERP software removes fraud risks entirely. If system permission mappings allow a single person to both set up vendors and clear payments, severe gaps remain.</li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
