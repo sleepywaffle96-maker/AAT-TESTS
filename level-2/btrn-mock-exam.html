@@ -378,168 +378,303 @@
 const questionsDatabase = [
     {
         id: 1,
-        type: "radio",
-        question: "A business purchases a new computer for office use on credit from a supplier. Which of the following represents the correct double-entry ledger alignment to record this transaction?",
-        options: [
-            { text: "Debit Non-Current Assets, Credit Trade Payables", correct: true },
-            { text: "Debit Trade Receivables, Credit Revenue", correct: false },
-            { text: "Debit Non-Current Assets, Credit Bank Checking Account", correct: false }
-        ],
+        chapter: 1,
+        type: "select",
+        points: 10,
+        instruction: "A business purchases a new computer for office use on credit from a supplier. Select the correct double-entry ledger alignment to record this transaction.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                To record the acquisition of a non-current asset on credit, the accountant must 
+                <select class="multi-select-field" data-ans="debit-asset">
+                    <option value="">-- Side A --</option>
+                    <option value="debit-asset">Debit Non-Current Assets Account</option>
+                    <option value="credit-asset">Credit Non-Current Assets Account</option>
+                </select> 
+                and subsequently 
+                <select class="multi-select-field" data-ans="credit-payables">
+                    <option value="">-- Side B --</option>
+                    <option value="debit-payables">Debit Trade Payables Control Account</option>
+                    <option value="credit-payables">Credit Trade Payables Control Account</option>
+                </select>.
+            </div>
+        `,
         solution: "Purchasing a non-current asset on credit increases an asset account (Debit) and increases a liability account (Credit Trade Payables)."
     },
     {
         id: 2,
-        type: "radio",
-        question: "An invoice is issued to a customer for credit sales of £1,000 plus standard rate VAT at 20%. What values must be posted to the Sales Ledger Control Account (SLCA) and the Sales Account?",
-        options: [
-            { text: "Debit SLCA £1,200, Credit Sales Account £1,000", correct: true },
-            { text: "Debit Sales Account £1,000, Credit SLCA £1,200", correct: false },
-            { text: "Debit SLCA £1,000, Credit VAT Account £200", correct: false }
-        ],
-        solution: "The customer owes the full gross amount, so SLCA is debited with £1,200. Revenue is recognized net of tax, so the Sales Account is credited with £1,000."
+        chapter: 1,
+        type: "select",
+        points: 10,
+        instruction: "An invoice is issued to a customer for credit sales of £1,000 plus standard rate VAT at 20%. Select the correct postings for the Sales Ledger Control Account (SLCA) and Sales Revenue.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                The customer owes the gross amount, requiring the accountant to 
+                <select class="multi-select-field" data-ans="debit-slca">
+                    <option value="">-- Post A --</option>
+                    <option value="debit-slca">Debit SLCA with £1,200</option>
+                    <option value="credit-slca">Credit SLCA with £1,200</option>
+                </select> 
+                while recognizing the net revenue by making a 
+                <select class="multi-select-field" data-ans="credit-sales">
+                    <option value="">-- Post B --</option>
+                    <option value="debit-sales">Debit Sales Revenue with £1,000</option>
+                    <option value="credit-sales">Credit Sales Revenue with £1,000</option>
+                </select>.
+            </div>
+        `,
+        solution: "The customer owes the full gross amount, so SLCA is debited with £1,200. Revenue is recognized net of tax, so Sales is credited with £1,000."
     },
     {
         id: 3,
-        type: "radio",
-        question: "A company receives a prompt payment discount from a credit supplier. In which book of prime entry must this transaction be recorded before posting to the general ledger?",
-        options: [
-            { text: "The Cash Book / Cash Payments Daybook", correct: true },
-            { text: "The Purchase Daybook", correct: false },
-            { text: "The Sales Return Daybook", correct: false }
-        ],
-        solution: "Discounts received change the absolute cash output value required to settle a debt, meaning they are tracked directly through the Cash Book entries grid."
+        chapter: 1,
+        type: "select",
+        points: 10,
+        instruction: "A company receives a prompt payment discount from a credit supplier. Select the correct book of prime entry for this transaction.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                This transaction directly alters the absolute cash output required to settle the debt, meaning it must be recorded in the 
+                <select class="multi-select-field" data-ans="cashbook">
+                    <option value="">-- Book of Prime Entry --</option>
+                    <option value="cashbook">Cash Book / Cash Payments Daybook</option>
+                    <option value="purchase">Purchase Daybook entries grid</option>
+                </select>.
+            </div>
+        `,
+        solution: "Discounts received change the cash output value required to settle a debt, meaning they are tracked directly through Cash Book entries."
     },
     {
         id: 4,
-        type: "radio",
-        question: "While preparing a bank reconciliation, an accountant notices a cheque payment of £450 has been recorded in the cash book but does not appear on the bank statement close balance. What is this item called?",
-        options: [
-            { text: "An unpresented cheque", correct: true },
-            { text: "An outstanding lodgement", correct: false },
-            { text: "A bank automated standing order error", correct: false }
-        ],
+        chapter: 2,
+        type: "select",
+        points: 10,
+        instruction: "While preparing a bank reconciliation, a cheque payment of £450 is recorded in the cash book but does not appear on the bank statement. Select the correct classification.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Cheques drawn and logged internally but not yet cleared or paid out by the banking institution are classified as an 
+                <select class="multi-select-field" data-ans="unpresented">
+                    <option value="">-- Classification --</option>
+                    <option value="unpresented">Unpresented Cheque adjustment item</option>
+                    <option value="lodgement">Outstanding Lodgement balance item</option>
+                </select>.
+            </div>
+        `,
         solution: "Cheques drawn and logged internally but not yet cleared or paid out by the bank institution are classified as unpresented cheques."
     },
     {
         id: 5,
-        type: "radio",
-        question: "The total of the Purchase Daybook is overstated by £500 due to an extraction adding fault. What impact will this error cause on the initial Trial Balance totals?",
-        options: [
-            { text: "The Debit total will be £500 higher than the Credit total, causing a suspense account balance.", correct: true },
-            { text: "The Credit total will be £500 higher than the Debit total.", correct: false },
-            { text: "The Trial Balance will still balance perfectly because double entry balances match.", correct: false }
-        ],
+        chapter: 2,
+        type: "select",
+        points: 10,
+        instruction: "The total of the Purchase Daybook is overstated by £500 due to an adding error. Select the impact this will cause on the initial Trial Balance totals.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Daybook total extraction errors cause an unequal posting value, meaning that the 
+                <select class="multi-select-field" data-ans="debit-higher">
+                    <option value="">-- Trial Balance Impact --</option>
+                    <option value="debit-higher">Debit total will be £500 higher, forcing a suspense account</option>
+                    <option value="credit-higher">Credit total will be £500 higher, forcing a suspense account</option>
+                </select>.
+            </div>
+        `,
         solution: "Daybook total extraction errors cause an unequal posting value to ledger sides, triggering an asymmetry that forces the creation of a suspense account allocation."
     },
     {
         id: 6,
-        type: "radio",
-        question: "An expense payment for office rent of £1,200 has been completely omitted from both the Cash Book and the Rent Expense account. What class of error does this reveal?",
-        options: [
-            { text: "An error of omission, which does not break Trial Balance symmetry.", correct: true },
-            { text: "An error of commission, requiring a direct journal adjustment line.", correct: false },
-            { text: "A compensating error balancing different accounts rows.", correct: false }
-        ],
+        chapter: 2,
+        type: "select",
+        points: 10,
+        instruction: "An rent payment of £1,200 has been completely omitted from both the Cash Book and the Rent Expense account. Select the class of error.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Because this transaction is completely forgotten on both sides of the double entry ledger, it represents an 
+                <select class="multi-select-field" data-ans="omission">
+                    <option value="">-- Class of Error --</option>
+                    <option value="omission">Error of omission, and the Trial Balance will still match</option>
+                    <option value="commission">Error of commission, breaking the Trial Balance symmetry</option>
+                </select>.
+            </div>
+        `,
         solution: "Errors of omission occur when a transaction is completely forgotten on both sides, meaning the Trial Balance will still match perfectly despite the missing data."
     },
     {
         id: 7,
-        type: "radio",
-        question: "A credit customer's check for £250 is returned by the bank marked 'Refer to Drawer' (Dishonored). What is the correct ledger adjustment to re-establish the debt asset?",
-        options: [
-            { text: "Debit Sales Ledger Control Account (SLCA), Credit Bank Checking Account", correct: true },
-            { text: "Debit Bank Checking Account, Credit Sales Ledger Control Account (SLCA)", correct: false },
-            { text: "Debit Bad Debts Provision, Credit Cash Account Balance", correct: false }
-        ],
+        chapter: 2,
+        type: "select",
+        points: 10,
+        instruction: "A credit customer's check for £250 is returned by the bank as dishonored. Select the correct ledger adjustment to re-establish the debt.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                To restore the customer's asset obligation and reverse the failed cash receipt, the accountant must 
+                <select class="multi-select-field" data-ans="debit-slca">
+                    <option value="">-- Entry --</option>
+                    <option value="debit-slca">Debit Sales Ledger Control Account (SLCA) and Credit Bank</option>
+                    <option value="credit-slca">Credit Sales Ledger Control Account (SLCA) and Debit Bank</option>
+                </select>.
+            </div>
+        `,
         solution: "When a check fails, the cash cash-in asset vanishes (Credit Bank) and the customer's legal obligation to pay is restored (Debit SLCA)."
     },
     {
         id: 8,
-        type: "radio",
-        question: "A manufacturing firm rents a production warehouse for a fixed annual payment of £24,000. How must this expenditure line be classified within cost behavior tracking matrixes?",
-        options: [
-            { text: "A fixed cost element that stays constant regardless of output variations.", correct: true },
-            { text: "A variable cost component that flexes with manufacturing volumes.", correct: false },
-            { text: "A semi-variable charge containing step-up threshold limits.", correct: false }
-        ],
+        chapter: 3,
+        type: "select",
+        points: 10,
+        instruction: "A manufacturing firm rents a production warehouse for a fixed annual payment of £24,000. Select the behavior classification.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Because this cost remains constant over the relevant operating window regardless of volume flexes, it is a 
+                <select class="multi-select-field" data-ans="fixed">
+                    <option value="">-- Cost Behavior --</option>
+                    <option value="fixed">Fixed cost element</option>
+                    <option value="variable">Variable cost element scaling with output</option>
+                </select>.
+            </div>
+        `,
         solution: "Fixed costs remain completely constant over a relevant range of operational activity, unaffected by changes in manufacturing output volumes."
     },
     {
         id: 9,
-        type: "radio",
-        question: "A factory worker is paid a basic rate of £12 per hour for a standard 35-hour week. During a peak production cycle, they complete 5 hours of overtime paid at time-and-a-half. How much total gross salary is calculated?",
-        options: [
-            { text: "£510 total gross payroll entry", correct: true },
-            { text: "£420 total gross payroll entry", correct: false },
-            { text: "£480 total gross payroll entry", correct: false }
-        ],
-        solution: "Basic Pay = 35 hours × £12 = £420. Overtime Pay = 5 hours × (£12 × 1.5) = 5 × £18 = £90. Total Salary = £420 + £90 = £510."
+        chapter: 3,
+        type: "input",
+        points: 15,
+        instruction: "A factory worker is paid a basic rate of £12 per hour for a standard 35-hour week. During a peak production cycle, they complete 5 hours of overtime paid at time-and-a-half. Compute the total gross salary.",
+        content: `
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Principles of Costing: Gross Payroll Calculations</th>
+                        <th style="width: 250px;">Gross Earnings (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Total Gross Salary Calculated (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="510" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        `,
+        solution: "Basic Pay = 35 hours × £12 = £420. Overtime Pay = 5 hours × (£12 × 1.5) = £90. Total Gross Salary = £420 + £90 = £510."
     },
     {
         id: 10,
-        type: "radio",
-        question: "An engineering company features a fixed overhead burden of £50,000 and sells single component kits with a contribution margin of £5 per unit. Compute the break-even point in units.",
-        options: [
-            { text: "Exactly 10,000 components units to achieve zero variance profit boundaries.", correct: true },
-            { text: "Exactly 5,000 components units to achieve zero variance profit boundaries.", correct: false },
-            { text: "Exactly 250,000 components units to achieve zero variance profit boundaries.", correct: false }
-        ],
-        solution: "Break-even Point in Units = Total Fixed Costs / Contribution per Unit. Calculation: £50,000 / £5 = 10,000 units required."
+        chapter: 3,
+        type: "input",
+        points: 15,
+        instruction: "An engineering company features a fixed overhead burden of £50,000 and sells single component kits with a contribution margin of £5 per unit. Compute the break-even point in units.",
+        content: `
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Principles of Costing: Break-Even Volume Analysis</th>
+                        <th style="width: 250px;">Break-Even Target (Units)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">Break-Even Output Volume Required (Integer value)</td>
+                        <td><input type="text" class="multi-input-field numeric-field" data-ans="10000" placeholder="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        `,
+        solution: "Break-even Point in Units = Total Fixed Costs / Contribution per Unit. Calculation: £50,000 / £5 = 10,000 units."
     },
-      {
+    {
         id: 11,
-        type: "radio",
-        question: "A company operates a premium inventory tracking method where materials issued to production are always priced at the value of the oldest stock currently held in the warehouse floor. What inventory system applies?",
-        options: [
-            { text: "First-In, First-Out (FIFO) material pricing evaluation strategy.", correct: true },
-            { text: "Last-In, First-Out (LIFO) material pricing evaluation strategy.", correct: false },
-            { text: "Weighted Average Cost (AVCO) material grouping allocation.", correct: false }
-        ],
-        solution: "The FIFO framework dictates that the earliest units loaded into inventory are the first ones issued to production lines, leaving the latest costs inside close stocks."
+        chapter: 3,
+        type: "select",
+        points: 10,
+        instruction: "A company prices materials issued to production using the value of the oldest stock currently held on the warehouse floor. Select the inventory method.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                The framework where the earliest items loaded into inventory are the first ones issued to production lines is known as 
+                <select class="multi-select-field" data-ans="fifo">
+                    <option value="">-- Pricing Strategy --</option>
+                    <option value="fifo">First-In, First-Out (FIFO)</option>
+                    <option value="avco">Weighted Average Cost (AVCO)</option>
+                </select>.
+            </div>
+        `,
+        solution: "The FIFO framework dictates that the oldest materials are issued first, leaving the latest purchase costs to value the closing stock."
     },
     {
         id: 12,
-        type: "radio",
-        question: "Under the provisions of the Data Protection Act / GDPR, what represents a primary statutory duty of a company acting as a Data Controller when archiving financial customer profiles?",
-        options: [
-            { text: "To process data fairly, lawfully, and ensure it is kept secure against unauthorized data breach actions.", correct: true },
-            { text: "To distribute personal profiles to external credit scoring providers without buyer consent lines.", correct: false },
-            { text: "To store full data blocks indefinitely even after corporate accounts are permanently dissolved.", correct: false }
-        ],
-        solution: "Data security compliance mandates that corporate controllers protect customer files, limiting usage to lawful reasons and scrubbing records when data storage durations expire."
+        chapter: 4,
+        type: "select",
+        points: 10,
+        instruction: "Complete the statement governing GDPR compliance requirements for financial record keeping.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Under the Data Protection Act / GDPR, a company acting as a Data Controller must process financial profiles fairly and lawfully, ensuring records are 
+                <select class="multi-select-field" data-ans="secure">
+                    <option value="">-- Requirement A --</option>
+                    <option value="public">Made public for external audit review</option>
+                    <option value="secure">Kept secure against unauthorized data breach actions</option>
+                </select> 
+                while avoiding storing files indefinitely when storage durations 
+                <select class="multi-select-field" data-ans="expire">
+                    <option value="">-- Requirement B --</option>
+                    <option value="expire">Formally expire and are scrubbed</option>
+                    <option value="flex">Are flexed inside the cost rows</option>
+                </select>.
+            </div>
+        `,
+        solution: "GDPR compliance demands that data controllers protect client records securely, limiting usage to lawful purposes and deleting entries once retention periods end."
     },
     {
         id: 13,
-        type: "radio",
-        question: "An accounting professional is requested by a senior corporate director to cover up a material budget expenditure variance before a bank audit inspects the ledger. Which AAT fundamental ethical principle is targeted?",
-        options: [
-            { text: "Integrity, which commands absolute straightforwardness, honesty, and fair dealing in all professional operations.", correct: true },
-            { text: "Professional Competence and Due Care capabilities.", correct: false },
-            { text: "Confidentiality restrictions regarding internal corporate accounting matrixes.", correct: false }
-        ],
-        solution: "Integrity requires accountants to refuse any involvement with false, misleading, or doctored statements. Covering up financial discrepancies directly violates this pillar."
+        chapter: 4,
+        type: "select",
+        points: 10,
+        instruction: "An accounting professional is requested to cover up a material budget expenditure variance before a bank inspection. Select the breached principle.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Refusing to associate with false, misleading, or doctored financial statements is a direct mandate under the foundational AAT principle of 
+                <select class="multi-select-field" data-ans="integrity">
+                    <option value="">-- Fundamental Principle --</option>
+                    <option value="integrity">Integrity, which commands absolute honesty</option>
+                    <option value="confidentiality">Confidentiality regarding ledger rows</option>
+                </select>.
+            </div>
+        `,
+        solution: "Integrity requires accounting professionals to be completely straightforward and honest. Masking discrepancies directly violates this fundamental ethical shield."
     },
     {
         id: 14,
-        type: "radio",
-        question: "Two independent business partners decide to establish a new commercial enterprise but wish to secure limited liability protection to insulate their personal property assets. What legal structure must they select?",
-        options: [
-            { text: "A Private Limited Company (Ltd) corporate setup.", correct: true },
-            { text: "An ordinary traditional Partnership arrangement.", correct: false },
-            { text: "Operating as an un-incorporated Sole Trader network.", correct: false }
-        ],
-        solution: "Incorporating a Private Limited Company creates a separate legal entity. This protects shareholders, limiting their personal risk to their investment capital."
+        chapter: 4,
+        type: "select",
+        points: 10,
+        instruction: "Two independent business partners wish to secure limited liability protection to insulate their personal property assets. Select the correct structure.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                Creating a separate legal entity that isolates owner liabilities to their invested capital requires establishing a 
+                <select class="multi-select-field" data-ans="ltd">
+                    <option value="">-- Corporate Structure --</option>
+                    <option value="sole">Un-incorporated Sole Trader network</option>
+                    <option value="ltd">Private Limited Company (Ltd)</option>
+                </select>.
+            </div>
+        `,
+        solution: "Incorporating a Private Limited Company (Ltd) shields shareholders' personal assets, limiting their financial exposure exclusively to their investment capital."
     },
     {
         id: 15,
-        type: "radio",
-        question: "A government authority increases the baseline national minimum wage rate across the retail sector. Within macro-economic tracking models, how will this decision impact general business operations?",
-        options: [
-            { text: "It expands corporate variable labour expenditures, driving up production costs and shifting break-even points.", correct: true },
-            { text: "It decreases aggregate consumer demand limits across local retail operations.", correct: false },
-            { text: "It automatically reduces the standard interest charges levied on bank overdraft lines.", correct: false }
-        ],
-        solution: "Wage adjustments alter corporate expense rows. An expansion in basic payroll costs increases variable production overheads, requiring higher sale volumes to cover the new threshold."
+        chapter: 4,
+        type: "select",
+        points: 10,
+        instruction: "A government authority increases the national minimum wage rate. Select the macro-economic impact on business operations.",
+        content: `
+            <div style="line-height: 2; font-size: 1.05rem;">
+                An expansion in statutory minimum payroll rates changes cost behavior rows, directly 
+                <select class="multi-select-field" data-ans="increasing">
+                    <option value="">-- Operational Impact --</option>
+                    <option value="increasing">Increasing variable labor expenditures and shifting break-even points</option>
+                    <option value="decreasing">Decreasing consumer demand metrics across local markets</option>
+                </select>.
+            </div>
+        `,
+        solution: "Minimum wage hikes expand basic variable labor outlays. This lifts production cost lines, requiring higher sales volumes to reach break-even boundaries."
     }
 ];
 
