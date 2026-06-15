@@ -89,30 +89,16 @@
         .topic-list a { color: #475569; text-decoration: none; font-size: 13px; display: flex; align-items: center; font-weight: 500; }
         .icon-bullet { margin-right: 10px; color: var(--aat-cyan); font-weight: bold; font-size: 14px; }
         .module-nav-container { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-   /* CLASSI DI FORZATURA DIRETTA COLORI LINK */
-.links-verde li a {
-    color: #059669 !important;
-    font-weight: 600 !important;
-}
-.links-verde li .icon-bullet {
-    color: #10B981 !important;
-}
+   /* FORZATURA DIRETTA DEI COLORI AD ALTRA SPECIFICITÀ TRAMITE ID */
+#lista-test-l2 li a { color: #059669 !important; font-weight: 600 !important; }
+#lista-test-l2 li .icon-bullet { color: #10B981 !important; }
 
-.links-azzurro li a {
-    color: #0284C7 !important;
-    font-weight: 600 !important;
-}
-.links-azzurro li .icon-bullet {
-    color: #0EA5E9 !important;
-}
+#lista-test-l3 li a { color: #0284C7 !important; font-weight: 600 !important; }
+#lista-test-l3 li .icon-bullet { color: #0EA5E9 !important; }
 
-.links-arancione li a {
-    color: #EA580C !important;
-    font-weight: 600 !important;
-}
-.links-arancione li .icon-bullet {
-    color: #F97316 !important;
-}
+#lista-test-l4 li a { color: #EA580C !important; font-weight: 600 !important; }
+#lista-test-l4 li .icon-bullet { color: #F97316 !important; }
+
 
     </style>
 </head>
@@ -160,7 +146,7 @@
  
          <div class="level-section">
              <button class="level-btn">📊 AAT Level 2 Certificate Topics</button>
-             <div class="chapters-panel">
+             <div class="chapters-panel" id="lista-test-l2">
                  <button class="chapter-btn">Chapter 1: Introduction to Bookkeeping</button>
                  <div class="tests-panel">
                      <ul class="topic-list links-verde">
@@ -207,7 +193,7 @@
 <!-- RIFERIMENTO_BLOCCO: PART_4_LEVEL_3_PANEL -->
          <div class="level-section">
              <button class="level-btn">🔷 AAT Level 3 Diploma Topics</button>
-             <div class="chapters-panel">
+             <<div class="chapters-panel" id="lista-test-l3">
                   <button class="chapter-btn">Chapter 1: Business Awareness (BUAW)</button>
                  <div class="tests-panel">
                      <ul class="topic-list links-azzurro">
@@ -243,7 +229,7 @@
             <!-- Mock Exam come bolla coordinata Livello 3 -->
             <button class="chapter-btn" style="background-color: #0369A1; color: #FFFFFF; border: 1px solid #0284C7; font-weight: 800;">🏆 FINAL COMPREHENSIVE MOCK EXAM</button>
             <div class="tests-panel">
-                <ul class="topic-list">
+                <ul class="topic-list links-azzurro">
                     <li><a href="level-3/l3-mock-exam.html"><span class="icon-bullet">&#127942;</span> Launch 60-Min Randomized Final Assessment</a></li>
                 </ul>
             </div>
@@ -251,7 +237,7 @@
 <!-- RIFERIMENTO_BLOCCO: PART_5_LEVEL_4_PANEL -->
          <div class="level-section">
              <button class="level-btn">🔶 AAT Level 4 Diploma Topics</button>
-             <div class="chapters-panel">
+             <div class="chapters-panel" id="lista-test-l4">
                              <!-- CHAPTER 1: AMA (FUSIONE DI BUDGETING E DECISION/CONTROL) -->
             <button class="chapter-btn">Chapter 1: Applied Management Accounting (AMA)</button>
             <div class="tests-panel">
