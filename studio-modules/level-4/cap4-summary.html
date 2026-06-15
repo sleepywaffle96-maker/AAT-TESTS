@@ -1,128 +1,104 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 4: DAIF Framework Summary | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 4: Business Tax (Cheat Sheet)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --panel-bg: rgba(0, 242, 254, 0.05);
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.7;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.3rem;
-        }
-        .formula-panel {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
+        .summary-card {
+            background-color: var(--l3-cyan-light);
+            border-left: 5px solid var(--l3-cyan-primary);
+            padding: 1.5rem;
             border-radius: 0 6px 6px 0;
+            margin-bottom: 2rem;
         }
-        .formula-title {
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
+        .trap-summary-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FEE2E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .formula-text {
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-        li {
-            margin-bottom: 0.5rem;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>DAIF Framework Cheat Sheet & Reference</h1>
-            <p style="color: var(--text-muted)">Essential parameters and calculation constraints for accounting standard compliance checks.</p>
-
-            <h2>1. Inventory Net Realisable Value Constraints (IAS 2)</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Net Realisable Value Calculation</div>
-                <div class="formula-text">NRV = Estimated Selling Price - Costs to Complete Production - Costs to Market/Sell/Distribute</div>
-                <p style="margin: 0.4rem 0 0 0; font-size: 0.9rem; color: var(--text-muted)">Compare this result directly against historical unit cost. Value the closing stock lines at the lower of the two figures.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 2rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 1rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px;">AAT LEVEL 4 RECAP</span>
+                <h1 style="font-size: 1.75rem; margin: 0.5rem 0 0 0; color: #111827; font-weight: 700;">Chapter 4: Business Tax Quick Cheat Sheet</h1>
             </div>
 
-            <h2>2. Non-Current Asset Revaluation Adjustments (IAS 16)</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Revaluation Surplus Equation</div>
-                <div class="formula-text">Surplus = Asset Market Valuation - Net Book Value at Date of Valuation</div>
+            <div class="summary-card">
+                <strong style="color: var(--l3-cyan-dark); font-size: 1.05rem; display: block; margin-bottom: 0.5rem;">🎯 BSTX TAXABLE ADJUSTMENTS BLOCK:</strong>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace; color: #111827;">
+                    • Disallowable: Depreciation, Customer Entertaining, Capital Assets Outlays (Add Back).<br>
+                    • Capital Allowances: AIA (100%), Main Pool WDA (18%), Special Rate Pool WDA (6%).<br>
+                    • Loss Options: Current Year, Carry Back (12 Months), Carry Forward (Same Trade).
+                </p>
             </div>
-            <div class="formula-panel">
-                <div class="formula-title">Excess Annual Reserves Transfer Calculation</div>
-                <div class="formula-text">Transfer Amount = New Depreciation Charge - Original Historical Cost Depreciation Charge</div>
-            </div>
-
-            <h2>3. Asset Impairment Valuation Limits (IAS 36)</h2>
-            <div class="formula-panel">
-                <div class="formula-title">Recoverable Amount Condition</div>
-                <div class="formula-text">Recoverable Amount = HIGHER of (Fair Value Less Costs to Sell) and (Value in Use)</div>
-                <p style="margin: 0.4rem 0 0 0; font-size: 0.9rem; color: var(--text-muted)">An asset is impaired if its carrying value exceeds this baseline. Write down the difference to the SoPL.</p>
-            </div>
-
-            <h2>4. Corporate Reporting Core Rules Reference</h2>
+            <h2>1. Profit Adjustments & Capital Allowances</h2>
             <ul>
-                <li><strong>Substance Over Form:</strong> Financial statements must reflect the economic reality of a transaction rather than its legal structure to ensure a faithful representation.</li>
-                <li><strong>Constructive Obligation:</strong> Arises when an entity's past practices, established patterns, or published policies create a valid expectation among third parties that the company will accept and settle a liability.</li>
-                <li><strong>Adjusting Event:</strong> Post-reporting-date evidence that confirms conditions already present at the year-end milestone date (e.g., a customer liquidating their business).</li>
+                <li><strong>Profit Conversions:</strong> Non-trade income (rental, interest) must be removed from trading accounts and reassessed in its specific statutory schedule.</li>
+                <li><strong>HMRC Pooling Mechanics:</strong> AIA provides immediate write-offs. Balance values in the Main Pool receive an 18% WDA, while the Special Rate Pool handles building integral assets at 6%.</li>
+                <li><strong>Balancing Adjustments:</strong> A Balancing Charge occurs if disposal proceeds exceed the remaining pool WDV, while a Balancing Allowance triggers to clear terminated single-asset pools.</li>
             </ul>
-        </div>
-    </div>
+
+            <h2>2. Chargeable Gains & Losses Treatment</h2>
+            <ul>
+                <li><strong>Corporate Capital Gains:</strong> Merged directly into the corporation tax computation pool. Indexation allowance applies to freeze historical values up to December 2017.</li>
+                <li><strong>Loss Restrictions:</strong> Capital losses face strict fences. They can only offset current or future capital gains and have zero interaction with trading profits.</li>
+                <li><strong>Loss Claims:</strong> Carry Back claims generate quick cash refunds against the past year's total profits. Carry Forward claims securely offset future trade margins.</li>
+            </ul>
+            <div class="trap-summary-box">
+                <strong style="color: #DC2626; font-size: 1rem; display: block; margin-bottom: 0.5rem;">⚠️ ADVANCED EXAM TRAPS RECAP (INVISIBLE ERRORS):</strong>
+                <ul>
+                    <li><strong>The Depreciation Add-Back Slip:</strong> Left accounting depreciation inside net tax calculations. It must always be added back before calculating Capital Allowances.</li>
+                    <li><strong>The Entertainment Split Mistake:</strong> Allowed customer entertainment costs to reduce taxable income. Employee entertaining is allowable; customer entertaining is strictly disallowable.</li>
+                    <li><strong>The Loss Offset Overreach:</strong> Attempted to use unabsorbed capital losses against trading or rental profits. Capital losses can only carry forward to reduce future chargeable capital gains.</li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
