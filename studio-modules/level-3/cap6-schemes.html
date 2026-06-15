@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAT Level 3 Advanced Diploma - Chapter 6 Schemes</title>
+    <title>AAT Level 3 - Chapter 6: Business Awareness (Visual Schemes)</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 3 - PALETTE AZZURRO CIANO ED AREA SCHEMI VISIVI */
         :root {
             --bg-dark-external: #0B0F19;
             --bubble-white-bg: #FFFFFF;
@@ -13,7 +14,11 @@
             --l3-cyan-dark: #0369A1;
             --l3-cyan-light: #E0F2FE;
             --text-dark: #1F2937;
+            --text-muted: #4B5563;
             --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --card-bg: #FAFAFA;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -21,76 +26,144 @@
             color: var(--text-dark);
             margin: 0;
             padding: 3rem 1rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
-        .studio-container { max-width: 1050px; margin: 0 auto; }
+        .studio-container { max-width: 1000px; margin: 0 auto; }
         .white-bubble-container {
             background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 3.5rem;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
             border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+        h2 { color: var(--l3-cyan-primary); font-size: 1.5rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .visual-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+        .visual-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--l3-cyan-dark);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.25rem;
+        }
+        .flow-diagram-box {
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            padding: 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #E2E8F0;
+            overflow-x: auto;
+            margin: 1.5rem 0;
         }
         .financial-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
         .financial-table th { background-color: var(--l3-cyan-dark); color: #FFFFFF; padding: 0.75rem; font-size: 0.85rem; border: 1px solid var(--l3-cyan-dark); }
         .financial-table td { border: 1px solid var(--border-color); padding: 0.75rem; font-size: 0.9rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
+            .flow-diagram-box { background: #F8FAFC; color: #000; border: 1px solid #CBD5E1; }
+        }
     </style>
 </head>
 <body>
     <div class="studio-container">
         <div class="white-bubble-container">
-            <div style="margin-bottom: 2.5rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
-                <span style="background: var(--l3-cyan-primary); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.3rem 0.6rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 3 ADVANCED DIPLOMA IN ACCOUNTING</span>
-                <h1 style="font-size: 2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700;">Chapter 6: Strategic Flowcharts & Business Awareness Matrices</h1>
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l3-cyan-primary); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 3 ADVANCED DIPLOMA IN ACCOUNTING</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Business Awareness - Chapter 6 Visual Schemes</h1>
             </div>
 
-            <!-- SCHEMA 1: DATA PIPELINE MAP -->
-            <div style="background: #FAFAFA; border: 1px solid #E5E7EB; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
-                <div style="font-weight: 700; color: var(--l3-cyan-dark); margin-bottom: 1rem; font-size: 1rem;">🧮 SCHEMA 1: THE DYNAMIC ACCOUNTING DATA PIPELINE METRICS MAP</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #111827; background: #FFFFFF; padding: 1rem; border-radius: 4px; border: 1px solid #D1D5DB; overflow-x: auto; white-space: pre;">
-[ SOURCE TRANSACTION FEED ] ------> Automated ingestion via API Bank Feeds and Cloud Systems
-                                                        |
-                                                        v
-[ DATA CLEANING & AI ROUTING ] ---> Machine Learning algorithms categorize transactions and flag ledger deviations
-                                                        |
-                                                        v
-[ CLOUD LEDGER CONSOLIDATION ] ---> Real-time Trial Balance compilation under permanent multi-device encryption
-                                                        |
-                                                        v
-[ MANAGEMENT REPORTING OUTPUT ] --> Extraction of performance metric ratios and live interactive KPI Dashboards
+            <h2>Scheme 6.1: Legal Business Structures Comparison</h2>
+            <div class="grid-container">
+                <div class="visual-card">
+                    <div class="visual-card-title">Sole Traders</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Owned by one individual. Total control but absolute risk exposure.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--danger-color); margin-top:0.5rem; margin-bottom:0;">⚠️ Unlimited Personal Liability: Personal assets can be legally seized to settle business deficits.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">Ordinary Partnerships</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Two or more partners operating under a joint Partnership Agreement structure.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--danger-color); margin-top:0.5rem; margin-bottom:0;">⚠️ Joint and Several Liability: Every partner is personally liable for all partnership debts.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">Limited Companies (Ltd/Plc)</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Separate legal entities regulated strictly by Companies House and Corporation Tax mandates.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--success-color); margin-top:0.5rem; margin-bottom:0;">🛡️ Limited Liability: Shareholder loss is strictly capped at the nominal value of their share investment.</p>
                 </div>
             </div>
-            <!-- SCHEMA 2: THE EXTERNAL ENVIRONMENTAL DRIVER INPUT MATRIX -->
-            <div style="margin-top: 2rem; margin-bottom: 1.5rem;">
-                <div style="font-weight: 700; color: var(--l3-cyan-dark); margin-bottom: 1rem; font-size: 1rem;">📋 SCHEMA 2: PESTLE DRIVER ROUTING AND REPORTING MATRIX</div>
-                <table class="financial-table" style="margin: 0;">
-                    <thead>
-                        <tr style="background: #0369A1; color: #FFFFFF;">
-                            <th style="text-align: left;">External Market Condition Event</th>
-                            <th>PESTLE Structural Vector</th>
-                            <th>Direct Operational Impact on Financial Ledgers</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="font-weight: 600; text-align: left;">The central bank raises interest base rates by 0.75% to manage inflation.</td>
-                            <td style="color:#0369A1; font-weight:700;">Economic Factor</td>
-                            <td>Increases corporate borrowing costs, raises the hurdle rate for capital investment, and reduces customer discretionary spending.</td>
-                        </tr>
-                        <tr style="background: #FAFAFA;">
-                            <td style="font-weight: 600; text-align: left;">Statutory updates to Data Protection frameworks introduce higher compliance fines.</td>
-                            <td style="color:#C2410C; font-weight:700;">Legal Factor</td>
-                            <td>Requires additional cash investments in data encryption infrastructure and data management staff.</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; text-align: left;">A major competitor switches its entire logistics fleet to low-carbon vehicles.</td>
-                            <td style="color:#059669; font-weight:700;">Environmental / Social</td>
-                            <td>Creates reputational pressure, altering consumer perception and affecting long-term brand equity assets.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h2>Scheme 6.2: HMRC Late Submission Points-Based System</h2>
+            <div class="flow-diagram-box">
+========================================================================================
+                      HMRC ALIGNED LATENESS PENALTY THRESHOLDS
+========================================================================================
+
+ [MONTHLY FILERS LAYER]   ----→ Missed Return = Accumulate 1 Penalty Point
+   • Penalty Cap Threshold: 5 Points
+   • Breach Outcome: Automatic £200 cash fine on 5th point and every delay thereafter.
+
+ [QUARTERLY FILERS LAYER]  ----→ Missed Return = Accumulate 1 Penalty Point
+   • Penalty Cap Threshold: 4 Points
+   • Breach Outcome: Automatic £200 cash fine on 4th point and every delay thereafter.
+
+ [ANNUAL FILERS LAYER]    ----→ Missed Return = Accumulate 1 Penalty Point
+   • Penalty Cap Threshold: 2 Points
+   • Breach Outcome: Automatic £200 cash fine on 2nd point and every delay thereafter.
+
+----------------------------------------------------------------------------------------
+ CRITICAL LAW: Late Payment Interest tracks tax debt unlinked to these points.
+ CHARGING FREQUENCY: CALCULATED DAILY from the original due date until settled in full.
+========================================================================================
             </div>
-        </div>
-    </div>
+            <h2>Scheme 6.3: HMRC Behavioral Penalty Bands & ESG Intensity</h2>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; width: 280px;">Behavioral Intent / Metric</th>
+                        <th style="text-align: left; width: 160px;">Prompted Range</th>
+                        <th style="text-align: left;">Core Operational Compliance Care</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 600;">Careless Error (Lack of reasonable care)</td>
+                        <td style="color: var(--danger-color); font-weight: 700;">15% - 30%</td>
+                        <td>Surcharge applied to Potential Lost Revenue (PLR) if triggered by an HMRC audit.</td>
+                    </tr>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">Deliberate but Unconcealed Error</td>
+                        <td style="color: var(--danger-color); font-weight: 700;">35% - 70%</td>
+                        <td>Taxpayer intentionally enters false metrics but does not actively obscure the audit trail.</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Deliberate and Actively Concealed Error</td>
+                        <td style="color: var(--danger-color); font-weight: 700;">50% - 100%</td>
+                        <td>Severe commercial fraud involving fabricated records. Faces maximum statutory fines.</td>
+                    </tr>
+                    <tr style="background: #E0F2FE;">
+                        <td style="font-weight: 600; color: var(--l3-cyan-dark);">ESG Carbon Emissions Intensity Factor</td>
+                        <td style="color: var(--l3-cyan-dark); font-weight: 700;">Quantitative Ratio</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Total Tonnes of CO2 / Total Activity Output Base (Units or Hours). Prevents Greenwashing.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
