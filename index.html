@@ -89,43 +89,40 @@
         .topic-list a { color: #475569; text-decoration: none; font-size: 13px; display: flex; align-items: center; font-weight: 500; }
         .icon-bullet { margin-right: 10px; color: var(--aat-cyan); font-weight: bold; font-size: 14px; }
         .module-nav-container { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        /* COLORI TENDINE LIVELLO 2 - VERDE COORDINATO */
-.level-section:nth-of-type(1) .tests-panel .topic-list li a {
-    color: #059669 !important; /* Testo verde scuro leggibile */
-    font-weight: 500;
+     /* COLORI DEI LINK INTERNI DIVISI PER LIVELLO - SELEZIONE DIRETTA */
+
+/* 1. Tutto ciò che si trova dentro il primo blocco (Livello 2 - Verde) */
+#quiz-form .level-section:first-of-type .tests-panel .topic-list li a,
+.chapters-panel:first-of-type .tests-panel .topic-list li a {
+    color: #059669 !important;
+    font-weight: 600 !important;
 }
-.level-section:nth-of-type(1) .tests-panel .topic-list li a:hover {
-    color: #047857 !important; /* Verde ancora più scuro al passaggio del mouse */
-    text-decoration: underline;
-}
-.level-section:nth-of-type(1) .tests-panel .topic-list li .icon-bullet {
-    color: #10B981 !important; /* Icona o pallino verde brillante */
-}
-/* COLORI TENDINE LIVELLO 3 - AZZURRO COORDINATO */
-.level-section:nth-of-type(2) .tests-panel .topic-list li a {
-    color: #0284C7 !important; /* Testo azzurro scuro leggibile */
-    font-weight: 500;
-}
-.level-section:nth-of-type(2) .tests-panel .topic-list li a:hover {
-    color: #0369A1 !important; /* Azzurro ancora più scuro al passaggio del mouse */
-    text-decoration: underline;
-}
-.level-section:nth-of-type(2) .tests-panel .topic-list li .icon-bullet {
-    color: #0EA5E9 !important; /* Icona o pallino azzurro brillante */
-}
-/* COLORI TENDINE LIVELLO 4 - ARANCIONE COORDINATO */
-.level-section:nth-of-type(3) .tests-panel .topic-list li a {
-    color: #EA580C !important; /* Testo arancione scuro leggibile */
-    font-weight: 500;
-}
-.level-section:nth-of-type(3) .tests-panel .topic-list li a:hover {
-    color: #C2410C !important; /* Arancione ancora più scuro al passaggio del mouse */
-    text-decoration: underline;
-}
-.level-section:nth-of-type(3) .tests-panel .topic-list li .icon-bullet {
-    color: #F97316 !important; /* Icona o pallino arancione brillante */
+#quiz-form .level-section:first-of-type .tests-panel .topic-list li .icon-bullet,
+.chapters-panel:first-of-type .tests-panel .topic-list li .icon-bullet {
+    color: #10B981 !important;
 }
 
+/* 2. Tutto ciò che si trova dentro il secondo blocco (Livello 3 - Azzurro) */
+.level-section:nth-of-type(2) .tests-panel .topic-list li a,
+.chapters-panel:nth-of-type(2) .tests-panel .topic-list li a {
+    color: #0284C7 !important;
+    font-weight: 600 !important;
+}
+.level-section:nth-of-type(2) .tests-panel .topic-list li .icon-bullet,
+.chapters-panel:nth-of-type(2) .tests-panel .topic-list li .icon-bullet {
+    color: #0EA5E9 !important;
+}
+
+/* 3. Tutto ciò che si trova dentro l'ultimo blocco (Livello 4 - Arancione) */
+.level-section:last-of-type .tests-panel .topic-list li a,
+.chapters-panel:last-of-type .tests-panel .topic-list li a {
+    color: #EA580C !important;
+    font-weight: 600 !important;
+}
+.level-section:last-of-type .tests-panel .topic-list li .icon-bullet,
+.chapters-panel:last-of-type .tests-panel .topic-list li .icon-bullet {
+    color: #F97316 !important;
+}
     </style>
 </head>
 <!-- RIFERIMENTO_BLOCCO: PART_2_STUDIO_PANEL -->
