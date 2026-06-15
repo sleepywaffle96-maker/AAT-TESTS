@@ -377,13 +377,13 @@ button.chapter-btn[data-level="l4"] {
 
       // 2. Esegui il blocco istantaneo prima che la pagina mostri i test
      netlifyIdentity.on('init', user => {
-
+console.log('INIT USER:', user);
   if (!user) {
 
-    document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
-      el.style.pointerEvents = 'none';
-      el.style.opacity = '0.2';
-    });
+    document.querySelectorAll('.chapters-panel, .chapter-btn, .simulator-banner').forEach(el => {
+    el.style.pointerEvents = 'none';
+    el.style.opacity = '0.2';
+});
 
     setTimeout(() => {
       netlifyIdentity.open();
@@ -396,10 +396,10 @@ button.chapter-btn[data-level="l4"] {
       // 3. Quando l'utente effettua il login, sblocca la dashboard
       netlifyIdentity.on('login', user => {
          netlifyIdentity.close();
-         document.querySelectorAll('.chapters-panel, .chapter-btn').forEach(el => {
-            el.style.pointerEvents = 'auto';
-            el.style.opacity = '1';
-         });
+         document.querySelectorAll('.chapters-panel, .chapter-btn, .simulator-banner').forEach(el => {
+    el.style.pointerEvents = 'auto';
+    el.style.opacity = '1';
+});
       });
 
       // 4. Se l'utente clicca su logout, riattiva la barriera
