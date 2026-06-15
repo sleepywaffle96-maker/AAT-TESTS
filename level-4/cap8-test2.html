@@ -3,311 +3,879 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Tax - Test Two</title>
+    <title>AAT Level 4 - Chapter 8: Credit & Debt Management (Test Two)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO CON CONNOTAZIONE ETICHETTA ARANCIONE BRAND */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span { color: #64748B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        #calc-close-btn { background: transparent; border: none; color: #EF4444; font-weight: bold; cursor: pointer; font-size: 14px; padding: 0; }
+
+        #calc-screen {
+            width: 100%; height: 45px; background: #000000; border-radius: 8px; color: #00FFFF; text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace; text-align: right; padding: 12px; font-size: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid #00FFFF; box-sizing: border-box;
+        }
+
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">Business Tax (Finance Act) - Test Two</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: CREDIT & DEBT MANAGEMENT (TEST TWO)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (Insolvency Order of Priority) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">1. When a corporate buyer enters compulsory statutory liquidation, inside which creditor asset classification layer do regular unsecured trade suppliers sit during liquidator payouts?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Secured preferential creditors backed by active floating charges.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Fully exempt from losses under HMRC data minimisation rules.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> At the bottom layer of the statutory order of priority, right before equity shareholders.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Unsecured trade creditors sit at the very bottom of the asset distribution ladder. Payouts occur only after liquidators, banks holding fixed/floating charges, and preferential employee nodes are fully cleared.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            A trading company records a net commercial profit of £210,000. The calculations show £6,500 of depreciation, £3,200 of subscription fees to non-authorized trade associations, and £1,500 for capital fines. Calculate the net adjusted trading profit after adding back these disallowed outlays:<br>
-            Adjusted Trading Profit: £ <input type="text" id="ans1" placeholder="0.00">
+            <!-- QUESTION 2: TIPO "multi-select" (Credit Liquidity Checks) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the technical description evaluating liquidity health diagnostics under credit verification checks.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To evaluate an applicant's capacity to settle credit bills without selling slow-moving stock lines, credit managers track the 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="quick">
+                            <option value="">-- Ratio Metric --</option>
+                            <option value="current">Current ratio baseline factor</option>
+                            <option value="quick">Quick (Acid Test) ratio baseline factor</option>
+                        </select> 
+                        and flag severe insolvency threats if the indicator drops significantly below a ratio threshold of 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="1">
+                            <option value="">-- Safe Boundary --</option>
+                            <option value="1">1.0 times coverage ceiling</option>
+                            <option value="3">3.0 times coverage ceiling</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Acid Test excludes inventories to map immediate emergency liquidity. A result under 1.0 means current liquid assets cannot cover current liabilities, highlighting high commercial credit failure probabilities.
+                </div>
+            </div>
+
+            <!-- QUESTION 3: TIPO "radio" (County Court Judgments) -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">3. If a creditor obtains a formal County Court Judgment (CCJ) against an overdue debtor, what administrative footprint results on the debtor's commercial agency record?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> An automated 18% bonus credit score addition is logged.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> A permanent negative record entry that damages their credit rating for a statutory period of 6 years unless paid within 30 days.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> Immediate reallocation of all asset tracking parameters to the Special Rate Pool.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Registered CCJs stand as heavy default footprints. Unless settled instantly within 30 days of the judgment, the entry stays visible to credit agencies for 6 years, crashing the buyer's credit scoring models.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "multi-input" (Collection Efficiency Index Calculation) -->
+            <div class="question-tab" data-qindex="4" data-type="multi-input">
+                <div class="task-instruction-text">4. A credit department measures its historical collection efficiency. Out of an active outstanding debt layer of £10,000 reaching its formal payment deadline, the team successfully collects exactly £8,500 cash. Compute the resulting Collection Efficiency Index percentage factor (enter strictly the integer percentage value).</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Credit Control Efficiency Evaluation Indicator</th>
+                                <th style="width: 250px;">Percentage Rate achieved (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Collection Efficiency Index (Input as positive integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="85" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> CEI Formula = (Actual Cash Collected / Total Eligible Outstanding Debt) × 100. Calculation: (£8,500 / £10,000) × 100 = 85% efficiency performance level.
+                </div>
+            </div>
+
+            <!-- QUESTION 5: TIPO "radio" (Overdue Interest Statutory Rates) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">5. Under the UK Late Payment of Commercial Debts (Interest) Act, what statutory interest surcharge rate can a business legally levy on overdue commercial invoices?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> 8% plus the official Bank of England base rate applicable for that period.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> A flat rate fee matched to the standard 20% VAT tier.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> Capped equivalent to the 6% special rate reducing pool allowance.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Late Payment Act penalizes slow payers. Creditors hold statutory rights to charge simple interest at 8% above the official central bank reference rate, plus fixed debt recovery compensation fees.
+                </div>
+            </div>
+            <!-- QUESTION 6: TIPO "multi-select" (Days Sales Outstanding Tracking) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the strategic statement regarding working capital conversion monitoring parameters.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        An unmitigated surge in debtor numbers without setting up rigid payment limits causes a dangerous expansion in 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="dso">
+                            <option value="">-- Ratio Metric --</option>
+                            <option value="dso">Days Sales Outstanding (DSO) metrics</option>
+                            <option value="turnover">Asset turnover efficiency benchmarks</option>
+                        </select> 
+                        which indicates that liquid corporate funds are increasingly trapped inside non-earning 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="receivables">
+                            <option value="">-- Balance Pool --</option>
+                            <option value="receivables">Trade receivables ledger accounts balances</option>
+                            <option value="allowances">HMRC special rate pooling allocations</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Escalating DSO scores demonstrate systemic credit control delays, meaning the firm is slow to extract cash from sales, directly expanding overdraft requirements.
+                </div>
+            </div>
+
+            <!-- QUESTION 7: TIPO "radio" (Liquidators Power Options) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">7. When reviewing an insolvent entity's historic transactions, a court liquidator identifies that property assets were transferred to an associated company for zero monetary value. Under what parameter can this be undone?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> Standard flexible budget flex adjustments.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> Transactions at an Undervalue provisions under Insolvency Acts, allowing the liquidator to reverse the transaction.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> Applying a flat 100% writing down allowance allocation.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Insolvency practitioners hold legal rights to challenge look-back entries. Transactions at an undervalue executed within statutory periods before insolvency can be completely set aside to protect creditors.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "multi-select" (High-Risk Credit Limits Control) -->
+            <div class="question-tab" data-qindex="8" data-type="multi-select">
+                <div class="task-instruction-text">8. Complete the governance analysis mapping proper responses to warning indicators.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        If a regular buyer’s commercial credit scoring model collapses due to multiple recent County Court Judgments, the credit controller must enforce an immediate 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="freeze">
+                            <option value="">-- Action --</option>
+                            <option value="freeze">Credit freeze parameter lockdown on new orders</option>
+                            <option value="discount"> Settlement discount rate enhancement</option>
+                        </select> 
+                        and switch subsequent order processing strictly to a 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="cash">
+                            <option value="">-- Payment Mode --</option>
+                            <option value="credit">Extended credit open ledger format</option>
+                            <option value="cash">Pro-forma cash cash-before-delivery framework</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Unfavorable credit updates command defensive actions. Shifting default threats to Cash-Before-Delivery (CBD) blocks fresh risk exposure while past unabsorbed lines are cleared.
+                </div>
+            </div>
+
+            <!-- QUESTION 9: TIPO "radio" (The Pre-Action Protocols Rule) -->
+            <div class="question-tab" data-qindex="9" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">9. Before initiating formal debt litigation inside the County Court, what preliminary civil law mandate must a credit control department complete to prevent court sanctions?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="A"> Capitalizing all administrative collection overheads into long-term assets.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="B"> Filing an immediate corporate winding-up petition with HMRC.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="C"> Issuing a compliant Letter before Action (LBA) fulfilling standard Civil Procedure Pre-Action Protocols.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Pre-Action Protocols demand that creditors issue an explicit, formal warning (Letter before Action) outlining the claim details and granting a final settlement window before applying for a court claim.
+                </div>
+            </div>
+            <!-- QUESTION 10: TIPO "multi-input" (The Net Receivables Balance Calculation) -->
+            <div class="question-tab" data-qindex="10" data-type="multi-input">
+                <div class="task-instruction-text">10. At year-end, a limited company holds a total trade receivables ledger balance of £40,000. Reviewing the accounts, the manager applies a specific bad debt provision of £3,000 on a bankrupt client, and sets a general provision rate of 5% on the remaining balance. Calculate the final net trade receivables amount (£) to be reported on the Statement of Financial Position.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Financial Accounting Receivables Valuation Component</th>
+                                <th style="width: 250px;">SoFP Carrying Value (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Net trade receivables carrying amount (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="35150" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Step 1: Subtract specific provision from gross receivables (£40,000 - £3,000 = £37,000 remaining). Step 2: Calculate general provision (£37,000 × 5% = £1,850). Step 3: Extract final carrying value (£37,000 - £1,850 = £35,150).
+                </div>
+            </div>
+
+            <!-- QUESTION 11: TIPO "radio" (Creditors Voluntary Liquidation) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">11. A corporate board realizes the company is entirely insolvent and can no longer meet its cash targets. They voluntarily initiate a winding-up process by calling a meeting of creditors. What classification applies?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> Compulsory High Court liquidation order.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> A Creditors’ Voluntary Liquidation (CVL), where shareholders and directors initiate the winding up due to insolvency.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> Members’ Voluntary Liquidation (MVL) for highly solvent entities.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> When an insolvent firm initiates its own death process, it deploys a CVL. An MVL applies exclusively to solvent companies where owners choose to extract capital surpluses.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "multi-select" (Invoice Discounting Confidentiality) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the technical assessment defining financing arrangements boundaries.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Unlike standard debt factoring which alters direct ledger collection visibility, an Invoice Discounting facility remains entirely 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="confidential">
+                            <option value="">-- Visibility --</option>
+                            <option value="public">Public to all commercial clients</option>
+                            <option value="confidential">Confidential from the end customers</option>
+                        </select> 
+                        meaning the company maintains absolute management over its own 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="collections">
+                            <option value="">-- Control --</option>
+                            <option value="collections">Debt collections and customer sales relationships</option>
+                            <option value="allowances">Special pooling write-offs schedules</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Invoice discounting gives financing liquidity backed by invoices while preserving customer privacy. The borrower retains standard customer credit management and pursues payments directly.
+                </div>
+            </div>
+
+            <!-- QUESTION 13: TIPO "radio" (Statutory Interest Accumulation Math) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">13. When enforcing overdue penalty interest under statutory late payment acts, over what timeline duration can simple interest fees be legally accumulated against the debtor?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> Starting from the day following the formal payment due date up to the exact date the cash clearing matches inside the bank account.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> Capped at a maximum duration of 30 calendar days per invoice ledger row.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Bypassed from calculation as a non-cash variable budget adjustment.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Overdue interest builds daily. The penalty collection loop opens as soon as the standard credit limit terms lapse, tracking all elapsed days up to full cash physical recovery.
+                </div>
+            </div>
+
+            <!-- QUESTION 14: TIPO "multi-select" (The Credit Insurance Void Threat) -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the analytical statement exposing operational negligence threats under credit insurance provisions.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Failing to execute basic credit checking steps before granting extensive open credit balances represents a credit policy 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="breach">
+                            <option value="">-- Classification --</option>
+                            <option value="breach">Breach that voids the trade credit insurance policy</option>
+                            <option value="success">Success that fulfills general profit optimization targets</option>
+                        </select> 
+                        because third-party policy providers require the seller to prove consistent 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="due">
+                            <option value="">-- Safeguard --</option>
+                            <option value="due">Due diligence and credit monitoring standards</option>
+                            <option value="variance">Variance logging entry allocations</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Credit insurance does not excuse reckless risk-taking. Providers require structured vetting paths before backing claims; negligence voids the entire underwriting protection cell.
+                </div>
+            </div>
+
+                       <!-- QUESTION 15: TIPO "radio" (The High-Value Credit Committee Mandate) -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. When a prospective corporate customer requests an exceptional credit limit that exceeds the automatic parameters of standard scoring models, who must review the application?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> The junior warehouse clerk handling physical product shipments dispatch.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> A designated high-level Credit Committee or Senior Credit Director, using qualitative financial analysis.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> Automatically cleared by switching all accounts directly to the suspense matrix.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Standard software algorithms manage routine limits. Large, non-standard credit requests require manual review by a Credit Committee, analyzing financial stability and structural leverage ratios.
+                </div>
+            </div>
+
+        </form>
+
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            A company buys a second-hand commercial lorry for £38,000 during its current 12-month cycle. If the investment is fully allocated within the company's remaining Annual Investment Allowance (AIA) pool, calculate the total allowance claimed:<br>
-            AIA Capital Allowance Claim: £ <input type="text" id="ans2" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            A corporation's Main Pool has a tax written-down value (TWDV) of £85,000 at the start of the period. No assets are added or sold. Calculate the standard Writing Down Allowance (WDA) deduction using the current 18% rate:<br>
-            Main Pool WDA Claim: £ <input type="text" id="ans3" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            A company has a Special Rate Pool balance of £75,000 covering integral building features. Calculate the Writing Down Allowance (WDA) available at the special pool rate of 6%:<br>
-            Special Rate Pool WDA Claim: £ <input type="text" id="ans4" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A manufacturing company disposes of an old delivery van from the Main Pool for £4,500 cash. The original cost was £12,000. Before this disposal, the Main Pool balance stood at £3,100. This creates a net credit balance of £1,400. Identify the tax term for this balance added back to profits:<br>
-            Tax Adjustment Element: <select id="ans5"><option value="">Select</option><option value="w">Balancing Allowance</option><option value="correct">Balancing Charge</option><option value="w">Writing Down Allowance</option></select>
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            A large company has an accounting period matching the calendar year. Under the UK installment system for large corporate groups, how many equal quarterly installment payments must the company make to settle its estimated annual Corporation Tax liability?<br>
-            Installment Payments: <input type="text" id="ans6" placeholder="0"> payments
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            A group structure consists of Company S (75% subsidiary of Parent P). Company S suffers a current year trading loss of £50,000. Company S can elect to surrender this loss to Parent P to offset Parent P's taxable profits for the same period. This corporate loss mitigation relief is known as:<br>
-            Loss Relief Term: <select id="ans7"><option value="">Select</option><option value="w">Carry Forward Relief</option><option value="correct">Group Relief</option><option value="w">Terminal Loss Relief</option></select>
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            A company purchases a new passenger car for business deliveries with an official CO2 emissions rating of 35g/km. Under the Capital Allowances rules for corporate cars, which pool category applies to this vehicle?<br>
-            Pool Category: <select id="ans8"><option value="">Select</option><option value="correct">Main Pool (18% WDA)</option><option value="w">Special Rate Pool (6% WDA)</option><option value="w">100% First Year Allowance</option></select>
-        </div>
-    </div>
-
-      <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            A limited company purchases an existing commercial freehold property on 1 June. Under the statutory structures for corporate non-residential property, which capital allowance framework allows a 3% flat-rate annual deduction on the original structural construction cost?<br>
-            Allowance Classification: <select id="ans9"><option value="">Select</option><option value="w">Annual Investment Allowance (AIA)</option><option value="correct">Structures and Buildings Allowance (SBA)</option><option value="w">Writing Down Allowance (WDA)</option></select>
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            A corporate group sells a piece of land held as a non-current asset, realizing an accounting profit of £45,000. For limited companies, capital gains are not taxed under Capital Gains Tax rules, but are instead integrated into which tax framework?<br>
-            Tax Classification: <select id="ans10"><option value="">Select</option><option value="w">Income Tax</option><option value="correct">Corporation Tax</option><option value="w">Value Added Tax (VAT)</option></select>
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            A business incurs a legal expense of £3,500 related to the renewal of a 25-year lease on its retail premises. When calculating the adjusted trading profit for Corporation Tax, how is this capital lease renewal cost treated?<br>
-            Tax Treatment: <select id="ans11"><option value="">Select</option><option value="w">It is fully allowable</option><option value="correct">It must be completely disallowed and added back</option><option value="w">It qualifies for 100% AIA</option></select>
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            A company has an accounting profit of £120,000. Depreciation charged in the accounts is £14,200, while the calculated capital allowances are £9,800. Assuming no other adjustments, calculate the final taxable trading profit:<br>
-            Taxable Trading Profit: £ <input type="text" id="ans12" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            A limited company invests cash into R&D activities, qualifying for the SME R&D tax relief scheme. This framework allows the company to deduct an additional percentage of its qualifying expenditure from its taxable profits. Under the baseline rules, what is this extra tax deduction percentage?<br>
-            Extra Deduction Rate: <input type="text" id="ans13" placeholder="0"> %
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            A company receives £4,000 of bank interest income on its treasury cash reserves. In the Corporation Tax computation, this non-trading interest is classified under which specific income category?<br>
-            Tax Classification: <select id="ans14"><option value="">Select</option><option value="w">Trading Profits</option><option value="correct">Loan Relationships (Non-trading income)</option><option value="w">Miscellaneous Capital Distributions</option></select>
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            A business sells a Main Pool machine that originally cost £10,000 for £12,000 cash. The asset's tax written-down value was zero. Under corporate capital disposal guidelines, the maximum disposal proceeds to be credited to the pool cannot exceed the asset's original cost.<br>
-            Is the statement above True or False?<br>
-            Answer: <select id="ans15"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    tabs.forEach(tab => tab.classList.remove('active'));
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    updateNavigationDisplay();
+}
+
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        icons.forEach(icon => icon.textContent = '');
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
-    }
-
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
-
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '221200' || val === '221200.00');
-        } else if (currentQ === 2) {
-            let val = document.getElementById('ans2').value.trim();
-            isCorrect = (val === '38000' || val === '38000.00');
-        } else if (currentQ === 3) {
-            let val = document.getElementById('ans3').value.trim();
-            isCorrect = (val === '15300' || val === '15300.00');
-        } else if (currentQ === 4) {
-            let val = document.getElementById('ans4').value.trim();
-            isCorrect = (val === '4500' || val === '4500.00');
-        } else if (currentQ === 5) {
-            isCorrect = (document.getElementById('ans5').value === 'correct');
-        } else if (currentQ === 6) {
-            let val = document.getElementById('ans6').value.trim();
-            isCorrect = (val === '4');
-        } else if (currentQ === 7) {
-            isCorrect = (document.getElementById('ans7').value === 'correct');
-        } else if (currentQ === 8) {
-            isCorrect = (document.getElementById('ans8').value === 'correct');
-        } else if (currentQ === 9) {
-            isCorrect = (document.getElementById('ans9').value === 'correct');
-        } else if (currentQ === 10) {
-            isCorrect = (document.getElementById('ans10').value === 'correct');
-        } else if (currentQ === 11) {
-            isCorrect = (document.getElementById('ans11').value === 'correct');
-        } else if (currentQ === 12) {
-            let val = document.getElementById('ans12').value.trim();
-            isCorrect = (val === '124400' || val === '124400.00');
-        } else if (currentQ === 13) {
-            let val = document.getElementById('ans13').value.trim();
-            isCorrect = (val === '130'); // SME R&D extra deduction percentage under FA2020 layout
-        } else if (currentQ === 14) {
-            isCorrect = (document.getElementById('ans14').value === 'correct');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
-        }
-
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) box.className = "option-box correct-answer-highlight";
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = field.getAttribute('data-ans');
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter8_Test2_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
