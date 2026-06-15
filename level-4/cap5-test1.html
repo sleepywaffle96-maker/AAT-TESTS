@@ -3,317 +3,874 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cash and Treasury Management - Test One</title>
+    <title>AAT Level 4 - Chapter 5: Personal Tax (Test One)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO CON CONNOTAZIONE ETICHETTA ARANCIONE BRAND */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span { color: #64748B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        #calc-close-btn { background: transparent; border: none; color: #EF4444; font-weight: bold; cursor: pointer; font-size: 14px; padding: 0; }
+
+        #calc-screen {
+            width: 100%; height: 45px; background: #000000; border-radius: 8px; color: #00FFFF; text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace; text-align: right; padding: 12px; font-size: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid #00FFFF; box-sizing: border-box;
+        }
+
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">Cash and Treasury Management - Test One</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: PERSONAL TAX (TEST ONE)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (Income Categories Pipeline) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">1. Under the statutory UK personal tax framework, in what precise sequential order must an individual's net incomes be structured and allocated across the progressive tax bands?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Non-Savings Income (Employment/Property) first, Savings Income (Interest) second, Dividend Income last.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Dividend Income first, Savings Income second, Non-Savings Income last to maximize deductions.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> All income streams are aggregated and taxed using a single flat-rate percentage factor.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The personal tax calculation framework forces a rigid pipeline: Non-Savings income must always consume the lower tax bands space first, followed sequentially by Savings, and then Dividends.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            A corporate treasury department analyzes its working capital metrics:<br>
-            - Inventory Holding Period = 45 days<br>
-            - Trade Receivables Collection Period = 38 days<br>
-            - Trade Payables Payment Period = 30 days<br>
-            Calculate the company's net Cash Conversion Cycle (CCC) expressed in days:<br>
-            Cash Conversion Cycle: <input type="text" id="ans1" placeholder="0"> days
+            <!-- QUESTION 2: TIPO "multi-select" (Personal Allowance Taper Rules) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the diagnostic description of the Personal Allowance taper tracking mechanism.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        If an individual's Adjusted Net Income crosses the statutory threshold baseline of 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="100000">
+                            <option value="">-- Threshold --</option>
+                            <option value="50000">£50,000 baseline cap</option>
+                            <option value="100000">£100,000 baseline cap</option>
+                        </select> 
+                        the Personal Allowance is progressively reduced by 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="1for2">
+                            <option value="">-- Reduction Rule --</option>
+                            <option value="1for2">£1 for every £2 of excess income</option>
+                            <option value="1for1">£1 for every £1 of excess income</option>
+                        </select> cells achieved.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Personal Allowance Taper Trap penalizes high earners. For every £2 earned above the £100,000 limit, £1 of allowance vanishes, disappearing completely at £125,140.
+                </div>
+            </div>
+            <!-- QUESTION 3: TIPO "radio" (Company Car Benefit List Price Rule) -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">3. Core Exam Trap: When computing an employee's P11D Benefit-in-Kind cash equivalent for a company car, what vehicle value indicator must be utilized inside the equation?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> The actual discounted purchase price paid by the corporate employer to the car dealership.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> The second-hand residual market depreciation value at the year-end close.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> The manufacturer's official published list price including delivery fees, completely ignoring internal corporate discounts.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Corporate Vehicle Discount Illusion warns that internal corporate purchase discounts are disallowable for car benefit calculations. HMRC rules mandate using the official manufacturer list price.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "multi-input" (Personal Allowance Taper Math Calculation) -->
+            <div class="question-tab" data-qindex="4" data-type="multi-input">
+                <div class="task-instruction-text">4. An individual registers an Adjusted Net Income of £108,000 during the fiscal tax period. Assume the maximum standard initial Personal Allowance is £12,570. Compute the revised tapered Personal Allowance remaining for this individual.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">HMRC Personal Allowance Taper Extraction</th>
+                                <th style="width: 250px;">Resulting Threshold (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Remaining Adjusted Personal Allowance Balance (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="8570" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Excess income = £108,000 - £100,000 = £8,000. Taper reduction = £8,000 / 2 = £4,000. Remaining allowance = £12,570 - £4,000 = £8,570.
+                </div>
+            </div>
+            <!-- QUESTION 5: TIPO "radio" (National Insurance Classes) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">5. Which National Insurance Contribution (NIC) class represents a profit-based percentage charge collected from self-employed sole traders on their net adjusted trading income?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> Class 1 Primary and Secondary payroll levies.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> Class 4 National Insurance contributions.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> Class 2 small weekly flat-rate welfare entries.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Self-employed sole traders are bound by two NIC structures: Class 2 flat-rate weekly contributions and Class 4 profit-based sliding percentage charges based on net adjusted trading profiles.
+                </div>
+            </div>
+
+            <!-- QUESTION 6: TIPO "multi-select" (Dividend Band Consumption Rule) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the technical description exposing band consumption traps under mixed dividend income profiles.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        The specialized dividend tax-free allowance applies a 0% tax rate factor, but it explicitly 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="consumes">
+                            <option value="">-- Action --</option>
+                            <option value="consumes">Consumes available space inside the tax bands</option>
+                            <option value="extends">Extends the total allocation of personal allowance</option>
+                        </select> 
+                        meaning subsequent investment cash flows are pushed into 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="higher">
+                            <option value="">-- Impact --</option>
+                            <option value="lower">Lower statutory percentage brackets</option>
+                            <option value="higher">Higher progressive tax percentage brackets</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Dividend Band Consumption Slip clarifies that even if an allowance drops the tax rate to 0%, it still fills band space, advancing subsequent income blocks toward higher tax thresholds.
+                </div>
+            </div>
+            <!-- QUESTION 7: TIPO "radio" (Individual CGT vs Corporate Chargeable Gains) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">7. When an individual sells a secondary residential property asset and registers a profit, how is this capital gain reported and processed?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> Completely separated from income tax schedules, applying specific Capital Gains Tax (CGT) brackets and allowances.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> Merged directly into the corporation tax computation pool as a chargeable gain cell.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> Logged as standard non-savings employment salary income via PAYE.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                .75rem;<div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Individuals calculate profits from asset sales under a separate Capital Gains Tax architecture applying distinct tax-exempt amounts (AEA), quite separate from corporate structures.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "multi-select" (Potentially Exempt Transfers) -->
+            <div class="question-tab" data-qindex="8" data-type="multi-select">
+                <div class="task-instruction-text">8. Complete the statutory statement governing lifetime gifts and Inheritance Tax (IHT) risks.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Gifts made by an individual directly to another person are classified as Potentially Exempt Transfers (PETs), remaining entirely tax-free provided the donor survives for 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="7">
+                            <option value="">-- Timeline --</option>
+                            <option value="3">3 years following the event</option>
+                            <option value="7">7 years following the event</option>
+                        </select> 
+                        otherwise they roll back into the estate evaluation pool subject to 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="iht">
+                            <option value="">-- Tax Risk --</option>
+                            <option value="iht">Inheritance Tax liability exposures</option>
+                            <option value="cgt">Capital Gains Tax residential surcharges</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Lifetime transfers to individuals remain exempt conditional on the donor's survival for 7 full years. Early death pulls the asset value back into the taxable estate matrix.
+                </div>
+            </div>
+            <!-- QUESTION 9: TIPO "radio" (Savings Allowance Boundaries) -->
+            <div class="question-tab" data-qindex="9" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">9. An individual is classified as a Higher Rate taxpayer for Income Tax purposes. What is their statutory personal savings allowance threshold for tax-free bank interest?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="A"> A standard allowance of exactly £1,000.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="B"> A restricted allowance of exactly £500.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="C"> Zero, as higher rate earners lose all interest tax-free shields.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The savings allowance scales with income brackets. Basic rate earners receive £1,000, higher rate earners are restricted to £500, and additional rate earners receive zero.
+                </div>
+            </div>
+
+            <!-- QUESTION 10: TIPO "multi-select" (P11D Medical Insurance benefit) -->
+            <div class="question-tab" data-qindex="10" data-type="multi-select">
+                <div class="task-instruction-text">10. Complete the statement explaining the tax treatment of company-funded private medical insurance.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        When an employer funds private medical insurance premiums for a worker, this event triggers a P11D 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="bik">
+                            <option value="">-- Benefit Type --</option>
+                            <option value="allowable">Fully exempt personal allowance</option>
+                            <option value="bik">Taxable Benefit-in-Kind (BIK)</option>
+                        </select> 
+                        valued at the exact cash cost incurred by the firm, which increases the worker's taxable 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="employment">
+                            <option value="">-- Income Category --</option>
+                            <option value="employment">Employment income schedule</option>
+                            <option value="savings">Savings interest schedule</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Employer-paid medical premiums represent a classic non-cash benefit. The full cost to the employer is treated as taxable employment income for the employee.
+                </div>
+            </div>
+            <!-- QUESTION 11: TIPO "radio" (Class 1 NIC Thresholds) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">11. Class 1 Secondary National Insurance Contributions are paid by which entity inside the UK employment framework?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> The corporate employer, calculated as a percentage of employee weekly or monthly payroll earnings above the secondary threshold.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> The individual employee via direct manual self-assessment returns.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> Self-employed sole traders who generate net business losses.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Class 1 National Insurance splits roles: Primary is deducted from the employee's salary, while Secondary represents a direct payroll tax paid exclusively by the employer.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "multi-select" (CGT Residential Surcharges) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the diagnostic analysis describing asset differentials within Capital Gains Tax brackets.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        While disposals of standard corporate shares attract regular individual CGT percentage brackets, gains derived from secondary residential properties face a statutory 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="surcharge">
+                            <option value="">-- Rate Impact --</option>
+                            <option value="exemption">Tax-free baseline exemption</option>
+                            <option value="surcharge">Surcharge applying higher percentage bands</option>
+                        </select> 
+                        which must be settled within tight legislative days windows following the property 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="completion">
+                            <option value="">-- Event --</option>
+                            <option value="completion">Completion payment date</option>
+                            <option value="valuation">Initial survey valuation date</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> UK tax policy places a specialized surcharge rate on residential property capital gains (excluding principal private residences) to penalize buy-to-let property speculation.
+                </div>
+            </div>
+            <!-- QUESTION 13: TIPO "radio" (P11D Beneficial Loans) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">13. An employer grants an internal loan to a worker at an interest rate below the official statutory rate. How is this transaction treated under Personal Tax rules?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> The interest savings gap is treated as a taxable Benefit-in-Kind and loaded onto employment income fields.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> Bypassed from all adjustments as an exempt non-savings interest deduction.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Logged as a credit balance adjustment within the revaluation reserve.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> If an employer provides a cheap or interest-free loan exceeding trivial limits, the interest savings gap calculated using the official rate is a taxable Benefit-in-Kind.
+                </div>
+            </div>
+
+            <!-- QUESTION 14: TIPO "multi-select" (Adjusted Net Income Bounds) -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the technical description regarding Adjusted Net Income deductions.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To determine the exact boundaries for the personal allowance taper, net income must be adjusted downwards by subtracting grossed-up 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="pension">
+                            <option value="">-- Deduction --</option>
+                            <option value="pension">Personal pension contributions and Gift Aid</option>
+                            <option value="dividends">Dividend income distributions profiles</option>
+                        </select> 
+                        contributions to extract the final taxable 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="adjusted">
+                            <option value="">-- Balance --</option>
+                            <option value="adjusted">Adjusted Net Income parameters</option>
+                            <option value="revaluation">Revaluation reserve equity cells</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                .75rem;<div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Personal pension contributions and Gift Aid donations reduce Adjusted Net Income (ANI). This can recover a tapered Personal Allowance or prevent higher tax rate liabilities.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "radio" (Individual CGT Annual Exempt Amount) -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. What is the operational effect of the individual Annual Exempt Amount (AEA) within Capital Gains Tax computations?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> It provides an enhanced deduction factor for corporate scientific research.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> It acts as a standard tax-free allowance threshold deducted from net capital gains to establish taxable gains.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> It triggers an automated 100% write-off for plant property additions.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Annual Exempt Amount (AEA) shields an individual's net capital profits up to a statutory baseline per tax year. Only the remaining excess is subject to sliding CGT brackets.
+                </div>
+            </div>
+
+        </form>
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            A company intends to invest an idle cash surplus of £150,000 into a 90-day bank deposit certificate offering a simple annual interest rate of 4%. Calculate the total interest income generated at maturity (Assume a standard 365-day year, round to the nearest pound):<br>
-            Interest Income: £ <input type="text" id="ans2" placeholder="0">
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            A UK exporter expects a payment of $120,000 from a US customer in 30 days. The treasury team wants to calculate the spot value. If the current spot exchange rate is £1 = $1.25, calculate the equivalent value in British Pounds (£):<br>
-            Equivalent Value: £ <input type="text" id="ans3" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            A firm borrows £80,000 on an overdraft facility. The bank charges an annual interest rate of 6.5%, calculated daily on the outstanding balance. If the company maintains this exact overdraft level for a full month of 30 days, calculate the total interest charge incurred (Assume a 365-day year, round to 2 decimal places):<br>
-            Overdraft Interest Charge: £ <input type="text" id="ans4" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A treasury assistant forecasts next week's cash movements. Expected cash receipts from credit customers are £84,000. Expected operational cash payments are £92,500. If the opening bank balance on Monday is £12,100 (debit), calculate the projected closing balance for Friday:<br>
-            Projected Closing Balance: £ <input type="text" id="ans5" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            An enterprise is evaluating a short-term trade invoice discount offer. A supplier offers a 2% discount if paid within 10 days, otherwise the full amount is due in 40 days. Calculate the approximate annualized effective interest rate associated with giving up this discount (Assume a 365-day year and simple compounding across the 30-day difference, round to 1 decimal place):<br>
-            Annualized Effective Rate: <input type="text" id="ans6" placeholder="0.0"> %
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            Under treasury liquidity management policies, the primary structural objective when selecting short-term financial instruments to deposit surplus operational cash is to:<br>
-            Primary Objective: <select id="ans7"><option value="">Select</option><option value="w">Maximize speculative investment yield</option><option value="correct">Preserve principal capital and maintain liquidity</option><option value="w">Hedge long-term non-current liabilities</option></select>
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            A company expects a large seasonal cash deficit in 3 months. To secure short-term commercial funds ahead of time, the treasurer negotiates a legally binding commitment from a clearing bank to provide funds when required up to a set ceiling. This facility is known as a:<br>
-            Facility Type: <select id="ans8"><option value="">Select</option><option value="w">Spot Exchange Contract</option><option value="correct">Committed Revolving Credit Facility</option><option value="w">Term Loan Facility</option></select>
-        </div>
-    </div>
-    
-    <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            A corporate treasurer needs to manage foreign exchange risk. The company will receive a payment of €250,000 in three months. To lock in a guaranteed exchange rate today and eliminate the risk of a weakening Euro, the company should enter into a:<br>
-            Contract Type: <select id="ans9"><option value="">Select</option><option value="w">Spot Exchange Contract</option><option value="correct">Forward Exchange Contract</option><option value="w">Revolving Credit Contract</option></select>
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            A treasury department operates a centralized pooling system. Sub-accounts transfer their balances automatically to a main concentration account at the end of each day. If a subsidiary account has an end-of-day deficit of £15,000 and another has a surplus of £45,000, calculate the net cash swept to the main account:<br>
-            Net Cash Swept: £ <input type="text" id="ans10" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            A finance company issues commercial paper with a face value of £100,000 and a maturity of 90 days. The paper is issued at a discount, and the investor pays £98,500 today. Calculate the exact dollar amount of the discount received by the investor at maturity:<br>
-            Discount Amount: £ <input type="text" id="ans11" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            Under working capital management principles, extending the credit period taken from suppliers (Trade Payables Payment Period) will always shorten the net cash conversion cycle, assuming inventory and receivables periods remain constant.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans12"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            A firm is suffering from a temporary cash shortage. It decides to sell its outstanding trade receivables invoices to a third-party financial institution at a discount to obtain immediate liquidity. This specialized treasury financing method is legally known as:<br>
-            Methodology: <select id="ans13"><option value="">Select</option><option value="w">Overdraft Funding</option><option value="correct">Factoring (Invoice Discounting)</option><option value="w">Leasing Allocation</option></select>
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            A treasury manager invests £200,000 in a short-term money market instrument that compounds interest quarterly at a nominal annual rate of 6%. Calculate the total value of the investment after 6 months (2 quarters) (round to 2 decimal places):<br>
-            Total Investment Value: £ <input type="text" id="ans14" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            The risk that a counterparty bank or financial institution will default on its operational obligations and fail to repay a company's short-term cash deposits at maturity is technically classified in treasury management as:<br>
-            Risk Category: <select id="ans15"><option value="">Select</option><option value="w">Liquidity Risk</option><option value="w">Market Risk</option><option value="correct">Credit (Counterparty) Risk</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    tabs.forEach(tab => tab.classList.remove('active'));
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    updateNavigationDisplay();
+}
+
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        icons.forEach(icon => icon.textContent = '');
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
-    }
-
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
-
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '53');
-        } else if (currentQ === 2) {
-            let val = document.getElementById('ans2').value.trim();
-            isCorrect = (val === '1479');
-        } else if (currentQ === 3) {
-            let val = document.getElementById('ans3').value.trim();
-            isCorrect = (val === '96000' || val === '96000.00');
-        } else if (currentQ === 4) {
-            let val = document.getElementById('ans4').value.trim();
-            isCorrect = (val === '427.40' || val === '427.4');
-        } else if (currentQ === 5) {
-            let val = document.getElementById('ans5').value.trim();
-            isCorrect = (val === '3600' || val === '3600.00');
-        } else if (currentQ === 6) {
-            let val = document.getElementById('ans6').value.trim();
-            isCorrect = (val === '24.8');
-        } else if (currentQ === 7) {
-            isCorrect = (document.getElementById('ans7').value === 'correct');
-        } else if (currentQ === 8) {
-            isCorrect = (document.getElementById('ans8').value === 'correct');
-        } else if (currentQ === 9) {
-            isCorrect = (document.getElementById('ans9').value === 'correct');
-        } else if (currentQ === 10) {
-            let val = document.getElementById('ans10').value.trim();
-            isCorrect = (val === '30000' || val === '30000.00');
-        } else if (currentQ === 11) {
-            let val = document.getElementById('ans11').value.trim();
-            isCorrect = (val === '1500' || val === '1500.00');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            isCorrect = (document.getElementById('ans13').value === 'correct');
-        } else if (currentQ === 14) {
-            let val = document.getElementById('ans14').value.trim();
-            isCorrect = (val === '206045' || val === '206045.00');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
-        }
-
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) box.className = "option-box correct-answer-highlight";
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = field.getAttribute('data-ans');
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter5_Test1_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
