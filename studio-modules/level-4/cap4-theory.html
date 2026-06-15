@@ -1,161 +1,151 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 4: DAIF Framework Theory | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 4: Business Tax (Theory)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --formula-bg: #F8FAFC;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.8;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.5rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-        }
-        h3 {
-            color: var(--secondary);
-            margin-top: 1.5rem;
-        }
-        p, li {
-            color: var(--text-muted);
-            font-size: 1.05rem;
+        .academic-quote {
+            border-left: 5px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
             text-align: justify;
         }
-        strong {
-            color: var(--text-main);
-        }
-        .syllabus-box {
-            border-left: 4px solid var(--accent-green);
-            background: rgba(16, 185, 129, 0.05);
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 2rem;
-        }
-        .exam-tip {
-            border-left: 4px solid var(--accent-orange);
-            background: rgba(245, 158, 11, 0.05);
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
+        .concept-card {
+            background-color: var(--formula-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
             margin: 1.5rem 0;
+        }
+        .trap-box {
+            background-color: #FFF5F5;
+            border-left: 5px solid #EF4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        h2 { color: var(--l3-cyan-primary); font-size: 1.6rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        h3 { color: var(--l3-cyan-dark); font-size: 1.25rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 600; }
+        p { text-align: justify; margin-bottom: 1.8rem; font-size: 1.05rem; }
+        ul, ol { margin-left: 2.5rem; margin-bottom: 1.8rem; }
+        li { margin-bottom: 0.6rem; font-size: 1rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <article class="glass-card">
-            <h1>Drafting & Interpreting Financial Statements (DAIF): Regulatory Framework</h1>
-            <div class="syllabus-box">
-                <p style="margin:0; color:var(--text-main);"><strong>AAT Level 4 Deep-Dive Textbook:</strong> This technical chapter covers the financial reporting regulatory environment, the legal principles of corporate disclosures, and an analytical analysis of International Accounting Standards (IAS/IFRS) adopted in the UK.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Business Tax - Chapter 4 Theory</h1>
             </div>
 
-            <h2>1. The Corporate Financial Reporting Regulatory Framework</h2>
-            <p>Unlike unincorporated entities (such as sole traders or general partnerships), limited companies operate under strict financial accountability rules. Because there is a formal separation between the owners (shareholders) and the managers (directors) of a company, corporate law requires a rigorous framework to guarantee that disclosures are true, complete, and comparable across market sectors.</p>
-            
-            <h3>The Pillars of UK Corporate Regulation</h3>
+            <h2>Lesson 4.1: Corporation Tax Framework & Trading Profits Adjustments</h2>
+            <p>
+                Under the UK tax regime, corporate entities are liable to pay Corporation Tax on their taxable profits arising in an accounting period. However, the net profit figure stated in a company’s financial Statement of Profit or Loss is prepared using standard accounting concepts (accruals, depreciations) and cannot be used directly for tax assessment. Advanced technicians must convert accounting profit into <strong>Adjusted Trading Profits</strong>.
+            </p>
+            <p>
+                The corporate tax computation framework requires systematic adjustments using strict statutory rules:
+            </p>
             <ul>
-                <li><strong>The Companies Act 2006:</strong> The primary legal foundation governing all limited entities in the United Kingdom. It sets out statutory responsibilities for accounting records, mandates external audit exemptions or thresholds, dictates filing windows with Companies House, and defines financial delivery timelines to protect creditors and investors.</li>
-                <li><strong>International Financial Reporting Standards (IFRS):</strong> Frameworks issued by the International Accounting Standards Board (IASB) and adopted within the UK. They establish clear global accounting benchmarks, moving accounting away from rigid local definitions toward global economic transparency.</li>
-                <li><strong>The Financial Reporting Council (FRC):</strong> The independent UK regulator promoting high-quality corporate governance and clear reporting. The FRC oversees audit quality and manages the UK GAAP framework (specifically FRS 102) for entities that are not required to adopt full international standards.</li>
+                <li><strong>Disallowable Expenses (Add Back):</strong> Capital expenditures, non-trade provisions, corporate entertaining (except for employees), gifts to customers exceeding trivial limits, and general financial depreciations must be added back to the net accounting profit.</li>
+                <li><strong>Allowable Deductions:</strong> Regular business revenue expenses, specific trade subscriptions, and staff training costs are fully deductible.</li>
+                <li><strong>Non-Trading Income Items (Deduct):</strong> Elements such as rental income, dividends received from other companies, or chargeable bank interests must be removed from the trading income block and classified under their specific statutory tax categories.</li>
             </ul>
-
-            <h3>IASB Conceptual Framework Qualitative Characteristics</h3>
-            <p>Financial statements must possess specific attributes to be considered useful by stakeholders. These are split into fundamental and enhancing properties:</p>
+            <h2>Lesson 4.2: Capital Allowances Framework & Pooling Pools</h2>
+            <p>
+                Accounting depreciation is strictly disallowable for tax computation purposes because individual companies employ distinct internal depreciation policy metrics. To ensure industry uniformity, HMRC replaces accounting depreciation with a statutory deduction system known as <strong>Capital Allowances</strong>.
+            </p>
+            <p>
+                Capital Allowances apply to plant and machinery capital investments, grouping qualifying assets into specific tracking pools:
+            </p>
             <ul>
-                <li><strong>Relevance:</strong> Information must be capable of making a difference in the decisions made by users. It has predictive value, confirmatory value, or both. It is directly tied to the concept of **Materiality**.</li>
-                <li><strong>Faithful Representation:</strong> The information must accurately depict the economic reality of the transactions. To achieve this, it must be complete, neutral (unbiased), and free from material error. This underpins the concept of **Substance Over Form**, where the legal structure of a transaction is overridden if its economic reality is different.</li>
-                <li><strong>Enhancing Characteristics:</strong> Comparability (across different periods and competitors), Verifiability (independent observers reaching a consensus), Timeliness (available before decision-making value expires), and Understandability (clear presentation for informed users).</li>
+                <li><strong>Annual Investment Allowance (AIA):</strong> Grants a 100% immediate write-off deduction against qualifying plant and machinery expenditure incurred up to the legislative ceiling limit in a single fiscal year.</li>
+                <li><strong>Main Pool Assets:</strong> Assets that do not qualify for AIA, or exceed its maximum limit, receive a standard <strong>Writing Down Allowance (WDA)</strong> calculated at a scaling percentage of <strong>18%</strong> on a reducing balance basis.</li>
+                <li><strong>Special Rate Pool Assets:</strong> Covers specific plant expenditures including long-life assets, thermal insulation, and integral building features. These receive a lower WDA tracking rate calculated at <strong>6%</strong>.</li>
             </ul>
-<!-- RIFERIMENTO_BLOCCO: 2 -->
-            <h2>2. Deep-Dive into International Accounting Standards (IAS)</h2>
-            <p>Level 4 examinations require advanced knowledge of asset valuation rules and income recognition constraints under explicit standards. Minor misinterpretations of these standards can result in material misstatements on corporate balance sheets.</p>
-            
-            <h3>IAS 1: Presentation of Financial Statements</h3>
-            <p>This standard sets out the minimum structural requirements for a complete set of financial statements. It outlines essential accounting principles, including the **Going Concern** baseline, the **Accruals basis** of accounting, consistency of presentation, and the explicit restriction against offsetting assets against liabilities or income against expenses unless explicitly permitted by another standard.</p>
-
-            <h3>IAS 2: Inventories</h3>
-            <p>Dictates that closing inventory balances must be valued at the **lower of cost and Net Realisable Value (NRV)**. 
-            <br><em>Cost</em> encompasses all expenditures incurred to bring the inventory to its present location and condition, including purchase prices, non-refundable import duties, freight charges, and direct production conversion overheads. 
-            <br><em>NRV</em> represents the estimated selling price in the ordinary course of business, less the estimated costs of completion and any estimated marketing and distribution expenses. If NRV falls below cost, the asset must be written down, expensing the deficit directly to cost of sales in the Statement of Profit or Loss (SoPL).</p>
-
-            <h3>IAS 16: Property, Plant and Equipment (PPE)</h3>
-            <p>Governs the initial recognition and subsequent measurement of tangible non-current assets. Asset acquisition requires measurement at cost, including site preparation, initial delivery, assembly, and dismantling provisions. Subsequent accounting allows two distinct structural choices:</p>
-            <ul>
-                <li><strong>Cost Model:</strong> Historical cost less accumulated depreciation and subsequent impairment provisions.</li>
-                <li><strong>Revaluation Model:</strong> Regular fair value revaluations. If an asset appreciates, the gain cannot be credited to the SoPL. Instead, it must be credited to Other Comprehensive Income (OCI) and accumulated in the **Revaluation Reserve** within the Equity section of the Statement of Financial Position (SoFP). If an asset revaluation causes a deficit, it is charged to the SoPL, unless it reverses a previous surplus on that same asset, in which case it is debited to the revaluation reserve.</li>
-            </ul>
-
-            <div class="exam-tip">
-                <p style="margin:0; color:var(--text-main);"><strong>AAT Exam Technical Rule:</strong> Under IAS 16, when a factory is revalued upwards, the annual depreciation expense will increase. Organizations are permitted to make an annual equity transfer from the Revaluation Reserve to Retained Earnings to account for this excess depreciation, keeping distributable profit reserves accurate.</p>
+            <div class="academic-quote">
+                "Upon the disposal or scrappage of a qualifying asset from a pool, the business extracts control balances. If the disposal value cells exceed the remaining pool Written Down Value (WDV), a Balancing Charge hits, increasing taxable income. Conversely, if a single asset pool terminates with a gap deficiency, a Balancing Allowance triggers, reducing taxable thresholds."
             </div>
-<!-- RIFERIMENTO_BLOCCO: 3 -->
-            <h2>3. Uncertainties, Provisions, and Post-Balance-Sheet Events</h2>
-            <p>Prudence dictates how corporate reporting models incorporate economic risks and post-period changes without overstating financial health metrics.</p>
-            
-            <h3>IAS 37: Provisions, Contingent Liabilities and Contingent Assets</h3>
-            <p>This standard sets strict thresholds to prevent companies from "smoothing" profits through arbitrary provisions or hiding material exposures in foot-notes:</p>
-            <ul>
-                <li><strong>Provisions:</strong> A provision is a liability of uncertain timing or amount. It must be formally recognized on the face of the SoFP only when a three-way condition is satisfied: a present legal or constructive obligation exists as a result of a past event; it is probable (defined as more likely than not, >50%) that an outflow of economic benefits will be required to settle the obligation; and a reliable statistical estimate can be made of the amount.</li>
-                <li><strong>Contingent Liabilities:</strong> If the economic outflow is only possible (5% to 50% likelihood) or if a present obligation cannot be measured reliably, it is classified as a Contingent Liability. No ledger entry is made; it is disclosed strictly within the accompanying notes. Remote contingencies (<5%) are ignored entirely.</li>
-                <li><strong>Contingent Assets:</strong> A possible asset arising from past events (e.g., an ongoing insurance claim). Prudence dictates that it must *never* be recognized on the SoFP until the economic inflow is virtually certain. If the inflow is probable, it is disclosed strictly in the notes.</li>
-            </ul>
+            <h2>Lesson 4.3: Corporate Chargeable Gains & Loss Relief Strategies</h2>
+            <p>
+                When a limited company sells a non-current capital asset (e.g., land, factory buildings, or long-term investments), any resulting capital gain is not taxed under separate Capital Gains Tax rates. Instead, corporate entities merge these gains—known as <strong>Chargeable Gains</strong>—directly into the main Corporation Tax liability calculation pool.
+            </p>
+            <p>
+                The statutory calculation of a corporate chargeable gain requires extracting precise historical costs and indexing parameters:
+            </p>
+            <div class="concept-card" style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; background-color: var(--l3-cyan-light); color: var(--l3-cyan-dark);">
+                <strong>CORPORATE CHARGEABLE GAIN CALCULATION MATRIX:</strong><br>
+                1. Gross Capital Gain = Gross Disposal Proceeds - Allowable Acquisition Expenditure<br>
+                2. Chargeable Gain Node = Gross Capital Gain - Indexation Allowance (frozen up to Dec 2017 limits)<br>
+                3. Capital Loss Offsets: Corporate capital losses can only offset capital gains; they can never reduce trading income.
+            </div>
 
-            <h3>IAS 10: Events After the Reporting Period</h3>
-            <p>This standard covers events that occur between the Statement of Financial Position date and the date when the financial statements are formally authorized for issue by the board of directors. These events are split into two categories:</p>
-            <ol>
-                <li><strong>Adjusting Events:</strong> Events that provide additional evidence of conditions that existed at the reporting date. These require retroactively updating the ledger values before final publication (e.g., the insolvency of a major credit customer after year-end confirms that their outstanding trade receivable balance was already impaired at the balance sheet date).</li>
-                <li><strong>Non-Adjusting Events:</strong> Events that are indicative of conditions that arose *after* the reporting date. No changes are made to the financial statements; if the event is material, it is disclosed in the notes to prevent the accounts from being misleading (e.g., a major factory fire or a corporate acquisition occurring two weeks after the year-end date).</li>
-            </ol>
-        </article>
-    </div>
+            <h3>Tax Loss Relief Allocations</h3>
+            <p>
+                If a corporation suffers a net trading loss during an accounting period, UK legislation offers dynamic statutory relief strategies to protect corporate cash flows:
+            </p>
+            <ul>
+                <li><strong>Current Year Relief:</strong> The trading loss can immediately offset any non-trading income or chargeable gains generated in the identical accounting period.</li>
+                <li><strong>Carry Back Relief:</strong> Unused losses can be carried back to offset total taxable profits of the preceding 12-month period, generating an immediate tax cash refund.</li>
+                <li><strong>Carry Forward Relief:</strong> Any remaining unmitigated loss is automatically carried forward to offset trading profits generated by the same trade in future accounting windows.</li>
+            </ul>
+            <div class="trap-box">
+                <h3 style="color: #DC2626; margin-top: 0; font-size: 1.15rem;">⚠️ Business Tax Invisible Error Encyclopedia (AAT Core Exam Traps)</h3>
+                <ul>
+                    <li>
+                        <strong>The Depreciation Add-Back Oversight:</strong> A classic calculation script error is forgetting to add back accounting depreciation to net accounting profits. Because depreciation is completely disallowable for HMRC checks, it must always be added back before applying Capital Allowances.
+                    </li>
+                    <li>
+                        <strong>The Customer Entertaining Trap:</strong> Exam scenarios present mixed hospitality lists. Staff entertaining costs are fully allowable and require zero adjustments. However, **customer entertaining** is completely disallowable and must be added back in full.
+                    </li>
+                    <li>
+                        <strong>The Capital Loss Reallocation Flaw:</strong> Attempting to use an unabsorbed corporate capital loss to reduce trading income or rental income blocks. Capital losses possess zero offset interaction with trading revenue; they can only carry forward to offset future chargeable capital gains.
+                    </li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
