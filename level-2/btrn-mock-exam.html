@@ -375,7 +375,7 @@
         </div>
     </div>
 <script>
-const questionsDatabase = [
+const examQuestions = [
     {
         id: 1,
         type: "radio",
@@ -486,61 +486,62 @@ const questionsDatabase = [
         ],
         solution: "Break-even Point in Units = Total Fixed Costs / Contribution per Unit. Calculation: £50,000 / £5 = 10,000 units required."
     },
-    {
-        id: 6,
+      {
+        id: 11,
         type: "radio",
-        question: "An expense payment for office rent of £1,200 has been completely omitted from both the Cash Book and the Rent Expense account. What class of error does this reveal?",
+        question: "A company operates a premium inventory tracking method where materials issued to production are always priced at the value of the oldest stock currently held in the warehouse floor. What inventory system applies?",
         options: [
-            { text: "An error of omission, which does not break Trial Balance symmetry.", correct: true },
-            { text: "An error of commission, requiring a direct journal adjustment line.", correct: false },
-            { text: "A compensating error balancing different accounts rows.", correct: false }
+            { text: "First-In, First-Out (FIFO) material pricing evaluation strategy.", correct: true },
+            { text: "Last-In, First-Out (LIFO) material pricing evaluation strategy.", correct: false },
+            { text: "Weighted Average Cost (AVCO) material grouping allocation.", correct: false }
         ],
-        solution: "Errors of omission occur when a transaction is completely forgotten on both sides, meaning the Trial Balance will still match perfectly despite the missing data."
+        solution: "The FIFO framework dictates that the earliest units loaded into inventory are the first ones issued to production lines, leaving the latest costs inside close stocks."
     },
     {
-        id: 7,
+        id: 12,
         type: "radio",
-        question: "A credit customer's check for £250 is returned by the bank marked 'Refer to Drawer' (Dishonored). What is the correct ledger adjustment to re-establish the debt asset?",
+        question: "Under the provisions of the Data Protection Act / GDPR, what represents a primary statutory duty of a company acting as a Data Controller when archiving financial customer profiles?",
         options: [
-            { text: "Debit Sales Ledger Control Account (SLCA), Credit Bank Checking Account", correct: true },
-            { text: "Debit Bank Checking Account, Credit Sales Ledger Control Account (SLCA)", correct: false },
-            { text: "Debit Bad Debts Provision, Credit Cash Account Balance", correct: false }
+            { text: "To process data fairly, lawfully, and ensure it is kept secure against unauthorized data breach actions.", correct: true },
+            { text: "To distribute personal profiles to external credit scoring providers without buyer consent lines.", correct: false },
+            { text: "To store full data blocks indefinitely even after corporate accounts are permanently dissolved.", correct: false }
         ],
-        solution: "When a check fails, the cash cash-in asset vanishes (Credit Bank) and the customer's legal obligation to pay is restored (Debit SLCA)."
+        solution: "Data security compliance mandates that corporate controllers protect customer files, limiting usage to lawful reasons and scrubbing records when data storage durations expire."
     },
     {
-        id: 8,
+        id: 13,
         type: "radio",
-        question: "A manufacturing firm rents a production warehouse for a fixed annual payment of £24,000. How must this expenditure line be classified within cost behavior tracking matrixes?",
+        question: "An accounting professional is requested by a senior corporate director to cover up a material budget expenditure variance before a bank audit inspects the ledger. Which AAT fundamental ethical principle is targeted?",
         options: [
-            { text: "A fixed cost element that stays constant regardless of output variations.", correct: true },
-            { text: "A variable cost component that flexes with manufacturing volumes.", correct: false },
-            { text: "A semi-variable charge containing step-up threshold limits.", correct: false }
+            { text: "Integrity, which commands absolute straightforwardness, honesty, and fair dealing in all professional operations.", correct: true },
+            { text: "Professional Competence and Due Care capabilities.", correct: false },
+            { text: "Confidentiality restrictions regarding internal corporate accounting matrixes.", correct: false }
         ],
-        solution: "Fixed costs remain completely constant over a relevant range of operational activity, unaffected by changes in manufacturing output volumes."
+        solution: "Integrity requires accountants to refuse any involvement with false, misleading, or doctored statements. Covering up financial discrepancies directly violates this pillar."
     },
     {
-        id: 9,
+        id: 14,
         type: "radio",
-        question: "A factory worker is paid a basic rate of £12 per hour for a standard 35-hour week. During a peak production cycle, they complete 5 hours of overtime paid at time-and-a-half. How much total gross salary is calculated?",
+        question: "Two independent business partners decide to establish a new commercial enterprise but wish to secure limited liability protection to insulate their personal property assets. What legal structure must they select?",
         options: [
-            { text: "£510 total gross payroll entry", correct: true },
-            { text: "£420 total gross payroll entry", correct: false },
-            { text: "£480 total gross payroll entry", correct: false }
+            { text: "A Private Limited Company (Ltd) corporate setup.", correct: true },
+            { text: "An ordinary traditional Partnership arrangement.", correct: false },
+            { text: "Operating as an un-incorporated Sole Trader network.", correct: false }
         ],
-        solution: "Basic Pay = 35 hours × £12 = £420. Overtime Pay = 5 hours × (£12 × 1.5) = 5 × £18 = £90. Total Salary = £420 + £90 = £510."
+        solution: "Incorporating a Private Limited Company creates a separate legal entity. This protects shareholders, limiting their personal risk to their investment capital."
     },
     {
-        id: 10,
+        id: 15,
         type: "radio",
-        question: "An engineering company features a fixed overhead burden of £50,000 and sells single component kits with a contribution margin of £5 per unit. Compute the break-even point in units.",
+        question: "A government authority increases the baseline national minimum wage rate across the retail sector. Within macro-economic tracking models, how will this decision impact general business operations?",
         options: [
-            { text: "Exactly 10,000 components units to achieve zero variance profit boundaries.", correct: true },
-            { text: "Exactly 5,000 components units to achieve zero variance profit boundaries.", correct: false },
-            { text: "Exactly 250,000 components units to achieve zero variance profit boundaries.", correct: false }
+            { text: "It expands corporate variable labour expenditures, driving up production costs and shifting break-even points.", correct: true },
+            { text: "It decreases aggregate consumer demand limits across local retail operations.", correct: false },
+            { text: "It automatically reduces the standard interest charges levied on bank overdraft lines.", correct: false }
         ],
-        solution: "Break-even Point in Units = Total Fixed Costs / Contribution per Unit. Calculation: £50,000 / £5 = 10,000 units required."
-    },
+        solution: "Wage adjustments alter corporate expense rows. An expansion in basic payroll costs increases variable production overheads, requiring higher sale volumes to cover the new threshold."
+    }
+];
 
 let examQuestions = []; 
 let currentTabActive = 0;
