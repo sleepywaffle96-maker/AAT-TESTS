@@ -99,39 +99,43 @@ ul.topic-list.color-l3 li .icon-bullet { color: #0EA5E9 !important; }
 ul.topic-list.color-l4 li a { color: #EA580C !important; font-weight: 600 !important; }
 ul.topic-list.color-l4 li .icon-bullet { color: #F97316 !important; }
 
-       /* ==========================================================================
-   FORZATURA TITOLI CAPITOLI AD ALTA SPECIFICITÀ ED ESCLUSIONE MOCK EXAM
+/* ==========================================================================
+   FORZATURA TITOLI CAPITOLI TRAMITE RELAZIONE DIRETTA CON LE LISTE INTERNE
    ========================================================================== */
 
-/* --- 1. TITOLI LIVELLO 2 (Verde Scuro Istituzionale) --- */
-#lista-test-l2 button.chapter-btn,
-.level-section:nth-of-type(1) .chapters-panel button.chapter-btn {
+/* --- 1. SE IL PANNELLO CONTIENE LA LISTA VERDE -> TITOLO VERDE SCURO --- */
+.level-section .chapters-panel:has(.color-l2) button.chapter-btn,
+.chapters-panel:has(.color-l2) button.chapter-btn,
+.tests-panel:has(.color-l2) preceeding-sibling::button.chapter-btn {
     color: #04583d !important;
     font-weight: 700 !important;
 }
 
-/* --- 2. TITOLI LIVELLO 3 (Azzurro Scuro Deep Blue Blindato) --- */
-.level-section:nth-of-type(2) button.chapter-btn,
-.level-section:nth-of-type(2) .chapters-panel button.chapter-btn {
+/* --- 2. SE IL PANNELLO CONTIENE LA LISTA AZZURRA -> TITOLO AZZURRO SCURO --- */
+.level-section .chapters-panel:has(.color-l3) button.chapter-btn,
+.chapters-panel:has(.color-l3) button.chapter-btn,
+.tests-panel:has(.color-l3) preceeding-sibling::button.chapter-btn {
     color: #034d75 !important;
     font-weight: 700 !important;
 }
 
-/* --- 3. TITOLI LIVELLO 4 (Arancione Bruciato/Marrone Mattone) --- */
-#lista-test-l4 button.chapter-btn,
-.level-section:nth-of-type(3) .chapters-panel button.chapter-btn {
+/* --- 3. SE IL PANNELLO CONTIENE LA LISTA ARANCIONE -> TITOLO ARANCIONE SCURO --- */
+.level-section .chapters-panel:has(.color-l4) button.chapter-btn,
+.chapters-panel:has(.color-l4) button.chapter-btn,
+.tests-panel:has(.color-l4) preceeding-sibling::button.chapter-btn {
     color: #9a3412 !important;
     font-weight: 700 !important;
 }
 
 /* ==========================================================================
-   RIPRISTINO IDENTITÀ ORIGINALE BOTTONI COMPREHENSIVE MOCK EXAM
-   ========================================================================== */
+   PROTEZIONE TOTALE IDENTITÀ PULSANTI MOCK EXAM (TESTO BIANCO AD ALTO CONTRASTO)
+   ========================================================================= */
 button.chapter-btn[style*="background-color"],
 button.chapter-btn[style*="background"] {
-    color: #FFFFFF !important; /* Forza il testo bianco originale */
+    color: #FFFFFF !important;
     font-weight: 800 !important;
 }
+
     </style>
 </head>
 <!-- RIFERIMENTO_BLOCCO: PART_2_STUDIO_PANEL -->
