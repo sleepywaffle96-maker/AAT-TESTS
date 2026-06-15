@@ -3,315 +3,877 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Management - Test Two</title>
+    <title>AAT Level 4 - Chapter 6: External Auditing (Test Two)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO CON CONNOTAZIONE ETICHETTA ARANCIONE BRAND */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span { color: #64748B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        #calc-close-btn { background: transparent; border: none; color: #EF4444; font-weight: bold; cursor: pointer; font-size: 14px; padding: 0; }
+
+        #calc-screen {
+            width: 100%; height: 45px; background: #000000; border-radius: 8px; color: #00FFFF; text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace; text-align: right; padding: 12px; font-size: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid #00FFFF; box-sizing: border-box;
+        }
+
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">Credit Management - Test Two</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <div class="test-title">UNIT: EXTERNAL AUDITING (TEST TWO)</div>
+            </div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (Self-Interest Threat) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">1. An audit partner is offered a significant financial interest or shares in a client company right before the year-end review. Under the IESBA Code of Ethics, which fundamental threat directly compromises their independence?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Advocacy threat parameters.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Self-interest threat, requiring immediate refusal or removal from the engagement team.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> Familiarity threat generated by prolonged tenure loops.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Holding a direct or indirect financial interest in an audit client triggers a severe self-interest threat. Independence cannot be safeguarded unless the interest is fully disposed of or the partner steps down.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            A company has total annual credit sales of £1,095,000 and a closing trade receivables balance of £135,000. Calculate the company's Days Sales Outstanding (DSO) to the nearest whole day (Assume a standard 365-day year):<br>
-            Days Sales Outstanding: <input type="text" id="ans1" placeholder="0"> days
+            <!-- QUESTION 2: TIPO "multi-select" (Advocacy vs Self-Review Threats) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the ethical assessment describing conflict of interest boundaries under corporate reviews.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Promoting a client's shares or representing them in a legal dispute with third parties creates an 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="advocacy">
+                            <option value="">-- Ethical Threat --</option>
+                            <option value="review">Self-review threat boundary</option>
+                            <option value="advocacy">Advocacy threat boundary</option>
+                        </select> 
+                        while preparing the identical financial statements that the firm must later inspect creates a 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="review">
+                            <option value="">-- Alternative Threat --</option>
+                            <option value="review">Self-review threat condition</option>
+                            <option value="intimidation">Intimidation threat condition</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Advocacy occurs when an auditor promotes the client's position to the point of compromising objectivity. Self-review arises when an auditor evaluates their own previous work or non-audit deliverables.
+                </div>
+            </div>
+            <!-- QUESTION 3: TIPO "radio" (Statistical vs Non-Statistical Sampling) -->
+            <div class="question-tab" data-qindex="3" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">3. Under ISA 530, what explicit parameter distinguishes statistical sampling methods from non-statistical judgmental sampling structures?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="A"> The absolute exclusion of high-value ledger entries from the database.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="B"> The continuous reliance on management's internal risk explanations.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q3" value="C"> Random selection of sample units combined with the application of probability theory to measure sampling risks.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Statistical sampling requires a random selection method and the mathematical application of probability models to evaluate results, eliminating human bias from the item extraction phase.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "multi-input" (Performance Materiality Math Calculation) -->
+            <div class="question-tab" data-qindex="4" data-type="multi-input">
+                <div class="task-instruction-text">4. An audit team establishes an overall planning materiality threshold of £20,000 for a retail entity. Due to moderate control risks identified, the partner sets performance materiality at exactly 75% of overall materiality. Compute the performance materiality buffer limit.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">ISA Performance Materiality Buffer Extraction</th>
+                                <th style="width: 250px;">Calculated Buffer (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Performance Materiality value layer (Integer value)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="15000" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Performance Materiality = Overall Materiality × Selected Percentage Factor. Calculation: £20,000 × 75% = £15,000. This lower threshold acts as a safety margin to aggregate small undetected errors.
+                </div>
+            </div>
+
+            <!-- QUESTION 5: TIPO "radio" (Inherent Risk Identification) -->
+            <div class="question-tab" data-qindex="5" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">5. Which of the following client factors should be classified by an auditor explicitly as an indicator of high Inherent Risk during the planning phase?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="A"> Operational staff lacking clear segregation of duties inside payroll.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="B"> The client engages in highly complex, derivative financial transactions or long-term revenue estimates subject to heavy judgment.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q5" value="C"> System validation range checks failing to reject duplicate data.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Inherent risk evaluates items prone to error before considering internal system shields. Highly judgmental estimates or intricate instruments naturally introduce high inherent misstatement possibilities.
+                </div>
+            </div>
+            <!-- QUESTION 6: TIPO "multi-select" (Auditor Fraud Responsibility) -->
+            <div class="question-tab" data-qindex="6" data-type="multi-select">
+                <div class="task-instruction-text">6. Complete the technical analysis clarifying structural management vs auditor responsibilities.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Under ISA 240, the primary responsibility for the prevention and detection of fraud rests completely with corporate 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="management">
+                            <option value="">-- Party --</option>
+                            <option value="auditors">External audit teams</option>
+                            <option value="management">Management and Those Charged With Governance</option>
+                        </select> 
+                        while the external auditor is responsible for obtaining reasonable assurance that statements are free from material 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="misstatement">
+                            <option value="">-- Target --</option>
+                            <option value="misstatement">Misstatement whether caused by fraud or error</option>
+                            <option value="variance">Variance logs inside flexible budgets</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Auditors are not corporate police. Management must set up internal control shields to block fraud, while external reviewers test if the books exhibit a true and fair view.
+                </div>
+            </div>
+
+            <!-- QUESTION 7: TIPO "radio" (Familiarity Threat & Partner Rotation) -->
+            <div class="question-tab" data-qindex="7" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">7. To mitigate severe Familiarity Threats arising from long association with a Public Interest Entity (PIE) audit client, what is the statutory rotation timeline mandated for the key audit partner?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="A"> Rotation is compulsory after a maximum continuous service period of 7 years.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="B"> Rotation is requested only if a material control override occurs.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q7" value="C"> Rotation can be bypassed if overall materiality sits below 0.5% of revenue.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Ethical standards dictate a strict 7-year maximum tenure cap for lead engagement partners on listed/PIE clients to block compromised objectivity before cooling-off periods run.
+                </div>
+            </div>
+            <!-- QUESTION 8: TIPO "multi-select" (Inventory Assertions Mapping) -->
+            <div class="question-tab" data-qindex="8" data-type="multi-select">
+                <div class="task-instruction-text">8. Complete the description of field testing procedures during physical stock takes.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Attending a year-end physical inventory count and selecting items from the warehouse floor to trace them forward into the ledger summaries tests for 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="completeness">
+                            <option value="">-- Target Assertion --</option>
+                            <option value="existence">Existence (Items are not fake)</option>
+                            <option value="completeness">Completeness (No omitted items)</option>
+                        </select> 
+                        whereas cross-checking recorded ledger listings backward to find the physical boxes tests for 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="existence">
+                            <option value="">-- Alternative Assertion --</option>
+                            <option value="existence">Existence / Genuine occurrence</option>
+                            <option value="valuation">Valuation allocations accuracy</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Floor-to-list verification checks that nothing was left out (Completeness). List-to-floor verification confirms that paper asset lines match real physical items (Existence).
+                </div>
+            </div>
+
+            <!-- QUESTION 9: TIPO "radio" (Quality Control ISA 220) -->
+            <div class="question-tab" data-qindex="9" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">9. Under ISA 220, who bears ultimate structural responsibility for the overall quality control execution across a specific contracted audit engagement?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="A"> The junior trainee clerk executing cash book reconciliations.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="B"> The client company's managing director or financial controller.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q9" value="C"> The assigned Engagement Partner, who must actively direct, supervise, and review the team's work.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Quality control mandates state that while tasks can be delegated, the lead Engagement Partner carries full personal accountability for the standard and execution of the final report.
+                </div>
+            </div>
+            <!-- QUESTION 10: TIPO "multi-input" (Compulsory Statutory Audit Exemption) -->
+            <div class="question-tab" data-qindex="10" data-type="multi-input">
+                <div class="task-instruction-text">10. Under standard UK company legal frameworks, small corporate entities qualify for an audit exemption if they meet at least two out of three criteria layers. Assume one threshold baseline dictates that the company's gross annual turnover must not cross a specific ceiling. Input that statutory small corporate turnover limit in millions of pounds (e.g. if the cap is £10.2 million, enter 10.2).</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">UK Company Law Audit Exemption Parameter</th>
+                                <th style="width: 250px;">Statutory Ceiling Limit (£m)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Turnover threshold limit baseline (Input value with decimal point)</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="10.2" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Small companies bypass audit burdens if they meet two metrics: Turnover under £10.2m, Total Assets under £5.1m, or fewer than 50 employees on payroll sheets.
+                </div>
+            </div>
+
+            <!-- QUESTION 11: TIPO "radio" (Disclaimer of Opinion) -->
+            <div class="question-tab" data-qindex="11" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">11. A corporate client completely blocks the audit team from inspecting its primary overseas physical inventory warehouses or verifying cash lines. The potential impact is material and pervasive. What opinion applies?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="A"> An Adverse Opinion declaring the whole ledger system completely false.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="B"> A Disclaimer of Opinion, stating that the auditor was unable to obtain sufficient appropriate evidence to form an opinion.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q11" value="C"> A standard Qualified "except for" report declaration.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> If an auditor cannot gather verification evidence on pervasive items, they cannot say if accounts are true or false. They must disclaim an opinion due to severe scope limitations.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "multi-select" (Pre-Engagement Ethical Procedures) -->
+            <div class="question-tab" data-qindex="12" data-type="multi-select">
+                <div class="task-instruction-text">12. Complete the client acceptance description explaining statutory pre-engagement protocols.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Before accepting a new client assignment, the incoming firm must issue an official letter requesting professional clearance to the 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="outgoing">
+                            <option value="">-- Target Firm --</option>
+                            <option value="outgoing">Outgoing/previous audit firm</option>
+                            <option value="hmrc">HMRC tax collection registry board</option>
+                        </select> 
+                        and if the client refuses to grant permission for this direct communication, the firm must 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="decline">
+                            <option value="">-- Decision --</option>
+                            <option value="decline">Decline the appointment immediately</option>
+                            <option value="accept">Accept the engagement and skip sample testing</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Ethical clearance uncovers hidden client issues (e.g. unlawful actions, unpaid fees). If a prospect blocks this checking step, the firm cannot guarantee integrity and must decline.
+                </div>
+            </div>
+            <!-- QUESTION 13: TIPO "radio" (Internal Audit vs External Audit) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">13. Which operational parameter distinguishes the primary objective of Internal Audit teams from the statutory duty of External Auditors?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> Internal audit reports to management to improve operational efficiency and risk controls, while external audit reports independently to shareholders on the true and fair view of accounts.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> Internal audit handles public tax calculations; external audit reviews flexible budget matrix allocations.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Internal audit answers to third-party bank institutions; external audit answers to HMRC.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Objectives differ fundamentally: Internal audit is an inside operational resource for management. External audit is a statutory governance shield acting exclusively for investors.
+                </div>
+            </div>
+
+            <!-- QUESTION 14: TIPO "multi-select" (The Management Representation Letter Trap) -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the evaluation statement exposing verification document limitations under ISAs.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Assuming that a signed Management Representation Letter can replace direct substantive testing on risky ledger balances represents a major exam performance 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="trap">
+                            <option value="">-- Assessment --</option>
+                            <option value="trap">Trap of compromised professional scepticism</option>
+                            <option value="success">Success that optimizes field verification budgets</option>
+                        </select> 
+                        because a manager's statement can never serve as a substitute for 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="sufficient">
+                            <option value="">-- Evidence --</option>
+                            <option value="sufficient">Sufficient appropriate independent audit evidence</option>
+                            <option value="trivial">Trivial variance logging adjustments lines</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Written representations confirm management's accountability responsibilities but are weak, internal evidence. They supplement, but never replace, rigorous source document checks.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "radio" (Key Audit Matters ISA 701) -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. Under ISA 701, what section inside an independent audit report communicates areas that required significant auditor attention and are considered of most significance during the corporate review?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> The standard Basis for Opinion boilerplate text block.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> The Key Audit Matters (KAMs) section paragraph disclosures.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> Moving the exceptions line-by-line straight into a suspense account placeholder.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Key Audit Matters deliver complete transparency to stakeholders. They outline complex areas (like heavy asset impairments or estimation models) that the team tackled during the review.
+                </div>
+            </div>
+
+        </form>
+
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            A credit analyst evaluates a buyer's liquidity metrics using the draft balance sheet:<br>
-            - Current Assets (including inventory of £40,000): £90,000<br>
-            - Current Liabilities: £25,000<br>
-            Calculate the exact Acid Test (Quick) Ratio (format as X.XX):<br>
-            Acid Test Ratio: <input type="text" id="ans2" placeholder="0.00"> : 1
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            A credit customer has an overdue balance of £6,000 that has been outstanding for 60 days past the payment deadline. The firm's internal cost of capital is 9.125% per annum. Calculate the exact interest cost of carrying this overdue debt for 60 days (Assume a 365-day year, round to 2 decimal places):<br>
-            Carrying Cost of Debt: £ <input type="text" id="ans3" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            A credit control department decides to take formal legal action against a debtor owing £15,000. Which court in England and Wales handles high-value commercial recovery claims exceeding the standard small claims limits?<br>
-            Court Type: <select id="ans4"><option value="">Select</option><option value="correct">The County Court / High Court</option><option value="w">Crown Court</option><option value="w">Magistrates' Court</option></select>
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A credit policy offers terms of "3/10, net 30". A client buys goods worth £12,000 on account and pays within the 10-day settlement window. Calculate the final cash collection amount required to clear the debt:<br>
-            Discounted Cash Settlement: £ <input type="text" id="ans5" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            Under the Late Payment of Commercial Debts Act, if a business charges statutory interest on a late payment, they are also entitled to claim a fixed lump sum compensation. For a debt between £1,000 and £9,999.99, what is the statutory compensation fee?<br>
-            Statutory Fee: <select id="ans6"><option value="">Select</option><option value="w">£40</option><option value="correct">£70</option><option value="w">£100</option></select>
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            A credit review indicates that a high-volume client has an extremely low Interest Cover Ratio. This trend indicates to the credit manager that the buyer:<br>
-            Credit Risk Interpretation: <select id="ans7"><option value="">Select</option><option value="w">Has excellent short-term bank liquidity buffers</option><option value="correct">May struggle to pay interest expenses from operating profits, representing high default risk</option><option value="w">Is collecting customer debts at an accelerated speed</option></select>
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            An analysis of aged debtors shows total receivables of £200,000. Out of this, £20,000 has been outstanding for more than 120 days. The policy dictates a specific allowance of 40% for debts older than 120 days, and a general allowance of 3% for all remaining balances. Calculate the total allowance for doubtful debts:<br>
-            Total Credit Allowance: £ <input type="text" id="ans8" placeholder="0.00">
-        </div>
-    </div>
-
-      <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            A corporate buyer enters administration owing your business £8,000. The insolvency practitioner notifies creditors that unsecured claims will receive a payout of exactly 22p in the pound. Calculate the final bad debt amount that must be written off to the profit or loss account:<br>
-            Bad Debt Write-off Value: £ <input type="text" id="ans9" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            A credit controller seeks to recover funds directly from a debtor's bank account. They apply for a court order that instructs the debtor's bank to freeze and transfer the required judgment sum straight to the creditor. This legal mechanism is known as a:<br>
-            Legal Mechanism: <select id="ans10"><option value="">Select</option><option value="correct">Third Party Debt Order</option><option value="w">Charging Order</option><option value="w">Warrant of Control</option></select>
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            A prospective client has a Current Ratio of 2.80 : 1 but an Acid Test Ratio of 0.40 : 1. How should the credit manager interpret this business layout?<br>
-            Liquidity Risk Status: <select id="ans11"><option value="">Select</option><option value="w">The buyer has uniform cash assets</option><option value="correct">The buyer is over-stocked with slow-moving inventory, indicating cash blockages</option><option value="w">The buyer is overly reliant on bank overdrafts</option></select>
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            If a customer exceeds their maximum approved credit limit, the credit management system should automatically put the account on 'credit hold' to prevent further order dispatches until a payment is made.<br>
-            Is this statement True or False?<br>
-            Answer: <select id="ans12"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            A credit risk manager purchases a financial derivative policy that transfers the default risk of a high-value key customer to an insurance institution, ensuring cash recovery if insolvency occurs. This structure represents:<br>
-            Methodology: <select id="ans13"><option value="">Select</option><option value="w">Invoice Factoring</option><option value="correct">Credit Insurance</option><option value="w">Retention of Title</option></select>
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            A firm reports an average inventory holding period of 50 days, a trade payables payment period of 40 days, and its trade receivables collection period (DSO) is 55 days. Calculate the net cash conversion cycle (CCC) window in days:<br>
-            Net Cash Cycle: <input type="text" id="ans14" placeholder="0"> days
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            A clause inserted into terms of trade which states that legal ownership of the goods remains with the seller until the buyer has paid for them in full is known as a Retention of Title (or Romalpa) clause.<br>
-            Is the statement above True or False?<br>
-            Answer: <select id="ans15"><option value="">Select</option><option value="correct">True</option><option value="w">False</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    tabs.forEach(tab => tab.classList.remove('active'));
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    updateNavigationDisplay();
+}
+
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        icons.forEach(icon => icon.textContent = '');
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
-    }
-
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
-
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '45');
-        } else if (currentQ === 2) {
-            let val = document.getElementById('ans2').value.trim();
-            isCorrect = (val === '2' || val === '2.0' || val === '2.00');
-        } else if (currentQ === 3) {
-            let val = document.getElementById('ans3').value.trim();
-            isCorrect = (val === '90' || val === '90.00');
-        } else if (currentQ === 4) {
-            isCorrect = (document.getElementById('ans4').value === 'correct');
-        } else if (currentQ === 5) {
-            let val = document.getElementById('ans5').value.trim();
-            isCorrect = (val === '11640' || val === '11640.00');
-        } else if (currentQ === 6) {
-            isCorrect = (document.getElementById('ans6').value === 'correct');
-        } else if (currentQ === 7) {
-            isCorrect = (document.getElementById('ans7').value === 'correct');
-        } else if (currentQ === 8) {
-            let val = document.getElementById('ans8').value.trim();
-            isCorrect = (val === '13400' || val === '13400.00');
-        } else if (currentQ === 9) {
-            let val = document.getElementById('ans9').value.trim();
-            isCorrect = (val === '6240' || val === '6240.00');
-        } else if (currentQ === 10) {
-            isCorrect = (document.getElementById('ans10').value === 'correct');
-        } else if (currentQ === 11) {
-            isCorrect = (document.getElementById('ans11').value === 'correct');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            isCorrect = (document.getElementById('ans13').value === 'correct');
-        } else if (currentQ === 14) {
-            let val = document.getElementById('ans14').value.trim();
-            isCorrect = (val === '65');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
-        }
-
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) box.className = "option-box correct-answer-highlight";
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = field.getAttribute('data-ans');
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter6_Test2_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
