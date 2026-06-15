@@ -373,9 +373,7 @@ button.chapter-btn[data-level="l4"] {
  }    <!-- NETLIFY IDENTITY SECURITY LOGIC ENGINE - FORCE SECURE -->
     <script>
       // 1. Inizializzazione immediata con le credenziali del tuo database server
-      netlifyIdentity.init({
-        APIUrl: 'https://netlify.app'
-      });
+      netlifyIdentity.init();
 
       // 2. Esegui il blocco istantaneo prima che la pagina mostri i test
       const user = netlifyIdentity.currentUser();
