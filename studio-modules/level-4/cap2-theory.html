@@ -1,117 +1,153 @@
-<!-- BLOCCO 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 2: AMAC Costing Theory | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 2: Drafting and Interpreting Financial Statements (Theory)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON ETICHETTA ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent-green: #10b981;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --warning-box-bg: #FFFBEB;
+            --warning-box-border: #F59E0B;
+            --formula-bg: #F8FAFC;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.8;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.5rem;
-            margin-top: 0;
-        }
-        h2 {
-            color: var(--primary);
-            border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-        }
-        h3 {
-            color: var(--secondary);
-        }
-        p, li {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
-        strong {
-            color: var(--text-main);
-        }
-        .syllabus-box {
-            border-left: 4px solid var(--accent-green);
-            background: rgba(16, 185, 129, 0.05);
-            padding: 1rem 1.5rem;
+        .academic-quote {
+            border-left: 5px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            padding: 1.5rem;
+            margin: 2rem 0;
             border-radius: 0 8px 8px 0;
-            margin-bottom: 2rem;
+            font-style: italic;
+            text-align: justify;
+        }
+        .concept-card {
+            background-color: var(--formula-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .trap-box {
+            background-color: #FFF5F5;
+            border-left: 5px solid #EF4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        h2 { color: var(--l3-cyan-primary); font-size: 1.6rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        h3 { color: var(--l3-cyan-dark); font-size: 1.25rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 600; }
+        p { text-align: justify; margin-bottom: 1.8rem; font-size: 1.05rem; }
+        ul, ol { margin-left: 2.5rem; margin-bottom: 1.8rem; }
+        li { margin-bottom: 0.6rem; font-size: 1rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <article class="glass-card">
-            <h1>Applied Management Accounting (AMAC): Costing & Performance</h1>
-            <div class="syllabus-box">
-                <p style="margin:0; color:var(--text-main);"><strong>AAT Level 4 Syllabus Context:</strong> This unit introduces modern strategic costing frameworks, overhead allocation alternatives, and structural lifecycle profitability tracing methods.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Drafting & Interpreting Financial Statements - Chapter 2 Theory</h1>
             </div>
 
-            <h2>1. Modern Costing Environments</h2>
-            <p>Traditional accounting systems (e.g., absorption costing) were designed when direct labor was the primary production driver. Modern manufacturing environments are highly automated, meaning overheads form the largest percentage of product costs.</p>
-            
-            <h3>Activity-Based Costing (ABC)</h3>
-            <p>ABC addresses misinterpretations by tracing overhead transactions directly to the specific business activities that generate them, rather than utilizing arbitrary volume baselines like machine hours:</p>
+            <h2>Lesson 2.1: The International Regulatory Framework & IFRS Foundation</h2>
+            <p>
+                Financial reporting for limited companies must adhere to global harmonized accounting concepts to ensure transparency across international financial capital markets. Under the Level 4 DAIF syllabus, accounting practices rely strictly on the regulatory standards developed by the <strong>International Accounting Standards Board (IASB)</strong> and the <strong>IFRS Foundation</strong>.
+            </p>
+            <p>
+                The primary frameworks governing the qualitative characteristics of corporate accounting information include:
+            </p>
             <ul>
-                <li><strong>Activities:</strong> Specific corporate operations that consume financial resources (e.g., setting up machinery, dispatching orders, inspecting quality).</li>
-                <li><strong>Cost Pools:</strong> Accumulated financial totals relating to each distinct activity area.</li>
-                <li><strong>Cost Drivers:</strong> The quantitative factors that cause the costs of an activity to increase or decrease (e.g., the absolute number of production setups or customer orders processed).</li>
+                <li><strong>Relevance:</strong> Financial data must be capable of making a difference in the decisions made by stakeholders, possessing predictive or confirmatory value.</li>
+                <li><strong>Faithful Representation:</strong> Financial summaries must accurately depict economic phenomena. Information must be complete, neutral, and entirely free from material error.</li>
+                <li><strong>Enhancing Characteristics:</strong> Comprise Comparability across reporting periods, Verifiability via clear audit checks, Timeliness of public release, and Understandability for proficient spreadsheet users.</li>
             </ul>
-            <p>By determining a specific <strong>Cost Driver Rate</strong> for each pool, ABC ensures high-volume, complex products absorb an accurate share of corporate engineering and administrative support expenses.</p>
-<!-- BLOCCO 2 -->
-            <h2>2. Advanced Profitability Frameworks</h2>
-            <p>Strategic management accounting requires businesses to evaluate profitability patterns across multiple horizons, focusing on operational restrictions and target allocations.</p>
+            <h2>Lesson 2.2: Drafting Financial Statements for Limited Companies</h2>
+            <p>
+                The drafting module mandates the formal execution of statutory year-end ledger reports based on standard corporate templates. Advanced technicians must handle accurate adjustments across complex financial areas:
+            </p>
+            <ul>
+                <li><strong>IAS 16 - Property, Plant, and Equipment (PPE):</strong> Governs the measurement baseline of tangibles. Revaluation reserves must be built when asset fair values shift upward, while historical cost models monitor depreciations.</li>
+                <li><strong>IAS 38 - Intangible Assets:</strong> Establishes rigid criteria for treating non-monetary items. <strong>Research expenditure</strong> must always be written off immediately inside the statement of profit or loss, whereas <strong>Development expenditure</strong> must be capitalized as an asset once commercial viability is proven.</li>
+                <li><strong>IAS 37 - Provisions, Contingent Liabilities, and Contingent Assets:</strong> Provisions are mapped if an entity has a present legal obligation stemming from past events where an outflow of cash resources is probable and reliably estimable.</li>
+            </ul>
+            <div class="academic-quote">
+                "The preparation of the Statement of Cash Flows under IAS 7 isolates changes in liquidity by separating corporate activities into Operating, Investing, and Financing flows, preventing management from masking pure cash performance deficits with non-cash profit accruals."
+            </div>
+            <h2>Lesson 2.3: Interpreting Financial Performance & Ratio Frameworks</h2>
+            <p>
+                Drafting accounts is only the baseline step; management and investors command analytical diagnostics to evaluate corporate health. Level 4 accounting monitors enterprise performance across three key financial ratio vectors:
+            </p>
             
-            <h3>Throughput Accounting (TA)</h3>
-            <p>Developed from the Theory of Constraints (ToC), Throughput Accounting assumes that in modern production setups, direct labor is a fixed short-term capacity cost. The only true variable expenditure is raw materials. The system prioritizes products that optimize the exploitation of the organizational <strong>bottleneck resource</strong> (the operational component running at maximum capability that slows overall output).</p>
+            <h3>Profitability & Asset Efficiency Indicators</h3>
+            <div class="concept-card" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; background-color: var(--l3-cyan-light); color: var(--l3-cyan-dark);">
+                • ROCE (Return on Capital Employed) = (Operating Profit / (Total Assets - Current Liabilities)) × 100<br>
+                • Asset Turnover = Revenue / (Total Assets - Current Liabilities)<br>
+                • Gross Profit Margin = (Gross Profit / Revenue) × 100
+            </div>
 
-            <h3>Lifecycle Costing</h3>
-            <p>Traditional frameworks track profitability periodically (monthly/annually). Lifecycle Costing tracks and accumulates all costs associated with a product from its initial Research & Development (R&D) stage, through manufacturing, design modifications, market maturity, and final decommissioning. It prevents organizations from launching products that generate short-term profits but incur excessive design and disposal liabilities.</p>
+            <h3>Liquidity, Solvency & Working Capital Cycles</h3>
+            <div class="concept-card" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; background-color: var(--l3-cyan-light); color: var(--l3-cyan-dark);">
+                • Current Ratio = Current Assets / Current Liabilities<br>
+                • Quick Ratio (Acid Test) = (Current Assets - Inventory) / Current Liabilities<br>
+                • Inventory Holding Days = (Closing Inventory / Cost of Sales) × 365<br>
+                • Trade Receivables Collection Days = (Trade Receivables / Credit Sales) × 365
+            </div>
 
-            <h3>Target Costing</h3>
-            <p>Unlike cost-plus strategies where companies add a profit margin to production costs, Target Costing reverses the sequence to match competitive market trends. Management determines an acceptable market-driven selling price and deducts the required profit margin to find the maximum allowable **Target Cost**. Any gap between this value and current production projections is defined as the <strong>Cost Gap</strong>, which must be eliminated via value engineering before production begins.</p>
-        </article>
-    </div>
+            <h3>Gearing and Long-Term Capital Risks</h3>
+            <p>
+                Gearing measures the degree of financial risk exposure by tracking the proportion of a company's capital structure funded by interest-bearing long-term debt relative to equity stakes:
+            </p>
+            <div class="concept-card" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; background-color: var(--l3-cyan-light); color: var(--l3-cyan-dark);">
+                • Gearing Ratio = (Long-Term Loans / (Total Equity + Long-Term Loans)) × 100<br>
+                • Interest Cover = Operating Profit / Finance Costs Interest Expense
+            </div>
+            <div class="trap-box">
+                <h3 style="color: #DC2626; margin-top: 0; font-size: 1.15rem;">⚠️ Drafting & Interpreting Statements Invisible Error Encyclopedia (AAT Core Exam Traps)</h3>
+                <ul>
+                    <li>
+                        <strong>The Research Capitalization Trap:</strong> A fatal conceptual flaw in statement adjustments is capitalizing research spending. Research represents initial testing and can never be capitalized under IAS 38; it must be written off immediately inside the profit or loss account.
+                    </li>
+                    <li>
+                        <strong>The Gearing Denominator Flaw:</strong> Exam candidates frequently compute gearing by dividing long-term liabilities strictly by equity capital, forgetting to include long-term loans inside the denominator pool. This skews capital structure solvency analysis completely.
+                    </li>
+                    <li>
+                        <strong>The Bonus Issue Cash Illusion:</strong> A common trap in the Statement of Changes in Equity (SOCIE) is treating a bonus issue of shares as an injection of new liquid funding. A bonus issue is a capitalization of reserves and does not generate any cash inflow.
+                    </li>
+                </ul>
+            </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
