@@ -3,334 +3,936 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Statements of Limited Companies - Test One</title>
+    <title>AAT Level 4 - Chapter 1: Applied Management Accounting (Test One)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - AZZURRO INTEGRATO CON ETICHETTA ARANCIONE COMPLIANT */
+        :root {
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --highlight-green: #DCFCE7;
+            --highlight-red: #FEE2E2;
+            --l4-orange-brand: #F97316; /* Colore etichetta arancione concordato */
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e3e3;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quiz-container {
-            width: 100%;
-            max-width: 750px;
-            background-color: #ffffff;
-            border: 1px solid #999999;
-            padding: 25px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-        .header-title {
-            color: #006633;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 2px solid #006633;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .question-page {
-            display: none;
-            min-height: 220px;
-        }
-        .question-page.active {
-            display: block;
-        }
-        .question-counter {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 15px;
-        }
-        .question-body {
-            font-size: 14px;
+            padding: 3rem 1rem;
             line-height: 1.6;
-            color: #222222;
         }
-        select, input[type="text"] {
-            padding: 4px;
-            font-size: 13px;
-            border: 1px solid #999999;
-            border-radius: 2px;
-            margin: 4px 0;
-        }
-        input[type="text"] {
-            width: 110px;
-            text-align: right;
-            font-family: monospace;
-        }
-        table.osborne-table {
+
+        .test-container {
+            background-color: var(--bubble-white-bg);
             width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            position: relative;
         }
-        table.osborne-table th {
-            background-color: #f2f2f2;
-            text-align: left;
-            font-size: 13px;
-        }
-        table.osborne-table td, table.osborne-table th {
-            border: 1px solid #aaaaaa;
-            padding: 6px;
-            font-size: 13px;
-        }
-        .nav-buttons {
-            margin-top: 30px;
-            border-top: 1px solid #cccccc;
-            padding-top: 15px;
+        .test-header-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .btn-action {
-            background-color: #f0f0f0;
-            border: 1px solid #999999;
-            padding: 4px 14px;
-            font-size: 13px;
+
+        .test-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .question-counter-label {
+            font-size: 0.9rem;
+            color: var(--l3-cyan-dark);
+            font-weight: 600;
+        }
+
+        .question-tab {
+            display: none;
+            flex-direction: column;
+        }
+        .question-tab.active {
+            display: flex;
+        }
+
+        .task-instruction-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .task-interactive-body {
+            background-color: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            color: #333333;
+            margin-bottom: 0.75rem;
+            transition: all 0.15s ease;
         }
-        .btn-action:hover {
-            background-color: #e0e0e0;
+        .option-box:hover { background-color: #F9FAFB; }
+        .option-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; }
+        .feedback-icon { font-weight: 700; font-size: 1.1rem; }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #FFFFFF;
         }
-        .feedback {
-            margin-top: 15px;
-            font-size: 14px;
+        .financial-table th {
+            background-color: var(--l3-cyan-dark);
+            color: #FFFFFF;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--l3-cyan-dark);
+        }
+        .financial-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .numeric-field, .multi-input-field, .multi-select-field, .select-input {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+        .numeric-field { font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .numeric-field:focus, .multi-input-field:focus, .multi-select-field:focus {
+            border-color: var(--l3-cyan-primary);
+            outline: none;
+            background-color: var(--l3-cyan-light);
+        }
+
+        .controls-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            border-top: 2px solid #E5E7EB;
+            padding-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-group-left, .btn-group-right { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+        .btn-blue { background-color: #2563EB; color: #FFFFFF; }
+        .btn-green { background-color: #059669; color: #FFFFFF; }
+        .btn-red { background-color: #DC2626; color: #FFFFFF; }
+        .btn-gray { background-color: #4B5563; color: #FFFFFF; }
+        .btn-purple { background-color: #7C3AED; color: #FFFFFF; }
+        .btn-gray:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .global-feedback-msg {
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .msg-correct { background-color: #DEF7EC; color: #065F46; }
+        .msg-incorrect { background-color: #FDE8E8; color: #9B1C1C; }
+
+        .solution-note-panel {
+            margin-top: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--l3-cyan-primary);
+            background-color: var(--l3-cyan-light);
+            font-size: 0.9rem;
+            color: #0369A1;
+        }
+
+        .correct-answer-highlight { background-color: var(--highlight-green) !important; border-color: var(--success-color) !important; }
+        .wrong-answer-highlight { background-color: var(--highlight-red) !important; border-color: var(--danger-color) !important; }
+        .hidden { display: none !important; }
+
+        #calc-toggle-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 1999;
+            font-size: 20px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border: none;
+        }
+        #calc-toggle-trigger:hover { transform: scale(1.08); background-color: #1D4ED8; }
+
+        #calc-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 240px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        #calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+        #calc-header span {
+            color: #64748B;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #calc-close-btn {
+            background: transparent;
+            border: none;
+            color: #EF4444;
             font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
         }
-        .correct { color: #006633; }
-        .incorrect { color: #cc0000; }
+
+        #calc-screen {
+            width: 100%;
+            height: 45px;
+            background: #000000;
+            border-radius: 8px;
+            color: #00FFFF;
+            text-shadow: 0 0 10px #00FFFF;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: right;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #00FFFF;
+            box-sizing: border-box;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media print {
+            body { background: #FFFFFF; padding: 0; margin: 0; }
+            .test-container { box-shadow: none; border: none; padding: 0; max-width: 1000px; }
+            .controls-footer, #calc-toggle-trigger, #calc-widget { display: none !important; }
+            .question-tab { display: flex !important; page-break-after: always; }
+        }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="header-title">Financial Statements of Limited Companies - Test One</div>
+    <div class="test-container">
+        <div class="test-header-row">
+            <div class="test-title">UNIT: APPLIED MANAGEMENT ACCOUNTING (TEST ONE)</div>
+            <div class="question-counter-label" id="q-counter-display">Question 1 of 15</div>
+        </div>
+        <form id="quiz-form" onsubmit="event.preventDefault();">
+            <!-- QUESTION 1: TIPO "radio" (ZBB Characteristics) -->
+            <div class="question-tab active" data-qindex="1" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">1. Which advanced budgetary control methodology rejects all past historical benchmarks, requiring managers to fully justify every line-item expense from a base of zero at the start of each cycle?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="A"> Incremental Budgeting Matrix Framework</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="B"> Zero-Based Budgeting (ZBB)</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q1" value="C"> Activity-Based Costing Absorption Pool</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Zero-Based Budgeting (ZBB) ignores historical cost data completely. It forces management to build every operational ledger column from scratch, eliminating historical inefficiencies and institutional waste slack.
+                </div>
+            </div>
 
-    <!-- Q1 -->
-    <div id="page1" class="question-page active">
-        <div class="question-counter">Q1 of 15</div>
-        <div class="question-body">
-            A parent company acquires 80% of the 100,000 ordinary £1 shares of a subsidiary for £140,000 cash. At the date of acquisition, the retained earnings of the subsidiary were £45,000. Calculate the total Goodwill arising on consolidation assuming the non-controlling interest is valued at its proportionate share of net assets:<br>
-            Goodwill: £ <input type="text" id="ans1" placeholder="0.00">
+            <!-- QUESTION 2: TIPO "multi-select" (Rolling Budgets Strategy) -->
+            <div class="question-tab" data-qindex="2" data-type="multi-select">
+                <div class="task-instruction-text">2. Complete the corporate accounting analysis assessing continuous forecasting tools.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To maintain high forecasting precision in volatile economic landscapes, a firm deploys 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="rolling">
+                            <option value="">-- Methodology --</option>
+                            <option value="incremental">Incremental Adjustments</option>
+                            <option value="rolling">Rolling (Continuous) Budgets</option>
+                        </select> 
+                        by adding a future operational period immediately as the current month or quarter 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="expires">
+                            <option value="">-- Condition --</option>
+                            <option value="expires">Expires</option>
+                            <option value="doubles">Doubles in volume</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                .75rem;<div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Rolling budgets ensure strategic cash forecasts remain accurate by dynamically refreshing the planning timeline whenever a current segment closes out.
+                </div>
+            </div>
+
+            <!-- QUESTION 3: TIPO "multi-input" (Flexible Budget Calculations) -->
+            <div class="question-tab" data-qindex="3" data-type="multi-input">
+                <div class="task-instruction-text">3. An enterprise sets an initial Fixed Budget for 10,000 units with Variable Materials costs at £40,000 and Fixed Overheads at £25,000. If actual production volume scales to 12,000 units, compute the accurate target parameters inside a true Flexible Budget.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Flexed Budget Expenditure Component</th>
+                                <th style="width: 250px;">Target Value (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Flexed Variable Materials Cost total parameter</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="48000" placeholder="0"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">Flexed Fixed Overheads Cost total parameter</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="25000" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Standard Variable rate = £40,000 / 10,000 = £4 per unit. Flexed Materials = 12,000 achieved units × £4 = £48,000. Under the Fixed Cost Flexing Trap, fixed overheads must remain absolutely constant at £25,000 regardless of activity shifts.
+                </div>
+            </div>
+
+            <!-- QUESTION 4: TIPO "radio" (Planning vs Operational Definition) -->
+            <div class="question-tab" data-qindex="4" data-type="radio" data-correct="A">
+                <div class="task-instruction-text">4. A variance component is caused purely by an industry-wide raw material price surge outside the control of the local purchasing manager. How is this classified under Level 4 variance splits?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q4" value="A"> A Planning Variance</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q4" value="B"> An Operational Variance</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q4" value="C"> A Material Efficiency Gain</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Variances are split to assess performance fairly. Planning variances measure standard forecasting errors caused by uncontrollable external macroeconomic updates.
+                </div>
+            </div>
+            <!-- QUESTION 5: TIPO "multi-select" (Operational Variances Role) -->
+            <div class="question-tab" data-qindex="5" data-type="multi-select">
+                <div class="task-instruction-text">5. Complete the statement regarding the managerial assessment of internal variances.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        To evaluate internal department efficiency and floor waste controls fairly, management extracts 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="operational">
+                            <option value="">-- Component --</option>
+                            <option value="planning">Planning Variances</option>
+                            <option value="operational">Operational Variances</option>
+                        </select> 
+                        because they measure the variance between the revised standard and 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="actual">
+                            <option value="">-- Baseline --</option>
+                            <option value="original">Original fixed standard lines</option>
+                            <option value="actual">Actual results achieved</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Operational variances isolate the pure actions of the department head from market volatility, allowing direct evaluation of shop floor resource usage and waste.
+                </div>
+            </div>
+
+            <!-- QUESTION 6: TIPO "radio" (Limiting Factor Ranking Principle) -->
+            <div class="question-tab" data-qindex="6" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">6. A factory encounters a critical bottleneck machine hours restriction. What is the mandatory legal standard ranking rule required to optimize product paths?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q6" value="A"> Prioritize the items exhibiting the highest absolute wholesale market selling price.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q6" value="B"> Prioritize the items exhibiting the maximized total net accounting profit margin per piece.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q6" value="C"> Prioritize the items based on their contribution per unit of the limiting factor resource consumed.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Limiting Factor Ranking Flaw warns against using raw unit margins. To maximize total corporate cash profits under shortages, lines must be sequenced by contribution per unit of scarce resource.
+                </div>
+            </div>
+
+            <!-- QUESTION 7: TIPO "multi-input" (Limiting Factor Math Node) -->
+            <div class="question-tab" data-qindex="7" data-type="multi-input">
+                <div class="task-instruction-text">7. Product Alpha generates a unit contribution of £30 and requires 3 machine hours per unit. Product Beta generates a unit contribution of £40 and requires 5 machine hours per unit. Calculate the key factory optimization indicators.</div>
+                <div class="task-interactive-body">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Product Variant Limiting Factor Metric</th>
+                                <th style="width: 250px;">Contribution per Hour (£)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">Product Alpha contribution factor per restricted machine hour</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="10" placeholder="0"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">Product Beta contribution factor per restricted machine hour</td>
+                                <td><input type="text" class="multi-input-field numeric-field" data-ans="8" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Alpha contribution per bottleneck hour = £30 / 3 hrs = £10/hr. Beta contribution = £40 / 5 hrs = £8/hr. Consequently, available machine capacity must be allocated to Product Alpha first.
+                </div>
+            </div>
+
+            <!-- QUESTION 8: TIPO "radio" (Goal Congruence Objective) -->
+            <div class="question-tab" data-qindex="8" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">8. When designing advanced internal transfer pricing structures for corporate divisions, what is the primary strategic objective known as 'Goal Congruence'?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="A"> Forcing buying divisions to hide their credit invoices from internal auditors.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="B"> Ensuring that autonomous decisions made by individual divisional managers automatically maximize total corporate profitability.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q8" value="C"> Moving all transfer pricing variance entries directly into the fixed asset register.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Goal congruence ensures decentralized company components trade under price terms that promote joint optimization, preventing localized profits from causing group-level cash deficits.
+                </div>
+            </div>
+            <!-- QUESTION 9: TIPO "multi-select" (Transfer Price Capacity Boundary) -->
+            <div class="question-tab" data-qindex="9" data-type="multi-select">
+                <div class="task-instruction-text">9. Complete the statement outlining transfer price parameters when excess capacity parameters exist.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        If a supplying division possesses ample spare production capacity, the opportunity cost of diverting items internally is 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="zero">
+                            <option value="">-- Opportunity Cost --</option>
+                            <option value="zero">Absolutely zero</option>
+                            <option value="maximum">Equivalent to full external retail price</option>
+                        </select>. 
+                        Therefore, the lowest acceptable minimum transfer price to safeguard divisional results is its 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="incremental">
+                            <option value="">-- Cost Base --</option>
+                            <option value="incremental">Pure incremental cost of production</option>
+                            <option value="markup">Full external market wholesale value</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> The Absolute Opportunity Cost Illusion clarifies that if no external sales are displaced, opportunity cost is zero. Demanding external markup rates breaks group goal congruence.
+                </div>
+            </div>
+
+            <!-- QUESTION 10: TIPO "radio" (Maximum Transfer Price Limit) -->
+            <div class="question-tab" data-qindex="10" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">10. From the strategic viewpoint of the internal buying division, what baseline parameter sets the absolute maximum transfer price they will accept?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="A"> The marginal standard cost plus a compulsory 15% corporate add-back markup.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="B"> The historical cost calculated using incremental budgeting adjustments curves.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q10" value="C"> The lower of the external market market price or the net divisional revenue generated after downstream processing.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> A buying division will never pay more internally than the open market price or the net final cash revenue they can generate from downstream completion processing.
+                </div>
+            </div>
+
+            <!-- QUESTION 11: TIPO "multi-select" (ABB Cost Drivers Framework) -->
+            <div class="question-tab" data-qindex="11" data-type="multi-select">
+                <div class="task-instruction-text">11. Complete the strategic taxonomy regarding contemporary activity-based planning.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        Unlike incremental structures, 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="abb">
+                            <option value="">-- System Name --</option>
+                            <option value="zbb">Zero-Based Budgeting (ZBB)</option>
+                            <option value="abb">Activity-Based Budgeting (ABB)</option>
+                        </select> 
+                        links resource consumption straight to operational processes by identifying clear 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="drivers">
+                            <option value="">-- Cost Links --</option>
+                            <option value="drivers">Cost drivers (e.g., number of machine setups)</option>
+                            <option value="variances">Uncontrollable planning variances</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Activity-Based Budgeting (ABB) replaces arbitrary overhead allocations by embedding hard activity cost drivers into the management control framework loop.
+                </div>
+            </div>
+
+            <!-- QUESTION 12: TIPO "radio" (ZBB Limitations) -->
+            <div class="question-tab" data-qindex="12" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">12. While Zero-Based Budgeting (ZBB) effectively targets institutional waste and optimizes resource pools, what is its primary operational disadvantage?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="A"> It locks variable costs into historical percentage curves permanently.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="B"> It requires massive administrative hours, expert training, and high operational staff resources.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q12" value="C"> It completely masks internal operational variances by flexing fixed overheads.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> ZBB requires corporate departments to justify all funding lines from scratch, delivering great optimization but demanding massive administrative labor hours.
+                </div>
+            </div>
+            <!-- QUESTION 13: TIPO "radio" (Fixed Budget Pitfall) -->
+            <div class="question-tab" data-qindex="13" data-type="radio" data-correct="C">
+                <div class="task-instruction-text">13. Why does comparing raw actual results directly against a static Fixed Budget represent a severe corporate control process failure?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="A"> Because it capitalizes development expenses into current asset lines.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="B"> Because fixed budgets automatically assume opportunity costs are zero.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q13" value="C"> Because volume fluctuations distort cost metrics, masking true spending efficiency and waste.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                .75rem;<div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Fixed budgets fail to adjust for output differences. Advanced management control commands flexible budgeting to isolate volume shifts from pure operational spending.
+                </div>
+            </div>
+
+            <!-- QUESTION 14: TIPO "multi-select" (Transfer Price with Capacity Constraints) -->
+            <div class="question-tab" data-qindex="14" data-type="multi-select">
+                <div class="task-instruction-text">14. Complete the statement calculating internal transfers under full capacity constraints.</div>
+                <div class="task-interactive-body">
+                    <p style="line-height: 2; font-size: 1.05rem; margin: 0;">
+                        When a manufacturing division operates at absolute full capacity, the minimum transfer price must equal its incremental production cost plus 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="lost">
+                            <option value="">-- Opportunity cost --</option>
+                            <option value="zero">A zero opportunity cost baseline</option>
+                            <option value="lost">The lost external market contribution margin</option>
+                        </select> 
+                        to prevent internal transfers from causing a net drop in 
+                        <select class="multi-select-field" style="width: auto; display: inline-block;" data-ans="group">
+                            <option value="">-- Corporate level --</option>
+                            <option value="group">Overall group level profits</option>
+                            <option value="divisional">Localized buying division autonomy</option>
+                        </select>.
+                    </p>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> If external orders are displaced, the lost contribution is a real opportunity cost that must be added to the base cost to protect corporate financial results.
+                </div>
+            </div>
+
+            <!-- QUESTION 15: TIPO "radio" (Revaluation Reserve Isolation) -->
+            <div class="question-tab" data-qindex="15" data-type="radio" data-correct="B">
+                <div class="task-instruction-text">15. During a rolling period review, an accountant notes an uncontrollable market wage adjustment has shifted standard labor benchmarks. How must this be processed?</div>
+                <div class="task-interactive-body">
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="A"> Added directly into flexed fixed overheads columns as a waste metric.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="B"> Isolated as a separate Planning Variance to avoid penalizing the operational floor manager.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                    <label class="option-box">
+                        <span class="option-label"><input type="radio" name="q15" value="C"> Logged inside the activity-based driver pool to delete the transaction footprint.</span>
+                        <span class="feedback-icon"></span>
+                    </label>
+                </div>
+                <div class="global-feedback-msg hidden"></div>
+                <div class="solution-note-panel hidden">
+                    <strong>Solution Note:</strong> Uncontrollable macroeconomic alterations represent planning updates. Keeping them separated from operational variances ensures internal performance evaluation tracks remain neutral and fair.
+                </div>
+            </div>
+
+        </form>
+
+        <!-- PULSANTIERA DI CONTROLLO INTERNA ALLA BOLLA BIANCA (APPENDICE TECNICA) -->
+        <div class="controls-footer">
+            <div class="btn-group-left">
+                <button type="button" class="btn btn-blue" id="btn-quiz-submit" onclick="validateCurrentTab()">Am I right?</button>
+                <button type="button" class="btn btn-green" id="btn-quiz-solution" onclick="showCurrentSolution()">Show Solution</button>
+                <button type="button" class="btn btn-red" onclick="resetCurrentTab()">Reset</button>
+            </div>
+            <div class="btn-group-right">
+                <button type="button" class="btn btn-gray" id="btn-quiz-prev" onclick="navigateTab(-1)">Previous Question</button>
+                <button type="button" class="btn btn-gray" id="btn-quiz-next" onclick="navigateTab(1)">Next Question</button>
+                <button type="button" class="btn btn-purple hidden" id="btn-quiz-print" onclick="triggerPDFDownload()">Download as PDF</button>
+            </div>
+        </div>
+
+    </div> <!-- Fine .test-container -->
+
+    <!-- TRIGGER CIRCOLARE FLUTTUANTE ANCORATO IN BASSO A DESTRA SCHERMO -->
+    <button type="button" id="calc-toggle-trigger" onclick="toggleCalcWidget()">🧮</button>
+
+    <!-- WIDGET CALCOLATRICE VETRATO "Osborne Calc" -->
+    <div id="calc-widget">
+        <div id="calc-header">
+            <span>Osborne Calc</span>
+            <button id="calc-close-btn" onclick="toggleCalcWidget()" title="Hide">✕</button>
+        </div>
+        <input type="text" id="calc-screen" readonly value="0">
+        <div class="calc-grid">
+            <button type="button" class="calc-btn op" onclick="pressClear()">C</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('pow')">x²</button>
+            <button type="button" class="calc-btn op" onclick="pressMathOp('sqrt')">√</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('/')">/</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="pressChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="pressChar('9')">9</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('*')">*</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="pressChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="pressChar('6')">6</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('-')">-</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="pressChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="pressChar('3')">3</button>
+            <button type="button" class="calc-btn op" onclick="pressChar('+')">+</button>
+            
+            <button type="button" class="calc-btn" onclick="pressChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="pressChar('.')">.</button>
+            <button type="button" class="calc-btn op" onclick="pressPercent()">%</button>
+            <button type="button" class="calc-btn" style="background:#059669; color:white;" onclick="executeCalc()">=</button>
         </div>
     </div>
-
-    <!-- Q2 -->
-    <div id="page2" class="question-page">
-        <div class="question-counter">Q2 of 15</div>
-        <div class="question-body">
-            Using the acquisition metrics from Q1, calculate the total value of the Non-Controlling Interest (NCI) to be reported in the Consolidated Statement of Financial Position at the date of acquisition:<br>
-            Non-Controlling Interest Value: £ <input type="text" id="ans2" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div id="page3" class="question-page">
-        <div class="question-counter">Q3 of 15</div>
-        <div class="question-body">
-            When preparing a Statement of Cash Flows using the IAS 7 indirect method, a company reports a net profit before tax of £85,000. The adjustments include a depreciation charge of £14,000, an increase in inventory of £3,500, and a decrease in trade receivables of £2,200. Calculate the cash generated from operations:<br>
-            Cash Generated from Operations: £ <input type="text" id="ans3" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q4 -->
-    <div id="page4" class="question-page">
-        <div class="question-counter">Q4 of 15</div>
-        <div class="question-body">
-            A company's draft accounts show a profit from operations (EBIT) of £120,000. During the year, finance costs were £15,000, and an ordinary dividend of £20,000 was paid. If the corporate tax rate results in a tax expense of £22,000, calculate the net profit for the year to be transferred to retained earnings:<br>
-            Net Profit for the Year: £ <input type="text" id="ans4" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q5 -->
-    <div id="page5" class="question-page">
-        <div class="question-counter">Q5 of 15</div>
-        <div class="question-body">
-            A limited company makes a 1-for-4 bonus issue of ordinary shares. Before the issue, the company's equity includes 200,000 ordinary shares of £0.50 nominal value and a share premium account balance of £45,000. Calculate the remaining balance in the Share Premium account after funding this bonus issue:<br>
-            Remaining Share Premium: £ <input type="text" id="ans5" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div id="page6" class="question-page">
-        <div class="question-counter">Q6 of 15</div>
-        <div class="question-body">
-            A company provides the following financial indicators: Revenue £450,000, Gross Profit £180,000, and Profit from Operations £67,500. Calculate the Operating Profit Margin percentage:<br>
-            Operating Profit Margin: <input type="text" id="ans6" placeholder="0.00"> %
-        </div>
-    </div>
-
-    <!-- Q7 -->
-    <div id="page7" class="question-page">
-        <div class="question-counter">Q7 of 15</div>
-        <div class="question-body">
-            A limited company has a total non-current liability debt of £150,000 in 8% debentures/bonds. Total equity reserves are £250,000. Calculate the gearing ratio using the capital-employed method [Debt / (Equity + Debt)] (round to 1 decimal place):<br>
-            Gearing Ratio: <input type="text" id="ans7" placeholder="0.0"> %
-        </div>
-    </div>
-
-    <!-- Q8 -->
-    <div id="page8" class="question-page">
-        <div class="question-counter">Q8 of 15</div>
-        <div class="question-body">
-            A subsidiary sells goods to its parent company for £24,000 cash. The goods originally cost the subsidiary £16,000. At the year-end, half of these goods remain unsold in the parent company's warehouse. Calculate the Provision for Unrealised Profit (PUP) adjustment required on consolidation:<br>
-            PUP Adjustment: £ <input type="text" id="ans8" placeholder="0.00">
-        </div>
-    </div>
-    <!-- Q9 -->
-    <div id="page9" class="question-page">
-        <div class="question-counter">Q9 of 15</div>
-        <div class="question-body">
-            A limited company makes a 1-for-5 rights issue of ordinary shares at a price of £1.20 per share. Before the rights issue, the company had 500,000 ordinary £0.50 nominal shares in issue. Calculate the total cash injection received from this transaction:<br>
-            Total Cash Received: £ <input type="text" id="ans9" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q10 -->
-    <div id="page10" class="question-page">
-        <div class="question-counter">Q10 of 15</div>
-        <div class="question-body">
-            Based on the transaction figures in Q9, calculate the total value that will be added to the Share Premium Account as a result of the rights issue:<br>
-            Value added to Share Premium: £ <input type="text" id="ans10" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q11 -->
-    <div id="page11" class="question-page">
-        <div class="question-counter">Q11 of 15</div>
-        <div class="question-body">
-            A company provides the following financial position details at the year-end:<br>
-            - Closing Trade Receivables: £48,000<br>
-            - Total Credit Revenue: £365,000<br>
-            Calculate the Trade Receivables Collection Period expressed in days (round to the nearest whole day):<br>
-            Receivables Collection Period: <input type="text" id="ans11" placeholder="0"> days
-        </div>
-    </div>
-
-    <!-- Q12 -->
-    <div id="page12" class="question-page">
-        <div class="question-counter">Q12 of 15</div>
-        <div class="question-body">
-            According to IAS 10, a material decline in the net realizable value of inventory after the reporting period provides evidence of conditions that existed at the end of the reporting period. This type of event is classified as an:<br>
-            Event Classification: <select id="ans12"><option value="">Select</option><option value="correct">Adjusting event</option><option value="w">Non-adjusting event</option></select>
-        </div>
-    </div>
-
-    <!-- Q13 -->
-    <div id="page13" class="question-page">
-        <div class="question-counter">Q13 of 15</div>
-        <div class="question-body">
-            A company has an opening corporation tax liability of £14,000. During the year, it makes a final cash payment of £15,500 to the tax authorities to clear the prior year's debt. The estimated tax charge for the current year is £18,000. Calculate the tax expense to be reported in the Statement of Profit or Loss:<br>
-            Total Tax Expense: £ <input type="text" id="ans13" placeholder="0.00">
-        </div>
-    </div>
-
-    <!-- Q14 -->
-    <div id="page14" class="question-page">
-        <div class="question-counter">Q14 of 15</div>
-        <div class="question-body">
-            A limited company reports a profit from operations (EBIT) of £95,000. Total equity is £320,000 and non-current liabilities are £80,000. Calculate the Return on Capital Employed (ROCE) percentage ratio (round to 1 decimal place):<br>
-            ROCE Ratio: <input type="text" id="ans14" placeholder="0.0"> %
-        </div>
-    </div>
-
-    <!-- Q15 -->
-    <div id="page15" class="question-page">
-        <div class="question-counter">Q15 of 15</div>
-        <div class="question-body">
-            Under IAS 38, research expenditure incurred during the initial phase of an internal project must be capitalized as an intangible asset if it is expected to generate future economic value.<br>
-            Is the statement above True or False?<br>
-            Answer: <select id="ans15"><option value="">Select</option><option value="w">True</option><option value="correct">False</option></select>
-        </div>
-    </div>
-
-    <!-- Feedback e Navigazione -->
-    <div id="feedbackBox" class="feedback"></div>
-
-    <div class="nav-buttons">
-        <button class="btn-action" id="backBtn" onclick="changePage(-1)">Back</button>
-        <button class="btn-action" onclick="checkCurrentAnswer()">Check Answer</button>
-        <button class="btn-action" id="nextBtn" onclick="changePage(1)">Next</button>
-    </div>
-</div>
-
 <script>
-    let currentQ = 1;
-    const totalQ = 15;
+let currentQuestionIndex = 1;
+const totalQuestionsCount = 15;
 
-    function updateButtons() {
-        document.getElementById('backBtn').style.visibility = (currentQ === 1) ? 'hidden' : 'visible';
-        document.getElementById('nextBtn').style.visibility = (currentQ === totalQ) ? 'hidden' : 'visible';
-        document.getElementById('feedbackBox').innerText = '';
+function updateNavigationDisplay() {
+    document.getElementById('q-counter-display').textContent = `Question ${currentQuestionIndex} of ${totalQuestionsCount}`;
+    document.getElementById('btn-quiz-prev').disabled = (currentQuestionIndex === 1);
+    
+    const nextBtn = document.getElementById('btn-quiz-next');
+    const printBtn = document.getElementById('btn-quiz-print');
+    
+    if (currentQuestionIndex === totalQuestionsCount) {
+        nextBtn.classList.add('hidden');
+        printBtn.classList.remove('hidden');
+    } else {
+        nextBtn.classList.remove('hidden');
+        printBtn.classList.add('hidden');
     }
+}
 
-    function changePage(step) {
-        if ((currentQ + step) >= 1 && (currentQ + step) <= totalQ) {
-            document.getElementById(`page${currentQ}`).classList.remove('active');
-            currentQ += step;
-            document.getElementById(`page${currentQ}`).classList.add('active');
-            updateButtons();
-        }
-    }
+function navigateTab(direction) {
+    const tabs = document.querySelectorAll('.question-tab');
+    let targetIndex = currentQuestionIndex + direction;
+    
+    if (targetIndex < 1 || targetIndex > totalQuestionsCount) return;
+    
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    currentQuestionIndex = targetIndex;
+    const activeTab = document.querySelector(`.question-tab[data-qindex="${currentQuestionIndex}"]`);
+    activeTab.classList.add('active');
+    
+    updateNavigationDisplay();
+}
 
-    function checkCurrentAnswer() {
-        let isCorrect = false;
-        let feedback = document.getElementById('feedbackBox');
+function validateCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const feedbackMsg = activeTab.querySelector('.global-feedback-msg');
+    let tabPassed = true;
 
-        if (currentQ === 1) {
-            let val = document.getElementById('ans1').value.trim();
-            isCorrect = (val === '24000' || val === '24000.00');
-        } else if (currentQ === 2) {
-            let val = document.getElementById('ans2').value.trim();
-            isCorrect = (val === '29000' || val === '29000.00');
-        } else if (currentQ === 3) {
-            let val = document.getElementById('ans3').value.trim();
-            isCorrect = (val === '97700' || val === '97700.00');
-        } else if (currentQ === 4) {
-            let val = document.getElementById('ans4').value.trim();
-            isCorrect = (val === '83000' || val === '83000.00');
-        } else if (currentQ === 5) {
-            let val = document.getElementById('ans5').value.trim();
-            isCorrect = (val === '20000' || val === '20000.00');
-        } else if (currentQ === 6) {
-            let val = document.getElementById('ans6').value.trim();
-            isCorrect = (val === '15' || val === '15.00');
-        } else if (currentQ === 7) {
-            let val = document.getElementById('ans7').value.trim();
-            isCorrect = (val === '37.5');
-        } else if (currentQ === 8) {
-            let val = document.getElementById('ans8').value.trim();
-            isCorrect = (val === '4000' || val === '4000.00');
-        } else if (currentQ === 9) {
-            let val = document.getElementById('ans9').value.trim();
-            isCorrect = (val === '120000' || val === '120000.00');
-        } else if (currentQ === 10) {
-            let val = document.getElementById('ans10').value.trim();
-            isCorrect = (val === '70000' || val === '70000.00');
-        } else if (currentQ === 11) {
-            let val = document.getElementById('ans11').value.trim();
-            isCorrect = (val === '48');
-        } else if (currentQ === 12) {
-            isCorrect = (document.getElementById('ans12').value === 'correct');
-        } else if (currentQ === 13) {
-            let val = document.getElementById('ans13').value.trim();
-            isCorrect = (val === '19500' || val === '19500.00');
-        } else if (currentQ === 14) {
-            let val = document.getElementById('ans14').value.trim();
-            isCorrect = (val === '23.8');
-        } else if (currentQ === 15) {
-            isCorrect = (document.getElementById('ans15').value === 'correct');
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        const selectedRadio = activeTab.querySelector('input[type="radio"]:checked');
+        const icons = activeTab.querySelectorAll('.feedback-icon');
+        
+        icons.forEach(icon => icon.textContent = '');
+        
+        if (!selectedRadio) {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Please select an answer option before verifying.";
+            feedbackMsg.classList.remove('hidden');
+            return;
         }
 
-        if (isCorrect) {
-            feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+        const chosenBox = selectedRadio.closest('.option-box');
+        const targetIcon = chosenBox.querySelector('.feedback-icon');
+
+        if (selectedRadio.value === correctAns) {
+            targetIcon.textContent = "✔️";
+            targetIcon.style.color = "var(--success-color)";
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "Correct! Well done.";
         } else {
-            feedback.innerHTML = '<span class="incorrect">Incorrect. Please try again.</span>';
+            targetIcon.textContent = "❌";
+            targetIcon.style.color = "var(--danger-color)";
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Incorrect option selected.";
+            tabPassed = false;
+        }
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        
+        fields.forEach(field => {
+            const userVal = field.value.trim().toLowerCase();
+            const correctVal = field.getAttribute('data-ans').trim().toLowerCase();
+            
+            if (userVal !== correctVal) {
+                tabPassed = false;
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field wrong-answer-highlight";
+                } else {
+                    field.className = "multi-select-field wrong-answer-highlight";
+                }
+            } else {
+                if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                    field.className = "multi-input-field numeric-field correct-answer-highlight";
+                } else {
+                    field.className = "multi-select-field correct-answer-highlight";
+                }
+            }
+        });
+
+        feedbackMsg.classList.remove('hidden');
+        if (tabPassed) {
+            feedbackMsg.className = "global-feedback-msg msg-correct";
+            feedbackMsg.textContent = "All fields correct! Exceptional work.";
+        } else {
+            feedbackMsg.className = "global-feedback-msg msg-incorrect";
+            feedbackMsg.textContent = "Some fields are incorrect. Review your accounting logic.";
         }
     }
+    feedbackMsg.classList.remove('hidden');
+}
 
-    updateButtons();
+function showCurrentSolution() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+
+    if (qType === "radio") {
+        const correctAns = activeTab.getAttribute('data-correct');
+        activeTab.querySelectorAll('.option-box').forEach(box => {
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio.value === correctAns) {
+                box.className = "option-box correct-answer-highlight";
+            }
+        });
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            const targetAns = field.getAttribute('data-ans');
+            field.value = targetAns;
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field correct-answer-highlight";
+            } else {
+                field.className = "multi-select-field correct-answer-highlight";
+            }
+        });
+    }
+
+    if (solutionPanel) solutionPanel.classList.remove('hidden');
+}
+
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.question-tab.active');
+    const qType = activeTab.getAttribute('data-type');
+    
+    activeTab.querySelector('.global-feedback-msg').classList.add('hidden');
+    const solutionPanel = activeTab.querySelector('.solution-note-panel');
+    if (solutionPanel) solutionPanel.classList.add('hidden');
+
+    if (qType === "radio") {
+        activeTab.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        activeTab.querySelectorAll('.option-box').forEach(box => box.className = "option-box");
+        activeTab.querySelectorAll('.feedback-icon').forEach(icon => icon.textContent = '');
+    } else {
+        const fields = activeTab.querySelectorAll('.multi-input-field, .multi-select-field, .numeric-field');
+        fields.forEach(field => {
+            field.value = '';
+            if (field.classList.contains('numeric-field') || field.classList.contains('multi-input-field')) {
+                field.className = "multi-input-field numeric-field";
+            } else {
+                field.className = "multi-select-field";
+            }
+        });
+    }
+}
+
+function triggerPDFDownload() {
+    const oldTitle = document.title;
+    document.title = "AAT_Level4_Chapter1_Test1_Report";
+    window.print();
+    document.title = oldTitle;
+}
+
+function toggleCalcWidget() {
+    const widget = document.getElementById('calc-widget');
+    widget.style.display = (widget.style.display === 'block') ? 'none' : 'block';
+}
+function pressChar(c) {
+    const p = document.getElementById('calc-screen');
+    p.value = (p.value === '0') ? c : p.value + c;
+}
+function pressClear() { document.getElementById('calc-screen').value = '0'; }
+function pressPercent() {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (!isNaN(val)) p.value = val / 100;
+}
+function pressMathOp(op) {
+    const p = document.getElementById('calc-screen');
+    let val = parseFloat(p.value);
+    if (isNaN(val)) return;
+    if (op === 'sqrt') p.value = Math.sqrt(val);
+    if (op === 'pow') p.value = Math.pow(val, 2);
+}
+function executeCalc() {
+    const p = document.getElementById('calc-screen');
+    try { p.value = eval(p.value); } catch(e) { p.value = 'Error'; }
+}
+
+const dragWidget = document.getElementById("calc-widget");
+const dragHandle = document.getElementById("calc-header");
+let activeDrag = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+dragHandle.addEventListener("mousedown", dragStart);
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("mousemove", drag);
+
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target.closest('#calc-header') && e.target !== document.getElementById('calc-close-btn')) activeDrag = true;
+}
+function dragEnd() { activeDrag = false; }
+function drag(e) {
+    if (activeDrag) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        dragWidget.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}
 </script>
-
 </body>
 </html>
