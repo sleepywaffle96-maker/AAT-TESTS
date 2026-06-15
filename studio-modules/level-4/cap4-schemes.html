@@ -1,155 +1,170 @@
-<!-- RIFERIMENTO_BLOCCO: 1 -->
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 4 - Chapter 4: DAIF Framework Schemes | AAT Accounting Hub</title>
+    <title>AAT Level 4 - Chapter 4: Business Tax (Visual Schemes)</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* DESIGN SYSTEM LIVELLO 4 - INTEGRITÀ DEL LOOK CON DETTAGLIO BADGE ARANCIONE BRAND CORRELATA */
         :root {
-            --bg-dark: #0a0f1d;
-            --card-glass: rgba(16, 24, 48, 0.75);
-            --border-glass: rgba(0, 242, 254, 0.15);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --t-green: #10b981;
-            --t-red: #ef4444;
-            --accent-blue: #3b82f6;
+            --bg-dark-external: #0B0F19;
+            --bubble-white-bg: #FFFFFF;
+            --l3-cyan-primary: #0284C7;
+            --l3-cyan-dark: #0369A1;
+            --l3-cyan-light: #E0F2FE;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            --danger-color: #DC2626;
+            --success-color: #059669;
+            --card-bg: #FAFAFA;
+            --l4-orange-brand: #F97316;
         }
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-external);
+            color: var(--text-dark);
             margin: 0;
-            padding: 2rem;
+            padding: 3rem 1rem;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .nav-back {
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
+        .studio-container { max-width: 1000px; margin: 0 auto; }
+        .white-bubble-container {
+            background-color: var(--bubble-white-bg);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-bottom: 2rem;
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
-        h1 {
-            color: transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            font-size: 2.2rem;
-            margin-top: 0;
+        h2 { color: var(--l3-cyan-primary); font-size: 1.5rem; border-bottom: 2px solid var(--l3-cyan-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
-        h2 {
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-top: 1.5rem;
+        .visual-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-sizing: border-box;
         }
-        .t-account {
-            width: 100%;
-            margin: 1rem 0;
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.02);
-            border-radius: 6px;
-            overflow: hidden;
+        .visual-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--l3-cyan-dark);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.25rem;
         }
-        .t-account th {
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--primary);
-            padding: 0.5rem;
-            border-bottom: 2px solid var(--primary);
+        .flow-diagram-box {
+            background-color: #0F172A;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            padding: 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #E2E8F0;
+            overflow-x: auto;
+            margin: 1.5rem 0;
         }
-        .t-account td {
-            padding: 0.6rem;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .t-account td:first-child {
-            border-right: 2px solid var(--border-glass);
-        }
-        .side-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
+        .financial-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .financial-table th { background-color: var(--l3-cyan-dark); color: #FFFFFF; padding: 0.75rem; font-size: 0.85rem; border: 1px solid var(--l3-cyan-dark); }
+        .financial-table td { border: 1px solid var(--border-color); padding: 0.75rem; font-size: 0.9rem; }
+        @media print {
+            body { background: #FFFFFF; padding: 0; }
+            .white-bubble-container { box-shadow: none; border: none; padding: 0; }
+            .flow-diagram-box { background: #F8FAFC; color: #000; border: 1px solid #CBD5E1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../studio.html" class="nav-back">← Back to Study Hub</a>
-        
-        <div class="glass-card">
-            <h1>DAIF Asset Adjustments & Structural Disclosure Models</h1>
-            <p style="color: var(--text-muted)">Visual ledgers for asset revaluations, excess depreciation equity updates, and standard legal disclosure pathways.</p>
+    <div class="studio-container">
+        <div class="white-bubble-container">
+            <div style="margin-bottom: 3rem; border-bottom: 3px solid var(--l3-cyan-light); padding-bottom: 1.5rem;">
+                <span style="background: var(--l4-orange-brand); color: #FFF; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.7rem; border-radius: 4px; letter-spacing: 0.05em;">AAT LEVEL 4 PROFESSIONAL</span>
+                <h1 style="font-size: 2.2rem; margin: 0.75rem 0 0 0; color: #111827; font-weight: 700; letter-spacing: -0.02em;">Unit: Business Tax - Chapter 4 Visual Schemes</h1>
+            </div>
 
-            <h2>1. IAS 16 Revaluation Reserve and Excess Depreciation Ledger Adjustments</h2>
-            <p style="color: var(--text-muted)">The standard accounting process required to record a corporate non-current asset gain, followed by the annual reserves transfer.</p>
-            
-            <table class="t-account">
+            <h2>Scheme 4.1: Net Accounting Profit to Taxable Trading Profit Adjustments</h2>
+            <div class="grid-container">
+                <div class="visual-card">
+                    <div class="visual-card-title">Disallowable Expenses (+ Add Back)</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Costs listed in P&amp;L cells that are explicitly banned by UK statutory tax rules.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--danger-color); margin-top:0.5rem; margin-bottom:0;">⚠️ Examples: Accounting Depreciation, Customer Entertaining, Capital Assets outlays.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">Non-Trading Income (- Deduct)</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">Revenue lines embedded inside accounting profits that belong to distinct tax schedules.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--l3-cyan-dark); margin-top:0.5rem; margin-bottom:0;">📌 Examples: Bank Interest received, Commercial Rental income, Dividends streams.</p>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-card-title">Capital Allowances (- Deduct)</div>
+                    <p style="font-size:0.9rem; margin:0; text-align:justify;">HMRC-approved statutory relief system that replaces accounting depreciation allocations.</p>
+                    <p style="font-size:0.85rem; font-weight:600; color:var(--success-color); margin-top:0.5rem; margin-bottom:0;">🛡️ Controls: AIA 100% immediate deductions, Main Pool WDA deductions.</p>
+                </div>
+            </div>
+            <h2>Scheme 4.2: HMRC Capital Allowances Pooling Architecture</h2>
+            <div class="flow-diagram-box">
+========================================================================================
+                      STATUTORY DEPRECIATION ALTERNATIVE TRACK
+========================================================================================
+
+ [CAPITAL ASSETS INFLOW EVENT] 
+   • Check AIA Eligibility: Grant 100% full immediate write-off up to statutory limit.
+   • Non-AIA qualifying assets allocations path splits into relative pools.
+         ↓
+ [MAIN POOL PIPELINE LAYER]
+   • Covers standard plant & machinery assets. Apply standard WDA rate at 18%.
+   • Mechanics: Reducing balance baseline multiplication calculated at end of period.
+         ↓
+ [SPECIAL RATE POOL LAYER]
+   • Covers integral building features, long-life machinery, or thermal insulation.
+   • Mechanics: Apply standard restricted WDA rate at 6% reducing balance baseline.
+
+----------------------------------------------------------------------------------------
+ BALANCING CHARGE RISK: Triggers if Sale Proceeds &gt; Pool Written Down Value (WDV).
+ BALANCING ALLOWANCE TRAP: Allowed only on asset disposal from single/terminated pools.
+========================================================================================
+            </div>
+            <h2>Scheme 4.3: Corporate Loss Relief Allocation Strategies</h2>
+            <table class="financial-table">
                 <thead>
-                    <tr><th colspan="2">Property Revaluation Reserve Account (Equity Section)</th></tr>
                     <tr>
-                        <th class="side-title">Debit (Dr) - Decreases / Transfers Out</th>
-                        <th class="side-title">Credit (Cr) - Surpluses / Increases In</th>
+                        <th style="text-align: left; width: 220px;">Loss Relief Allocation</th>
+                        <th style="text-align: left; width: 300px;">Statutory Execution Window</th>
+                        <th style="text-align: left;">Strategic Tax Shield Operations</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Transfer to Retained Earnings: Excess Depreciation <span style="color:var(--t-red)">£5,000</span></td>
-                        <td>Opening Balance b/f <span style="color:var(--text-main)">£120,000</span></td>
+                        <td style="font-weight: 600;">Current Year Claim</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Identical Accounting Period</td>
+                        <td>Offsets trading loss directly against current non-trading income or corporate chargeable gains.</td>
+                    </tr>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600;">Carry Back Relief</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Preceding 12-Month Period</td>
+                        <td>Offsets against total taxable profits of the past year to secure an immediate cash tax refund from HMRC.</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td>Gain on Land and Buildings Revaluation <span style="color:var(--t-green)">£35,000</span></td>
+                        <td style="font-weight: 600;">Carry Forward Relief</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Future Accounting Periods</td>
+                        <td>Unabsorbed losses advance automatically to reduce trading profit cells of the identical trade line.</td>
                     </tr>
-                    <tr style="background: rgba(0, 242, 254, 0.05); border-top: 1px solid var(--primary);">
-                        <td><strong>Closing Balance c/f (Carried to SoFP Equity)</strong> <span style="color:var(--primary)">£150,000</span></td>
-                        <td></td>
+                    <tr style="background: #FAFAFA;">
+                        <td style="font-weight: 600; color: var(--danger-color);">Capital Loss Restriction</td>
+                        <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Capital Gains Only</td>
+                        <td>Banned from reducing general trading income. Can only carry forward to net future chargeable capital gains.</td>
                     </tr>
                 </tbody>
             </table>
-<!-- RIFERIMENTO_BLOCCO: 2 -->
-            <h2>2. Statutory IAS 37 Treatment Decision Grid Flow</h2>
-            <p style="color: var(--text-muted)">Visual structure used to determine whether a corporate obligation requires financial provision recording or footnote text disclosures.</p>
-            
-            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1.5rem; overflow-x: auto;">
-                <pre style="color: var(--text-muted); font-family: monospace; font-size: 0.95rem; margin: 0; line-height: 1.6;">
-                          [ <strong>Past Obligating Event Identified</strong> ]
-                                           │
-                                           ▼
-                 Is economic resource outflow PROBABLE? (&gt;50% Likelihood)
-                                           │
-                        ┌──────────────────┴──────────────────┐
-                        ▼ YES                                 ▼ NO
-          Can amount be reliably estimated?       Is outflow POSSIBLE? (5% - 50%)
-                        │                                     │
-            ┌───────────┴───────────┐             ┌───────────┴───────────┐
-            ▼ YES                   ▼ NO          ▼ YES                   ▼ NO (Remote &lt;5%)
-     [ <strong>RECORD PROVISION</strong> ]    [ <strong>DISCLOSE NOTE</strong> ]   [ <strong>DISCLOSE NOTE</strong> ]     [ <strong>IGNORE ENTIRELY</strong> ]
-     Debit: Profit or Loss   Footnote text disclosure  Footnote text disclosure  No financial action
-     Credit: Provisions Liab in Statements        in Statements        required
-                </pre>
-            </div>
-            
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 242, 254, 0.05); border-radius: 6px; border: 1px solid var(--border-glass)">
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text-main);"><strong>Analytical Insight:</strong> For adjusting events under IAS 10, use the same logical checks. If an event confirms conditions that already existed at the reporting date, update the figures in the financial statements. If it introduces new conditions, disclose it in the notes without altering the numbers.</p>
-            </div>
-        </div>
-    </div>
+
+        </div> <!-- Fine .white-bubble-container -->
+    </div> <!-- Fine .studio-container -->
 </body>
 </html>
