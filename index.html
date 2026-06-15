@@ -99,29 +99,39 @@ ul.topic-list.color-l3 li .icon-bullet { color: #0EA5E9 !important; }
 ul.topic-list.color-l4 li a { color: #EA580C !important; font-weight: 600 !important; }
 ul.topic-list.color-l4 li .icon-bullet { color: #F97316 !important; }
 
-        /* ==========================================================================
-   FORZATURA CROMATICA TITOLI CAPITOLI (BOTTONI ACCORDION INTERNI)
+       /* ==========================================================================
+   FORZATURA TITOLI CAPITOLI AD ALTA SPECIFICITÀ ED ESCLUSIONE MOCK EXAM
    ========================================================================== */
 
-/* --- TITOLI LIVELLO 2 (Verde Scuro Istituzionale) --- */
+/* --- 1. TITOLI LIVELLO 2 (Verde Scuro Istituzionale) --- */
 #lista-test-l2 button.chapter-btn,
-.level-section:nth-of-type(1) button.chapter-btn {
-    color: #04583d !important; /* Tonalità forest green scura ed elegante */
+.level-section:nth-of-type(1) .chapters-panel button.chapter-btn {
+    color: #04583d !important;
     font-weight: 700 !important;
 }
 
-/* --- TITOLI LIVELLO 3 (Azzurro Scuro Deep Blue) --- */
-.level-section:nth-of-type(2) button.chapter-btn {
-    color: #034d75 !important; /* Tonalità navy/azzurro scuro profondo */
+/* --- 2. TITOLI LIVELLO 3 (Azzurro Scuro Deep Blue Blindato) --- */
+.level-section:nth-of-type(2) button.chapter-btn,
+.level-section:nth-of-type(2) .chapters-panel button.chapter-btn {
+    color: #034d75 !important;
     font-weight: 700 !important;
 }
 
-/* --- TITOLI LIVELLO 4 (Arancione Bruciato/Marrone Mattone) --- */
-.level-section:nth-of-type(3) button.chapter-btn {
-    color: #9a3412 !important; /* Tonalità arancione scuro bruciato ad alto contrasto */
+/* --- 3. TITOLI LIVELLO 4 (Arancione Bruciato/Marrone Mattone) --- */
+#lista-test-l4 button.chapter-btn,
+.level-section:nth-of-type(3) .chapters-panel button.chapter-btn {
+    color: #9a3412 !important;
     font-weight: 700 !important;
 }
 
+/* ==========================================================================
+   RIPRISTINO IDENTITÀ ORIGINALE BOTTONI COMPREHENSIVE MOCK EXAM
+   ========================================================================== */
+button.chapter-btn[style*="background-color"],
+button.chapter-btn[style*="background"] {
+    color: #FFFFFF !important; /* Forza il testo bianco originale */
+    font-weight: 800 !important;
+}
     </style>
 </head>
 <!-- RIFERIMENTO_BLOCCO: PART_2_STUDIO_PANEL -->
