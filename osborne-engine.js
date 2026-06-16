@@ -67,318 +67,438 @@ function randomBusiness(){
 
 function generateL2CH1(){
 
-    const type = rand(1,15);
-    const business = randomBusiness();
-
-    /* ---------------- EASY CONCEPT + CONTEXT ---------------- */
-
-    if(type === 1){
-
-        const correct = "Recording financial transactions";
-
-        const options = shuffle([
-            correct,
-            "Calculating tax automatically",
-            "Preparing audit reports",
-            "Managing payroll only"
-        ]);
-
-        return {
-            question:
-            `What is the main purpose of bookkeeping in a business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 2){
-
-        const correct = "Assets";
-
-        const options = shuffle([
-            correct,
-            "Liabilities",
-            "Expenses",
-            "Revenue"
-        ]);
-
-        return {
-            question:
-            `A business purchases equipment. How is this classified?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "Double-entry bookkeeping";
-
-        const options = shuffle([
-            correct,
-            "Single-entry bookkeeping",
-            "Cash accounting only",
-            "Management accounting"
-        ]);
-
-        return {
-            question:
-            `Every transaction affects at least two accounts. Which principle is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Capital";
-
-        const options = shuffle([
-            correct,
-            "Expenses",
-            "Liabilities",
-            "Drawings"
-        ]);
-
-        return {
-            question:
-            `${business} owner introduces personal funds into the business. Which account increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 5){
-
-        const correct = "Drawings";
-
-        const options = shuffle([
-            correct,
-            "Sales",
-            "Purchases",
-            "Revenue"
-        ]);
-
-        return {
-            question:
-            `The owner takes money out of the business for personal use. Which account is affected?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- MICRO NUMERIC BASIC (OSBORNE STYLE) ---------------- */
-
-    if(type === 6){
-
-        const amount = rand(100,900);
-
-        const correct = amount;
-
-        const options = shuffle([
-            correct,
-            correct + 50,
-            correct - 30,
-            correct + 100
-        ]);
-
-        return {
-            question:
-            `A cash sale of £${amount} is recorded. What value should be entered in sales?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const amount = rand(200,1200);
-
-        const correct = amount;
-
-        const options = shuffle([
-            correct,
-            correct + 100,
-            correct - 50,
-            correct + 200
-        ]);
-
-        return {
-            question:
-            `${business} purchases goods for £${amount} on credit. What value is recorded in purchases?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- CONTROL UNDERSTANDING ---------------- */
-
-    if(type === 8){
-
-        const correct = "Sales invoice";
-
-        const options = shuffle([
-            correct,
-            "Bank statement",
-            "Payroll record",
-            "Petty cash voucher"
-        ]);
-
-        return {
-            question:
-            `Which document is issued when goods are sold on credit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 9){
-
-        const correct = "Purchase invoice";
-
-        const options = shuffle([
-            correct,
-            "Sales invoice",
-            "Receipt",
-            "Credit note"
-        ]);
-
-        return {
-            question:
-            `Which document is received when goods are bought on credit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- ACCOUNTING EQUATION BASIC ---------------- */
-
-    if(type === 10){
-
-        const amount = rand(100,1000);
-
-        const correct = "Assets increase and capital increases";
-
-        const options = shuffle([
-            correct,
-            "Assets decrease and capital decreases",
-            "Liabilities increase and assets decrease",
-            "Revenue decreases and capital decreases"
-        ]);
-
-        return {
-            question:
-            `${business} receives £${amount} from the owner as capital. What is the effect?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- CLASSIFICATION QUICK FIRE ---------------- */
-
-    if(type === 11){
-
-        const correct = "Asset";
-
-        const options = shuffle([
-            correct,
-            "Expense",
-            "Revenue",
-            "Liability"
-        ]);
-
-        return {
-            question:
-            `A trade receivable is classified as which type of account?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Liability";
-
-        const options = shuffle([
-            correct,
-            "Asset",
-            "Expense",
-            "Capital"
-        ]);
-
-        return {
-            question:
-            `A trade payable is classified as which type of account?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- VERY LIGHT APPLICATION ---------------- */
-
-    if(type === 13){
-
-        const amount = rand(50,300);
-
-        const correct = "Expense";
-
-        const options = shuffle([
-            correct,
-            "Asset",
-            "Revenue",
-            "Capital"
-        ]);
-
-        return {
-            question:
-            `${business} pays £${amount} for stationery. How is this classified?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "To provide reliable financial information";
-
-        const options = shuffle([
-            correct,
-            "To increase profit automatically",
-            "To avoid paying tax",
-            "To eliminate all errors"
-        ]);
-
-        return {
-            question:
-            `Why is bookkeeping important for a business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- FINAL CHECK ---------------- */
-
-    if(type === 15){
-
-        const correct = "At least two accounts";
-
-        const options = shuffle([
-            correct,
-            "Only one account",
-            "Only cash accounts",
-            "Only revenue accounts"
-        ]);
-
-        return {
-            question:
-            `In double-entry bookkeeping, how many accounts are affected by each transaction?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    throw new Error("L2-CH1 type not implemented: " + type);
+```
+const type = rand(1,15);
+const business = randomBusiness();
+
+/* ---------------- CAPITAL INTRODUCED ---------------- */
+
+if(type === 1){
+
+    const amount = rand(2000,15000);
+
+    const correct =
+        "Assets increase and capital increases";
+
+    const options = shuffle([
+        correct,
+        "Assets decrease and capital increases",
+        "Liabilities increase only",
+        "Expenses increase"
+    ]);
+
+    return {
+        question:
+        `${business} owner introduces £${amount} into the business bank account.
+```
+
+What is the effect on the accounting equation?`,
+options,
+correct: options.indexOf(correct)
+};
 }
+
+```
+/* ---------------- DRAWINGS ---------------- */
+
+if(type === 2){
+
+    const amount = rand(100,2000);
+
+    const correct =
+        "Assets decrease and drawings increase";
+
+    const options = shuffle([
+        correct,
+        "Assets increase and capital increases",
+        "Income increases",
+        "Liabilities increase"
+    ]);
+
+    return {
+        question:
+        `The owner withdraws £${amount} from the business bank account for personal use.
+```
+
+What is the effect?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- CASH SALE ---------------- */
+
+if(type === 3){
+
+    const amount = rand(200,5000);
+
+    const correct =
+        "Cash increases and income increases";
+
+    const options = shuffle([
+        correct,
+        "Cash decreases and income increases",
+        "Liabilities increase",
+        "Expenses increase"
+    ]);
+
+    return {
+        question:
+        `${business} makes a cash sale of £${amount}.
+```
+
+What happens in the accounting records?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- CASH PURCHASE ---------------- */
+
+if(type === 4){
+
+    const amount = rand(100,3000);
+
+    const correct =
+        "Cash decreases and expenses increase";
+
+    const options = shuffle([
+        correct,
+        "Cash increases and expenses increase",
+        "Income increases",
+        "Capital increases"
+    ]);
+
+    return {
+        question:
+        `${business} purchases office supplies for cash costing £${amount}.
+```
+
+What happens in the accounts?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- EQUIPMENT PURCHASE ---------------- */
+
+if(type === 5){
+
+    const amount = rand(1000,12000);
+
+    const correct =
+        "One asset increases and another asset decreases";
+
+    const options = shuffle([
+        correct,
+        "Income increases",
+        "Capital increases",
+        "Expenses increase immediately"
+    ]);
+
+    return {
+        question:
+        `${business} buys equipment for £${amount} using money from the business bank account.
+```
+
+Which statement is correct?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- CAPITAL CALCULATION ---------------- */
+
+if(type === 6){
+
+    const assets = rand(8000,25000);
+    const liabilities = rand(1000,7000);
+
+    const capital =
+        assets - liabilities;
+
+    const options = shuffle([
+        capital,
+        capital + 1000,
+        capital - 1000,
+        capital + 2000
+    ]);
+
+    return {
+        question:
+        `Assets = ${currency(assets)}
+```
+
+Liabilities = ${currency(liabilities)}
+
+Calculate capital.`,
+options: options.map(v => currency(v)),
+correct: options.indexOf(capital)
+};
+}
+
+```
+/* ---------------- ASSETS CALCULATION ---------------- */
+
+if(type === 7){
+
+    const capital = rand(5000,15000);
+    const liabilities = rand(1000,6000);
+
+    const assets =
+        capital + liabilities;
+
+    const options = shuffle([
+        assets,
+        assets + 1000,
+        assets - 1000,
+        assets + 1500
+    ]);
+
+    return {
+        question:
+        `Capital = ${currency(capital)}
+```
+
+Liabilities = ${currency(liabilities)}
+
+Calculate total assets.`,
+options: options.map(v => currency(v)),
+correct: options.indexOf(assets)
+};
+}
+
+```
+/* ---------------- ACCOUNTING EQUATION EFFECT ---------------- */
+
+if(type === 8){
+
+    const correct =
+        "Assets increase and liabilities increase";
+
+    const options = shuffle([
+        correct,
+        "Assets decrease and income increases",
+        "Capital decreases",
+        "Expenses decrease"
+    ]);
+
+    return {
+        question:
+        `${business} purchases inventory on credit from a supplier.
+```
+
+What is the immediate effect?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- ASSET CLASSIFICATION ---------------- */
+
+if(type === 9){
+
+    const correct = "Asset";
+
+    const options = shuffle([
+        correct,
+        "Liability",
+        "Income",
+        "Expense"
+    ]);
+
+    return {
+        question:
+        `${business} purchases a delivery van.
+```
+
+How should the van be classified?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- LIABILITY CLASSIFICATION ---------------- */
+
+if(type === 10){
+
+    const correct = "Liability";
+
+    const options = shuffle([
+        correct,
+        "Asset",
+        "Income",
+        "Expense"
+    ]);
+
+    return {
+        question:
+        `${business} owes money to a supplier for goods purchased on credit.
+```
+
+How should this balance be classified?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- MULTI-STEP START-UP ---------------- */
+
+if(type === 11){
+
+    const capital = rand(8000,15000);
+    const equipment = rand(1000,4000);
+
+    const correct =
+        "Assets remain higher than liabilities";
+
+    const options = shuffle([
+        correct,
+        "No assets remain",
+        "Capital becomes zero",
+        "Liabilities increase automatically"
+    ]);
+
+    return {
+        question:
+        `${business} starts trading.
+```
+
+Step 1:
+Owner introduces £${capital}.
+
+Step 2:
+Equipment costing £${equipment} is purchased using business cash.
+
+Which statement is correct?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- MULTI-STEP TRADING ---------------- */
+
+if(type === 12){
+
+    const sale = rand(1000,4000);
+    const expense = rand(200,1000);
+
+    const correct =
+        "Income exceeds expenses";
+
+    const options = shuffle([
+        correct,
+        "Expenses exceed income",
+        "Assets become zero",
+        "Liabilities must increase"
+    ]);
+
+    return {
+        question:
+        `${business} makes cash sales of £${sale} and pays expenses of £${expense}.
+```
+
+Which statement is correct?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- MULTI-STEP ACCOUNTING EQUATION ---------------- */
+
+if(type === 13){
+
+    const capital = rand(5000,12000);
+    const drawings = rand(200,1500);
+
+    const correct =
+        "Owner's interest in the business decreases";
+
+    const options = shuffle([
+        correct,
+        "Business income increases",
+        "Liabilities increase",
+        "Expenses increase automatically"
+    ]);
+
+    return {
+        question:
+        `The owner introduces £${capital} and later withdraws £${drawings} for personal use.
+```
+
+What is the overall effect?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- PURPOSE OF BOOKKEEPING ---------------- */
+
+if(type === 14){
+
+    const correct =
+        "To record business transactions accurately";
+
+    const options = shuffle([
+        correct,
+        "To increase profit automatically",
+        "To reduce liabilities",
+        "To remove taxes"
+    ]);
+
+    return {
+        question:
+        `${business} wants reliable financial records.
+```
+
+What is the main purpose of bookkeeping?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+/* ---------------- BUSINESS ENTITY CONCEPT ---------------- */
+
+if(type === 15){
+
+    const correct =
+        "The business and owner are treated separately";
+
+    const options = shuffle([
+        correct,
+        "The owner and business are the same entity",
+        "Personal expenses belong in business records",
+        "Only companies apply bookkeeping rules"
+    ]);
+
+    return {
+        question:
+        `The owner pays for a family holiday using a personal bank account.
+```
+
+How should this be treated under the business entity concept?`,
+options,
+correct: options.indexOf(correct)
+};
+}
+
+```
+throw new Error("L2-CH1 type not implemented: " + type);
+```
+
+}
+
 function generateL2CH2(){
 
     const type = rand(1,15);
