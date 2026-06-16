@@ -266,88 +266,96 @@ const syllabusData = {
     L2: [
         {
             value:"L2-CH1",
-            label:"Chapter 1 – Business Transactions & Documentation"
+            label:"Chapter 1 – Introduction to Bookkeeping"
         },
         {
             value:"L2-CH2",
-            label:"Chapter 2 – Double-Entry Bookkeeping"
+            label:"Chapter 2 – Principles of Bookkeeping Controls"
         },
         {
             value:"L2-CH3",
-            label:"Chapter 3 – Ledger Accounts & Balancing"
+            label:"Chapter 3 – Principles of Costing"
         },
         {
             value:"L2-CH4",
-            label:"Chapter 4 – Control Accounts & Reconciliations"
+            label:"Chapter 4 – Business Environment (BTRN - Part 1)"
         },
         {
             value:"L2-CH5",
-            label:"Chapter 5 – Trial Balance & DEAD CLIC Matrix"
+            label:"Chapter 5 – Business Environment (BTRN - Part 2)"
         },
         {
             value:"L2-random",
-            label:"Random (All L2 Chapters)"
+            label:"🎲 Random (All L2 Chapters)"
         }
     ],
 
     L3: [
         {
             value:"L3-CH1",
-            label:"Chapter 1 – Advanced Bookkeeping Principles"
+            label:"Chapter 1 – Business Awareness (BUAW)"
         },
         {
             value:"L3-CH2",
-            label:"Chapter 2 – Final Accounts Preparation"
+            label:"Chapter 2 – Financial Accounting (FAPS)"
         },
         {
             value:"L3-CH3",
-            label:"Chapter 3 – VAT Calculations & Returns"
+            label:"Chapter 3 – Management Accounting Techniques (MATS)"
         },
         {
             value:"L3-CH4",
-            label:"Chapter 4 – Payroll Computations"
-        },
-        {
-            value:"L3-CH5",
-            label:"Chapter 5 – Extended Trial Balance & Adjustments"
+            label:"Chapter 4 – Tax Processes for Businesses (TPFB)"
         },
         {
             value:"L3-random",
-            label:"Random (All L3 Chapters)"
+            label:"🎲 Random (All L3 Chapters)"
         }
     ],
 
     L4: [
         {
             value:"L4-CH1",
-            label:"Chapter 1 – Financial Statements Analysis"
+            label:"Chapter 1 – Applied Management Accounting (AMA)"
         },
         {
             value:"L4-CH2",
-            label:"Chapter 2 – Budgeting & Forecasting"
+            label:"Chapter 2 – Drafting and Interpreting Financial Statements (DAIF)"
         },
         {
             value:"L4-CH3",
-            label:"Chapter 3 – Internal Controls & Audit"
+            label:"Chapter 3 – Internal Accounting Systems and Controls (IASC)"
         },
                 {
             value:"L4-CH4",
-            label:"Chapter 4 – Management Accounting Techniques"
+            label:"Chapter 4 – Business Tax (BSTX)"
         },
         {
             value:"L4-CH5",
-            label:"Chapter 5 – Cash Flow & Financial Performance"
+            label:"Chapter 5 – Personal Tax (PLTX)"
+        },
+        {
+            value:"L4-CH6",
+            label:"Chapter 6 – External Auditing (EXAU)"
+        },
+        {
+            value:"L4-CH7",
+            label:"Chapter 7 – Cash and Treasury Management (CTMN)"
+        },
+        {
+            value:"L4-CH8",
+            label:"Chapter 8 – Credit and Debt Management (CRDM)"
         },
         {
             value:"L4-random",
-            label:"Random (All L4 Chapters)"
+            label:"🎲 Random (All L4 Chapters)"
         }
     ],
 
     random:[
         {
             value:"all-random",
-            label:"Random (All Levels & Chapters)"
+            label:"🎲 Random (All Levels & Chapters)"
         }
     ]
 };
@@ -940,23 +948,25 @@ function buildQuestionPool(){
 
     return {
 
-        "L2-CH1":generateL2CH1,
-        "L2-CH2":generateL2CH2,
-        "L2-CH3":generateL2CH3,
-        "L2-CH4":generateL2CH4,
-        "L2-CH5":generateL2CH5,
+        "L2-CH1": generateL2CH1,
+        "L2-CH2": generateL2CH2,
+        "L2-CH3": generateL2CH3,
+        "L2-CH4": generateL2CH4,
+        "L2-CH5": generateL2CH5,
 
-        "L3-CH1":generateL3CH1,
-        "L3-CH2":generateL3CH2,
-        "L3-CH3":generateL3CH3,
-        "L3-CH4":generateL3CH4,
-        "L3-CH5":generateL3CH5,
+        "L3-CH1": generateL3CH1,
+        "L3-CH2": generateL3CH2,
+        "L3-CH3": generateL3CH3,
+        "L3-CH4": generateL3CH4,
 
-        "L4-CH1":generateL4CH1,
-        "L4-CH2":generateL4CH2,
-        "L4-CH3":generateL4CH3,
-        "L4-CH4":generateL4CH4,
-        "L4-CH5":generateL4CH5
+        "L4-CH1": generateL4CH1,
+        "L4-CH2": generateL4CH2,
+        "L4-CH3": generateL4CH3,
+        "L4-CH4": generateL4CH4,
+        "L4-CH5": generateL4CH5,
+        "L4-CH6": generateL4CH6,
+        "L4-CH7": generateL4CH7,
+        "L4-CH8": generateL4CH8
     };
 }
 
