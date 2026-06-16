@@ -515,7 +515,7 @@ function generateL2CH2(){
     }
     function generateDynamicL2CH2(){
 
-    const type = rand(1,5);
+    const type = rand(1,20);
 
     const business = randomBusiness();
         if(type === 1){
@@ -620,7 +620,9 @@ if(type === 5){
         options.indexOf("Error of omission")
     };
 }
-        if(type === 6){
+       if(type === 6){
+
+    const amount = rand(3000,12000);
 
     const options = shuffle([
         "Error of principle",
@@ -631,7 +633,11 @@ if(type === 5){
 
     return {
         question:
-        `A van purchase was incorrectly recorded as a motor expense. What type of error is this?`,
+        `${business} purchased a delivery van for £${amount}.
+
+The bookkeeper recorded the transaction as Motor Expenses rather than a non-current asset.
+
+What type of accounting error has occurred?`,
 
         options,
 
@@ -640,6 +646,8 @@ if(type === 5){
     };
 }
         if(type === 7){
+
+    const diff = rand(50,500);
 
     const options = shuffle([
         "A suspense account",
@@ -650,7 +658,11 @@ if(type === 5){
 
     return {
         question:
-        `When the trial balance does not agree temporarily, which account may be used until the error is found?`,
+        `${business} is preparing its accounts.
+
+The trial balance does not agree and there is an unexplained difference of £${diff}.
+
+Which account may be used temporarily until the error is found?`,
 
         options,
 
@@ -659,6 +671,8 @@ if(type === 5){
     };
 }
         if(type === 8){
+
+    const amount = rand(100,2000);
 
     const options = shuffle([
         "Journal entry",
@@ -669,7 +683,10 @@ if(type === 5){
 
     return {
         question:
-        `Which accounting record is normally used to correct bookkeeping errors?`,
+        `${business} discovers that a transaction worth £${amount}
+was posted to the wrong ledger account.
+
+Which accounting record should normally be used to correct the error?`,
 
         options,
 
@@ -677,7 +694,9 @@ if(type === 5){
         options.indexOf("Journal entry")
     };
 }
-        if(type === 9){
+       if(type === 9){
+
+    const amount = rand(200,1500);
 
     const options = shuffle([
         "A customer is also a supplier",
@@ -688,7 +707,11 @@ if(type === 5){
 
     return {
         question:
-        `${business} owes £500 to a supplier who also owes £500 as a customer. When can a contra entry be used?`,
+        `${business} owes Green Ltd £${amount} for purchases.
+
+Green Ltd also owes ${business} £${amount} for sales.
+
+When can a contra entry be used?`,
 
         options,
 
@@ -696,7 +719,7 @@ if(type === 5){
         options.indexOf("A customer is also a supplier")
     };
 }
-        if(type === 10){
+       if(type === 10){
 
     const options = shuffle([
         "The arithmetic accuracy of ledger entries",
@@ -707,7 +730,11 @@ if(type === 5){
 
     return {
         question:
-        `What is the main purpose of preparing a trial balance?`,
+        `${business} has completed all ledger postings for the month.
+
+A trial balance is prepared before producing financial statements.
+
+What is the main purpose of the trial balance?`,
 
         options,
 
@@ -715,9 +742,10 @@ if(type === 5){
         options.indexOf("The arithmetic accuracy of ledger entries")
     };
 }
-        if(type === 11){
+       if(type === 11){
 
     const customer = randomPerson();
+    const amount = rand(500,5000);
 
     const options = shuffle([
         "Irrecoverable debt",
@@ -728,7 +756,11 @@ if(type === 5){
 
     return {
         question:
-        `${customer} owes the business £800 but has gone into liquidation and is unlikely to pay. How should this be classified?`,
+        `${customer} owes ${business} £${amount}.
+
+The customer has entered liquidation and recovery of the balance is considered unlikely.
+
+How should this balance be classified?`,
 
         options,
 
@@ -736,7 +768,9 @@ if(type === 5){
         options.indexOf("Irrecoverable debt")
     };
 }
-        if(type === 12){
+       if(type === 12){
+
+    const amount = rand(5000,30000);
 
     const options = shuffle([
         "To estimate future bad debts",
@@ -747,7 +781,11 @@ if(type === 5){
 
     return {
         question:
-        `Why is an allowance for doubtful debts maintained?`,
+        `${business} has trade receivables totalling £${amount}.
+
+Management believes that some customers may fail to pay their balances.
+
+Why should an allowance for doubtful debts be maintained?`,
 
         options,
 
@@ -755,7 +793,9 @@ if(type === 5){
         options.indexOf("To estimate future bad debts")
     };
 }
-        if(type === 13){
+      if(type === 13){
+
+    const amount = rand(5,40);
 
     const options = shuffle([
         "Small routine business expenses",
@@ -766,7 +806,9 @@ if(type === 5){
 
     return {
         question:
-        `What is petty cash primarily used for?`,
+        `${business} paid £${amount} for postage stamps using petty cash.
+
+Why would petty cash normally be used in this situation?`,
 
         options,
 
@@ -774,9 +816,10 @@ if(type === 5){
         options.indexOf("Small routine business expenses")
     };
 }
-        if(type === 14){
+       if(type === 14){
 
     const fund = rand(100,500);
+    const spent = rand(20,80);
 
     const options = shuffle([
         "Maintain a fixed petty cash balance",
@@ -787,7 +830,11 @@ if(type === 5){
 
     return {
         question:
-        `A petty cash float is maintained at £${fund}. What is the purpose of the imprest system?`,
+        `${business} operates an imprest petty cash system.
+
+The float is £${fund} and £${spent} has been spent during the week.
+
+What is the purpose of the imprest system?`,
 
         options,
 
@@ -806,7 +853,11 @@ if(type === 5){
 
     return {
         question:
-        `Two independent errors cancel each other out, causing the trial balance to still agree. What type of error is this?`,
+        `${business}'s trial balance agrees perfectly.
+
+A later review discovers two separate bookkeeping errors that happen to cancel each other out.
+
+What type of error is this?`,
 
         options,
 
@@ -814,11 +865,11 @@ if(type === 5){
         options.indexOf("Compensating error")
     };
 }
-        if(type === 16){
+      if(type === 16){
 
     const cashbook = rand(5000,15000);
-    const diff = rand(100,900);
-    const bank = cashbook + diff;
+    const deposit = rand(100,900);
+    const bank = cashbook + deposit;
 
     const options = shuffle([
         "Outstanding lodgement",
@@ -829,7 +880,13 @@ if(type === 5){
 
     return {
         question:
-        `The cash book shows £${cashbook} but the bank statement shows £${bank}. A deposit was made just before the month end but has not yet appeared on the bank statement. What explains the difference?`,
+        `${business}'s cash book shows £${cashbook}.
+
+The bank statement shows £${bank}.
+
+A deposit of £${deposit} was made on the final day of the month but has not yet appeared on the bank statement.
+
+What explains the difference?`,
 
         options,
 
@@ -837,7 +894,9 @@ if(type === 5){
         options.indexOf("Outstanding lodgement")
     };
 }
-        if(type === 17){
+      if(type === 17){
+
+    const balance = rand(10000,50000);
 
     const options = shuffle([
         "Total receivables balance",
@@ -848,7 +907,9 @@ if(type === 5){
 
     return {
         question:
-        `What should the balance on a sales ledger control account normally represent?`,
+        `${business}'s sales ledger control account shows a balance of £${balance}.
+
+What should this balance normally agree with?`,
 
         options,
 
@@ -856,7 +917,9 @@ if(type === 5){
         options.indexOf("Total receivables balance")
     };
 }
-        if(type === 18){
+       if(type === 18){
+
+    const balance = rand(5000,30000);
 
     const options = shuffle([
         "Total payables balance",
@@ -867,7 +930,9 @@ if(type === 5){
 
     return {
         question:
-        `What should the balance on a purchase ledger control account normally represent?`,
+        `${business}'s purchase ledger control account shows a balance of £${balance}.
+
+What should this balance normally agree with?`,
 
         options,
 
@@ -875,12 +940,12 @@ if(type === 5){
         options.indexOf("Total payables balance")
     };
 }
-        if(type === 19){
+       if(type === 19){
 
     const diff = rand(50,500);
 
     const options = shuffle([
-        "Open a suspense account for £" + diff,
+        `Open a suspense account for £${diff}`,
         "Ignore the difference",
         "Adjust the bank account",
         "Write off the difference"
@@ -888,15 +953,21 @@ if(type === 5){
 
     return {
         question:
-        `The trial balance totals differ by £${diff} and the error cannot immediately be found. What is the appropriate temporary action?`,
+        `${business} is preparing a trial balance.
+
+The debit total exceeds the credit total by £${diff} and the error cannot yet be located.
+
+What should be done temporarily?`,
 
         options,
 
         correct:
-        options.indexOf("Open a suspense account for £" + diff)
+        options.indexOf(`Open a suspense account for £${diff}`)
     };
 }
         if(type === 20){
+
+    const amount = rand(100,2000);
 
     const options = shuffle([
         "A journal entry",
@@ -907,7 +978,10 @@ if(type === 5){
 
     return {
         question:
-        `An accountant discovers that rent expense was posted to the repairs account. Which document is normally used to correct the error?`,
+        `${business} discovers that rent expense of £${amount}
+was posted to the repairs account.
+
+Which accounting record should be used to correct the error?`,
 
         options,
 
