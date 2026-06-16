@@ -3481,6 +3481,434 @@ What is the total cost?`,
 
     throw new Error("L3-CH4 type not implemented: " + type);
 }
+function generateL4CH1(){
+
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    if(type === 1){
+
+        const selling = rand(20,80);
+        const variable = rand(5,selling-5);
+
+        const contribution =
+            selling - variable;
+
+        const options = shuffle([
+            contribution,
+            contribution + 5,
+            contribution - 5,
+            selling
+        ]);
+
+        return {
+            question:
+            `${business} sells a product for ${currency(selling)} per unit.
+
+Variable cost per unit is ${currency(variable)}.
+
+Calculate contribution per unit.`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(contribution)
+        };
+    }
+
+    if(type === 2){
+
+        const contribution = rand(10,50);
+        const units = rand(100,1000);
+
+        const total =
+            contribution * units;
+
+        const options = shuffle([
+            total,
+            total + 1000,
+            total - 1000,
+            contribution
+        ]);
+
+        return {
+            question:
+            `Contribution per unit is ${currency(contribution)}.
+
+${units} units are sold.
+
+Calculate total contribution.`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    if(type === 3){
+
+        const fixed = rand(5000,25000);
+        const contribution = rand(10,50);
+
+        const breakeven =
+            Math.round(fixed / contribution);
+
+        const options = shuffle([
+            breakeven,
+            breakeven + 100,
+            breakeven - 100,
+            fixed
+        ]);
+
+        return {
+            question:
+            `${business} has fixed costs of ${currency(fixed)}.
+
+Contribution per unit is ${currency(contribution)}.
+
+Calculate break-even units.`,
+            options,
+            correct: options.indexOf(breakeven)
+        };
+    }
+
+    if(type === 4){
+
+        const fixed = rand(5000,20000);
+        const contributionRatio = rand(20,70)/100;
+
+        const breakevenRevenue =
+            Math.round(fixed / contributionRatio);
+
+        const options = shuffle([
+            breakevenRevenue,
+            breakevenRevenue + 1000,
+            breakevenRevenue - 1000,
+            fixed
+        ]);
+
+        return {
+            question:
+            `Fixed costs are ${currency(fixed)}.
+
+Contribution to sales ratio is ${(contributionRatio*100).toFixed(0)}%.
+
+Calculate break-even revenue.`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(breakevenRevenue)
+        };
+    }
+
+    if(type === 5){
+
+        const actual = rand(10000,50000);
+        const breakeven = rand(5000,actual-1000);
+
+        const mos =
+            actual - breakeven;
+
+        const options = shuffle([
+            mos,
+            mos + 1000,
+            mos - 1000,
+            actual
+        ]);
+
+        return {
+            question:
+            `Actual sales are ${currency(actual)}.
+
+Break-even sales are ${currency(breakeven)}.
+
+Calculate margin of safety.`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(mos)
+        };
+    }
+
+    if(type === 6){
+
+        const correct =
+            "Variable costs change with activity levels";
+
+        const options = shuffle([
+            correct,
+            "Variable costs remain constant",
+            "Variable costs are always fixed",
+            "Variable costs are irrelevant"
+        ]);
+
+        return {
+            question:
+            `${business} increases production from 1,000 units to 2,000 units.
+
+Which statement is correct?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 7){
+
+        const productA = rand(15,50);
+        const productB = rand(15,50);
+
+        const answer =
+            productA > productB
+            ? "Prioritise Product A"
+            : "Prioritise Product B";
+
+        const options = shuffle([
+            answer,
+            "Produce equal quantities regardless",
+            "Stop production",
+            "Ignore contribution"
+        ]);
+
+        return {
+            question:
+            `A production bottleneck exists.
+
+Contribution per limiting factor unit:
+
+Product A = ${currency(productA)}
+Product B = ${currency(productB)}
+
+Which product should be prioritised?`,
+            options,
+            correct: options.indexOf(answer)
+        };
+    }
+
+    if(type === 8){
+
+        const correct =
+            "Contribution is key when selecting product mix";
+
+        const options = shuffle([
+            correct,
+            "Revenue only matters",
+            "Ignore costs completely",
+            "Fixed costs determine every decision"
+        ]);
+
+        return {
+            question:
+            `${business} has limited production capacity.
+
+What is the most important factor when selecting products?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+        if(type === 9){
+
+        const budget = rand(10000,50000);
+        const actual = budget + rand(1000,5000);
+
+        const correct =
+            "Adverse variance";
+
+        const options = shuffle([
+            correct,
+            "Favourable variance",
+            "No variance",
+            "Break-even variance"
+        ]);
+
+        return {
+            question:
+            `Budgeted costs = ${currency(budget)}
+
+Actual costs = ${currency(actual)}
+
+Interpret the variance.`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 10){
+
+        const correct =
+            "Rent is normally a fixed cost";
+
+        const options = shuffle([
+            correct,
+            "Direct materials are fixed costs",
+            "Sales commission is fixed",
+            "Packaging is fixed"
+        ]);
+
+        return {
+            question:
+            `${business} reviews cost behaviour.
+
+Which cost is usually fixed?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 11){
+
+        const make = rand(15,40);
+        const buy = rand(15,40);
+
+        const answer =
+            make < buy
+            ? "Manufacture internally"
+            : "Purchase externally";
+
+        const options = shuffle([
+            answer,
+            "Ignore cost comparison",
+            "Always outsource",
+            "Always manufacture"
+        ]);
+
+        return {
+            question:
+            `Cost to manufacture = ${currency(make)} per unit.
+
+Cost to purchase = ${currency(buy)} per unit.
+
+What is the preferred option?`,
+            options,
+            correct: options.indexOf(answer)
+        };
+    }
+
+    if(type === 12){
+
+        const spareCapacity = rand(0,1);
+
+        const answer =
+            spareCapacity
+            ? "Accept if contribution is positive"
+            : "Consider capacity impact carefully";
+
+        const options = shuffle([
+            answer,
+            "Reject all special orders",
+            "Accept all special orders",
+            "Ignore contribution"
+        ]);
+
+        return {
+            question:
+            `${business} receives a special order below the normal selling price.
+
+What should management consider?`,
+            options,
+            correct: options.indexOf(answer)
+        };
+    }
+
+    if(type === 13){
+
+        const selling = rand(40,100);
+        const variable = rand(10,40);
+        const units = rand(500,3000);
+
+        const contribution =
+            (selling-variable)*units;
+
+        const answer =
+            contribution > 20000
+            ? "Strong contribution performance"
+            : "Contribution performance is modest";
+
+        const options = shuffle([
+            answer,
+            "Business is at break-even",
+            "Contribution is negative",
+            "Profit equals sales"
+        ]);
+
+        return {
+            question:
+            `${business} sells ${units} units.
+
+Selling price = ${currency(selling)}
+
+Variable cost = ${currency(variable)}
+
+Step 1: Calculate contribution.
+
+Step 2: Evaluate performance.`,
+            options,
+            correct: options.indexOf(answer)
+        };
+    }
+
+    if(type === 14){
+
+        const fixed = rand(10000,25000);
+        const contribution = rand(20,60);
+        const actual = rand(500,1500);
+
+        const breakeven =
+            Math.round(fixed/contribution);
+
+        const answer =
+            actual > breakeven
+            ? "Operating above break-even"
+            : "Operating below break-even";
+
+        const options = shuffle([
+            answer,
+            "Profit cannot be determined",
+            "Contribution is irrelevant",
+            "Sales equal fixed costs"
+        ]);
+
+        return {
+            question:
+            `Fixed costs = ${currency(fixed)}
+
+Contribution per unit = ${currency(contribution)}
+
+Actual sales volume = ${actual} units
+
+Step 1: Estimate break-even.
+
+Step 2: Evaluate performance.`,
+            options,
+            correct: options.indexOf(answer)
+        };
+    }
+
+    if(type === 15){
+
+        const contributionA = rand(15000,50000);
+        const contributionB = rand(10000,45000);
+
+        const answer =
+            contributionA > contributionB
+            ? "Project A should be preferred"
+            : "Project B should be preferred";
+
+        const options = shuffle([
+            answer,
+            "Choose randomly",
+            "Ignore contribution data",
+            "Select the lowest revenue option"
+        ]);
+
+        return {
+            question:
+            `Management is comparing two projects.
+
+Project A contribution = ${currency(contributionA)}
+
+Project B contribution = ${currency(contributionB)}
+
+Step 1: Compare contribution.
+
+Step 2: Recommend the stronger option.`,
+            options,
+            correct: options.indexOf(answer)
+        };
+    }
+
+    throw new Error("L4-CH1 type not implemented: " + type);
+}
 function generateL4CH2(){
 
     const type = rand(1,15);
