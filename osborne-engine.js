@@ -1,6 +1,6 @@
-// ======================
+// =====================
 // HELPERS
-// ======================
+// =====================
 
 function rand(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -42,98 +42,92 @@ function randomPerson(){
     ]);
 }
 
-function money(n){
-    return `£${n}`;
-}
+// =====================
+// L2 CH2 GENERATOR
+// (1 domanda = 1 scenario completo)
+// =====================
 
-function month(){
-    return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][rand(0,11)];
-}
+function generateDynamicL2CH2(){
 
-// ======================
-// LEVEL 3 CH2 ENGINE
-// ======================
-
-function generateOsborneL2CH2(type){
-
+    const type = rand(1,3);
     const business = randomBusiness();
 
+    // TYPE 1 - Bank reconciliation
     if(type === 1){
 
         const cashbook = rand(5000,15000);
-        const charges = rand(10,80);
-        const lodgement = rand(100,900);
+        const bank = cashbook + rand(-500,500);
+        const diff = bank - cashbook;
 
-        const adjusted = cashbook - charges + lodgement;
+        const options = shuffle([
+            "Timing difference",
+            "Compensating error",
+            "Error of principle",
+            "Fraud"
+        ]);
 
         return {
-            scenario:
-            `${business} is preparing a bank reconciliation for ${month()}.
+            question:
+            `${business} is preparing a bank reconciliation.
 
-Cash book balance: ${money(cashbook)}
-Bank charges not recorded: ${money(charges)}
-Outstanding lodgement: ${money(lodgement)}`,
+Cash book balance: £${cashbook}
+Bank statement: £${bank}
 
-            question: "What is the adjusted cash book balance?",
+What best explains the difference of £${diff}?`,
 
-            options: shuffle([
-                money(adjusted),
-                money(cashbook),
-                money(cashbook - charges),
-                money(cashbook + lodgement)
-            ]),
-
+            options,
             correct: 0
         };
     }
 
+    // TYPE 2 - Bad debt
     if(type === 2){
 
-        const receivables = rand(20000,50000);
-        const sales = rand(5000,15000);
-        const receipts = rand(3000,12000);
-        const writeoff = rand(100,900);
+        const person = randomPerson();
+        const amount = rand(500,5000);
 
-        const balance = receivables + sales - receipts - writeoff;
+        const options = shuffle([
+            "Irrecoverable debt",
+            "Accrual",
+            "Prepayment",
+            "Contra entry"
+        ]);
 
         return {
-            scenario:
-            `${business} sales ledger movements for ${month()}.`,
+            question:
+            `${person} owes ${business} £${amount}.
 
-            question: "What is the closing receivables balance?",
+The business believes the amount will not be recovered.
 
-            options: shuffle([
-                money(balance),
-                money(receivables + sales),
-                money(receivables - receipts),
-                money(receivables + receipts)
-            ]),
+How should this be recorded?`,
 
+            options,
             correct: 0
         };
     }
 
+    // TYPE 3 - Suspense account
     if(type === 3){
 
         const diff = rand(50,500);
 
+        const options = shuffle([
+            `Open suspense account for £${diff}`,
+            "Ignore difference",
+            "Adjust bank statement",
+            "Write off difference"
+        ]);
+
         return {
-            scenario:
-            `${business} trial balance does not agree.`,
-
             question:
-            `What is the correct action when the difference is ${money(diff)}?`,
+            `${business} prepares a trial balance.
 
-            options: shuffle([
-                `Open suspense account for ${money(diff)}`,
-                "Ignore difference",
-                "Adjust bank statement",
-                "Write off as expense"
-            ]),
+The debit total exceeds the credit total by £${diff}.
 
+What is the correct immediate action?`,
+
+            options,
             correct: 0
         };
     }
-
-    throw new Error("Type not implemented: " + type);
 }
