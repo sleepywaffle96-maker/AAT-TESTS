@@ -65,11 +65,12 @@ function randomBusiness(){
    LEVEL 2 QUESTION BANK
 ------------------------ */
 
-   function generateL2CH1(){
+function generateL2CH1(){
 
-    const type = rand(1,10);
+    const type = rand(1,15);
+    const business = randomBusiness();
 
-    // ---------------- BASIC CONCEPTS ----------------
+    /* ---------------- EASY CONCEPT + CONTEXT ---------------- */
 
     if(type === 1){
 
@@ -77,13 +78,14 @@ function randomBusiness(){
 
         const options = shuffle([
             correct,
-            "Preparing tax returns",
-            "Calculating profit automatically",
+            "Calculating tax automatically",
+            "Preparing audit reports",
             "Managing payroll only"
         ]);
 
         return {
-            question:`What is the main purpose of bookkeeping?`,
+            question:
+            `What is the main purpose of bookkeeping in a business?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -91,37 +93,37 @@ function randomBusiness(){
 
     if(type === 2){
 
-        const correct = "Assets, liabilities and equity";
+        const correct = "Assets";
 
         const options = shuffle([
             correct,
-            "Revenue and expenses only",
-            "Cash and bank only",
-            "Profit and loss only"
+            "Liabilities",
+            "Expenses",
+            "Revenue"
         ]);
 
         return {
-            question:`What are the main categories in the accounting equation?`,
+            question:
+            `A business purchases equipment. How is this classified?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- DEBIT / CREDIT LOGIC ----------------
-
     if(type === 3){
 
-        const correct = "Debit increases assets";
+        const correct = "Double-entry bookkeeping";
 
         const options = shuffle([
             correct,
-            "Credit increases assets",
-            "Debit decreases liabilities",
-            "Credit increases expenses"
+            "Single-entry bookkeeping",
+            "Cash accounting only",
+            "Management accounting"
         ]);
 
         return {
-            question:`Which statement about double-entry is correct?`,
+            question:
+            `Every transaction affects at least two accounts. Which principle is this?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -129,28 +131,131 @@ function randomBusiness(){
 
     if(type === 4){
 
-        const correct = "Credit increases liabilities";
+        const correct = "Capital";
 
         const options = shuffle([
             correct,
-            "Debit increases liabilities",
-            "Credit decreases assets",
-            "Debit increases revenue"
+            "Expenses",
+            "Liabilities",
+            "Drawings"
         ]);
 
         return {
-            question:`Which statement is correct regarding liabilities?`,
+            question:
+            `${business} owner introduces personal funds into the business. Which account increases?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- SIMPLE TRANSACTIONS ----------------
-
     if(type === 5){
 
-        const business = randomBusiness();
-        const amount = rand(50,500);
+        const correct = "Drawings";
+
+        const options = shuffle([
+            correct,
+            "Sales",
+            "Purchases",
+            "Revenue"
+        ]);
+
+        return {
+            question:
+            `The owner takes money out of the business for personal use. Which account is affected?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- MICRO NUMERIC BASIC (OSBORNE STYLE) ---------------- */
+
+    if(type === 6){
+
+        const amount = rand(100,900);
+
+        const correct = amount;
+
+        const options = shuffle([
+            correct,
+            correct + 50,
+            correct - 30,
+            correct + 100
+        ]);
+
+        return {
+            question:
+            `A cash sale of £${amount} is recorded. What value should be entered in sales?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 7){
+
+        const amount = rand(200,1200);
+
+        const correct = amount;
+
+        const options = shuffle([
+            correct,
+            correct + 100,
+            correct - 50,
+            correct + 200
+        ]);
+
+        return {
+            question:
+            `${business} purchases goods for £${amount} on credit. What value is recorded in purchases?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CONTROL UNDERSTANDING ---------------- */
+
+    if(type === 8){
+
+        const correct = "Sales invoice";
+
+        const options = shuffle([
+            correct,
+            "Bank statement",
+            "Payroll record",
+            "Petty cash voucher"
+        ]);
+
+        return {
+            question:
+            `Which document is issued when goods are sold on credit?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 9){
+
+        const correct = "Purchase invoice";
+
+        const options = shuffle([
+            correct,
+            "Sales invoice",
+            "Receipt",
+            "Credit note"
+        ]);
+
+        return {
+            question:
+            `Which document is received when goods are bought on credit?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- ACCOUNTING EQUATION BASIC ---------------- */
+
+    if(type === 10){
+
+        const amount = rand(100,1000);
 
         const correct = "Assets increase and capital increases";
 
@@ -158,64 +263,39 @@ function randomBusiness(){
             correct,
             "Assets decrease and capital decreases",
             "Liabilities increase and assets decrease",
-            "Expenses increase and capital decreases"
+            "Revenue decreases and capital decreases"
         ]);
 
         return {
             question:
-`${business} receives £${amount} from the owner as capital.
-
-What is the effect on the accounting equation?`,
+            `${business} receives £${amount} from the owner as capital. What is the effect?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 6){
+    /* ---------------- CLASSIFICATION QUICK FIRE ---------------- */
 
-        const business = randomBusiness();
-        const amount = rand(20,300);
-
-        const correct = "Assets decrease and capital decreases";
-
-        const options = shuffle([
-            correct,
-            "Assets increase and liabilities increase",
-            "Income increases and capital increases",
-            "Expenses decrease and assets increase"
-        ]);
-
-        return {
-            question:
-`${business} owner withdraws £${amount} from the business.
-
-What is the effect on the accounting equation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- BASIC CLASSIFICATION ----------------
-
-    if(type === 7){
+    if(type === 11){
 
         const correct = "Asset";
 
         const options = shuffle([
             correct,
-            "Liability",
             "Expense",
-            "Revenue"
+            "Revenue",
+            "Liability"
         ]);
 
         return {
-            question:`A business bank account balance is classified as what?`,
+            question:
+            `A trade receivable is classified as which type of account?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 8){
+    if(type === 12){
 
         const correct = "Liability";
 
@@ -223,168 +303,232 @@ What is the effect on the accounting equation?`,
             correct,
             "Asset",
             "Expense",
-            "Income"
+            "Capital"
         ]);
 
         return {
-            question:`Money owed to suppliers is classified as what?`,
+            question:
+            `A trade payable is classified as which type of account?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- BASIC PRINCIPLES ----------------
+    /* ---------------- VERY LIGHT APPLICATION ---------------- */
 
-    if(type === 9){
+    if(type === 13){
 
-        const correct = "Every transaction affects at least two accounts";
+        const amount = rand(50,300);
+
+        const correct = "Expense";
 
         const options = shuffle([
             correct,
-            "Only cash transactions are recorded",
-            "Each transaction affects one account only",
-            "Assets always equal liabilities"
+            "Asset",
+            "Revenue",
+            "Capital"
         ]);
 
         return {
-            question:`Which statement best describes double-entry bookkeeping?`,
+            question:
+            `${business} pays £${amount} for stationery. How is this classified?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 10){
+    if(type === 14){
 
-        const correct = "Business and owner are separate entities";
+        const correct = "To provide reliable financial information";
 
         const options = shuffle([
             correct,
-            "Business and owner are the same",
-            "Only companies use bookkeeping",
-            "Personal expenses are always included"
+            "To increase profit automatically",
+            "To avoid paying tax",
+            "To eliminate all errors"
         ]);
 
         return {
-            question:`What is the business entity concept?`,
+            question:
+            `Why is bookkeeping important for a business?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    return generateL2CH1();
+    /* ---------------- FINAL CHECK ---------------- */
+
+    if(type === 15){
+
+        const correct = "At least two accounts";
+
+        const options = shuffle([
+            correct,
+            "Only one account",
+            "Only cash accounts",
+            "Only revenue accounts"
+        ]);
+
+        return {
+            question:
+            `In double-entry bookkeeping, how many accounts are affected by each transaction?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    throw new Error("L2-CH1 type not implemented: " + type);
 }
 function generateL2CH2(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- CONTROL ACCOUNTS ----------------
+    /* ---------------- CONTROL ACCOUNTS + PRACTICAL ---------------- */
 
     if(type === 1){
 
-        const correct = "Sales ledger control account";
+        const opening = rand(8000,15000);
+        const sales = rand(2000,6000);
+        const cash = rand(1000,4000);
+
+        const closing = opening + sales - cash;
 
         const options = shuffle([
-            correct,
-            "Cash account",
-            "Capital account",
-            "Purchase account"
+            closing,
+            closing + 200,
+            closing - 300,
+            closing + 500
         ]);
 
         return {
-            question:`Which account is used to check the accuracy of customer balances?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} has:
+Opening balance £${opening}
+Sales £${sales}
+Cash received £${cash}
+
+What is the closing balance of the sales ledger control account?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(closing)
         };
     }
 
     if(type === 2){
 
-        const correct = "Purchase ledger control account";
+        const opening = rand(5000,12000);
+        const purchases = rand(2000,5000);
+        const payments = rand(1000,4000);
+
+        const closing = opening + purchases - payments;
 
         const options = shuffle([
-            correct,
-            "Sales revenue account",
-            "Bank account",
-            "Drawings account"
+            closing,
+            closing + 150,
+            closing - 200,
+            closing + 400
         ]);
 
         return {
-            question:`Which account is used to check supplier balances?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} purchase ledger control account:
+Opening £${opening}
+Purchases £${purchases}
+Payments £${payments}
+
+What is the closing balance?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(closing)
         };
     }
+
+    /* ---------------- BANK RECONCILIATION PRACTICAL ---------------- */
 
     if(type === 3){
 
-        const correct = "Total receivables balance";
+        const cashbook = rand(4000,9000);
+        const bank = cashbook - rand(100,800);
+
+        const correct = "Unpresented cheques";
 
         const options = shuffle([
             correct,
-            "Bank balance",
-            "Cash sales",
-            "Capital balance"
+            "Capital injection",
+            "Inventory error",
+            "Depreciation"
         ]);
 
         return {
-            question:`The sales ledger control account should agree with what?`,
+            question:
+            `Cash book balance £${cashbook}
+Bank statement £${bank}
+
+What is the most likely reason for the difference?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- ERRORS ----------------
-
     if(type === 4){
+
+        const cashbook = rand(3000,8000);
+        const bank = cashbook + rand(100,600);
+
+        const correct = "Outstanding lodgements";
+
+        const options = shuffle([
+            correct,
+            "Bank charges error",
+            "Overstated capital",
+            "Sales return"
+        ]);
+
+        return {
+            question:
+            `Cash book £${cashbook}
+Bank statement £${bank}
+
+What explains the difference?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- ERRORS (HIGH PRACTICAL) ---------------- */
+
+    if(type === 5){
 
         const correct = "Error of omission";
 
         const options = shuffle([
             correct,
             "Error of principle",
-            "Compensating error",
-            "Bank error"
+            "Bank reconciliation error",
+            "VAT error"
         ]);
 
         return {
-            question:`A transaction is completely missing from the records. What error is this?`,
+            question:
+            `${business} completely forgot to record a purchase invoice. What type of error is this?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 5){
+    if(type === 6){
 
         const correct = "Error of principle";
 
         const options = shuffle([
             correct,
             "Error of omission",
-            "Casting error",
-            "Suspense error"
+            "Compensating error",
+            "Cash error"
         ]);
 
         return {
-            question:`A non-current asset is recorded as an expense. What error is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Compensating error";
-
-        const options = shuffle([
-            correct,
-            "Error of omission",
-            "Error of principle",
-            "Bank error"
-        ]);
-
-        return {
-            question:`Two errors cancel each other out in the trial balance. What is this called?`,
+            question:
+            `A non-current asset purchase has been recorded as an expense. What type of error is this?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -392,43 +536,41 @@ function generateL2CH2(){
 
     if(type === 7){
 
-        const correct = "Casting error";
+        const correct = "Suspense account";
+
+        const diff = rand(50,500);
 
         const options = shuffle([
             correct,
-            "Error of omission",
-            "Error of principle",
-            "Control error"
+            "Capital account",
+            "Sales account",
+            "Bank account"
         ]);
 
         return {
-            question:`A ledger has been incorrectly added up. What type of error is this?`,
+            question:
+            `A trial balance does not balance by £${diff}. Where is the difference temporarily recorded?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- BANK RECONCILIATION ----------------
+    /* ---------------- CONTROL ACCOUNT LOGIC ---------------- */
 
     if(type === 8){
 
-        const cashbook = rand(2000,15000);
-        const bank = cashbook + rand(-500,500);
-
-        const correct = "Timing differences";
+        const correct = "Sales invoices";
 
         const options = shuffle([
             correct,
-            "Fraud",
-            "Capital injection",
-            "Inventory loss"
+            "Bank statements",
+            "Payroll reports",
+            "VAT returns"
         ]);
 
         return {
             question:
-`${business} cash book shows £${cashbook}, bank statement shows £${bank}.
-
-What explains the difference most likely?`,
+            `What increases the sales ledger control account?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -436,75 +578,79 @@ What explains the difference most likely?`,
 
     if(type === 9){
 
-        const correct = "Outstanding cheque";
+        const correct = "Purchase invoices";
 
         const options = shuffle([
             correct,
-            "Bank loan",
-            "Credit note",
-            "Capital contribution"
+            "Sales invoices",
+            "Receipts",
+            "Cash book only"
         ]);
 
         return {
-            question:`A cheque recorded in cash book has not cleared the bank. What is it called?`,
+            question:
+            `What increases the purchase ledger control account?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CALCULATION + INTERPRETATION ---------------- */
 
     if(type === 10){
 
-        const correct = "Outstanding lodgement";
+        const diff = rand(100,800);
 
         const options = shuffle([
-            correct,
-            "Bank overdraft",
-            "Petty cash",
-            "Suspense account"
+            "Investigate differences in control accounts",
+            "Ignore difference",
+            "Adjust profit immediately",
+            "Write off balance"
         ]);
 
         return {
-            question:`A deposit is recorded in cash book but not yet on bank statement. What is it called?`,
+            question:
+            `A control account differs from subsidiary records by £${diff}. What should be done first?`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf("Investigate differences in control accounts")
         };
     }
 
-    // ---------------- SUSPENSE ACCOUNT ----------------
+    /* ---------------- FINAL PRACTICAL UNDERSTANDING ---------------- */
 
     if(type === 11){
 
-        const correct = "Suspense account";
+        const correct = "Reconciliation between control accounts and subsidiary ledgers";
 
         const options = shuffle([
             correct,
-            "Bank account",
-            "Sales account",
-            "Cash account"
+            "Tax calculation",
+            "Payroll processing",
+            "Budget preparation"
         ]);
 
         return {
-            question:`A trial balance does not balance. What account is temporarily used?`,
+            question:
+            `What is the purpose of reconciling control accounts?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- TRIAL BALANCE ----------------
-
     if(type === 12){
 
-        const correct = "To check arithmetic accuracy of ledger entries";
+        const correct = "Timing difference";
 
         const options = shuffle([
             correct,
-            "To calculate profit",
-            "To record transactions",
-            "To pay suppliers"
+            "Capital error",
+            "Profit manipulation",
+            "Inventory loss"
         ]);
 
         return {
-            question:`What is the purpose of a trial balance?`,
+            question:
+            `A payment has been recorded in the cash book but not yet on the bank statement. What is this?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -512,574 +658,384 @@ What explains the difference most likely?`,
 
     if(type === 13){
 
-        const correct = "It may still contain errors";
+        const correct = "Ledger accuracy";
 
         const options = shuffle([
             correct,
-            "It guarantees no errors exist",
-            "It replaces the ledger",
-            "It calculates VAT"
-        ]);
-
-        return {
-            question:`What is true about a trial balance that balances?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- APPLICATION SCENARIOS ----------------
-
-    if(type === 14){
-
-        const amount = rand(100,3000);
-
-        const correct = "Journal entry";
-
-        const options = shuffle([
-            correct,
-            "Invoice",
-            "Receipt",
-            "Statement"
+            "Profit maximisation",
+            "Tax avoidance",
+            "Cash generation"
         ]);
 
         return {
             question:
-`A transaction of £${amount} must be corrected in the ledger.
-
-What document is used?`,
+            `What is the main purpose of control accounts?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    if(type === 14){
+
+        const correct = "At least two accounts are affected";
+
+        const options = shuffle([
+            correct,
+            "Only one account is affected",
+            "Only cash accounts",
+            "Only expense accounts"
+        ]);
+
+        return {
+            question:
+            `In double-entry bookkeeping, what is always true?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- HARD PRACTICAL FINAL ---------------- */
 
     if(type === 15){
 
-        const correct = "Control accounts help detect errors";
+        const opening = rand(10000,20000);
+        const sales = rand(3000,8000);
+        const cash = rand(2000,7000);
+
+        const closing = opening + sales - cash;
 
         const options = shuffle([
-            correct,
-            "Control accounts eliminate all errors",
-            "Control accounts replace invoices",
-            "Control accounts store cash"
+            closing,
+            closing + 300,
+            closing - 400,
+            closing + 600
         ]);
 
         return {
-            question:`What is the main purpose of control accounts?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} control account:
+Opening £${opening}
+Sales £${sales}
+Cash £${cash}
+
+What is the correct closing balance?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(closing)
         };
     }
 
-    if(type === 16){
-
-        const correct = "Every debit has a corresponding credit";
-
-        const options = shuffle([
-            correct,
-            "Only cash is recorded",
-            "Only revenue is recorded",
-            "Debits are optional"
-        ]);
-
-        return {
-            question:`Which statement describes double-entry principles?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 17){
-
-        const correct = "Sales ledger control account";
-
-        const options = shuffle([
-            correct,
-            "Cash account",
-            "Bank account",
-            "Expense account"
-        ]);
-
-        return {
-            question:`Which control account summarises customer balances?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Purchase ledger control account";
-
-        const options = shuffle([
-            correct,
-            "Revenue account",
-            "Cash account",
-            "Capital account"
-        ]);
-
-        return {
-            question:`Which control account summarises supplier balances?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "To locate errors in accounting records";
-
-        const options = shuffle([
-            correct,
-            "To increase profit",
-            "To eliminate tax",
-            "To create invoices"
-        ]);
-
-        return {
-            question:`Why are control systems important in bookkeeping?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Ensure accuracy of financial records";
-
-        const options = shuffle([
-            correct,
-            "Guarantee profit",
-            "Eliminate business risk",
-            "Increase cash flow"
-        ]);
-
-        return {
-            question:`What is the overall purpose of bookkeeping controls?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL2CH2();
+    throw new Error("L2-CH2 type not implemented: " + type);
 }
 function generateL2CH3(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- COST CLASSIFICATION ----------------
+    /* ---------------- UNIT COSTING BASIC ---------------- */
 
     if(type === 1){
+
+        const materials = rand(2,15);
+        const labour = rand(3,20);
+        const overhead = rand(1,10);
+
+        const total = materials + labour + overhead;
+
+        const options = shuffle([
+            total,
+            total + 2,
+            total - 3,
+            total + 5
+        ]);
+
+        return {
+            question:
+            `A product has:
+Materials £${materials}
+Labour £${labour}
+Overheads £${overhead}
+
+What is the total cost per unit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    if(type === 2){
+
+        const cost = rand(10,50);
+        const markup = rand(20,100);
+
+        const selling = cost + (cost * markup / 100);
+
+        const options = shuffle([
+            Math.round(selling),
+            Math.round(selling + 5),
+            Math.round(selling - 5),
+            Math.round(selling + 10)
+        ]);
+
+        return {
+            question:
+            `A product costs £${cost} and has a markup of ${markup}%.
+
+What is the selling price (approx.)?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(Math.round(selling))
+        };
+    }
+
+    /* ---------------- LABOUR COSTING ---------------- */
+
+    if(type === 3){
+
+        const hours = rand(5,20);
+        const rate = rand(8,25);
+
+        const cost = hours * rate;
+
+        const options = shuffle([
+            cost,
+            cost + 10,
+            cost - 15,
+            cost + 20
+        ]);
+
+        return {
+            question:
+            `A worker is paid £${rate} per hour for ${hours} hours.
+
+What is the total labour cost?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(cost)
+        };
+    }
+
+    /* ---------------- MATERIAL WASTE ---------------- */
+
+    if(type === 4){
+
+        const used = rand(10,40);
+        const waste = rand(1,5);
+
+        const total = used + waste;
+
+        const options = shuffle([
+            total,
+            total + 2,
+            total - 1,
+            total + 4
+        ]);
+
+        return {
+            question:
+            `A process uses ${used}kg of material and wastes ${waste}kg.
+
+What is total material input?`,
+            options: options.map(v => total + " kg"),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- COST PER UNIT ---------------- */
+
+    if(type === 5){
+
+        const totalCost = rand(200,800);
+        const units = rand(20,80);
+
+        const unitCost = totalCost / units;
+
+        const options = shuffle([
+            unitCost,
+            unitCost + 2,
+            unitCost - 1,
+            unitCost + 3
+        ]);
+
+        return {
+            question:
+            `Total production cost is £${totalCost} for ${units} units.
+
+What is cost per unit (approx.)?`,
+            options: options.map(v => currency(v.toFixed(2))),
+            correct: options.indexOf(unitCost)
+        };
+    }
+
+    /* ---------------- SIMPLE PROFIT ---------------- */
+
+    if(type === 6){
+
+        const cost = rand(5,30);
+        const selling = cost + rand(5,20);
+
+        const profit = selling - cost;
+
+        const options = shuffle([
+            profit,
+            profit + 2,
+            profit - 1,
+            profit + 3
+        ]);
+
+        return {
+            question:
+            `A product costs £${cost} and sells for £${selling}.
+
+What is the profit per unit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- OVERHEADS ---------------- */
+
+    if(type === 7){
+
+        const rent = rand(100,500);
+        const utilities = rand(50,200);
+
+        const total = rent + utilities;
+
+        const options = shuffle([
+            total,
+            total + 10,
+            total - 20,
+            total + 30
+        ]);
+
+        return {
+            question:
+            `A business has:
+Rent £${rent}
+Utilities £${utilities}
+
+What are total overhead costs?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- BREAK EVEN BASIC ---------------- */
+
+    if(type === 8){
+
+        const fixed = rand(100,500);
+        const contrib = rand(5,20);
+
+        const breakEven = Math.round(fixed / contrib);
+
+        const options = shuffle([
+            breakEven,
+            breakEven + 2,
+            breakEven - 3,
+            breakEven + 5
+        ]);
+
+        return {
+            question:
+            `Fixed costs are £${fixed}.
+Contribution per unit is £${contrib}.
+
+What is the break-even point (units)?`,
+            options: options.map(v => options),
+            correct: options.indexOf(breakEven)
+        };
+    }
+
+    /* ---------------- COST CLASSIFICATION ---------------- */
+
+    if(type === 9){
 
         const correct = "Direct cost";
 
         const options = shuffle([
             correct,
             "Indirect cost",
-            "Fixed cost",
-            "Overhead"
+            "Fixed cost only",
+            "Capital cost"
         ]);
 
         return {
-            question:`A cost that can be directly traced to a product is called what?`,
+            question:
+            `Raw materials used in production are classified as what type of cost?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 2){
+    if(type === 10){
 
         const correct = "Indirect cost";
 
         const options = shuffle([
             correct,
             "Direct cost",
-            "Variable cost",
-            "Revenue cost"
-        ]);
-
-        return {
-            question:`A cost that cannot be directly traced to a product is called what?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "Fixed cost";
-
-        const options = shuffle([
-            correct,
-            "Variable cost",
-            "Direct cost",
-            "Marginal cost"
-        ]);
-
-        return {
-            question:`Which cost remains the same regardless of production level?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Variable cost";
-
-        const options = shuffle([
-            correct,
-            "Fixed cost",
-            "Capital cost",
-            "Indirect cost"
-        ]);
-
-        return {
-            question:`Which cost changes with production volume?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- COST BEHAVIOUR ----------------
-
-    if(type === 5){
-
-        const correct = "Total cost increases";
-
-        const options = shuffle([
-            correct,
-            "Total cost decreases",
-            "Fixed cost decreases",
-            "Revenue decreases"
-        ]);
-
-        return {
-            question:`When production increases, what happens to total variable cost?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Remains constant";
-
-        const options = shuffle([
-            correct,
-            "Increases",
-            "Decreases",
-            "Becomes zero"
-        ]);
-
-        return {
-            question:`What happens to fixed costs when production increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Variable cost per unit stays constant";
-
-        const options = shuffle([
-            correct,
-            "Fixed cost per unit stays constant",
-            "Total cost stays constant",
-            "Revenue stays constant"
-        ]);
-
-        return {
-            question:`What is true about variable cost per unit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Fixed cost per unit decreases as output increases";
-
-        const options = shuffle([
-            correct,
-            "Fixed cost per unit increases",
-            "Variable cost per unit increases",
-            "Total cost per unit stays constant"
-        ]);
-
-        return {
-            question:`What happens to fixed cost per unit when output increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- SIMPLE CALCULATIONS ----------------
-
-    if(type === 9){
-
-        const units = rand(100,1000);
-        const cost = rand(2,20);
-        const total = units * cost;
-
-        const options = shuffle([
-            total,
-            total + 100,
-            total - 100,
-            total + 250
+            "Revenue cost",
+            "Variable income"
         ]);
 
         return {
             question:
-`${business} produces ${units} units at £${cost} variable cost per unit.
-
-What is the total variable cost?`,
+            `Electricity used in a factory is classified as what type of cost?`,
             options,
-            correct: options.indexOf(total)
+            correct: options.indexOf(correct)
         };
     }
 
-    if(type === 10){
-
-        const fixed = rand(500,5000);
-        const units = rand(100,1000);
-
-        const perUnit = fixed / units;
-
-        const options = shuffle([
-            perUnit,
-            perUnit + 1,
-            perUnit - 1,
-            perUnit + 2
-        ]);
-
-        return {
-            question:
-`${business} has fixed costs of £${fixed} and produces ${units} units.
-
-What is the fixed cost per unit (approx)?`,
-            options,
-            correct: options.indexOf(perUnit)
-        };
-    }
-
-    // ---------------- COSTING LOGIC ----------------
+    /* ---------------- FINAL APPLICATION ---------------- */
 
     if(type === 11){
 
-        const correct = "Total cost = fixed cost + variable cost";
+        const cost = rand(20,60);
+        const markup = 50;
+
+        const selling = cost * 1.5;
 
         const options = shuffle([
-            correct,
-            "Total cost = revenue - profit",
-            "Total cost = assets - liabilities",
-            "Total cost = cash - expenses"
-        ]);
-
-        return {
-            question:`How is total cost calculated?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Cost per unit = total cost ÷ number of units";
-
-        const options = shuffle([
-            correct,
-            "Cost per unit = profit ÷ sales",
-            "Cost per unit = revenue ÷ cash",
-            "Cost per unit = fixed cost × units"
-        ]);
-
-        return {
-            question:`How is cost per unit calculated?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- BUSINESS APPLICATION ----------------
-
-    if(type === 13){
-
-        const correct = "Manufacturing cost";
-
-        const options = shuffle([
-            correct,
-            "Bank cost",
-            "Capital cost",
-            "Tax cost"
-        ]);
-
-        return {
-            question:`Costs directly involved in making goods are called what?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "Overhead cost";
-
-        const options = shuffle([
-            correct,
-            "Direct material",
-            "Revenue cost",
-            "Cash cost"
-        ]);
-
-        return {
-            question:`Indirect costs such as rent and utilities are called what?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- SCENARIO APPLICATION ----------------
-
-    if(type === 15){
-
-        const amount = rand(100,5000);
-
-        const correct = "Direct cost";
-
-        const options = shuffle([
-            correct,
-            "Indirect cost",
-            "Fixed cost",
-            "Revenue cost"
+            Math.round(selling),
+            Math.round(selling + 5),
+            Math.round(selling - 5),
+            Math.round(selling + 10)
         ]);
 
         return {
             question:
-`${business} buys raw materials costing £${amount} for production.
+            `${business} applies a 50% markup.
+Cost is £${cost}.
 
-What type of cost is this?`,
-            options,
-            correct: options.indexOf(correct)
+What is selling price?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(Math.round(selling))
         };
     }
 
-    if(type === 16){
+    /* ---------------- SAFETY ---------------- */
 
-        const correct = "Fixed cost";
-
-        const options = shuffle([
-            correct,
-            "Variable cost",
-            "Direct cost",
-            "Production cost"
-        ]);
-
-        return {
-            question:`Rent paid by a factory is classified as what type of cost?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM TRICKS ----------------
-
-    if(type === 17){
-
-        const correct = "Total cost increases but fixed cost stays constant";
-
-        const options = shuffle([
-            correct,
-            "Both decrease",
-            "Fixed cost increases with output",
-            "Variable cost stays constant"
-        ]);
-
-        return {
-            question:`What happens when production increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Direct cost is traceable to a product";
-
-        const options = shuffle([
-            correct,
-            "Indirect cost is always variable",
-            "Fixed cost is always direct",
-            "Revenue is a cost"
-        ]);
-
-        return {
-            question:`Which statement is correct?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Cost control";
-
-        const options = shuffle([
-            correct,
-            "Profit maximisation",
-            "Cash generation",
-            "Tax avoidance"
-        ]);
-
-        return {
-            question:`Why is costing important in business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Helps in pricing decisions";
-
-        const options = shuffle([
-            correct,
-            "Eliminates costs",
-            "Removes risk",
-            "Creates cash"
-        ]);
-
-        return {
-            question:`Why do businesses calculate costs?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL2CH3();
+    throw new Error("L2-CH3 type not implemented: " + type);
 }
 function generateL2CH4(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- TYPES OF BUSINESS ----------------
+    /* ---------------- BUSINESS DECISIONS ---------------- */
 
     if(type === 1){
 
-        const correct = "Service business";
+        const correct = "Increase sales revenue";
 
         const options = shuffle([
             correct,
-            "Manufacturing business",
-            "Charity organisation",
-            "Government body"
+            "Increase fixed costs",
+            "Reduce assets",
+            "Ignore customers"
         ]);
 
         return {
-            question:`A business that provides cleaning services is classified as what type?`,
+            question:
+            `${business} wants to improve profitability. What is the most appropriate objective?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1087,412 +1043,39 @@ function generateL2CH4(){
 
     if(type === 2){
 
-        const correct = "Manufacturing business";
+        const correct = "Higher demand for products";
 
         const options = shuffle([
             correct,
-            "Retail bank",
-            "Charity",
-            "Partnership only"
+            "Lower customer base",
+            "Reduced competition only",
+            "Higher taxes"
         ]);
 
         return {
-            question:`A company that produces furniture is an example of what?`,
+            question:
+            `What is most likely to improve a business's revenue?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- BUSINESS TYPES ---------------- */
 
     if(type === 3){
-
-        const correct = "Retail business";
-
-        const options = shuffle([
-            correct,
-            "Charity organisation",
-            "Public sector body",
-            "Non-profit organisation"
-        ]);
-
-        return {
-            question:`A supermarket is classified as what type of business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Public sector organisation";
-
-        const options = shuffle([
-            correct,
-            "Private limited company",
-            "Sole trader",
-            "Retail business"
-        ]);
-
-        return {
-            question:`A government-funded hospital belongs to which sector?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- OWNERSHIP ----------------
-
-    if(type === 5){
 
         const correct = "Sole trader";
 
         const options = shuffle([
             correct,
             "Public limited company",
-            "Charity",
-            "Government agency"
+            "Government agency",
+            "Charity only"
         ]);
 
         return {
-            question:`A business owned by one person is called what?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Partnership";
-
-        const options = shuffle([
-            correct,
-            "Sole trader",
-            "Government body",
-            "Public corporation"
-        ]);
-
-        return {
-            question:`A business owned by two or more people is called what?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Limited liability company";
-
-        const options = shuffle([
-            correct,
-            "Sole trader",
-            "Cash business",
-            "Informal organisation"
-        ]);
-
-        return {
-            question:`Which type of business protects owners from unlimited personal liability?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Public limited company";
-
-        const options = shuffle([
-            correct,
-            "Sole trader",
-            "Partnership",
-            "Charity"
-        ]);
-
-        return {
-            question:`Which type of company can sell shares to the public?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- STAKEHOLDERS ----------------
-
-    if(type === 9){
-
-        const correct = "Customers";
-
-        const options = shuffle([
-            correct,
-            "Auditors only",
-            "Tax authorities only",
-            "Competitors"
-        ]);
-
-        return {
-            question:`Who are the primary stakeholders interested in product quality?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 10){
-
-        const correct = "Employees";
-
-        const options = shuffle([
-            correct,
-            "Suppliers",
-            "Banks",
-            "Government only"
-        ]);
-
-        return {
-            question:`Who is directly affected by wage levels in a business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Owners";
-
-        const options = shuffle([
-            correct,
-            "Customers",
-            "Competitors",
-            "Auditors"
-        ]);
-
-        return {
-            question:`Who has the main interest in profit generation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Government";
-
-        const options = shuffle([
-            correct,
-            "Customers",
-            "Employees",
-            "Managers"
-        ]);
-
-        return {
-            question:`Who collects taxes from businesses?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- OBJECTIVES ----------------
-
-    if(type === 13){
-
-        const correct = "Profit maximisation";
-
-        const options = shuffle([
-            correct,
-            "Increasing costs",
-            "Reducing revenue",
-            "Avoiding customers"
-        ]);
-
-        return {
-            question:`What is a common objective of private sector businesses?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "Survival";
-
-        const options = shuffle([
-            correct,
-            "Tax avoidance",
-            "Loss making",
-            "Reducing output"
-        ]);
-
-        return {
-            question:`What is often the main objective of a new business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 15){
-
-        const correct = "Growth";
-
-        const options = shuffle([
-            correct,
-            "Decline",
-            "Closure",
-            "Tax reduction"
-        ]);
-
-        return {
-            question:`What objective focuses on increasing market size?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 16){
-
-        const correct = "Customer satisfaction";
-
-        const options = shuffle([
-            correct,
-            "Reducing wages",
-            "Increasing debt",
-            "Ignoring quality"
-        ]);
-
-        return {
-            question:`What is a key objective for most businesses?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- SCENARIO + TRAPS ----------------
-
-    if(type === 17){
-
-        const correct = "Limited liability protects personal assets";
-
-        const options = shuffle([
-            correct,
-            "Owners are fully responsible for all debts",
-            "Business and owner are the same entity",
-            "Profits are guaranteed"
-        ]);
-
-        return {
-            question:`What is an advantage of limited liability?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Stakeholders can have conflicting interests";
-
-        const options = shuffle([
-            correct,
-            "All stakeholders want the same outcome",
-            "Only owners matter",
-            "Employees control profit"
-        ]);
-
-        return {
-            question:`What is true about stakeholders in a business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "External environment affects business decisions";
-
-        const options = shuffle([
-            correct,
-            "Businesses operate in isolation",
-            "Only internal factors matter",
-            "Profit is fixed"
-        ]);
-
-        return {
-            question:`What is true about business environment?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Businesses must adapt to market conditions";
-
-        const options = shuffle([
-            correct,
-            "Businesses never change",
-            "Prices are always fixed",
-            "Customers do not influence decisions"
-        ]);
-
-        return {
-            question:`What is a key principle of business operation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL2CH4();
-}
-function generateL2CH5(){
-
-    const type = rand(1,20);
-    const business = randomBusiness();
-
-    // ---------------- STAKEHOLDER CONFLICTS ----------------
-
-    if(type === 1){
-
-        const correct = "Profit vs employee wages";
-
-        const options = shuffle([
-            correct,
-            "Cash vs bank",
-            "Assets vs liabilities",
-            "Sales vs purchases"
-        ]);
-
-        return {
-            question:`Which is a typical conflict in business objectives?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 2){
-
-        const correct = "Owners and employees";
-
-        const options = shuffle([
-            correct,
-            "Customers and suppliers",
-            "Bank and cash",
-            "Assets and expenses"
-        ]);
-
-        return {
-            question:`Which groups often have conflicting interests over wages and profit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "Customers and shareholders";
-
-        const options = shuffle([
-            correct,
-            "Cash and bank",
-            "Debits and credits",
-            "Assets and liabilities"
-        ]);
-
-        return {
-            question:`Who may disagree over price levels and profit margins?`,
+            question:
+            `${business} is owned and controlled by one person. What type of business is this?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1500,37 +1083,39 @@ function generateL2CH5(){
 
     if(type === 4){
 
-        const correct = "Government and businesses";
+        const correct = "Limited liability";
 
         const options = shuffle([
             correct,
-            "Cash and capital",
-            "Sales and purchases",
-            "Debtors and creditors"
+            "Unlimited liability",
+            "No liability",
+            "Government protection"
         ]);
 
         return {
-            question:`Which groups may disagree over taxation and regulation?`,
+            question:
+            `What is a key advantage of a limited company?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- ETHICS / CSR ----------------
+    /* ---------------- STAKEHOLDERS ---------------- */
 
     if(type === 5){
 
-        const correct = "Corporate Social Responsibility";
+        const correct = "Customers";
 
         const options = shuffle([
             correct,
-            "Cash flow management",
-            "Profit recording",
-            "Inventory control"
+            "Banks only",
+            "Government only",
+            "Suppliers only"
         ]);
 
         return {
-            question:`What does CSR stand for?`,
+            question:
+            `Who is most affected by product quality?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1538,35 +1123,39 @@ function generateL2CH5(){
 
     if(type === 6){
 
-        const correct = "Ethical behaviour";
+        const correct = "Suppliers";
 
         const options = shuffle([
             correct,
-            "Maximising fraud",
-            "Avoiding customers",
-            "Reducing quality"
+            "Customers",
+            "Employees only",
+            "Competitors only"
         ]);
 
         return {
-            question:`What is expected from businesses in relation to society?`,
+            question:
+            `Who provides goods or services to a business?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
+    /* ---------------- BUSINESS OBJECTIVES ---------------- */
+
     if(type === 7){
 
-        const correct = "Reducing environmental impact";
+        const correct = "Profit maximisation";
 
         const options = shuffle([
             correct,
-            "Increasing waste",
-            "Ignoring regulations",
-            "Maximising pollution"
+            "Random spending",
+            "Loss creation",
+            "No objectives"
         ]);
 
         return {
-            question:`What is a CSR objective?`,
+            question:
+            `What is a common objective of a private sector business?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1574,37 +1163,39 @@ function generateL2CH5(){
 
     if(type === 8){
 
-        const correct = "Fair treatment of employees";
+        const correct = "Customer satisfaction";
 
         const options = shuffle([
             correct,
-            "Reducing wages unfairly",
-            "Ignoring contracts",
-            "Avoiding safety rules"
+            "Increasing errors",
+            "Reducing quality",
+            "Ignoring feedback"
         ]);
 
         return {
-            question:`What is part of ethical business behaviour?`,
+            question:
+            `Why is customer satisfaction important?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- EXTERNAL ENVIRONMENT ----------------
+    /* ---------------- MARKET FACTORS ---------------- */
 
     if(type === 9){
 
-        const correct = "Inflation";
+        const correct = "Competition";
 
         const options = shuffle([
             correct,
-            "Depreciation",
-            "Capital",
-            "Revenue"
+            "Weather only",
+            "Internal bookkeeping only",
+            "Accounting standards"
         ]);
 
         return {
-            question:`Which external factor affects business costs?`,
+            question:
+            `What external factor affects business pricing decisions?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1612,35 +1203,39 @@ function generateL2CH5(){
 
     if(type === 10){
 
-        const correct = "Interest rates";
+        const correct = "Supply and demand";
 
         const options = shuffle([
             correct,
-            "Inventory levels",
-            "Gross profit",
-            "Cash receipts"
+            "Bank reconciliation",
+            "Depreciation rules",
+            "Payroll systems"
         ]);
 
         return {
-            question:`What external factor affects borrowing costs?`,
+            question:
+            `What determines the price of most goods in a market economy?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
+    /* ---------------- ETHICS / RESPONSIBILITY ---------------- */
+
     if(type === 11){
 
-        const correct = "Competition";
+        const correct = "Ethical behaviour";
 
         const options = shuffle([
             correct,
-            "Bank reconciliation",
-            "Ledger posting",
-            "Capital account"
+            "Tax avoidance",
+            "Misreporting profits",
+            "Ignoring laws"
         ]);
 
         return {
-            question:`What external factor influences pricing decisions?`,
+            question:
+            `What is expected from businesses in society?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1648,37 +1243,39 @@ function generateL2CH5(){
 
     if(type === 12){
 
-        const correct = "Government legislation";
+        const correct = "Corporate Social Responsibility (CSR)";
 
         const options = shuffle([
             correct,
-            "Cash flow",
-            "Profit margin",
-            "Inventory cost"
+            "Profit hiding",
+            "Expense inflation",
+            "Tax evasion"
         ]);
 
         return {
-            question:`What external factor can force businesses to change operations?`,
+            question:
+            `What term describes a business acting responsibly towards society?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- BUSINESS DECISIONS ----------------
+    /* ---------------- BASIC SCENARIOS ---------------- */
 
     if(type === 13){
 
-        const correct = "Increase prices";
+        const correct = "Increase marketing";
 
         const options = shuffle([
             correct,
-            "Ignore costs",
-            "Stop selling",
-            "Remove customers"
+            "Reduce customers",
+            "Ignore sales",
+            "Close business"
         ]);
 
         return {
-            question:`If costs increase, what may a business do?`,
+            question:
+            `${business} wants to increase awareness of its products. What should it do?`,
             options,
             correct: options.indexOf(correct)
         };
@@ -1686,133 +1283,395 @@ function generateL2CH5(){
 
     if(type === 14){
 
-        const correct = "Reduce costs";
+        const correct = "Expand market share";
+
+        const options = shuffle([
+            correct,
+            "Reduce output",
+            "Stop advertising",
+            "Increase losses"
+        ]);
+
+        return {
+            question:
+            `What does a business aim to achieve in growth strategy?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL APPLICATION ---------------- */
+
+    if(type === 15){
+
+        const correct = "Improve efficiency and reduce costs";
 
         const options = shuffle([
             correct,
             "Increase waste",
-            "Ignore profit",
-            "Stop accounting"
+            "Ignore competition",
+            "Reduce customers"
         ]);
 
         return {
-            question:`How can a business improve profitability?`,
+            question:
+            `${business} wants to improve performance. What is the best strategy?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    throw new Error("L2-CH4 type not implemented: " + type);
+}
+function generateL2CH5(){
+
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    /* ---------------- SCENARIO 1: BUSINESS GROWTH ---------------- */
+
+    if(type === 1){
+
+        const correct = "Increase advertising and marketing";
+
+        const options = shuffle([
+            correct,
+            "Reduce product quality",
+            "Increase waste",
+            "Stop selling products"
+        ]);
+
+        return {
+            question:
+            `${business} is experiencing a decline in sales over the last 3 months.
+
+What is the best action to improve performance?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 2: CUSTOMER PROBLEMS ---------------- */
+
+    if(type === 2){
+
+        const correct = "Improve customer service";
+
+        const options = shuffle([
+            correct,
+            "Ignore complaints",
+            "Increase prices without reason",
+            "Reduce staff training"
+        ]);
+
+        return {
+            question:
+            `${business} has received many customer complaints about service delays.
+
+What should the business do?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 3: COST PRESSURE ---------------- */
+
+    if(type === 3){
+
+        const correct = "Reduce unnecessary costs";
+
+        const options = shuffle([
+            correct,
+            "Increase all costs",
+            "Ignore expenses",
+            "Stop budgeting"
+        ]);
+
+        return {
+            question:
+            `${business} profits are falling due to high operating costs.
+
+What is the most appropriate action?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 4: COMPETITION ---------------- */
+
+    if(type === 4){
+
+        const correct = "Differentiate products";
+
+        const options = shuffle([
+            correct,
+            "Copy competitors exactly",
+            "Reduce product range to zero",
+            "Ignore competitors"
+        ]);
+
+        return {
+            question:
+            `A new competitor has entered the market with lower prices.
+
+What should ${business} do?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 5: EXPANSION DECISION ---------------- */
+
+    if(type === 5){
+
+        const correct = "Open new markets";
+
+        const options = shuffle([
+            correct,
+            "Close existing markets",
+            "Reduce customer base",
+            "Stop selling products"
+        ]);
+
+        return {
+            question:
+            `${business} has stable profits and wants to grow.
+
+What is the best strategy?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 6: EMPLOYEES ---------------- */
+
+    if(type === 6){
+
+        const correct = "Increase staff training";
+
+        const options = shuffle([
+            correct,
+            "Reduce employee skills",
+            "Ignore performance issues",
+            "Cut all wages"
+        ]);
+
+        return {
+            question:
+            `Productivity at ${business} has decreased due to staff errors.
+
+What should the business do?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 7: QUALITY ISSUES ---------------- */
+
+    if(type === 7){
+
+        const correct = "Improve quality control systems";
+
+        const options = shuffle([
+            correct,
+            "Ignore defects",
+            "Increase defective products",
+            "Reduce inspections"
+        ]);
+
+        return {
+            question:
+            `${business} has noticed an increase in product defects.
+
+What is the best response?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 8: CASH FLOW ---------------- */
+
+    if(type === 8){
+
+        const correct = "Improve cash flow management";
+
+        const options = shuffle([
+            correct,
+            "Ignore cash shortages",
+            "Spend without planning",
+            "Remove budgeting systems"
+        ]);
+
+        return {
+            question:
+            `${business} is struggling to pay suppliers on time due to cash shortages.
+
+What should be done?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 9: PRICING ---------------- */
+
+    if(type === 9){
+
+        const correct = "Review pricing strategy";
+
+        const options = shuffle([
+            correct,
+            "Ignore market changes",
+            "Set random prices",
+            "Eliminate pricing structure"
+        ]);
+
+        return {
+            question:
+            `Sales are falling because customers think prices are too high.
+
+What should ${business} do?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 10: TECHNOLOGY ---------------- */
+
+    if(type === 10){
+
+        const correct = "Invest in new technology";
+
+        const options = shuffle([
+            correct,
+            "Avoid automation",
+            "Reduce efficiency",
+            "Ignore innovation"
+        ]);
+
+        return {
+            question:
+            `${business} is using outdated systems that slow down production.
+
+What is the best action?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 11: CUSTOMER RETENTION ---------------- */
+
+    if(type === 11){
+
+        const correct = "Build customer loyalty programmes";
+
+        const options = shuffle([
+            correct,
+            "Ignore existing customers",
+            "Increase complaints",
+            "Reduce service quality"
+        ]);
+
+        return {
+            question:
+            `${business} is losing repeat customers.
+
+What should it focus on?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 12: PROFIT DECLINE ---------------- */
+
+    if(type === 12){
+
+        const correct = "Analyse financial performance";
+
+        const options = shuffle([
+            correct,
+            "Ignore financial reports",
+            "Increase losses",
+            "Stop accounting records"
+        ]);
+
+        return {
+            question:
+            `Profits at ${business} have decreased significantly.
+
+What is the first step?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 13: SUPPLY ISSUES ---------------- */
+
+    if(type === 13){
+
+        const correct = "Find alternative suppliers";
+
+        const options = shuffle([
+            correct,
+            "Stop production permanently",
+            "Ignore shortages",
+            "Increase delays"
+        ]);
+
+        return {
+            question:
+            `${business} is experiencing delays from current suppliers.
+
+What should it do?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SCENARIO 14: BUSINESS ETHICS ---------------- */
+
+    if(type === 14){
+
+        const correct = "Act ethically and legally";
+
+        const options = shuffle([
+            correct,
+            "Ignore laws",
+            "Reduce transparency",
+            "Increase fraud"
+        ]);
+
+        return {
+            question:
+            `What should all businesses ensure in their operations?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL MIXED SCENARIO ---------------- */
 
     if(type === 15){
 
-        const correct = "Improve efficiency";
+        const correct = "Improve overall business efficiency";
 
         const options = shuffle([
             correct,
-            "Increase losses",
-            "Reduce sales",
-            "Increase debt"
+            "Increase waste",
+            "Ignore performance",
+            "Reduce planning"
         ]);
 
         return {
-            question:`What helps a business remain competitive?`,
+            question:
+            `${business} is facing multiple issues: declining sales, rising costs, and customer complaints.
+
+What is the best overall response?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
-
-        const correct = "Customer demand affects sales";
-
-        const options = shuffle([
-            correct,
-            "Demand has no impact",
-            "Only costs matter",
-            "Profit is fixed"
-        ]);
-
-        return {
-            question:`What influences business revenue?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM TRICKS ----------------
-
-    if(type === 17){
-
-        const correct = "Stakeholder objectives may conflict";
-
-        const options = shuffle([
-            correct,
-            "All stakeholders agree",
-            "Only owners matter",
-            "Profit is guaranteed"
-        ]);
-
-        return {
-            question:`What is true about stakeholders?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "External factors are uncontrollable";
-
-        const options = shuffle([
-            correct,
-            "Businesses control inflation",
-            "Government is internal",
-            "Competition is fixed"
-        ]);
-
-        return {
-            question:`What is true about external environment?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Businesses must adapt to survive";
-
-        const options = shuffle([
-            correct,
-            "Businesses never change",
-            "Markets are fixed",
-            "Demand is constant"
-        ]);
-
-        return {
-            question:`What is a key business principle?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Balance between profit and ethics";
-
-        const options = shuffle([
-            correct,
-            "Profit only matters",
-            "Ethics do not matter",
-            "Loss is required"
-        ]);
-
-        return {
-            question:`What is a modern business challenge?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL2CH5();
+    throw new Error("L2-CH5 type not implemented: " + type);
 }
 /* ------------------------
    LEVEL 3 QUESTION BANK
@@ -1820,1594 +1679,1751 @@ function generateL2CH5(){
 
 function generateL3CH1(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- BUSINESS STRUCTURES ----------------
+    /* ---------------- BASIC ACCOUNTING UNDERSTANDING ---------------- */
 
     if(type === 1){
 
-        const correct = "Sole trader";
+        const correct = "Provide financial information for decision making";
 
         const options = shuffle([
             correct,
-            "Public limited company",
-            "Government body",
-            "Charity organisation"
+            "Increase profit automatically",
+            "Avoid all business risks",
+            "Replace management decisions"
         ]);
 
         return {
-            question:`Which business structure is owned by one person?`,
+            question:
+            `What is the main purpose of financial accounting?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- BUSINESS STRUCTURE ---------------- */
 
     if(type === 2){
 
-        const correct = "Partnership";
+        const correct = "Limited liability company";
 
         const options = shuffle([
             correct,
-            "Public sector organisation",
-            "Charity",
-            "Bank"
+            "Sole trader",
+            "Unregistered partnership",
+            "Informal group"
         ]);
 
         return {
-            question:`Which structure involves two or more owners?`,
+            question:
+            `${business} is owned by shareholders and has separate legal identity. What type of business is this?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- PRACTICAL PROFIT LOGIC ---------------- */
 
     if(type === 3){
 
-        const correct = "Private limited company";
+        const revenue = rand(5000,20000);
+        const costs = rand(3000,15000);
+
+        const profit = revenue - costs;
 
         const options = shuffle([
-            correct,
-            "Sole trader",
-            "Government department",
-            "Cash business"
+            profit,
+            profit + 500,
+            profit - 400,
+            profit + 800
         ]);
 
         return {
-            question:`Which business structure has limited liability and shares not sold publicly?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} has revenue of £${revenue} and costs of £${costs}.
+
+What is the profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
         };
     }
+
+    /* ---------------- USERS OF ACCOUNTS ---------------- */
 
     if(type === 4){
 
-        const correct = "Public limited company";
+        const correct = "Investors";
 
         const options = shuffle([
             correct,
-            "Partnership",
-            "Sole trader",
-            "Non-profit organisation"
+            "Only employees",
+            "Only customers",
+            "Only suppliers"
         ]);
 
         return {
-            question:`Which company type can sell shares to the public?`,
+            question:
+            `Who uses financial statements to decide whether to invest in a business?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- STAKEHOLDERS ----------------
+    /* ---------------- CASH VS PROFIT ---------------- */
 
     if(type === 5){
+
+        const correct = "Profit includes non-cash items";
+
+        const options = shuffle([
+            correct,
+            "Cash equals profit always",
+            "Profit ignores revenue",
+            "Cash is never recorded"
+        ]);
+
+        return {
+            question:
+            `Why is profit different from cash?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- BASIC ACCOUNTING EQUATION ---------------- */
+
+    if(type === 6){
+
+        const assets = rand(10000,20000);
+        const liabilities = rand(3000,8000);
+
+        const capital = assets - liabilities;
+
+        const options = shuffle([
+            capital,
+            capital + 500,
+            capital - 300,
+            capital + 800
+        ]);
+
+        return {
+            question:
+            `A business has assets of £${assets} and liabilities of £${liabilities}.
+
+What is capital?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(capital)
+        };
+    }
+
+    /* ---------------- INCOME STATEMENT LOGIC ---------------- */
+
+    if(type === 7){
+
+        const revenue = rand(8000,15000);
+        const expenses = rand(3000,9000);
+
+        const profit = revenue - expenses;
+
+        const options = shuffle([
+            profit,
+            profit + 200,
+            profit - 300,
+            profit + 500
+        ]);
+
+        return {
+            question:
+            `Revenue £${revenue}
+Expenses £${expenses}
+
+What is operating profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- ACCURACY & RECORDING ---------------- */
+
+    if(type === 8){
+
+        const correct = "Reliable financial reporting";
+
+        const options = shuffle([
+            correct,
+            "Random guessing",
+            "Profit manipulation",
+            "Ignoring records"
+        ]);
+
+        return {
+            question:
+            `Why is accuracy important in accounting records?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- USERS OF ACCOUNTING ---------------- */
+
+    if(type === 9){
+
+        const correct = "Managers";
+
+        const options = shuffle([
+            correct,
+            "Only government",
+            "Only competitors",
+            "Only customers"
+        ]);
+
+        return {
+            question:
+            `Who uses financial information for internal decision making?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- BASIC ANALYSIS ---------------- */
+
+    if(type === 10){
+
+        const profit = rand(1000,6000);
+        const trend = "increasing";
+
+        const options = shuffle([
+            "Business is performing well",
+            "Business is failing immediately",
+            "No information available",
+            "Costs are zero"
+        ]);
+
+        return {
+            question:
+            `A business reports increasing profits of £${profit}.
+
+What can be concluded?`,
+            options,
+            correct: options.indexOf("Business is performing well")
+        };
+    }
+
+    /* ---------------- COST VS REVENUE UNDERSTANDING ---------------- */
+
+    if(type === 11){
+
+        const correct = "Revenue must exceed costs for profit";
+
+        const options = shuffle([
+            correct,
+            "Costs must exceed revenue",
+            "Revenue is irrelevant",
+            "Profit is always fixed"
+        ]);
+
+        return {
+            question:
+            `What must be true for a business to make a profit?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SIMPLE FINANCIAL POSITION ---------------- */
+
+    if(type === 12){
+
+        const assets = rand(5000,12000);
+        const capital = rand(2000,7000);
+
+        const liabilities = assets - capital;
+
+        const options = shuffle([
+            liabilities,
+            liabilities + 200,
+            liabilities - 300,
+            liabilities + 500
+        ]);
+
+        return {
+            question:
+            `Assets £${assets}
+Capital £${capital}
+
+What are liabilities?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(liabilities)
+        };
+    }
+
+    /* ---------------- STAKEHOLDERS ---------------- */
+
+    if(type === 13){
 
         const correct = "Employees";
 
         const options = shuffle([
             correct,
-            "Competitors",
-            "Banks only",
-            "Tax authorities only"
-        ]);
-
-        return {
-            question:`Who is directly affected by wage decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Customers";
-
-        const options = shuffle([
-            correct,
-            "Auditors",
-            "Government only",
-            "Banks only"
-        ]);
-
-        return {
-            question:`Who is mainly concerned with product quality and price?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Government";
-
-        const options = shuffle([
-            correct,
-            "Employees",
-            "Customers",
-            "Suppliers"
-        ]);
-
-        return {
-            question:`Who regulates business activity through laws and taxation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Shareholders";
-
-        const options = shuffle([
-            correct,
-            "Customers",
-            "Employees",
-            "Competitors"
-        ]);
-
-        return {
-            question:`Who is mainly interested in dividends and profit growth?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- ENVIRONMENT ----------------
-
-    if(type === 9){
-
-        const correct = "Internal environment";
-
-        const options = shuffle([
-            correct,
-            "External environment",
-            "Global market",
-            "Tax system"
-        ]);
-
-        return {
-            question:`What environment is controlled by the business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 10){
-
-        const correct = "External environment";
-
-        const options = shuffle([
-            correct,
-            "Internal environment",
-            "Cash environment",
-            "Ledger environment"
-        ]);
-
-        return {
-            question:`What environment includes factors like competition and economy?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Competition";
-
-        const options = shuffle([
-            correct,
-            "Bank reconciliation",
-            "Depreciation",
-            "Payroll"
-        ]);
-
-        return {
-            question:`Which is an external factor affecting pricing decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Economic conditions";
-
-        const options = shuffle([
-            correct,
-            "Inventory system",
-            "Bookkeeping method",
-            "Ledger balance"
-        ]);
-
-        return {
-            question:`Which external factor affects business demand?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- OBJECTIVES ----------------
-
-    if(type === 13){
-
-        const correct = "Profit maximisation";
-
-        const options = shuffle([
-            correct,
-            "Loss maximisation",
-            "Cost elimination",
-            "Cash removal"
-        ]);
-
-        return {
-            question:`What is a key objective of private sector businesses?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "Survival";
-
-        const options = shuffle([
-            correct,
-            "Tax avoidance",
-            "Cash reduction",
-            "Debt creation"
-        ]);
-
-        return {
-            question:`What is the main objective of a new business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 15){
-
-        const correct = "Growth";
-
-        const options = shuffle([
-            correct,
-            "Decline",
-            "Closure",
-            "Loss making"
-        ]);
-
-        return {
-            question:`What objective involves expanding the business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 16){
-
-        const correct = "Customer satisfaction";
-
-        const options = shuffle([
-            correct,
-            "Reducing quality",
-            "Increasing waste",
-            "Ignoring demand"
-        ]);
-
-        return {
-            question:`What is a key objective of most businesses?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- SCENARIO + REASONING ----------------
-
-    if(type === 17){
-
-        const correct = "Stakeholders may have conflicting objectives";
-
-        const options = shuffle([
-            correct,
-            "All stakeholders agree",
-            "Only owners matter",
-            "Profit is guaranteed"
-        ]);
-
-        return {
-            question:`What is true about stakeholder objectives?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "External factors cannot be controlled";
-
-        const options = shuffle([
-            correct,
-            "Businesses control inflation",
-            "Government is internal",
-            "Demand is fixed"
-        ]);
-
-        return {
-            question:`What is true about external environment?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Businesses must adapt to survive";
-
-        const options = shuffle([
-            correct,
-            "Markets never change",
-            "Profit is guaranteed",
-            "Costs are irrelevant"
-        ]);
-
-        return {
-            question:`What is a key business principle?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Balance between profit and stakeholder needs";
-
-        const options = shuffle([
-            correct,
-            "Profit only matters",
-            "Ethics are irrelevant",
-            "Loss is required"
-        ]);
-
-        return {
-            question:`What is a modern business challenge?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL3CH1();
-}
-
-function generateL3CH2(){
-
-    const revenue = rand(10000,40000);
-    const expenses = rand(3000,9000);
-
-    const profit =
-        revenue - expenses;
-
-    const options =
-        shuffle([
-            profit,
-            profit + 500,
-            profit - 500,
-            profit + 1000
-        ]);
-
-    return {
-
-        question:
-        `Revenue equals
-         ${currency(revenue)}
-         and expenses equal
-         ${currency(expenses)}.
-
-         What is the profit?`,
-
-        options:
-        options.map(v=>currency(v)),
-
-        correct:
-        options.indexOf(profit)
-    };
-}
-    function generateL3CH3(){
-
-    const type = rand(1,20);
-    const business = randomBusiness();
-
-    // ---------------- CONTRIBUTION BASICS ----------------
-
-    if(type === 1){
-
-        const correct = "Selling price - variable cost";
-
-        const options = shuffle([
-            correct,
-            "Fixed cost - revenue",
-            "Revenue + tax",
-            "Cash - profit"
-        ]);
-
-        return {
-            question:`How is contribution per unit calculated?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 2){
-
-        const correct = "Contribution covers fixed costs";
-
-        const options = shuffle([
-            correct,
-            "Fixed costs create revenue",
-            "Revenue removes costs",
-            "Profit is fixed"
-        ]);
-
-        return {
-            question:`What is the purpose of contribution?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "Total contribution - fixed costs";
-
-        const options = shuffle([
-            correct,
-            "Revenue - tax",
-            "Assets - liabilities",
-            "Cash - expenses"
-        ]);
-
-        return {
-            question:`How is profit calculated in marginal costing?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Contribution increases profit";
-
-        const options = shuffle([
-            correct,
-            "Fixed cost increases profit",
-            "Revenue reduces contribution",
-            "Costs have no effect"
-        ]);
-
-        return {
-            question:`What is the effect of higher contribution?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- BREAK-EVEN ----------------
-
-    if(type === 5){
-
-        const correct = "Break-even point";
-
-        const options = shuffle([
-            correct,
-            "Profit maximum",
-            "Loss limit",
-            "Cash balance"
-        ]);
-
-        return {
-            question:`What is the point where revenue equals total costs?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Fixed costs ÷ contribution per unit";
-
-        const options = shuffle([
-            correct,
-            "Revenue ÷ profit",
-            "Cost ÷ tax",
-            "Assets ÷ liabilities"
-        ]);
-
-        return {
-            question:`How is break-even output calculated?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "No profit and no loss";
-
-        const options = shuffle([
-            correct,
-            "Maximum profit",
-            "Maximum loss",
-            "Zero sales"
-        ]);
-
-        return {
-            question:`What happens at break-even point?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Higher contribution reduces break-even point";
-
-        const options = shuffle([
-            correct,
-            "Higher contribution increases break-even",
-            "Fixed costs reduce contribution",
-            "Revenue has no effect"
-        ]);
-
-        return {
-            question:`What happens if contribution increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- PROFIT CALCULATIONS ----------------
-
-    if(type === 9){
-
-        const units = rand(100, 800);
-        const price = rand(10, 60);
-        const vc = rand(5, 30);
-        const fixed = rand(500, 5000);
-
-        const profit = (units * (price - vc)) - fixed;
-
-        const options = shuffle([
-            profit,
-            profit + 100,
-            profit - 100,
-            profit + 250
+            "Only banks",
+            "Only government",
+            "Only competitors"
         ]);
 
         return {
             question:
-`${business} sells ${units} units at £${price}.
-Variable cost per unit is £${vc}.
-Fixed costs are £${fixed}.
-
-What is the profit?`,
+            `Who benefits from job security and wages information?`,
             options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL APPLICATION ---------------- */
+
+    if(type === 14){
+
+        const revenue = rand(10000,20000);
+        const costs = rand(5000,15000);
+
+        const profit = revenue - costs;
+
+        const options = shuffle([
+            profit,
+            profit + 400,
+            profit - 500,
+            profit + 700
+        ]);
+
+        return {
+            question:
+            `${business} financial summary:
+Revenue £${revenue}
+Costs £${costs}
+
+What is net profit?`,
+            options: options.map(v => currency(v)),
             correct: options.indexOf(profit)
         };
     }
 
-    if(type === 10){
-
-        const correct = "Revenue - total costs";
-
-        const options = shuffle([
-            correct,
-            "Assets - liabilities",
-            "Cash - tax",
-            "Cost + profit"
-        ]);
-
-        return {
-            question:`What is another formula for profit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Increasing sales increases profit";
-
-        const options = shuffle([
-            correct,
-            "Sales have no effect",
-            "Fixed costs increase profit",
-            "Revenue reduces profit"
-        ]);
-
-        return {
-            question:`What happens if sales volume increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Loss occurs when costs exceed revenue";
-
-        const options = shuffle([
-            correct,
-            "Loss occurs when revenue increases",
-            "Loss occurs when fixed costs are zero",
-            "Loss occurs when cash increases"
-        ]);
-
-        return {
-            question:`When does a business make a loss?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- DECISION MAKING ----------------
-
-    if(type === 13){
-
-        const correct = "Choose highest contribution option";
-
-        const options = shuffle([
-            correct,
-            "Choose lowest revenue",
-            "Ignore costs",
-            "Maximise fixed costs"
-        ]);
-
-        return {
-            question:`What is the key rule in short-term decision making?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "Only relevant costs should be considered";
-
-        const options = shuffle([
-            correct,
-            "All historical costs matter",
-            "Fixed costs always ignored",
-            "Revenue is irrelevant"
-        ]);
-
-        return {
-            question:`Which costs are relevant for decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    /* ---------------- FINAL CONCEPT ---------------- */
 
     if(type === 15){
 
-        const correct = "Compare incremental revenue and costs";
+        const correct = "Support decision making";
 
         const options = shuffle([
             correct,
-            "Ignore revenue",
-            "Ignore contribution",
-            "Only fixed costs matter"
+            "Replace accounting",
+            "Eliminate reporting",
+            "Increase errors"
         ]);
 
         return {
-            question:`How are decisions evaluated?`,
+            question:
+            `What is the ultimate role of accounting information?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
-
-        const correct = "Opportunity cost must be considered";
-
-        const options = shuffle([
-            correct,
-            "Only cash matters",
-            "Tax is irrelevant",
-            "Profit is fixed"
-        ]);
-
-        return {
-            question:`What should also be considered in decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM TRAPS ----------------
-
-    if(type === 17){
-
-        const correct = "Break-even changes with cost structure";
-
-        const options = shuffle([
-            correct,
-            "Break-even is constant",
-            "Profit is fixed",
-            "Revenue is irrelevant"
-        ]);
-
-        return {
-            question:`What affects break-even point?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Contribution must cover fixed costs first";
-
-        const options = shuffle([
-            correct,
-            "Fixed costs are ignored",
-            "Revenue equals profit",
-            "Costs do not matter"
-        ]);
-
-        return {
-            question:`What is the priority in marginal costing?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "High fixed costs increase break-even point";
-
-        const options = shuffle([
-            correct,
-            "High fixed costs reduce break-even",
-            "Variable costs irrelevant",
-            "Revenue controls costs"
-        ]);
-
-        return {
-            question:`What happens if fixed costs increase?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "CVP analysis is essential for decisions";
-
-        const options = shuffle([
-            correct,
-            "Only cash matters",
-            "Profit is random",
-            "Costs are irrelevant"
-        ]);
-
-        return {
-            question:`What is central in management accounting?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL3CH3();
+    throw new Error("L3-CH1 type not implemented: " + type);
 }
 
-function generateL3CH4(){
+function generateL3CH2(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- VAT BASICS ----------------
+    /* ---------------- DOUBLE ENTRY BASICS ---------------- */
 
     if(type === 1){
 
-        const correct = "Value Added Tax";
+        const correct = "Debit expense, Credit cash";
 
         const options = shuffle([
             correct,
-            "Variable Asset Tax",
-            "Volume Accounting Tax",
-            "Vendor Allocation Tax"
+            "Debit cash, Credit expense",
+            "Debit revenue, Credit capital",
+            "Debit liability, Credit asset"
         ]);
 
         return {
-            question:`What does VAT stand for?`,
+            question:
+            `A business pays rent in cash. What is the correct double entry?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- PURCHASE ON CREDIT ---------------- */
 
     if(type === 2){
 
-        const correct = "Tax on goods and services";
+        const correct = "Debit purchases, Credit trade payables";
 
         const options = shuffle([
             correct,
-            "Tax on profits only",
-            "Tax on wages",
-            "Tax on assets only"
+            "Debit cash, Credit purchases",
+            "Debit sales, Credit cash",
+            "Debit expense, Credit revenue"
         ]);
 
         return {
-            question:`What is VAT charged on?`,
+            question:
+            `${business} buys goods on credit. What is the correct entry?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- SALES ON CREDIT ---------------- */
 
     if(type === 3){
 
-        const correct = "Registered businesses only";
+        const correct = "Debit trade receivables, Credit sales";
 
         const options = shuffle([
             correct,
-            "All individuals",
-            "Only employees",
-            "Only banks"
+            "Debit cash, Credit sales",
+            "Debit purchases, Credit cash",
+            "Debit expense, Credit liability"
         ]);
 
         return {
-            question:`Who must register for VAT?`,
+            question:
+            `${business} sells goods on credit. What is the correct entry?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CASH FLOW ENTRY ---------------- */
 
     if(type === 4){
 
-        const correct = "Output tax and input tax";
+        const amount = rand(200,2000);
+
+        const correct = "Debit cash, Credit capital";
 
         const options = shuffle([
             correct,
-            "Debit and credit tax",
-            "Fixed and variable tax",
-            "Cash and bank tax"
+            "Debit capital, Credit cash",
+            "Debit expense, Credit cash",
+            "Debit revenue, Credit expense"
         ]);
 
         return {
-            question:`What are the two main components of VAT accounting?`,
+            question:
+            `${business} owner introduces £${amount} into the business bank account.
+
+What is the correct journal entry?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- INPUT / OUTPUT VAT ----------------
+    /* ---------------- ACCRUALS ---------------- */
 
     if(type === 5){
 
-        const correct = "VAT charged on sales";
+        const correct = "Expense is recorded even if not yet paid";
 
         const options = shuffle([
             correct,
-            "VAT paid on purchases",
-            "VAT refunded by HMRC",
-            "No VAT involved"
+            "Expense is ignored until paid",
+            "Revenue is deleted",
+            "Cash is not recorded"
         ]);
 
         return {
-            question:`What is output tax?`,
+            question:
+            `What is an accrual?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
     if(type === 6){
+
+        const expense = rand(100,600);
+        const accrual = rand(50,200);
+
+        const total = expense + accrual;
+
+        const options = shuffle([
+            total,
+            total + 50,
+            total - 30,
+            total + 80
+        ]);
+
+        return {
+            question:
+            `Utility expense £${expense} plus accrual £${accrual}.
+
+What is total expense to be recorded?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- PREPAYMENTS ---------------- */
+
+    if(type === 7){
+
+        const correct = "Expense paid in advance";
+
+        const options = shuffle([
+            correct,
+            "Expense never recorded",
+            "Revenue delay",
+            "Capital injection"
+        ]);
+
+        return {
+            question:
+            `What is a prepayment?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 8){
+
+        const total = rand(300,1200);
+        const prepaid = rand(50,300);
+
+        const expense = total - prepaid;
+
+        const options = shuffle([
+            expense,
+            expense + 40,
+            expense - 60,
+            expense + 90
+        ]);
+
+        return {
+            question:
+            `Insurance paid £${total}, prepayment £${prepaid}.
+
+What is the expense for the period?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(expense)
+        };
+    }
+
+    /* ---------------- LEDGER LOGIC ---------------- */
+
+    if(type === 9){
+
+        const correct = "Records all transactions by account";
+
+        const options = shuffle([
+            correct,
+            "Stores only cash transactions",
+            "Deletes errors automatically",
+            "Only used for tax"
+        ]);
+
+        return {
+            question:
+            `What is the purpose of a ledger?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TRIAL BALANCE UNDERSTANDING ---------------- */
+
+    if(type === 10){
+
+        const correct = "Total debits equal total credits";
+
+        const options = shuffle([
+            correct,
+            "Debits are always higher",
+            "Credits are ignored",
+            "Only cash is recorded"
+        ]);
+
+        return {
+            question:
+            `What must be true in a trial balance?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- ERROR DETECTION ---------------- */
+
+    if(type === 11){
+
+        const correct = "Error of commission";
+
+        const options = shuffle([
+            correct,
+            "Error of principle",
+            "Accrual error",
+            "Capital error"
+        ]);
+
+        return {
+            question:
+            `A transaction is recorded in the wrong account type but correct class.
+
+What type of error is this?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- JOURNAL REASONING ---------------- */
+
+    if(type === 12){
+
+        const correct = "To correct accounting errors";
+
+        const options = shuffle([
+            correct,
+            "To increase profit",
+            "To avoid taxes",
+            "To remove invoices"
+        ]);
+
+        return {
+            question:
+            `What is the purpose of a journal entry?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CASH VS CREDIT ---------------- */
+
+    if(type === 13){
+
+        const correct = "Cash increases assets immediately";
+
+        const options = shuffle([
+            correct,
+            "Cash decreases liabilities",
+            "Cash removes revenue",
+            "Cash has no effect"
+        ]);
+
+        return {
+            question:
+            `What happens when cash is received?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL APPLICATION ---------------- */
+
+    if(type === 14){
+
+        const revenue = rand(2000,8000);
+        const expense = rand(1000,5000);
+
+        const profit = revenue - expense;
+
+        const options = shuffle([
+            profit,
+            profit + 200,
+            profit - 300,
+            profit + 500
+        ]);
+
+        return {
+            question:
+            `${business} records revenue £${revenue} and expenses £${expense}.
+
+What is profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- FINAL THEORY APPLICATION ---------------- */
+
+    if(type === 15){
+
+        const correct = "Accurate financial reporting for stakeholders";
+
+        const options = shuffle([
+            correct,
+            "Random number generation",
+            "Tax elimination",
+            "Profit manipulation"
+        ]);
+
+        return {
+            question:
+            `Why is financial accounting important?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    throw new Error("L3-CH2 type not implemented: " + type);
+}
+    function generateL3CH3(){
+
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    /* ---------------- COST TYPES ---------------- */
+
+    if(type === 1){
+
+        const correct = "Fixed costs do not change with output";
+
+        const options = shuffle([
+            correct,
+            "Fixed costs increase with sales",
+            "Fixed costs are always zero",
+            "Fixed costs depend on revenue"
+        ]);
+
+        return {
+            question:
+            `What is a characteristic of fixed costs?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- VARIABLE COSTS ---------------- */
+
+    if(type === 2){
+
+        const correct = "They increase as output increases";
+
+        const options = shuffle([
+            correct,
+            "They stay constant always",
+            "They decrease when sales increase",
+            "They are unrelated to production"
+        ]);
+
+        return {
+            question:
+            `What happens to variable costs when production increases?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CONTRIBUTION ---------------- */
+
+    if(type === 3){
+
+        const selling = rand(10,50);
+        const varCost = rand(5,30);
+
+        const contribution = selling - varCost;
+
+        const options = shuffle([
+            contribution,
+            contribution + 2,
+            contribution - 3,
+            contribution + 5
+        ]);
+
+        return {
+            question:
+            `A product sells for £${selling} and has variable cost £${varCost}.
+
+What is contribution per unit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(contribution)
+        };
+    }
+
+    /* ---------------- BREAK EVEN UNITS ---------------- */
+
+    if(type === 4){
+
+        const fixed = rand(1000,5000);
+        const selling = rand(20,80);
+        const varCost = rand(10,40);
+
+        const contribution = selling - varCost;
+        const breakEven = Math.ceil(fixed / contribution);
+
+        const options = shuffle([
+            breakEven,
+            breakEven + 5,
+            breakEven - 3,
+            breakEven + 10
+        ]);
+
+        return {
+            question:
+            `${business} has fixed costs £${fixed}.
+Selling price £${selling}
+Variable cost £${varCost}
+
+What is break-even output (units)?`,
+            options,
+            correct: options.indexOf(breakEven)
+        };
+    }
+
+    /* ---------------- BREAK EVEN REVENUE ---------------- */
+
+    if(type === 5){
+
+        const fixed = rand(2000,6000);
+        const contributionRatio = rand(20,60) / 100;
+
+        const breakEvenRevenue = Math.round(fixed / contributionRatio);
+
+        const options = shuffle([
+            breakEvenRevenue,
+            breakEvenRevenue + 500,
+            breakEvenRevenue - 400,
+            breakEvenRevenue + 800
+        ]);
+
+        return {
+            question:
+            `Fixed costs £${fixed}
+Contribution ratio ${(contributionRatio*100).toFixed(0)}%
+
+What is break-even revenue?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(breakEvenRevenue)
+        };
+    }
+
+    /* ---------------- PROFIT USING CONTRIBUTION ---------------- */
+
+    if(type === 6){
+
+        const units = rand(100,500);
+        const selling = rand(10,40);
+        const varCost = rand(5,25);
+        const fixed = rand(1000,4000);
+
+        const profit = (selling - varCost) * units - fixed;
+
+        const options = shuffle([
+            profit,
+            profit + 200,
+            profit - 300,
+            profit + 500
+        ]);
+
+        return {
+            question:
+            `Units sold: ${units}
+Selling price: £${selling}
+Variable cost: £${varCost}
+Fixed costs: £${fixed}
+
+What is profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- DECISION MAKING ---------------- */
+
+    if(type === 7){
+
+        const correct = "Choose option with higher contribution";
+
+        const options = shuffle([
+            correct,
+            "Choose lowest revenue",
+            "Ignore costs completely",
+            "Choose highest fixed cost"
+        ]);
+
+        return {
+            question:
+            `How should a business choose between two products?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- COST BEHAVIOUR ---------------- */
+
+    if(type === 8){
+
+        const correct = "Semi-variable costs contain both fixed and variable elements";
+
+        const options = shuffle([
+            correct,
+            "They are always fixed",
+            "They are always variable",
+            "They do not exist in accounting"
+        ]);
+
+        return {
+            question:
+            `What is a semi-variable cost?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- PROFIT IMPACT ---------------- */
+
+    if(type === 9){
+
+        const change = rand(50,300);
+
+        const options = shuffle([
+            "Profit increases",
+            "Profit decreases",
+            "No change in profit",
+            "Costs become zero"
+        ]);
+
+        return {
+            question:
+            `If variable costs increase by £${change} per unit, what happens to profit (assuming selling price is unchanged)?`,
+            options,
+            correct: options.indexOf("Profit decreases")
+        };
+    }
+
+    /* ---------------- CONTRIBUTION INTERPRETATION ---------------- */
+
+    if(type === 10){
+
+        const correct = "Amount available to cover fixed costs";
+
+        const options = shuffle([
+            correct,
+            "Total revenue",
+            "Total costs",
+            "Tax amount"
+        ]);
+
+        return {
+            question:
+            `What does contribution represent?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL BREAK EVEN INSIGHT ---------------- */
+
+    if(type === 11){
+
+        const correct = "Where profit is zero";
+
+        const options = shuffle([
+            correct,
+            "Where revenue is zero",
+            "Where costs are zero",
+            "Where cash is negative"
+        ]);
+
+        return {
+            question:
+            `What is the break-even point?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SIMPLE CALCULATION ---------------- */
+
+    if(type === 12){
+
+        const fixed = rand(1000,3000);
+        const profit = rand(500,2000);
+
+        const totalContribution = fixed + profit;
+
+        const options = shuffle([
+            totalContribution,
+            totalContribution + 100,
+            totalContribution - 200,
+            totalContribution + 300
+        ]);
+
+        return {
+            question:
+            `Fixed costs £${fixed}
+Profit £${profit}
+
+What total contribution is needed?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(totalContribution)
+        };
+    }
+
+    /* ---------------- INTERPRETATION ---------------- */
+
+    if(type === 13){
+
+        const correct = "Helps managers make pricing decisions";
+
+        const options = shuffle([
+            correct,
+            "Replaces accounting system",
+            "Removes costs",
+            "Guarantees profit"
+        ]);
+
+        return {
+            question:
+            `Why is management accounting useful?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL APPLICATION ---------------- */
+
+    if(type === 14){
+
+        const selling = rand(20,60);
+        const varCost = rand(10,30);
+        const units = rand(100,400);
+
+        const fixed = rand(1000,5000);
+
+        const profit = (selling - varCost) * units - fixed;
+
+        const options = shuffle([
+            profit,
+            profit + 200,
+            profit - 300,
+            profit + 500
+        ]);
+
+        return {
+            question:
+            `${business}:
+Selling price £${selling}
+Variable cost £${varCost}
+Units ${units}
+Fixed costs £${fixed}
+
+What is profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- FINAL THEORY ---------------- */
+
+    if(type === 15){
+
+        const correct = "Supports planning and decision making";
+
+        const options = shuffle([
+            correct,
+            "Eliminates accounting",
+            "Removes pricing",
+            "Guarantees revenue"
+        ]);
+
+        return {
+            question:
+            `What is the main purpose of management accounting?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    throw new Error("L3-CH3 type not implemented: " + type);
+}
+
+function generateL3CH4(){
+
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    /* ---------------- VAT BASICS ---------------- */
+
+    if(type === 1){
+
+        const correct = "Output VAT is charged on sales";
+
+        const options = shuffle([
+            correct,
+            "Input VAT is charged on sales",
+            "VAT is not recorded in accounting",
+            "VAT replaces revenue"
+        ]);
+
+        return {
+            question:
+            `What is output VAT?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- INPUT VAT ---------------- */
+
+    if(type === 2){
 
         const correct = "VAT paid on purchases";
 
         const options = shuffle([
             correct,
             "VAT charged on sales",
-            "VAT on profit",
-            "VAT on wages"
+            "VAT on wages",
+            "VAT on profit"
         ]);
 
         return {
-            question:`What is input tax?`,
+            question:
+            `What is input VAT?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- VAT CALCULATION ---------------- */
+
+    if(type === 3){
+
+        const net = rand(100,1000);
+        const vatRate = 0.20;
+        const vat = net * vatRate;
+        const total = net + vat;
+
+        const options = shuffle([
+            total,
+            total + 20,
+            total - 15,
+            total + 30
+        ]);
+
+        return {
+            question:
+            `${business} sells goods with net value £${net}.
+VAT is 20%.
+
+What is the total price including VAT?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- VAT LIABILITY ---------------- */
+
+    if(type === 4){
+
+        const input = rand(50,300);
+        const output = rand(100,500);
+
+        const liability = output - input;
+
+        const options = shuffle([
+            liability,
+            liability + 20,
+            liability - 30,
+            liability + 40
+        ]);
+
+        return {
+            question:
+            `A business has output VAT £${output} and input VAT £${input}.
+
+What is the VAT payable to HMRC?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(liability)
+        };
+    }
+
+    /* ---------------- TAX PURPOSE ---------------- */
+
+    if(type === 5){
+
+        const correct = "Fund government spending";
+
+        const options = shuffle([
+            correct,
+            "Increase profit",
+            "Reduce costs",
+            "Replace accounting records"
+        ]);
+
+        return {
+            question:
+            `What is the purpose of taxation?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX DEADLINES ---------------- */
+
+    if(type === 6){
+
+        const correct = "Must be submitted to HMRC on time";
+
+        const options = shuffle([
+            correct,
+            "Can be ignored",
+            "Only voluntary",
+            "Used for payroll only"
+        ]);
+
+        return {
+            question:
+            `What is required for tax returns?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX RECORDS ---------------- */
 
     if(type === 7){
 
-        const correct = "Output tax minus input tax";
+        const correct = "Accurate financial records";
 
         const options = shuffle([
             correct,
-            "Sales minus profit",
-            "Cash minus bank",
-            "Assets minus liabilities"
+            "Estimated guesses",
+            "No documentation",
+            "Only cash records"
         ]);
 
         return {
-            question:`How is VAT payable calculated?`,
+            question:
+            `What is required to complete a tax return?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- ERRORS IN TAX ---------------- */
 
     if(type === 8){
 
-        const correct = "Refund from HMRC";
+        const correct = "Penalties or fines";
 
         const options = shuffle([
             correct,
-            "Penalty payment",
-            "Loan from bank",
-            "Dividend income"
+            "Profit increase",
+            "No impact",
+            "Automatic correction always"
         ]);
 
         return {
-            question:`What happens if input tax exceeds output tax?`,
+            question:
+            `What can happen if tax returns are incorrect?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- VAT CALCULATIONS ----------------
+    /* ---------------- VAT REGISTRATION ---------------- */
 
     if(type === 9){
 
-        const net = rand(100,1000);
-        const rate = 20;
-        const vat = net * rate / 100;
-
-        const correct = vat;
+        const correct = "When turnover exceeds threshold";
 
         const options = shuffle([
             correct,
-            correct + 10,
-            correct - 10,
-            correct + 20
+            "When profit is negative",
+            "Only at start of business",
+            "Never required"
         ]);
 
         return {
             question:
-`${business} sells goods worth £${net} (net). VAT rate is 20%.
-
-What is the VAT amount?`,
+            `When must a business register for VAT?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CASH FLOW TAX IMPACT ---------------- */
 
     if(type === 10){
 
-        const gross = rand(120,1200);
-        const net = gross / 1.2;
-        const vat = gross - net;
-
-        const correct = vat;
+        const vat = rand(50,200);
 
         const options = shuffle([
-            correct,
-            correct + 5,
-            correct - 5,
-            correct + 15
+            "Reduces cash balance",
+            "Increases profit directly",
+            "No impact on cash",
+            "Eliminates expenses"
         ]);
 
         return {
             question:
-`A sale totals £${gross.toFixed(2)} including VAT.
+            `${business} pays £${vat} VAT to HMRC.
 
-What is the VAT amount?`,
+What is the effect on cash?`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf("Reduces cash balance")
         };
     }
+
+    /* ---------------- INPUT VS OUTPUT DISTINCTION ---------------- */
 
     if(type === 11){
 
-        const correct = "20% standard rate (UK example)";
+        const correct = "Output VAT is collected on sales";
 
         const options = shuffle([
             correct,
-            "10% fixed rate",
-            "5% universal rate",
-            "No VAT exists"
+            "Input VAT is income",
+            "VAT is optional",
+            "VAT is profit"
         ]);
 
         return {
-            question:`What is the standard VAT rate commonly used in UK exams?`,
+            question:
+            `Which statement is correct about VAT?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- RECORDING REQUIREMENT ---------------- */
 
     if(type === 12){
 
-        const correct = "VAT is added to net price";
+        const correct = "VAT must be recorded separately";
 
         const options = shuffle([
             correct,
-            "VAT reduces profit",
-            "VAT replaces revenue",
-            "VAT is ignored in sales"
+            "VAT is ignored in accounts",
+            "VAT replaces expenses",
+            "VAT is only estimated"
         ]);
 
         return {
-            question:`How is VAT usually applied to sales?`,
+            question:
+            `How should VAT be treated in accounting records?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- HMRC PROCESS ----------------
+    /* ---------------- TAX SYSTEM UNDERSTANDING ---------------- */
 
     if(type === 13){
 
-        const correct = "HM Revenue & Customs";
+        const correct = "Self-assessment system";
 
         const options = shuffle([
             correct,
-            "Home Market Retail Council",
-            "High Management Revenue Centre",
-            "Holding Monetary Regulation Committee"
+            "Random tax system",
+            "Optional system",
+            "No reporting system"
         ]);
 
         return {
-            question:`What does HMRC stand for?`,
+            question:
+            `What type of system is UK tax based on for businesses?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- FINAL CALCULATION ---------------- */
 
     if(type === 14){
 
-        const correct = "VAT return";
+        const net = rand(500,2000);
+        const vat = net * 0.2;
+        const total = net + vat;
 
         const options = shuffle([
-            correct,
-            "Income statement",
-            "Trial balance",
-            "Bank statement"
+            total,
+            total + 50,
+            total - 40,
+            total + 80
         ]);
 
         return {
-            question:`What document is submitted to HMRC for VAT reporting?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `A business buys goods for £${net} + VAT 20%.
+
+What is the total cost?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
         };
     }
+
+    /* ---------------- FINAL THEORY APPLICATION ---------------- */
 
     if(type === 15){
 
-        const correct = "Quarterly submission";
+        const correct = "Ensures compliance with legal requirements";
 
         const options = shuffle([
             correct,
-            "Daily submission",
-            "Yearly only",
-            "No submission required"
+            "Increases profit automatically",
+            "Removes accounting rules",
+            "Eliminates VAT system"
         ]);
 
         return {
-            question:`How often is VAT typically submitted?`,
+            question:
+            `Why must businesses follow tax regulations?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
-
-        const correct = "Penalties may be charged";
-
-        const options = shuffle([
-            correct,
-            "No consequences exist",
-            "Tax is cancelled",
-            "Profit increases"
-        ]);
-
-        return {
-            question:`What happens if a VAT return is late?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- SCENARIO / EXAM TRAPS ----------------
-
-    if(type === 17){
-
-        const correct = "VAT must be recorded correctly in accounts";
-
-        const options = shuffle([
-            correct,
-            "VAT is ignored in bookkeeping",
-            "VAT replaces profit",
-            "VAT is optional"
-        ]);
-
-        return {
-            question:`What is true about VAT in accounting records?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Input VAT reduces VAT payable";
-
-        const options = shuffle([
-            correct,
-            "Input VAT increases tax payable",
-            "Output VAT is ignored",
-            "VAT has no effect"
-        ]);
-
-        return {
-            question:`What is the effect of input VAT?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Businesses must keep VAT records";
-
-        const options = shuffle([
-            correct,
-            "Records are optional",
-            "Only cash matters",
-            "Banks handle VAT automatically"
-        ]);
-
-        return {
-            question:`What is required for VAT compliance?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "VAT affects pricing decisions";
-
-        const options = shuffle([
-            correct,
-            "VAT has no impact on prices",
-            "VAT removes costs",
-            "VAT increases profit directly"
-        ]);
-
-        return {
-            question:`What is a business implication of VAT?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL3CH4();
+    throw new Error("L3-CH4 type not implemented: " + type);
 }
-
 /* ------------------------
    LEVEL 4 QUESTION BANK
 ------------------------ */
 
-function generateL4CH1(){
+function generateL3CH4(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- ADVANCED CVP ----------------
+    /* ---------------- VAT BASICS ---------------- */
 
     if(type === 1){
 
-        const price = rand(20,80);
-        const vc = rand(5,40);
-        const fixed = rand(1000,10000);
-
-        const contribution = price - vc;
-        const bep = Math.round(fixed / contribution);
+        const correct = "Output VAT is charged on sales";
 
         const options = shuffle([
-            bep,
-            bep + 10,
-            bep - 10,
-            bep + 25
+            correct,
+            "Input VAT is charged on sales",
+            "VAT is not recorded in accounting",
+            "VAT replaces revenue"
         ]);
 
         return {
             question:
-`${business} sells a product at £${price}.
-Variable cost is £${vc}.
-Fixed costs are £${fixed}.
-
-What is the break-even output (approx.)?`,
+            `What is output VAT?`,
             options,
-            correct: options.indexOf(bep)
+            correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- INPUT VAT ---------------- */
 
     if(type === 2){
 
-        const correct = "Increase selling price or reduce variable costs";
+        const correct = "VAT paid on purchases";
 
         const options = shuffle([
             correct,
-            "Increase fixed costs",
-            "Reduce sales volume",
-            "Ignore costs"
-        ]);
-
-        return {
-            question:`How can a business improve profitability?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "Contribution per unit × units sold";
-
-        const options = shuffle([
-            correct,
-            "Fixed cost × revenue",
-            "Cash × profit",
-            "Assets × liabilities"
-        ]);
-
-        return {
-            question:`How is total contribution calculated?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Higher contribution reduces risk";
-
-        const options = shuffle([
-            correct,
-            "Higher contribution increases risk",
-            "Contribution has no effect",
-            "Fixed costs control risk only"
-        ]);
-
-        return {
-            question:`What is the effect of high contribution?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- BUDGETING ----------------
-
-    if(type === 5){
-
-        const correct = "A financial plan for future periods";
-
-        const options = shuffle([
-            correct,
-            "A record of past transactions",
-            "A tax document",
-            "A bank statement"
-        ]);
-
-        return {
-            question:`What is a budget?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Helps control costs and plan resources";
-
-        const options = shuffle([
-            correct,
-            "Eliminates all expenses",
-            "Guarantees profit",
-            "Removes VAT"
-        ]);
-
-        return {
-            question:`Why are budgets important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Variance analysis compares actual vs budget";
-
-        const options = shuffle([
-            correct,
-            "Variance removes budgets",
-            "Variance increases profit",
-            "Variance ignores costs"
-        ]);
-
-        return {
-            question:`What is variance analysis?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Favourable and adverse variances";
-
-        const options = shuffle([
-            correct,
-            "Debit and credit variances",
-            "Cash and bank variances",
-            "Profit and loss variances only"
-        ]);
-
-        return {
-            question:`What types of variances exist?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- DECISION MAKING ----------------
-
-    if(type === 9){
-
-        const correct = "Choose option with highest contribution";
-
-        const options = shuffle([
-            correct,
-            "Choose highest fixed cost",
-            "Choose lowest revenue",
-            "Ignore costs"
-        ]);
-
-        return {
-            question:`What is the key rule in short-term decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 10){
-
-        const correct = "Relevant costs only";
-
-        const options = shuffle([
-            correct,
-            "All historical costs",
-            "Only fixed costs",
-            "Only revenue"
-        ]);
-
-        return {
-            question:`Which costs are considered in decision making?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Opportunity cost matters";
-
-        const options = shuffle([
-            correct,
-            "Only cash matters",
-            "Tax is ignored",
-            "Profit is fixed"
-        ]);
-
-        return {
-            question:`What should also be considered in decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Incremental analysis";
-
-        const options = shuffle([
-            correct,
-            "Historical analysis",
-            "Random selection",
-            "Cash only analysis"
-        ]);
-
-        return {
-            question:`What method is used for decision evaluation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- MULTI STEP ----------------
-
-    if(type === 13){
-
-        const revenue = rand(5000,20000);
-        const vc = rand(2000,8000);
-        const fc = rand(1000,5000);
-
-        const profit = revenue - vc - fc;
-
-        const options = shuffle([
-            profit,
-            profit + 100,
-            profit - 100,
-            profit + 250
+            "VAT charged on sales",
+            "VAT on wages",
+            "VAT on profit"
         ]);
 
         return {
             question:
-`${business} has revenue £${revenue}, variable costs £${vc}, fixed costs £${fc}.
-
-What is the profit?`,
+            `What is input VAT?`,
             options,
-            correct: options.indexOf(profit)
+            correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- VAT CALCULATION ---------------- */
+
+    if(type === 3){
+
+        const net = rand(100,1000);
+        const vatRate = 0.20;
+        const vat = net * vatRate;
+        const total = net + vat;
+
+        const options = shuffle([
+            total,
+            total + 20,
+            total - 15,
+            total + 30
+        ]);
+
+        return {
+            question:
+            `${business} sells goods with net value £${net}.
+VAT is 20%.
+
+What is the total price including VAT?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- VAT LIABILITY ---------------- */
+
+    if(type === 4){
+
+        const input = rand(50,300);
+        const output = rand(100,500);
+
+        const liability = output - input;
+
+        const options = shuffle([
+            liability,
+            liability + 20,
+            liability - 30,
+            liability + 40
+        ]);
+
+        return {
+            question:
+            `A business has output VAT £${output} and input VAT £${input}.
+
+What is the VAT payable to HMRC?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(liability)
+        };
+    }
+
+    /* ---------------- TAX PURPOSE ---------------- */
+
+    if(type === 5){
+
+        const correct = "Fund government spending";
+
+        const options = shuffle([
+            correct,
+            "Increase profit",
+            "Reduce costs",
+            "Replace accounting records"
+        ]);
+
+        return {
+            question:
+            `What is the purpose of taxation?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX DEADLINES ---------------- */
+
+    if(type === 6){
+
+        const correct = "Must be submitted to HMRC on time";
+
+        const options = shuffle([
+            correct,
+            "Can be ignored",
+            "Only voluntary",
+            "Used for payroll only"
+        ]);
+
+        return {
+            question:
+            `What is required for tax returns?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX RECORDS ---------------- */
+
+    if(type === 7){
+
+        const correct = "Accurate financial records";
+
+        const options = shuffle([
+            correct,
+            "Estimated guesses",
+            "No documentation",
+            "Only cash records"
+        ]);
+
+        return {
+            question:
+            `What is required to complete a tax return?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- ERRORS IN TAX ---------------- */
+
+    if(type === 8){
+
+        const correct = "Penalties or fines";
+
+        const options = shuffle([
+            correct,
+            "Profit increase",
+            "No impact",
+            "Automatic correction always"
+        ]);
+
+        return {
+            question:
+            `What can happen if tax returns are incorrect?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- VAT REGISTRATION ---------------- */
+
+    if(type === 9){
+
+        const correct = "When turnover exceeds threshold";
+
+        const options = shuffle([
+            correct,
+            "When profit is negative",
+            "Only at start of business",
+            "Never required"
+        ]);
+
+        return {
+            question:
+            `When must a business register for VAT?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CASH FLOW TAX IMPACT ---------------- */
+
+    if(type === 10){
+
+        const vat = rand(50,200);
+
+        const options = shuffle([
+            "Reduces cash balance",
+            "Increases profit directly",
+            "No impact on cash",
+            "Eliminates expenses"
+        ]);
+
+        return {
+            question:
+            `${business} pays £${vat} VAT to HMRC.
+
+What is the effect on cash?`,
+            options,
+            correct: options.indexOf("Reduces cash balance")
+        };
+    }
+
+    /* ---------------- INPUT VS OUTPUT DISTINCTION ---------------- */
+
+    if(type === 11){
+
+        const correct = "Output VAT is collected on sales";
+
+        const options = shuffle([
+            correct,
+            "Input VAT is income",
+            "VAT is optional",
+            "VAT is profit"
+        ]);
+
+        return {
+            question:
+            `Which statement is correct about VAT?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- RECORDING REQUIREMENT ---------------- */
+
+    if(type === 12){
+
+        const correct = "VAT must be recorded separately";
+
+        const options = shuffle([
+            correct,
+            "VAT is ignored in accounts",
+            "VAT replaces expenses",
+            "VAT is only estimated"
+        ]);
+
+        return {
+            question:
+            `How should VAT be treated in accounting records?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX SYSTEM UNDERSTANDING ---------------- */
+
+    if(type === 13){
+
+        const correct = "Self-assessment system";
+
+        const options = shuffle([
+            correct,
+            "Random tax system",
+            "Optional system",
+            "No reporting system"
+        ]);
+
+        return {
+            question:
+            `What type of system is UK tax based on for businesses?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL CALCULATION ---------------- */
 
     if(type === 14){
 
-        const correct = "Revenue - variable cost = contribution";
+        const net = rand(500,2000);
+        const vat = net * 0.2;
+        const total = net + vat;
 
         const options = shuffle([
-            correct,
-            "Revenue - fixed cost",
-            "Cash - tax",
-            "Assets - liabilities"
+            total,
+            total + 50,
+            total - 40,
+            total + 80
         ]);
 
         return {
-            question:`What is the contribution formula?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `A business buys goods for £${net} + VAT 20%.
+
+What is the total cost?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
         };
     }
+
+    /* ---------------- FINAL THEORY APPLICATION ---------------- */
 
     if(type === 15){
 
-        const correct = "Fixed costs do not change with output";
+        const correct = "Ensures compliance with legal requirements";
 
         const options = shuffle([
             correct,
-            "Fixed costs increase per unit",
-            "Variable costs are constant",
-            "Revenue is fixed"
+            "Increases profit automatically",
+            "Removes accounting rules",
+            "Eliminates VAT system"
         ]);
 
         return {
-            question:`Which statement is correct about fixed costs?`,
+            question:
+            `Why must businesses follow tax regulations?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
-
-        const correct = "Profit increases with volume";
-
-        const options = shuffle([
-            correct,
-            "Profit is unrelated to volume",
-            "Fixed costs increase profit",
-            "Revenue has no effect"
-        ]);
-
-        return {
-            question:`What happens when sales volume increases?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM TRAPS ----------------
-
-    if(type === 17){
-
-        const correct = "Ignoring fixed costs in short-term decisions";
-
-        const options = shuffle([
-            correct,
-            "Including irrelevant costs",
-            "Ignoring revenue",
-            "Maximising fixed costs"
-        ]);
-
-        return {
-            question:`What is a common mistake in decision making?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Break-even is affected by cost structure";
-
-        const options = shuffle([
-            correct,
-            "Break-even is always constant",
-            "Profit never changes",
-            "Costs do not matter"
-        ]);
-
-        return {
-            question:`What affects break-even point?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Higher fixed costs increase risk";
-
-        const options = shuffle([
-            correct,
-            "Higher fixed costs reduce risk",
-            "Variable costs remove risk",
-            "Revenue controls risk"
-        ]);
-
-        return {
-            question:`What is the effect of high fixed costs?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Management accounting supports decision making";
-
-        const options = shuffle([
-            correct,
-            "It only records history",
-            "It replaces bookkeeping",
-            "It removes costs"
-        ]);
-
-        return {
-            question:`What is the purpose of management accounting?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL4CH1();
+    throw new Error("L3-CH4 type not implemented: " + type);
 }
-
 function generateL4CH2(){
 
     const type = rand(1,20);
