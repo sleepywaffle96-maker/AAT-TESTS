@@ -3426,2656 +3426,2426 @@ What is the total cost?`,
 }
 function generateL4CH2(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- P&L STRUCTURE ----------------
+    /* ---------------- GROSS PROFIT ---------------- */
 
     if(type === 1){
 
-        const correct = "Revenue - expenses = profit";
+        const sales = rand(5000,20000);
+        const cogs = rand(2000,15000);
+
+        const gp = sales - cogs;
 
         const options = shuffle([
-            correct,
-            "Assets - liabilities = cash",
-            "Cash - VAT = revenue",
-            "Capital - bank = profit"
+            gp,
+            gp + 500,
+            gp - 400,
+            gp + 800
         ]);
 
         return {
-            question:`How is profit calculated in an income statement?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} has sales £${sales} and cost of sales £${cogs}.
+
+What is gross profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(gp)
         };
     }
+
+    /* ---------------- NET PROFIT ---------------- */
 
     if(type === 2){
 
-        const correct = "Gross profit comes before expenses";
+        const sales = rand(8000,20000);
+        const cogs = rand(3000,12000);
+        const expenses = rand(1000,5000);
+
+        const profit = sales - cogs - expenses;
 
         const options = shuffle([
-            correct,
-            "Expenses come before revenue",
-            "Tax comes first",
-            "Assets are included"
+            profit,
+            profit + 500,
+            profit - 600,
+            profit + 900
         ]);
 
         return {
-            question:`Where does gross profit appear in the income statement?`,
+            question:
+            `${business}:
+Sales £${sales}
+Cost of sales £${cogs}
+Expenses £${expenses}
+
+What is net profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- ACCRUAL ADJUSTMENT ---------------- */
+
+    if(type === 3){
+
+        const expense = rand(500,3000);
+        const accrual = rand(100,800);
+
+        const total = expense + accrual;
+
+        const options = shuffle([
+            total,
+            total + 200,
+            total - 150,
+            total + 300
+        ]);
+
+        return {
+            question:
+            `Expense recorded £${expense}
+Accrued expense £${accrual}
+
+What is total expense?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- PREPAYMENT ---------------- */
+
+    if(type === 4){
+
+        const paid = rand(1000,5000);
+        const prepayment = rand(200,1000);
+
+        const expense = paid - prepayment;
+
+        const options = shuffle([
+            expense,
+            expense + 200,
+            expense - 150,
+            expense + 300
+        ]);
+
+        return {
+            question:
+            `Insurance paid £${paid}
+Prepayment £${prepayment}
+
+What is expense for the period?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(expense)
+        };
+    }
+
+    /* ---------------- ACCRUED INCOME ---------------- */
+
+    if(type === 5){
+
+        const income = rand(500,3000);
+        const accrued = rand(100,800);
+
+        const total = income + accrued;
+
+        const options = shuffle([
+            total,
+            total + 100,
+            total - 200,
+            total + 250
+        ]);
+
+        return {
+            question:
+            `Income earned £${income}
+Accrued income £${accrued}
+
+What is total income?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(total)
+        };
+    }
+
+    /* ---------------- STATEMENT STRUCTURE ---------------- */
+
+    if(type === 6){
+
+        const correct = "Income Statement shows profit for a period";
+
+        const options = shuffle([
+            correct,
+            "Shows only cash",
+            "Shows only assets",
+            "Shows VAT only"
+        ]);
+
+        return {
+            question:
+            `What does an income statement show?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 3){
+    /* ---------------- TRADING ACCOUNT ---------------- */
 
-        const correct = "Operating expenses reduce profit";
+    if(type === 7){
+
+        const correct = "Calculates gross profit";
+
+        const options = shuffle([
+            correct,
+            "Calculates cash flow",
+            "Calculates tax",
+            "Calculates assets"
+        ]);
+
+        return {
+            question:
+            `What is the purpose of a trading account?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- MULTI STEP PROFIT ---------------- */
+
+    if(type === 8){
+
+        const sales = rand(10000,30000);
+        const cogs = rand(5000,20000);
+        const expenses = rand(2000,8000);
+
+        const profit = sales - cogs - expenses;
+
+        const options = shuffle([
+            profit,
+            profit + 500,
+            profit - 600,
+            profit + 900
+        ]);
+
+        return {
+            question:
+            `${business}:
+Sales £${sales}
+COGS £${cogs}
+Expenses £${expenses}
+
+What is net profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
+        };
+    }
+
+    /* ---------------- ERROR IDENTIFICATION ---------------- */
+
+    if(type === 9){
+
+        const correct = "Overstating expenses reduces profit";
 
         const options = shuffle([
             correct,
             "Expenses increase profit",
-            "Revenue reduces costs",
-            "Assets increase profit"
+            "Revenue removes costs",
+            "Assets affect profit directly"
         ]);
 
         return {
-            question:`What is the effect of expenses in P&L?`,
+            question:
+            `What is the effect of overstating expenses?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 4){
-
-        const correct = "Net profit is final result";
-
-        const options = shuffle([
-            correct,
-            "Net profit is before revenue",
-            "Net profit equals assets",
-            "Net profit is cash balance"
-        ]);
-
-        return {
-            question:`What does net profit represent?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- BALANCE SHEET ----------------
-
-    if(type === 5){
-
-        const correct = "Assets = Liabilities + Capital";
-
-        const options = shuffle([
-            correct,
-            "Revenue = Expenses + Tax",
-            "Cash = Profit",
-            "Income = Assets"
-        ]);
-
-        return {
-            question:`What is the accounting equation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Non-current assets and current assets";
-
-        const options = shuffle([
-            correct,
-            "Revenue and expenses",
-            "Profit and loss",
-            "Debits and credits"
-        ]);
-
-        return {
-            question:`What are the main categories of assets?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Current liabilities are short-term obligations";
-
-        const options = shuffle([
-            correct,
-            "Current liabilities are assets",
-            "They are long-term investments",
-            "They are revenue items"
-        ]);
-
-        return {
-            question:`What are current liabilities?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Capital represents owner’s investment";
-
-        const options = shuffle([
-            correct,
-            "Capital is bank overdraft",
-            "Capital is revenue",
-            "Capital is expenses"
-        ]);
-
-        return {
-            question:`What does capital represent?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- ACCRUALS / PREPAYMENTS ----------------
-
-    if(type === 9){
-
-        const correct = "Accrual increases expenses";
-
-        const options = shuffle([
-            correct,
-            "Accrual increases revenue",
-            "Accrual reduces assets",
-            "Accrual has no effect"
-        ]);
-
-        return {
-            question:`What is the effect of an accrual?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    /* ---------------- ADJUSTMENT LOGIC ---------------- */
 
     if(type === 10){
 
-        const correct = "Prepayment is an asset";
+        const correct = "Match income and expenses to correct period";
 
         const options = shuffle([
             correct,
-            "Prepayment is a liability",
-            "Prepayment is revenue",
-            "Prepayment is expense only"
+            "Ignore timing",
+            "Only record cash",
+            "Remove accruals"
         ]);
 
         return {
-            question:`How is a prepayment treated?`,
+            question:
+            `Why are adjustments made in financial statements?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- WORKING CAPITAL STYLE ---------------- */
 
     if(type === 11){
 
-        const correct = "Match expenses to correct accounting period";
+        const correct = "Assets minus current liabilities";
 
         const options = shuffle([
             correct,
-            "Increase profit artificially",
-            "Ignore timing differences",
-            "Record cash only"
+            "Revenue minus expenses",
+            "Cash minus VAT",
+            "Profit minus tax"
         ]);
 
         return {
-            question:`Why are accruals and prepayments used?`,
+            question:
+            `What is working capital?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- FINAL PROFIT RECONSTRUCTION ---------------- */
 
     if(type === 12){
 
-        const correct = "They adjust profit for correct period";
+        const sales = rand(10000,25000);
+        const cogs = rand(4000,15000);
+        const expenses = rand(2000,9000);
+
+        const profit = sales - cogs - expenses;
 
         const options = shuffle([
-            correct,
-            "They increase revenue always",
-            "They remove liabilities",
-            "They eliminate assets"
+            profit,
+            profit + 800,
+            profit - 700,
+            profit + 1000
         ]);
 
         return {
-            question:`What is the purpose of adjustments?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `Reconstruct profit:
+Sales £${sales}
+COGS £${cogs}
+Expenses £${expenses}
+
+What is profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(profit)
         };
     }
 
-    // ---------------- DEPRECIATION ----------------
+    /* ---------------- INTERPRETATION ---------------- */
 
     if(type === 13){
 
-        const correct = "Spreads cost over useful life";
+        const correct = "Helps stakeholders understand performance";
 
         const options = shuffle([
             correct,
-            "Increases cash balance",
-            "Removes VAT",
-            "Creates revenue"
+            "Removes accounting rules",
+            "Guarantees cash",
+            "Eliminates profit"
+
         ]);
 
         return {
-            question:`What is depreciation?`,
+            question:
+            `Why are financial statements prepared?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- SIMPLE CALCULATION ---------------- */
 
     if(type === 14){
 
-        const correct = "Non-current asset value decreases over time";
+        const sales = rand(5000,15000);
+        const cogs = rand(2000,10000);
+
+        const gp = sales - cogs;
 
         const options = shuffle([
-            correct,
-            "Asset value increases over time",
-            "Cash increases automatically",
-            "Liabilities increase"
+            gp,
+            gp + 300,
+            gp - 400,
+            gp + 600
         ]);
 
         return {
-            question:`What happens to assets due to depreciation?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `Sales £${sales}
+COGS £${cogs}
+
+What is gross profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(gp)
         };
     }
+
+    /* ---------------- FINAL THEORY APPLICATION ---------------- */
 
     if(type === 15){
 
-        const correct = "Depreciation is a non-cash expense";
+        const correct = "Financial statements summarise business performance";
 
         const options = shuffle([
             correct,
-            "Depreciation involves cash payment",
-            "It increases revenue",
-            "It is a liability"
+            "Replace bookkeeping",
+            "Eliminate costs",
+            "Increase cash automatically"
         ]);
 
         return {
-            question:`What type of expense is depreciation?`,
+            question:
+            `What is the main purpose of financial statements?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
+    throw new Error("L4-CH2 type not implemented: " + type);
+}function generateL4CH3(){
 
-        const correct = "Accumulated depreciation reduces asset value";
-
-        const options = shuffle([
-            correct,
-            "It increases profit",
-            "It increases revenue",
-            "It increases cash"
-        ]);
-
-        return {
-            question:`What is accumulated depreciation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- INTERPRETATION ----------------
-
-    if(type === 17){
-
-        const correct = "Profitability measures efficiency";
-
-        const options = shuffle([
-            correct,
-            "Profitability measures cash only",
-            "Profitability ignores costs",
-            "Profitability is fixed"
-        ]);
-
-        return {
-            question:`What does profitability indicate?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Liquidity is ability to pay short-term debts";
-
-        const options = shuffle([
-            correct,
-            "Liquidity is profit level",
-            "Liquidity is revenue",
-            "Liquidity is assets only"
-        ]);
-
-        return {
-            question:`What is liquidity?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Higher profit improves financial performance";
-
-        const options = shuffle([
-            correct,
-            "Profit has no effect",
-            "Profit reduces assets",
-            "Profit is irrelevant"
-        ]);
-
-        return {
-            question:`What does higher profit indicate?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Financial statements support decision making";
-
-        const options = shuffle([
-            correct,
-            "They only record cash",
-            "They replace bookkeeping",
-            "They remove taxes"
-        ]);
-
-        return {
-            question:`What is the purpose of financial statements?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL4CH2();
-}
-   function generateL4CH3(){
-
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- INTERNAL CONTROL BASICS ----------------
+    /* ---------------- INTERNAL CONTROL PURPOSE ---------------- */
 
     if(type === 1){
 
-        const correct = "To prevent fraud and errors";
+        const correct = "To prevent and detect errors and fraud";
 
         const options = shuffle([
             correct,
-            "To increase profit",
-            "To reduce tax",
-            "To increase sales"
+            "To increase profit automatically",
+            "To eliminate bookkeeping",
+            "To avoid tax payments"
         ]);
 
         return {
-            question:`What is the main purpose of internal controls?`,
+            question:
+            `What is the purpose of internal controls?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- SEGREGATION OF DUTIES ---------------- */
 
     if(type === 2){
 
-        const correct = "To safeguard assets";
-
-        const options = shuffle([
-            correct,
-            "To increase revenue",
-            "To reduce wages",
-            "To avoid VAT"
-        ]);
-
-        return {
-            question:`Why do businesses use internal controls?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "To ensure reliable financial reporting";
-
-        const options = shuffle([
-            correct,
-            "To increase cash flow",
-            "To avoid expenses",
-            "To maximise sales"
-        ]);
-
-        return {
-            question:`What is another aim of internal controls?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Reduce risk of misstatement";
-
-        const options = shuffle([
-            correct,
-            "Increase tax payments",
-            "Increase liabilities",
-            "Reduce revenue"
-        ]);
-
-        return {
-            question:`What do controls help reduce?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- SEGREGATION OF DUTIES ----------------
-
-    if(type === 5){
-
-        const correct = "Different people handle recording and approval";
+        const correct = "Different people handle authorisation and recording";
 
         const options = shuffle([
             correct,
             "One person does everything",
             "Only managers record transactions",
-            "No recording is needed"
+            "Cash is never recorded"
         ]);
 
         return {
-            question:`What is segregation of duties?`,
+            question:
+            `What is segregation of duties?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CASH CONTROLS ---------------- */
+
+    if(type === 3){
+
+        const correct = "Bank reconciliations detect differences between records and bank statement";
+
+        const options = shuffle([
+            correct,
+            "Cash is never checked",
+            "Bank statements are ignored",
+            "Profit is adjusted automatically"
+        ]);
+
+        return {
+            question:
+            `Why are bank reconciliations performed?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FRAUD SCENARIO ---------------- */
+
+    if(type === 4){
+
+        const missing = rand(100,1000);
+
+        const options = shuffle([
+            "Cash has been stolen",
+            "Revenue increased",
+            "Expenses decreased",
+            "Profit increased"
+        ]);
+
+        return {
+            question:
+            `${business} finds £${missing} missing from cash records.
+
+What is the most likely issue?`,
+            options,
+            correct: options.indexOf("Cash has been stolen")
+        };
+    }
+
+    /* ---------------- ERROR DETECTION ---------------- */
+
+    if(type === 5){
+
+        const correct = "Incorrect recording of transactions";
+
+        const options = shuffle([
+            correct,
+            "Higher sales",
+            "Tax increase",
+            "More cash inflow"
+        ]);
+
+        return {
+            question:
+            `What is a common cause of discrepancies in accounting records?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- AUTHORISATION ---------------- */
 
     if(type === 6){
 
-        const correct = "Reduces risk of fraud";
+        const correct = "All transactions must be approved before processing";
 
         const options = shuffle([
             correct,
-            "Increases fraud risk",
-            "Removes accounting records",
-            "Increases cash usage"
+            "Anyone can approve payments",
+            "Approval is optional",
+            "Cash does not need approval"
         ]);
 
         return {
-            question:`Why is segregation of duties important?`,
+            question:
+            `What is meant by authorisation control?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- ASSET SAFEGUARDING ---------------- */
 
     if(type === 7){
 
-        const correct = "Authorisation should be separate from recording";
+        const correct = "Protecting assets from theft or misuse";
 
         const options = shuffle([
             correct,
-            "Same person should authorise and record",
-            "No authorisation is needed",
-            "Only cash transactions matter"
+            "Increasing liabilities",
+            "Reducing profit",
+            "Ignoring stock levels"
         ]);
 
         return {
-            question:`What is good control practice?`,
+            question:
+            `What is asset safeguarding?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- DOCUMENTATION CONTROL ---------------- */
 
     if(type === 8){
 
-        const correct = "Prevents manipulation of records";
+        const correct = "Using invoices and receipts to support transactions";
 
         const options = shuffle([
             correct,
-            "Increases manipulation",
-            "Removes documentation",
-            "Stops auditing"
+            "Verbal agreements only",
+            "No records kept",
+            "Estimates instead of documents"
         ]);
 
         return {
-            question:`What is a benefit of segregation of duties?`,
+            question:
+            `Why are source documents important?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- FRAUD & ERROR PREVENTION ----------------
+    /* ---------------- CASH HANDLING SCENARIO ---------------- */
 
     if(type === 9){
 
-        const correct = "Authorisation of transactions";
+        const loss = rand(50,500);
 
         const options = shuffle([
-            correct,
-            "Ignoring transactions",
-            "Removing controls",
-            "Increasing cash usage"
+            "Cash not properly recorded",
+            "Revenue increased",
+            "Expenses reduced",
+            "No issue detected"
         ]);
 
         return {
-            question:`Which control helps prevent fraud?`,
+            question:
+            `${business} discovers cash shortages of £${loss}.
+
+What is the most likely control weakness?`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf("Cash not properly recorded")
         };
     }
+
+    /* ---------------- CONTROL IMPROVEMENT ---------------- */
 
     if(type === 10){
 
-        const correct = "Reconciliations detect errors";
+        const correct = "Introduce regular internal audits";
 
         const options = shuffle([
             correct,
-            "Reconciliations increase errors",
-            "Reconciliations remove accounts",
-            "Reconciliations increase fraud"
-        ]);
-
-        return {
-            question:`What is the purpose of reconciliations?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Physical security of assets";
-
-        const options = shuffle([
-            correct,
-            "Leaving assets unprotected",
-            "Removing records",
-            "Ignoring stock"
-        ]);
-
-        return {
-            question:`What helps prevent theft?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Regular reviews of accounts";
-
-        const options = shuffle([
-            correct,
-            "No reviews needed",
-            "Only annual checks",
+            "Remove accounting records",
+            "Allow one person full control",
             "Ignore discrepancies"
         ]);
 
         return {
-            question:`How can errors be detected?`,
+            question:
+            `How can a business improve internal controls?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- AUDIT TRAIL & SYSTEMS ----------------
+    /* ---------------- BANK CONTROL ---------------- */
 
-    if(type === 13){
+    if(type === 11){
 
-        const correct = "Audit trail shows transaction history";
-
-        const options = shuffle([
-            correct,
-            "Audit trail hides transactions",
-            "Audit trail deletes records",
-            "Audit trail increases cash"
-        ]);
-
-        return {
-            question:`What is an audit trail?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "Traceability of transactions";
+        const correct = "Restrict access to bank accounts";
 
         const options = shuffle([
             correct,
-            "Random record keeping",
-            "Cash-only tracking",
-            "No documentation"
-        ]);
-
-        return {
-            question:`What does an audit trail provide?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 15){
-
-        const correct = "Computerised systems improve accuracy";
-
-        const options = shuffle([
-            correct,
-            "Increase manual errors",
-            "Remove records",
-            "Stop accounting"
-        ]);
-
-        return {
-            question:`What is a benefit of computerised accounting systems?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 16){
-
-        const correct = "Backup systems protect data";
-
-        const options = shuffle([
-            correct,
-            "Data is never saved",
-            "Backups increase fraud",
-            "Backups remove records"
-        ]);
-
-        return {
-            question:`Why are backups important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM SCENARIOS ----------------
-
-    if(type === 17){
-
-        const correct = "Weak controls increase fraud risk";
-
-        const options = shuffle([
-            correct,
-            "Weak controls reduce fraud",
-            "Controls are irrelevant",
-            "Fraud is impossible"
-        ]);
-
-        return {
-            question:`What happens if internal controls are weak?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Lack of segregation increases risk";
-
-        const options = shuffle([
-            correct,
-            "Risk decreases",
-            "Profit increases",
-            "Errors disappear"
-        ]);
-
-        return {
-            question:`What is the effect of no segregation of duties?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Controls must be regularly reviewed";
-
-        const options = shuffle([
-            correct,
-            "Controls never change",
-            "Controls are optional",
-            "Controls are only for audits"
-        ]);
-
-        return {
-            question:`What is important for internal control systems?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Internal controls support accurate reporting";
-
-        const options = shuffle([
-            correct,
-            "Controls reduce accuracy",
-            "Controls remove accounting",
-            "Controls increase fraud"
-        ]);
-
-        return {
-            question:`What is the overall benefit of internal controls?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL4CH3();
-}
-
-function generateL4CH4(){
-
-    const type = rand(1,20);
-    const business = randomBusiness();
-
-    // ---------------- VAT BASICS ----------------
-
-    if(type === 1){
-
-        const correct = "Output VAT is charged on sales";
-
-        const options = shuffle([
-            correct,
-            "Input VAT is charged on sales",
-            "VAT is ignored in business",
-            "VAT only applies to expenses"
-        ]);
-
-        return {
-            question:`What is output VAT?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 2){
-
-        const correct = "Input VAT is reclaimable on purchases";
-
-        const options = shuffle([
-            correct,
-            "Input VAT is never recoverable",
-            "VAT is only on profit",
-            "VAT replaces income tax"
-        ]);
-
-        return {
-            question:`What is input VAT?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const amount = rand(100,5000);
-
-        const correct = "VAT must be added to sales price";
-
-        const options = shuffle([
-            correct,
-            "VAT reduces sales price",
-            "VAT is deducted from profit only",
-            "VAT is ignored in invoices"
+            "Give all staff access",
+            "Remove bank statements",
+            "Avoid reconciliation"
         ]);
 
         return {
             question:
-`${business} sells goods worth £${amount} (excluding VAT).
-What is the correct VAT treatment?`,
+            `What is a control over bank transactions?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 4){
-
-        const correct = "VAT is a liability to HMRC";
-
-        const options = shuffle([
-            correct,
-            "VAT is an asset always",
-            "VAT is revenue",
-            "VAT is profit"
-        ]);
-
-        return {
-            question:`How is VAT treated in accounts?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- TAXABLE PROFIT ----------------
-
-    if(type === 5){
-
-        const correct = "Accounting profit adjusted for tax rules";
-
-        const options = shuffle([
-            correct,
-            "Cash received only",
-            "Revenue minus VAT",
-            "Assets minus liabilities only"
-        ]);
-
-        return {
-            question:`What is taxable profit based on?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Some expenses are disallowed for tax";
-
-        const options = shuffle([
-            correct,
-            "All expenses are always allowed",
-            "Only cash expenses count",
-            "Revenue is ignored"
-        ]);
-
-        return {
-            question:`What is true about taxable profit adjustments?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Capital expenditure is not fully deductible immediately";
-
-        const options = shuffle([
-            correct,
-            "Capital expenditure is always fully deductible",
-            "Capital is treated as revenue",
-            "All assets are expenses immediately"
-        ]);
-
-        return {
-            question:`How is capital expenditure treated for tax?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Depreciation is not tax deductible directly";
-
-        const options = shuffle([
-            correct,
-            "Depreciation is always tax deductible",
-            "Depreciation increases VAT",
-            "Depreciation is revenue"
-        ]);
-
-        return {
-            question:`What is true about depreciation and tax?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- CORPORATION TAX ----------------
-
-    if(type === 9){
-
-        const correct = "Tax on company profits";
-
-        const options = shuffle([
-            correct,
-            "Tax on sales only",
-            "Tax on assets",
-            "Tax on cash flow"
-        ]);
-
-        return {
-            question:`What is corporation tax charged on?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 10){
-
-        const correct = "Paid on taxable profit";
-
-        const options = shuffle([
-            correct,
-            "Paid on revenue only",
-            "Paid on VAT collected",
-            "Paid on bank balance"
-        ]);
-
-        return {
-            question:`Corporation tax is calculated on:`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Higher profit leads to higher tax liability";
-
-        const options = shuffle([
-            correct,
-            "Tax is fixed regardless of profit",
-            "Tax decreases with profit",
-            "Profit has no effect"
-        ]);
-
-        return {
-            question:`What is the relationship between profit and tax?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    /* ---------------- ERROR IMPACT ---------------- */
 
     if(type === 12){
 
-        const correct = "Tax liability is a current liability";
+        const correct = "Financial statements become unreliable";
 
         const options = shuffle([
             correct,
-            "Tax is an asset",
-            "Tax is revenue",
-            "Tax is capital"
-        ]);
-
-        return {
-            question:`How is corporation tax recorded?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- COMPLIANCE & PENALTIES ----------------
-
-    if(type === 13){
-
-        const correct = "Late filing penalties apply";
-
-        const options = shuffle([
-            correct,
-            "No consequences for late filing",
-            "Profit increases automatically",
+            "Profit always increases",
+            "Cash increases automatically",
             "VAT is removed"
         ]);
 
         return {
-            question:`What happens if tax returns are filed late?`,
+            question:
+            `What is the impact of weak internal controls?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 14){
+    /* ---------------- STOCK CONTROL ---------------- */
 
-        const correct = "Accurate records are legally required";
+    if(type === 13){
 
-        const options = shuffle([
-            correct,
-            "Records are optional",
-            "Only cash records matter",
-            "VAT replaces records"
-        ]);
-
-        return {
-            question:`Why must businesses keep records?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 15){
-
-        const correct = "HMRC can investigate records";
+        const correct = "Regular stock counts help prevent theft and errors";
 
         const options = shuffle([
             correct,
-            "Records cannot be checked",
-            "Only banks can audit",
-            "No inspections exist"
-        ]);
-
-        return {
-            question:`Who can inspect business records?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 16){
-
-        const correct = "Deadlines must be strictly followed";
-
-        const options = shuffle([
-            correct,
-            "Deadlines are optional",
-            "Tax can be ignored",
-            "Profit removes deadlines"
-        ]);
-
-        return {
-            question:`What is important in tax compliance?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM SCENARIOS ----------------
-
-    if(type === 17){
-
-        const correct = "VAT collected must be paid to HMRC";
-
-        const options = shuffle([
-            correct,
-            "VAT belongs to the owner",
-            "VAT is profit",
-            "VAT is ignored"
-        ]);
-
-        return {
-            question:`What happens to VAT collected from customers?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Tax adjustments increase accuracy of profit";
-
-        const options = shuffle([
-            correct,
-            "Tax adjustments reduce accuracy",
-            "Tax removes accounting rules",
-            "Tax has no effect"
-        ]);
-
-        return {
-            question:`Why are tax adjustments made?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Different rules apply for accounting and tax profit";
-
-        const options = shuffle([
-            correct,
-            "They are always identical",
-            "Tax ignores accounting",
-            "Profit is always cash based"
-        ]);
-
-        return {
-            question:`What is true about accounting vs taxable profit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Compliance ensures legal operation";
-
-        const options = shuffle([
-            correct,
-            "Compliance increases fraud",
-            "Compliance reduces profit",
-            "Compliance is optional"
-        ]);
-
-        return {
-            question:`Why is tax compliance important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL4CH4();
-}
-function generateL4CH5(){
-
-    const type = rand(1,20);
-    const business = randomBusiness();
-    const person = randomPerson();
-
-    // ---------------- INCOME TAX BASICS ----------------
-
-    if(type === 1){
-
-        const correct = "Tax paid on personal income";
-
-        const options = shuffle([
-            correct,
-            "Tax paid on company revenue",
-            "Tax on assets only",
-            "Tax on VAT"
-        ]);
-
-        return {
-            question:`What is personal income tax?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 2){
-
-        const correct = "Higher income leads to higher tax";
-
-        const options = shuffle([
-            correct,
-            "Tax is fixed for everyone",
-            "Tax decreases with income",
-            "Income has no effect"
-        ]);
-
-        return {
-            question:`How does income affect tax liability?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const amount = rand(15000,60000);
-
-        const correct = "Gross income before deductions";
-
-        const options = shuffle([
-            correct,
-            "Net income after tax only",
-            "Cash in bank",
-            "Profit after VAT"
+            "Stock is never checked",
+            "Stock is irrelevant",
+            "Stock is always assumed correct"
         ]);
 
         return {
             question:
-`${person} earns £${amount} per year.
-What is gross income?`,
+            `Why are stock counts performed?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 4){
-
-        const correct = "Net income is after tax deductions";
-
-        const options = shuffle([
-            correct,
-            "Net income is before tax",
-            "Net income is revenue",
-            "Net income is VAT"
-        ]);
-
-        return {
-            question:`What is net income?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- PAYE vs SELF-ASSESSMENT ----------------
-
-    if(type === 5){
-
-        const correct = "PAYE is tax deducted by employer";
-
-        const options = shuffle([
-            correct,
-            "PAYE is paid annually by self-employed only",
-            "PAYE is VAT system",
-            "PAYE is optional tax"
-        ]);
-
-        return {
-            question:`What is PAYE?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Self-employed complete tax returns";
-
-        const options = shuffle([
-            correct,
-            "Employees complete VAT returns",
-            "Employers pay all tax",
-            "No records are needed"
-        ]);
-
-        return {
-            question:`What is self-assessment?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Employees pay tax through payroll";
-
-        const options = shuffle([
-            correct,
-            "Employees pay tax manually each month",
-            "Employees avoid tax",
-            "Employees set tax rates"
-        ]);
-
-        return {
-            question:`How do employees usually pay tax?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Self-employed income is not taxed at source";
-
-        const options = shuffle([
-            correct,
-            "Tax is always deducted automatically",
-            "No tax applies",
-            "VAT replaces income tax"
-        ]);
-
-        return {
-            question:`What is true for self-employed individuals?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- DEDUCTIONS & ALLOWANCES ----------------
-
-    if(type === 9){
-
-        const correct = "Personal allowance reduces taxable income";
-
-        const options = shuffle([
-            correct,
-            "Allowance increases tax",
-            "Allowance is a penalty",
-            "Allowance removes income"
-        ]);
-
-        return {
-            question:`What is a personal allowance?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 10){
-
-        const correct = "Allowable expenses reduce taxable profit";
-
-        const options = shuffle([
-            correct,
-            "Expenses increase tax",
-            "Expenses are ignored",
-            "Expenses are revenue"
-        ]);
-
-        return {
-            question:`What is the effect of allowable expenses?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Some expenses are not tax deductible";
-
-        const options = shuffle([
-            correct,
-            "All expenses are deductible",
-            "No expenses are allowed",
-            "Expenses increase tax automatically"
-        ]);
-
-        return {
-            question:`What is true about tax deductions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Charitable donations may reduce tax";
-
-        const options = shuffle([
-            correct,
-            "Donations increase tax",
-            "Donations are ignored",
-            "Donations are liabilities"
-        ]);
-
-        return {
-            question:`How can donations affect tax?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- NATIONAL INSURANCE & NET INCOME ----------------
-
-    if(type === 13){
-
-        const correct = "NI contributes to state benefits";
-
-        const options = shuffle([
-            correct,
-            "NI is a business tax",
-            "NI is VAT",
-            "NI is optional income"
-        ]);
-
-        return {
-            question:`What is National Insurance used for?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    /* ---------------- SYSTEM PURPOSE ---------------- */
 
     if(type === 14){
 
-        const correct = "Net pay is after tax and NI";
+        const correct = "To ensure accuracy and reliability of records";
 
         const options = shuffle([
             correct,
-            "Net pay is before deductions",
-            "Net pay equals gross income",
-            "Net pay excludes salary"
+            "To increase revenue automatically",
+            "To eliminate costs",
+            "To avoid reporting"
         ]);
 
         return {
-            question:`What is net pay?`,
+            question:
+            `What is the purpose of an accounting system?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- FINAL APPLICATION ---------------- */
 
     if(type === 15){
 
-        const correct = "Gross pay minus deductions";
+        const correct = "Controls reduce risk of fraud and error";
 
         const options = shuffle([
             correct,
-            "Gross pay plus VAT",
-            "Cash received only",
-            "Revenue minus expenses"
+            "Controls increase profit",
+            "Controls remove accounting rules",
+            "Controls eliminate cash"
         ]);
 
         return {
-            question:`How is net income calculated?`,
+            question:
+            `Why are internal controls important in a business?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
+    throw new Error("L4-CH3 type not implemented: " + type);
+}
 
-        const correct = "Higher earnings increase NI contributions";
+function generateL4CH4(){
+
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    /* ---------------- TAXABLE PROFIT ---------------- */
+
+    if(type === 1){
+
+        const profit = rand(5000,20000);
+        const expenses = rand(500,3000);
+
+        const taxable = profit - expenses;
 
         const options = shuffle([
-            correct,
-            "NI is fixed",
-            "NI decreases with income",
-            "NI is unrelated to earnings"
+            taxable,
+            taxable + 500,
+            taxable - 400,
+            taxable + 800
         ]);
 
         return {
-            question:`What happens to NI with higher income?`,
+            question:
+            `${business} reports accounting profit of £${profit}.
+Non-allowable expenses £${expenses}.
+
+What is taxable profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(taxable)
+        };
+    }
+
+    /* ---------------- TAX PAYABLE ---------------- */
+
+    if(type === 2){
+
+        const taxable = rand(5000,15000);
+        const rate = 0.2;
+
+        const tax = Math.round(taxable * rate);
+
+        const options = shuffle([
+            tax,
+            tax + 200,
+            tax - 300,
+            tax + 400
+        ]);
+
+        return {
+            question:
+            `Taxable profit £${taxable}
+Tax rate 20%
+
+What is tax payable?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(tax)
+        };
+    }
+
+    /* ---------------- VAT OUTPUT ---------------- */
+
+    if(type === 3){
+
+        const sales = rand(1000,8000);
+        const vatRate = 0.2;
+
+        const vat = Math.round(sales * vatRate);
+
+        const options = shuffle([
+            vat,
+            vat + 50,
+            vat - 60,
+            vat + 100
+        ]);
+
+        return {
+            question:
+            `Sales £${sales} (excluding VAT)
+VAT rate 20%
+
+What is VAT payable to tax authority?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(vat)
+        };
+    }
+
+    /* ---------------- VAT INPUT ---------------- */
+
+    if(type === 4){
+
+        const purchases = rand(1000,6000);
+        const vat = Math.round(purchases * 0.2);
+
+        const options = shuffle([
+            vat,
+            vat + 50,
+            vat - 50,
+            vat + 100
+        ]);
+
+        return {
+            question:
+            `Purchases £${purchases} (excluding VAT)
+VAT rate 20%
+
+What is input VAT?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(vat)
+        };
+    }
+
+    /* ---------------- VAT NET PAYMENT ---------------- */
+
+    if(type === 5){
+
+        const output = rand(500,2000);
+        const input = rand(200,1000);
+
+        const net = output - input;
+
+        const options = shuffle([
+            net,
+            net + 100,
+            net - 150,
+            net + 200
+        ]);
+
+        return {
+            question:
+            `Output VAT £${output}
+Input VAT £${input}
+
+What is VAT payable?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- TAX ADJUSTMENT ---------------- */
+
+    if(type === 6){
+
+        const correct = "Add back non-allowable expenses";
+
+        const options = shuffle([
+            correct,
+            "Deduct all expenses",
+            "Ignore revenue",
+            "Remove capital"
+        ]);
+
+        return {
+            question:
+            `What is done when calculating taxable profit?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- EXAM SCENARIOS ----------------
+    /* ---------------- ALLOWABLE EXPENSE ---------------- */
 
-    if(type === 17){
+    if(type === 7){
 
-        const correct = "Incorrect tax reporting leads to penalties";
+        const correct = "Expenses incurred wholly and exclusively for business";
 
         const options = shuffle([
             correct,
-            "No consequences exist",
-            "Profit increases automatically",
-            "Tax is ignored"
+            "Personal shopping",
+            "Private travel",
+            "Family expenses"
         ]);
 
         return {
-            question:`What happens if personal tax is misreported?`,
+            question:
+            `What is an allowable expense?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 18){
+    /* ---------------- NON ALLOWABLE ---------------- */
 
-        const correct = "Records must be kept for tax compliance";
+    if(type === 8){
+
+        const correct = "Personal expenses of owner";
 
         const options = shuffle([
             correct,
-            "Records are optional",
-            "Only banks keep records",
-            "HMRC does not require records"
+            "Office rent",
+            "Electricity bill",
+            "Wages"
         ]);
 
         return {
-            question:`Why must individuals keep tax records?`,
+            question:
+            `Which is a non-allowable expense?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 19){
+    /* ---------------- TAX EFFECT ---------------- */
 
-        const correct = "Tax systems differ between employees and self-employed";
+    if(type === 9){
+
+        const correct = "Reduces profit available for distribution";
 
         const options = shuffle([
             correct,
-            "They are identical",
-            "Employees pay no tax",
-            "Self-employed are exempt"
+            "Increases sales",
+            "Removes expenses",
+            "Creates cash automatically"
         ]);
 
         return {
-            question:`What is true about tax systems?`,
+            question:
+            `What is the effect of business tax?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 20){
+    /* ---------------- VAT PURPOSE ---------------- */
 
-        const correct = "Tax compliance ensures legal income reporting";
+    if(type === 10){
+
+        const correct = "Tax on consumption collected by businesses";
 
         const options = shuffle([
             correct,
-            "Compliance increases fraud",
-            "Compliance is optional",
-            "Compliance removes income tax"
+            "Tax on profit only",
+            "Bank charge",
+            "Salary deduction"
         ]);
 
         return {
-            question:`Why is tax compliance important for individuals?`,
+            question:
+            `What is VAT?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    return generateL4CH5();
+    /* ---------------- TAX LIABILITY ---------------- */
+
+    if(type === 11){
+
+        const taxable = rand(8000,20000);
+        const tax = Math.round(taxable * 0.25);
+
+        const options = shuffle([
+            tax,
+            tax + 500,
+            tax - 400,
+            tax + 700
+        ]);
+
+        return {
+            question:
+            `Taxable profit £${taxable}
+Tax rate 25%
+
+What is tax liability?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(tax)
+        };
+    }
+
+    /* ---------------- CASH IMPACT ---------------- */
+
+    if(type === 12){
+
+        const correct = "Tax reduces cash in bank";
+
+        const options = shuffle([
+            correct,
+            "Tax increases revenue",
+            "Tax increases assets",
+            "Tax removes liabilities"
+        ]);
+
+        return {
+            question:
+            `What is the cash effect of paying tax?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX CALC STEP ---------------- */
+
+    if(type === 13){
+
+        const profit = rand(10000,25000);
+        const adj = rand(1000,5000);
+
+        const taxable = profit - adj;
+
+        const options = shuffle([
+            taxable,
+            taxable + 500,
+            taxable - 600,
+            taxable + 800
+        ]);
+
+        return {
+            question:
+            `Profit £${profit}
+Non-allowable expenses £${adj}
+
+What is taxable profit?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(taxable)
+        };
+    }
+
+    /* ---------------- TAX INTERPRETATION ---------------- */
+
+    if(type === 14){
+
+        const correct = "Paid to government based on taxable profit";
+
+        const options = shuffle([
+            correct,
+            "Paid to suppliers",
+            "Paid to employees",
+            "Paid to customers"
+        ]);
+
+        return {
+            question:
+            `What is business tax paid on?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL EXAM STYLE ---------------- */
+
+    if(type === 15){
+
+        const correct = "Ensures businesses contribute to government revenue";
+
+        const options = shuffle([
+            correct,
+            "Increases sales automatically",
+            "Removes accounting rules",
+            "Eliminates profit"
+        ]);
+
+        return {
+            question:
+            `Why do businesses pay tax?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    throw new Error("L4-CH4 type not implemented: " + type);
+}
+function generateL4CH5(){
+
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    /* ---------------- GROSS TO NET PAY ---------------- */
+
+    if(type === 1){
+
+        const gross = rand(1500,5000);
+        const tax = Math.round(gross * 0.2);
+        const net = gross - tax;
+
+        const options = shuffle([
+            net,
+            net + 100,
+            net - 120,
+            net + 200
+        ]);
+
+        return {
+            question:
+            `Employee gross pay £${gross}
+Income tax 20%
+
+What is net pay?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- NATIONAL INSURANCE ---------------- */
+
+    if(type === 2){
+
+        const gross = rand(2000,6000);
+        const ni = Math.round(gross * 0.1);
+        const net = gross - ni;
+
+        const options = shuffle([
+            net,
+            net + 150,
+            net - 200,
+            net + 300
+        ]);
+
+        return {
+            question:
+            `Gross pay £${gross}
+National Insurance 10%
+
+What is take-home pay?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- TAX + NI COMBINED ---------------- */
+
+    if(type === 3){
+
+        const gross = rand(3000,8000);
+        const tax = Math.round(gross * 0.2);
+        const ni = Math.round(gross * 0.1);
+
+        const net = gross - tax - ni;
+
+        const options = shuffle([
+            net,
+            net + 200,
+            net - 250,
+            net + 350
+        ]);
+
+        return {
+            question:
+            `Gross pay £${gross}
+Income tax 20%
+NI 10%
+
+What is net pay?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- PAYE PURPOSE ---------------- */
+
+    if(type === 4){
+
+        const correct = "Tax deducted from wages before employee receives pay";
+
+        const options = shuffle([
+            correct,
+            "Tax paid directly by employee at end of year",
+            "Tax optional for employees",
+            "Tax only on profits"
+        ]);
+
+        return {
+            question:
+            `What is PAYE?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- DEDUCTIONS EFFECT ---------------- */
+
+    if(type === 5){
+
+        const correct = "Reduces take-home pay";
+
+        const options = shuffle([
+            correct,
+            "Increases gross pay",
+            "Removes salary",
+            "Has no effect"
+        ]);
+
+        return {
+            question:
+            `What is the effect of deductions on wages?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- PENSION DEDUCTION ---------------- */
+
+    if(type === 6){
+
+        const gross = rand(2000,6000);
+        const pension = Math.round(gross * 0.05);
+        const net = gross - pension;
+
+        const options = shuffle([
+            net,
+            net + 100,
+            net - 150,
+            net + 200
+        ]);
+
+        return {
+            question:
+            `Gross pay £${gross}
+Pension contribution 5%
+
+What is net pay?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- SIMPLE PAYSLIP INTERPRETATION ---------------- */
+
+    if(type === 7){
+
+        const correct = "Shows gross pay and deductions";
+
+        const options = shuffle([
+            correct,
+            "Shows only bank balance",
+            "Shows only profit",
+            "Shows only VAT"
+        ]);
+
+        return {
+            question:
+            `What does a payslip show?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- TAX RATE CHANGE ---------------- */
+
+    if(type === 8){
+
+        const gross = rand(2500,7000);
+        const taxRate = 0.25;
+        const tax = Math.round(gross * taxRate);
+
+        const options = shuffle([
+            tax,
+            tax + 100,
+            tax - 120,
+            tax + 250
+        ]);
+
+        return {
+            question:
+            `Gross pay £${gross}
+Income tax 25%
+
+How much tax is deducted?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(tax)
+        };
+    }
+
+    /* ---------------- REAL-LIFE SCENARIO ---------------- */
+
+    if(type === 9){
+
+        const correct = "Employee receives less cash due to deductions";
+
+        const options = shuffle([
+            correct,
+            "Employee receives more cash",
+            "Tax increases gross pay",
+            "NI increases salary"
+        ]);
+
+        return {
+            question:
+            `${business} processes payroll.
+
+What happens after deductions?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- DIFFERENCE GROSS VS NET ---------------- */
+
+    if(type === 10){
+
+        const correct = "Gross pay is before deductions, net pay is after";
+
+        const options = shuffle([
+            correct,
+            "Net pay is higher than gross",
+            "Gross pay includes tax refunds",
+            "They are always equal"
+        ]);
+
+        return {
+            question:
+            `What is the difference between gross and net pay?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- SIMPLE NET CALC ---------------- */
+
+    if(type === 11){
+
+        const gross = rand(1800,4500);
+        const tax = Math.round(gross * 0.2);
+
+        const net = gross - tax;
+
+        const options = shuffle([
+            net,
+            net + 100,
+            net - 90,
+            net + 150
+        ]);
+
+        return {
+            question:
+            `Gross pay £${gross}
+Tax 20%
+
+What is net pay?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- EMPLOYER ROLE ---------------- */
+
+    if(type === 12){
+
+        const correct = "Deducts tax and pays it to government";
+
+        const options = shuffle([
+            correct,
+            "Keeps all tax",
+            "Pays employee full gross only",
+            "Ignores tax rules"
+        ]);
+
+        return {
+            question:
+            `What is the employer's role in PAYE?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- WHY TAX EXISTS ---------------- */
+
+    if(type === 13){
+
+        const correct = "Funds government services";
+
+        const options = shuffle([
+            correct,
+            "Increases wages",
+            "Removes expenses",
+            "Creates profit"
+        ]);
+
+        return {
+            question:
+            `Why do employees pay income tax?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- MULTI DEDUCTION SCENARIO ---------------- */
+
+    if(type === 14){
+
+        const gross = rand(3000,9000);
+        const tax = Math.round(gross * 0.2);
+        const ni = Math.round(gross * 0.1);
+        const pension = Math.round(gross * 0.05);
+
+        const net = gross - tax - ni - pension;
+
+        const options = shuffle([
+            net,
+            net + 200,
+            net - 300,
+            net + 400
+        ]);
+
+        return {
+            question:
+            `Gross pay £${gross}
+Tax 20%
+NI 10%
+Pension 5%
+
+What is net pay?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
+        };
+    }
+
+    /* ---------------- FINAL EXAM STYLE ---------------- */
+
+    if(type === 15){
+
+        const correct = "Ensures correct tax is collected from employees";
+
+        const options = shuffle([
+            correct,
+            "Increases salary automatically",
+            "Removes deductions",
+            "Eliminates payroll"
+        ]);
+
+        return {
+            question:
+            `Why is PAYE used?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    throw new Error("L4-CH5 type not implemented: " + type);
 }
 function generateL4CH6(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- AUDIT BASICS ----------------
+    /* ---------------- PURPOSE OF AUDIT ---------------- */
 
     if(type === 1){
 
-        const correct = "To verify financial statements are accurate";
+        const correct = "To provide independent assurance on financial statements";
 
         const options = shuffle([
             correct,
-            "To prepare tax returns for HMRC",
+            "To prepare management accounts",
             "To increase profit",
-            "To manage payroll"
+            "To calculate tax"
         ]);
 
         return {
-            question:`What is the main purpose of an external audit?`,
+            question:
+            `What is the purpose of an external audit?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- AUDITOR INDEPENDENCE ---------------- */
 
     if(type === 2){
 
-        const correct = "To provide an independent opinion";
+        const correct = "Auditors must be independent of the business";
 
         const options = shuffle([
             correct,
-            "To change accounting records",
-            "To reduce tax",
-            "To create budgets"
+            "Auditors work for management",
+            "Auditors prepare payroll",
+            "Auditors set prices"
         ]);
 
         return {
-            question:`What does an external auditor provide?`,
+            question:
+            `Why must auditors be independent?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- EVIDENCE ---------------- */
 
     if(type === 3){
 
-        const correct = "To ensure accounts show a true and fair view";
+        const correct = "Audit evidence must be sufficient and appropriate";
 
         const options = shuffle([
             correct,
-            "To guarantee profit",
-            "To increase revenue",
-            "To manage cash flow"
+            "Evidence can be verbal only",
+            "No evidence is required",
+            "Estimates are enough"
         ]);
 
         return {
-            question:`What is the audit opinion based on?`,
+            question:
+            `What is required for audit evidence?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- ERROR DETECTION ---------------- */
 
     if(type === 4){
 
-        const correct = "Audit detects but does not prevent fraud";
+        const missing = rand(500,5000);
 
         const options = shuffle([
-            correct,
-            "Audit prevents all fraud",
-            "Audit creates fraud",
-            "Audit removes records"
+            "Financial statements may be incorrect",
+            "Profit always increases",
+            "Tax is removed",
+            "Cash increases automatically"
         ]);
 
         return {
-            question:`What is a limitation of an audit?`,
+            question:
+            `${business} has missing transactions worth £${missing}.
+
+What is the main risk?`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf("Financial statements may be incorrect")
         };
     }
 
-    // ---------------- INDEPENDENCE & ETHICS ----------------
+    /* ---------------- AUDIT REPORT ---------------- */
 
     if(type === 5){
 
-        const correct = "Auditor must be independent of the business";
+        const correct = "Provides opinion on truth and fairness of accounts";
 
         const options = shuffle([
             correct,
-            "Auditor works as manager",
-            "Auditor is owner of business",
-            "Auditor prepares accounts only"
+            "Sets employee wages",
+            "Calculates VAT",
+            "Approves purchases"
         ]);
 
         return {
-            question:`Why must auditors be independent?`,
+            question:
+            `What does an audit report provide?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- FRAUD RISK ---------------- */
 
     if(type === 6){
 
-        const correct = "To avoid bias in reporting";
+        const correct = "Weak internal controls increase fraud risk";
 
         const options = shuffle([
             correct,
-            "To increase profit",
-            "To reduce tax liability",
-            "To increase sales"
+            "Strong controls increase fraud",
+            "Audits create fraud",
+            "Reports remove cash"
         ]);
 
         return {
-            question:`What is the purpose of auditor independence?`,
+            question:
+            `What is the relationship between internal controls and fraud?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- AUDITOR ROLE ---------------- */
 
     if(type === 7){
 
-        const correct = "Conflicts of interest must be avoided";
+        const correct = "Checks financial records and issues opinion";
 
         const options = shuffle([
             correct,
-            "Conflicts are encouraged",
-            "Auditors must be employees",
-            "Auditors control cash"
+            "Runs the business",
+            "Prepares invoices",
+            "Manages payroll"
         ]);
 
         return {
-            question:`What is an ethical requirement for auditors?`,
+            question:
+            `What does an external auditor do?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- MATERIALITY ---------------- */
 
     if(type === 8){
 
-        const correct = "Auditors cannot prepare the accounts they audit";
+        const correct = "Errors that could influence user decisions";
 
         const options = shuffle([
             correct,
-            "Auditors must prepare accounts",
-            "Auditors are management",
-            "Auditors ignore records"
+            "Any small typo",
+            "Only cash errors",
+            "Only payroll errors"
         ]);
 
         return {
-            question:`What is a key rule in auditing ethics?`,
+            question:
+            `What is materiality in auditing?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- AUDIT EVIDENCE ----------------
+    /* ---------------- AUDIT TRAIL ---------------- */
 
     if(type === 9){
 
-        const correct = "Invoices and receipts provide audit evidence";
+        const correct = "A record showing all transaction steps";
 
         const options = shuffle([
             correct,
-            "Opinions only",
-            "Verbal statements only",
-            "Estimates only"
+            "A list of employees",
+            "A tax form",
+            "A profit report only"
         ]);
 
         return {
-            question:`What is audit evidence?`,
+            question:
+            `What is an audit trail?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- INDEPENDENCE THREAT ---------------- */
 
     if(type === 10){
 
-        const correct = "Physical inspection of assets";
+        const correct = "Conflict of interest reduces audit reliability";
 
         const options = shuffle([
             correct,
-            "Guessing values",
-            "Ignoring records",
-            "Creating reports"
+            "Independence improves sales",
+            "Auditors must work for management",
+            "Conflict increases profit"
         ]);
 
         return {
-            question:`How can auditors verify assets?`,
+            question:
+            `What happens if auditors are not independent?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- SAMPLING ---------------- */
 
     if(type === 11){
 
-        const correct = "Bank statements are key evidence";
+        const correct = "Checking a sample of transactions instead of all";
 
         const options = shuffle([
             correct,
-            "Only forecasts",
-            "Only budgets",
-            "Only verbal claims"
+            "Checking only one transaction",
+            "Checking no transactions",
+            "Checking only cash"
         ]);
 
         return {
-            question:`What is strong audit evidence?`,
+            question:
+            `What is audit sampling?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- ERROR IMPACT ---------------- */
 
     if(type === 12){
 
-        const correct = "Sampling is used due to time limits";
+        const correct = "Users may make incorrect decisions";
 
         const options = shuffle([
             correct,
-            "All transactions are always checked",
-            "No records are checked",
-            "Only cash is checked"
+            "Profit increases",
+            "Cash increases automatically",
+            "Tax disappears"
         ]);
 
         return {
-            question:`Why do auditors use sampling?`,
+            question:
+            `What is the impact of inaccurate financial statements?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- PROCESS & LIMITATIONS ----------------
+    /* ---------------- AUDITOR RESPONSIBILITY ---------------- */
 
     if(type === 13){
 
-        const correct = "Audit includes planning, testing, reporting";
+        const correct = "They provide reasonable assurance, not absolute guarantee";
 
         const options = shuffle([
             correct,
-            "Audit is only reporting",
-            "Audit is only planning",
-            "Audit is only bookkeeping"
+            "They guarantee no fraud exists",
+            "They manage the business",
+            "They prepare accounts only"
         ]);
 
         return {
-            question:`What are the stages of an audit?`,
+            question:
+            `What is the auditor's responsibility?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- QUALIFIED OPINION ---------------- */
 
     if(type === 14){
 
-        const correct = "Audits are not 100% error proof";
+        const correct = "Financial statements are mostly correct with some issues";
 
         const options = shuffle([
             correct,
-            "Audits guarantee perfection",
-            "Audits remove all fraud",
-            "Audits are optional checks only"
+            "Accounts are perfect",
+            "Accounts are completely false",
+            "No audit is needed"
         ]);
 
         return {
-            question:`What is a limitation of auditing?`,
+            question:
+            `What is a qualified audit opinion?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- FINAL EXAM STYLE ---------------- */
 
     if(type === 15){
 
-        const correct = "Materiality affects audit focus";
+        const correct = "Audits increase confidence in financial reporting";
 
         const options = shuffle([
             correct,
-            "All items are equally important",
-            "Materiality is irrelevant",
-            "Only cash matters"
+            "Audits increase profit",
+            "Audits remove tax",
+            "Audits replace bookkeeping"
         ]);
 
         return {
-            question:`What is materiality in auditing?`,
+            question:
+            `Why are external audits important?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
-
-        const correct = "Audit risk cannot be fully eliminated";
-
-        const options = shuffle([
-            correct,
-            "Risk can be fully removed",
-            "Risk is not considered",
-            "Risk is always zero"
-        ]);
-
-        return {
-            question:`What is audit risk?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM SCENARIOS ----------------
-
-    if(type === 17){
-
-        const correct = "Errors may still exist after audit";
-
-        const options = shuffle([
-            correct,
-            "All errors are removed",
-            "Audits create errors",
-            "Records are destroyed"
-        ]);
-
-        return {
-            question:`What may happen even after an audit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Auditor issues an audit report";
-
-        const options = shuffle([
-            correct,
-            "Auditor prepares tax returns",
-            "Auditor sets prices",
-            "Auditor manages payroll"
-        ]);
-
-        return {
-            question:`What is the final output of an audit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Audit increases credibility of accounts";
-
-        const options = shuffle([
-            correct,
-            "Audit reduces reliability",
-            "Audit removes transparency",
-            "Audit has no effect"
-        ]);
-
-        return {
-            question:`What is the benefit of auditing?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Stakeholders rely on audited accounts";
-
-        const options = shuffle([
-            correct,
-            "Only managers use them",
-            "They are never used",
-            "They are irrelevant"
-        ]);
-
-        return {
-            question:`Who uses audited financial statements?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL4CH6();
+    throw new Error("L4-CH6 type not implemented: " + type);
 }
 function generateL4CH7(){
 
-    const type = rand(1,20);
+    const type = rand(1,15);
     const business = randomBusiness();
 
-    // ---------------- CASH & LIQUIDITY ----------------
+    /* ---------------- CASH POSITION ---------------- */
 
     if(type === 1){
 
-        const correct = "Cash is required for daily operations";
+        const cash = rand(2000,15000);
+        const payable = rand(1000,8000);
+
+        const net = cash - payable;
 
         const options = shuffle([
-            correct,
-            "Cash is only needed annually",
-            "Cash is irrelevant in business",
-            "Cash is only profit"
+            net,
+            net + 500,
+            net - 600,
+            net + 900
         ]);
 
         return {
-            question:`Why is cash important for a business?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} has cash £${cash} and payables £${payable}.
+
+What is the net cash position?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
         };
     }
+
+    /* ---------------- OVERDRAFT SCENARIO ---------------- */
 
     if(type === 2){
 
-        const correct = "Liquidity refers to ability to pay short-term debts";
+        const overdraft = rand(1000,8000);
+        const cash = rand(500,3000);
+
+        const position = cash - overdraft;
 
         const options = shuffle([
-            correct,
-            "Liquidity is profit",
-            "Liquidity is assets only",
-            "Liquidity is long-term loans"
+            position,
+            position + 500,
+            position - 400,
+            position + 800
         ]);
 
         return {
-            question:`What is liquidity?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `${business} has overdraft £${overdraft} and cash £${cash}.
+
+What is the overall cash position?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(position)
         };
     }
+
+    /* ---------------- CASH FLOW PURPOSE ---------------- */
 
     if(type === 3){
 
-        const correct = "Cash flow measures movement of cash in and out";
+        const correct = "To ensure the business can meet short-term obligations";
 
         const options = shuffle([
             correct,
-            "Cash flow is profit only",
-            "Cash flow is VAT",
-            "Cash flow is assets"
+            "To increase profit automatically",
+            "To calculate tax",
+            "To replace income statement"
         ]);
 
         return {
-            question:`What is cash flow?`,
+            question:
+            `What is the purpose of cash management?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- LIQUIDITY ---------------- */
 
     if(type === 4){
 
-        const correct = "A profitable business can still run out of cash";
+        const correct = "Ability to pay short-term debts when due";
 
         const options = shuffle([
             correct,
-            "Profit always equals cash",
-            "Cash and profit are identical",
-            "Cash is always unlimited"
+            "Total profit earned",
+            "Long-term investment value",
+            "Tax liability"
         ]);
 
         return {
-            question:`What is a key cash flow concept?`,
+            question:
+            `What is liquidity?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- WORKING CAPITAL ----------------
+    /* ---------------- CASH SHORTAGE ---------------- */
 
     if(type === 5){
+
+        const missing = rand(500,3000);
+
+        const options = shuffle([
+            "Poor cash control or overspending",
+            "Higher revenue",
+            "Lower tax rate",
+            "Increased profit"
+        ]);
+
+        return {
+            question:
+            `${business} reports a cash shortage of £${missing}.
+
+What is the most likely cause?`,
+            options,
+            correct: options.indexOf("Poor cash control or overspending")
+        };
+    }
+
+    /* ---------------- CASH SURPLUS ---------------- */
+
+    if(type === 6){
+
+        const correct = "Business can invest or repay liabilities";
+
+        const options = shuffle([
+            correct,
+            "Business must close",
+            "Tax increases automatically",
+            "Expenses increase"
+        ]);
+
+        return {
+            question:
+            `What can a business do with cash surplus?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- WORKING CAPITAL LINK ---------------- */
+
+    if(type === 7){
 
         const correct = "Current assets minus current liabilities";
 
         const options = shuffle([
             correct,
-            "Total revenue minus expenses",
-            "Fixed assets minus capital",
-            "Cash minus VAT"
-        ]);
-
-        return {
-            question:`What is working capital?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 6){
-
-        const correct = "Positive working capital supports operations";
-
-        const options = shuffle([
-            correct,
-            "Negative working capital is always good",
-            "Working capital is irrelevant",
-            "It only affects tax"
-        ]);
-
-        return {
-            question:`Why is working capital important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Inventory increases working capital needs";
-
-        const options = shuffle([
-            correct,
-            "Inventory reduces cash needs to zero",
-            "Inventory has no effect",
-            "Inventory removes liabilities"
-        ]);
-
-        return {
-            question:`What is the effect of high inventory?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 8){
-
-        const correct = "Receivables delay cash inflow";
-
-        const options = shuffle([
-            correct,
-            "Receivables increase immediate cash",
-            "Receivables are liabilities",
-            "Receivables are expenses"
-        ]);
-
-        return {
-            question:`How do receivables affect cash flow?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- BANKING & OVERDRAFT ----------------
-
-    if(type === 9){
-
-        const correct = "Overdraft allows spending beyond balance";
-
-        const options = shuffle([
-            correct,
-            "Overdraft increases profit",
-            "Overdraft removes debt",
-            "Overdraft is free cash"
-        ]);
-
-        return {
-            question:`What is a bank overdraft?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 10){
-
-        const correct = "Overdraft is a short-term liability";
-
-        const options = shuffle([
-            correct,
-            "Overdraft is an asset",
-            "Overdraft is revenue",
-            "Overdraft is equity"
-        ]);
-
-        return {
-            question:`How is an overdraft classified?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 11){
-
-        const correct = "Interest is charged on overdrafts";
-
-        const options = shuffle([
-            correct,
-            "Overdrafts are interest-free",
-            "Overdrafts increase revenue",
-            "Overdrafts are tax-free income"
-        ]);
-
-        return {
-            question:`What is true about overdrafts?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 12){
-
-        const correct = "Bank reconciliation identifies timing differences";
-
-        const options = shuffle([
-            correct,
-            "Bank reconciliation removes profit",
-            "It replaces bookkeeping",
-            "It ignores bank statements"
-        ]);
-
-        return {
-            question:`What is the purpose of bank reconciliation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- CASH FLOW DECISIONS ----------------
-
-    if(type === 13){
-
-        const correct = "Delaying payments improves short-term cash";
-
-        const options = shuffle([
-            correct,
-            "Paying early improves cash",
-            "Ignoring suppliers improves cash",
-            "Cash flow is unaffected"
-        ]);
-
-        return {
-            question:`How can a business improve cash flow?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 14){
-
-        const correct = "Fast collection of receivables improves liquidity";
-
-        const options = shuffle([
-            correct,
-            "Slower collections improve liquidity",
-            "Receivables have no effect",
-            "Cash flow ignores customers"
-        ]);
-
-        return {
-            question:`Why is quick debt collection important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 15){
-
-        const correct = "Cash budgeting helps predict shortages";
-
-        const options = shuffle([
-            correct,
-            "Cash budgeting is unnecessary",
-            "Cash budgets are profit reports",
-            "Budgets remove risk entirely"
-        ]);
-
-        return {
-            question:`What is the purpose of a cash budget?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 16){
-
-        const correct = "Maintaining cash reserves reduces risk";
-
-        const options = shuffle([
-            correct,
-            "Cash reserves increase risk",
-            "Cash reserves are liabilities",
-            "Cash reserves are profit"
-        ]);
-
-        return {
-            question:`Why do businesses keep cash reserves?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- EXAM SCENARIOS ----------------
-
-    if(type === 17){
-
-        const correct = "Cash shortage can cause business failure";
-
-        const options = shuffle([
-            correct,
-            "Cash shortage increases profit",
-            "Cash shortage is irrelevant",
-            "Cash shortage improves liquidity"
-        ]);
-
-        return {
-            question:`What is the risk of poor cash management?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 18){
-
-        const correct = "Cash flow differs from profit";
-
-        const options = shuffle([
-            correct,
-            "Cash flow equals profit always",
-            "Cash flow is irrelevant",
-            "Profit is always cash"
-        ]);
-
-        return {
-            question:`What is true about cash flow and profit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 19){
-
-        const correct = "Strong liquidity improves survival chances";
-
-        const options = shuffle([
-            correct,
-            "Liquidity has no effect",
-            "Liquidity reduces survival",
-            "Liquidity is irrelevant"
-
-        ]);
-
-        return {
-            question:`Why is liquidity important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 20){
-
-        const correct = "Treasury management ensures cash availability";
-
-        const options = shuffle([
-            correct,
-            "Treasury removes cash needs",
-            "Treasury is only tax-related",
-            "Treasury replaces accounting"
-        ]);
-
-        return {
-            question:`What is the role of treasury management?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    return generateL4CH7();
-}
-function generateL4CH8(){
-
-    const type = rand(1,20);
-    const business = randomBusiness();
-    const customer = randomPerson();
-
-    // ---------------- CREDIT BASICS ----------------
-
-    if(type === 1){
-
-        const correct = "Credit sales allow customers to pay later";
-
-        const options = shuffle([
-            correct,
-            "Credit sales require immediate payment",
-            "Credit sales are cash only",
-            "Credit sales eliminate risk"
-        ]);
-
-        return {
-            question:`What are credit sales?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 2){
-
-        const correct = "Trade receivables represent money owed by customers";
-
-        const options = shuffle([
-            correct,
-            "Trade receivables are debts owed to suppliers",
-            "Trade receivables are expenses",
-            "Trade receivables are cash in bank"
-        ]);
-
-        return {
-            question:`What are trade receivables?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 3){
-
-        const correct = "Credit increases sales but increases risk";
-
-        const options = shuffle([
-            correct,
-            "Credit reduces sales",
-            "Credit removes customers",
-            "Credit eliminates profit"
-        ]);
-
-        return {
-            question:`What is the effect of offering credit?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 4){
-
-        const correct = "Credit policy sets rules for lending to customers";
-
-        const options = shuffle([
-            correct,
-            "Credit policy removes accounting",
-            "Credit policy sets tax rates",
-            "Credit policy controls wages"
-        ]);
-
-        return {
-            question:`What is a credit policy?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    // ---------------- RECEIVABLES & RISK ----------------
-
-    if(type === 5){
-
-        const amount = rand(500,8000);
-
-        const correct = "Higher receivables increase risk of non-payment";
-
-        const options = shuffle([
-            correct,
-            "Receivables eliminate risk",
-            "Receivables guarantee cash",
-            "Receivables reduce sales"
+            "Revenue minus expenses",
+            "Cash minus tax",
+            "Profit minus dividends"
         ]);
 
         return {
             question:
-`${business} has £${amount} in trade receivables.
-What is the risk implication?`,
+            `What is working capital?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 6){
-
-        const correct = "Late payment reduces cash flow";
-
-        const options = shuffle([
-            correct,
-            "Late payment increases profit",
-            "Late payment has no effect",
-            "Late payment increases VAT"
-        ]);
-
-        return {
-            question:`What is the effect of late customer payments?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    if(type === 7){
-
-        const correct = "Credit checks reduce risk of bad debts";
-
-        const options = shuffle([
-            correct,
-            "Credit checks increase debt",
-            "Credit checks remove customers",
-            "Credit checks eliminate sales"
-        ]);
-
-        return {
-            question:`Why do businesses perform credit checks?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    /* ---------------- CASH FORECAST ---------------- */
 
     if(type === 8){
 
-        const correct = "Credit limits restrict maximum debt per customer";
+        const inflow = rand(5000,15000);
+        const outflow = rand(3000,12000);
+
+        const net = inflow - outflow;
 
         const options = shuffle([
-            correct,
-            "Credit limits increase sales automatically",
-            "Credit limits remove cash",
-            "Credit limits increase VAT"
+            net,
+            net + 400,
+            net - 500,
+            net + 700
         ]);
 
         return {
-            question:`What is a credit limit?`,
-            options,
-            correct: options.indexOf(correct)
+            question:
+            `Cash inflow £${inflow}
+Cash outflow £${outflow}
+
+What is net cash flow?`,
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(net)
         };
     }
 
-    // ---------------- BAD DEBTS ----------------
+    /* ---------------- BANK DECISION ---------------- */
 
     if(type === 9){
 
-        const correct = "Irrecoverable debt is written off";
+        const correct = "Use overdraft to cover short-term shortage";
 
         const options = shuffle([
             correct,
-            "Irrecoverable debt is ignored",
-            "Irrecoverable debt increases profit",
-            "Irrecoverable debt becomes cash"
+            "Ignore shortage",
+            "Stop bookkeeping",
+            "Increase tax"
         ]);
 
         return {
-            question:`What happens to irrecoverable debts?`,
+            question:
+            `What should a business do if it has a short-term cash shortage?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CASH CONTROL ---------------- */
 
     if(type === 10){
 
-        const correct = "Bad debts reduce profit";
+        const correct = "Regular bank reconciliations";
 
         const options = shuffle([
             correct,
-            "Bad debts increase profit",
-            "Bad debts increase revenue",
-            "Bad debts have no effect"
+            "Ignore bank statements",
+            "Keep no records",
+            "Estimate cash only"
         ]);
 
         return {
-            question:`What is the effect of bad debts?`,
+            question:
+            `What is a key cash control?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- LIQUIDITY RISK ---------------- */
 
     if(type === 11){
 
-        const correct = "Provision is made for doubtful debts";
+        const correct = "Risk of not being able to pay debts on time";
 
         const options = shuffle([
             correct,
-            "Provision eliminates sales",
-            "Provision increases cash",
-            "Provision removes VAT"
+            "Higher profit",
+            "Lower revenue",
+            "Tax savings"
         ]);
 
         return {
-            question:`Why is a provision for doubtful debts created?`,
+            question:
+            `What is liquidity risk?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CASH VS PROFIT ---------------- */
 
     if(type === 12){
 
-        const correct = "Bad debts are an expense";
+        const correct = "Profit does not always equal cash flow";
 
         const options = shuffle([
             correct,
-            "Bad debts are revenue",
-            "Bad debts are assets",
-            "Bad debts are liabilities"
+            "Profit always equals cash",
+            "Cash is always higher than profit",
+            "They are identical always"
         ]);
 
         return {
-            question:`How are bad debts classified?`,
+            question:
+            `What is the difference between cash and profit?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- CREDIT CONTROL ----------------
+    /* ---------------- INVESTMENT DECISION ---------------- */
 
     if(type === 13){
 
-        const correct = "Prompt invoicing improves cash collection";
+        const correct = "Invest surplus cash to earn return";
 
         const options = shuffle([
             correct,
-            "Delayed invoicing improves cash",
-            "Invoicing has no effect",
-            "Invoices reduce profit"
+            "Store cash without use",
+            "Destroy surplus cash",
+            "Increase liabilities"
         ]);
 
         return {
-            question:`How can credit control be improved?`,
+            question:
+            `What can a business do with surplus cash?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- CASH IMPACT ---------------- */
 
     if(type === 14){
 
-        const correct = "Debt collection procedures recover overdue amounts";
+        const correct = "Cash decreases when expenses are paid";
 
         const options = shuffle([
             correct,
-            "Debt collection increases sales automatically",
-            "Debt collection removes customers",
-            "Debt collection is illegal"
+            "Cash increases with expenses",
+            "Cash is unaffected",
+            "Profit increases automatically"
         ]);
 
         return {
-            question:`What is debt collection?`,
+            question:
+            `What is the effect of paying expenses in cash?`,
             options,
             correct: options.indexOf(correct)
         };
     }
+
+    /* ---------------- FINAL EXAM STYLE ---------------- */
 
     if(type === 15){
 
-        const correct = "Stricter credit reduces sales but improves cash flow";
+        const correct = "Ensures business can operate without liquidity problems";
 
         const options = shuffle([
             correct,
-            "Stricter credit increases risk",
-            "Stricter credit removes profit",
-            "Credit has no effect"
+            "Increases profit automatically",
+            "Removes tax obligations",
+            "Eliminates accounting system"
         ]);
 
         return {
-            question:`What is the effect of stricter credit terms?`,
+            question:
+            `Why is cash management important?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 16){
+    throw new Error("L4-CH7 type not implemented: " + type);
+}
+function generateL4CH8(){
 
-        const correct = "Monitoring receivables improves control";
+    const type = rand(1,15);
+    const business = randomBusiness();
+
+    /* ---------------- CREDIT SALES ---------------- */
+
+    if(type === 1){
+
+        const sales = rand(2000,15000);
 
         const options = shuffle([
-            correct,
-            "Monitoring increases debt",
-            "Monitoring removes cash",
-            "Monitoring is unnecessary"
+            "Increase receivables (trade debtors)",
+            "Increase cash immediately",
+            "Reduce liabilities",
+            "Increase profit instantly"
         ]);
 
         return {
-            question:`Why monitor receivables?`,
+            question:
+            `${business} makes credit sales of £${sales}.
+
+What happens in the accounts?`,
+            options,
+            correct: options.indexOf("Increase receivables (trade debtors)")
+        };
+    }
+
+    /* ---------------- BAD DEBT ---------------- */
+
+    if(type === 2){
+
+        const bad = rand(200,2000);
+
+        const options = shuffle([
+            "Expense increases and receivables decrease",
+            "Cash increases",
+            "Profit increases",
+            "Liabilities increase"
+        ]);
+
+        return {
+            question:
+            `${business} writes off a bad debt of £${bad}.
+
+What is the effect?`,
+            options,
+            correct: options.indexOf("Expense increases and receivables decrease")
+        };
+    }
+
+    /* ---------------- CREDIT CONTROL PURPOSE ---------------- */
+
+    if(type === 3){
+
+        const correct = "Reduce risk of late or non-payment";
+
+        const options = shuffle([
+            correct,
+            "Increase sales automatically",
+            "Eliminate all debt",
+            "Remove accounting system"
+        ]);
+
+        return {
+            question:
+            `What is the purpose of credit control?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    // ---------------- EXAM SCENARIOS ----------------
+    /* ---------------- CREDIT RISK ---------------- */
 
-    if(type === 17){
+    if(type === 4){
 
-        const correct = "High receivables can cause liquidity problems";
+        const correct = "Customer's ability to pay on time";
 
         const options = shuffle([
             correct,
-            "Receivables improve liquidity instantly",
-            "Receivables eliminate risk",
-            "Receivables increase cash immediately"
+            "Business profit level",
+            "Tax rate",
+            "Stock level"
         ]);
 
         return {
-            question:`What is a risk of high receivables?`,
+            question:
+            `What is credit risk?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 18){
+    /* ---------------- PAYMENT TERMS ---------------- */
 
-        const correct = "Credit customers may default on payments";
+    if(type === 5){
+
+        const correct = "Shorter credit terms improve cash flow";
 
         const options = shuffle([
             correct,
-            "Credit removes all risk",
-            "Credit guarantees profit",
-            "Credit eliminates customers"
+            "Longer credit improves cash flow",
+            "Credit has no effect on cash",
+            "Credit removes profit"
         ]);
 
         return {
-            question:`What is credit risk?`,
+            question:
+            `What is the effect of shorter credit terms?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 19){
+    /* ---------------- RECEIVABLES COLLECTION ---------------- */
 
-        const correct = "Cash sales reduce credit risk";
+    if(type === 6){
+
+        const correct = "Send reminders and chase overdue invoices";
 
         const options = shuffle([
             correct,
-            "Cash sales increase credit risk",
-            "Cash sales increase receivables",
-            "Cash sales create debt"
+            "Ignore customers",
+            "Delete invoices",
+            "Increase tax"
         ]);
 
         return {
-            question:`Why are cash sales safer?`,
+            question:
+            `What is a method of collecting receivables?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    if(type === 20){
+    /* ---------------- CASH FLOW IMPACT ---------------- */
 
-        const correct = "Poor credit control increases bad debts";
+    if(type === 7){
+
+        const correct = "Delayed cash inflow due to credit sales";
 
         const options = shuffle([
             correct,
-            "Poor credit reduces sales risk",
-            "Poor credit improves cash flow",
-            "Poor credit eliminates debt"
+            "Immediate cash increase",
+            "Profit elimination",
+            "Tax reduction"
         ]);
 
         return {
-            question:`What is the effect of poor credit control?`,
+            question:
+            `What is the impact of credit sales on cash flow?`,
             options,
             correct: options.indexOf(correct)
         };
     }
 
-    return generateL4CH8();
+    /* ---------------- BAD DEBT PREVENTION ---------------- */
+
+    if(type === 8){
+
+        const correct = "Assess customer creditworthiness before selling on credit";
+
+        const options = shuffle([
+            correct,
+            "Sell to anyone",
+            "Ignore payment history",
+            "Avoid invoices"
+        ]);
+
+        return {
+            question:
+            `How can bad debts be reduced?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- OVERDUE ACCOUNTS ---------------- */
+
+    if(type === 9){
+
+        const overdue = rand(500,5000);
+
+        const options = shuffle([
+            "Increase risk of bad debts",
+            "Increase profit automatically",
+            "Increase tax",
+            "Reduce expenses"
+        ]);
+
+        return {
+            question:
+            `${business} has £${overdue} overdue receivables.
+
+What is the main risk?`,
+            options,
+            correct: options.indexOf("Increase risk of bad debts")
+        };
+    }
+
+    /* ---------------- CREDIT LIMIT ---------------- */
+
+    if(type === 10){
+
+        const correct = "Maximum amount a customer can owe";
+
+        const options = shuffle([
+            correct,
+            "Minimum wage level",
+            "Tax threshold",
+            "Profit limit"
+        ]);
+
+        return {
+            question:
+            `What is a credit limit?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CASH VS CREDIT SALES ---------------- */
+
+    if(type === 11){
+
+        const correct = "Cash sales improve liquidity faster than credit sales";
+
+        const options = shuffle([
+            correct,
+            "Credit sales improve liquidity faster",
+            "Both are identical always",
+            "Cash sales reduce revenue"
+        ]);
+
+        return {
+            question:
+            `What is the difference between cash and credit sales?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- RECEIVABLES CONTROL ---------------- */
+
+    if(type === 12){
+
+        const correct = "Monitor and manage outstanding customer balances";
+
+        const options = shuffle([
+            correct,
+            "Ignore invoices",
+            "Remove records",
+            "Increase expenses"
+        ]);
+
+        return {
+            question:
+            `What is receivables control?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CREDIT POLICY ---------------- */
+
+    if(type === 13){
+
+        const correct = "Rules for offering credit to customers";
+
+        const options = shuffle([
+            correct,
+            "Rules for paying employees",
+            "Rules for taxation",
+            "Rules for stock control"
+        ]);
+
+        return {
+            question:
+            `What is a credit policy?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- CASH COLLECTION DELAY ---------------- */
+
+    if(type === 14){
+
+        const correct = "Cash inflow is delayed due to credit terms";
+
+        const options = shuffle([
+            correct,
+            "Cash inflow increases instantly",
+            "Profit increases automatically",
+            "Expenses disappear"
+        ]);
+
+        return {
+            question:
+            `What is the effect of allowing credit to customers?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    /* ---------------- FINAL EXAM STYLE ---------------- */
+
+    if(type === 15){
+
+        const correct = "Effective credit control improves cash flow and reduces risk";
+
+        const options = shuffle([
+            correct,
+            "Credit control increases tax",
+            "Credit control removes revenue",
+            "Credit control eliminates accounting"
+        ]);
+
+        return {
+            question:
+            `Why is credit control important?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    throw new Error("L4-CH8 type not implemented: " + type);
 }
