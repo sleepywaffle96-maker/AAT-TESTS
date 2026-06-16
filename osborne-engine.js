@@ -5526,326 +5526,473 @@ function generateL4CH8(){
     const type = rand(1,15);
     const business = randomBusiness();
 
-    /* ---------------- CREDIT SALES ---------------- */
+    /* ---------------- MULTI-STEP 1: CREDIT SALES → RECEIVABLES → RISK ---------------- */
 
     if(type === 1){
 
-        const sales = rand(2000,15000);
+        const sales = rand(4000,12000);
+        const paid = rand(2000,8000);
+
+        const receivables = sales - paid;
+
+        const risk =
+            receivables > 5000
+            ? "High risk of bad debt"
+            : "Manageable credit exposure";
 
         const options = shuffle([
-            "Increase receivables (trade debtors)",
-            "Increase cash immediately",
-            "Reduce liabilities",
-            "Increase profit instantly"
+            risk,
+            "No credit risk exists",
+            "Profit automatically increases",
+            "Cash increases immediately"
         ]);
 
         return {
             question:
             `${business} makes credit sales of £${sales}.
+£${paid} is received immediately.
+Outstanding invoices remain unpaid.
 
-What happens in the accounts?`,
+Step 1: Calculate receivables.
+Step 2: Assess credit risk.`,
             options,
-            correct: options.indexOf("Increase receivables (trade debtors)")
+            correct: options.indexOf(risk)
         };
     }
 
-    /* ---------------- BAD DEBT ---------------- */
+    /* ---------------- MULTI-STEP 2: BAD DEBT + PROFIT IMPACT ---------------- */
 
     if(type === 2){
 
-        const bad = rand(200,2000);
+        const debt = rand(500,3000);
 
         const options = shuffle([
-            "Expense increases and receivables decrease",
+            "Expense increases and profit decreases",
             "Cash increases",
-            "Profit increases",
-            "Liabilities increase"
+            "Liabilities increase",
+            "Revenue increases"
         ]);
 
         return {
             question:
-            `${business} writes off a bad debt of £${bad}.
+            `${business} writes off a bad debt of £${debt}.
 
-What is the effect?`,
+Step 1: Identify accounting treatment.
+Step 2: Determine impact on profit.`,
             options,
-            correct: options.indexOf("Expense increases and receivables decrease")
+            correct: options.indexOf("Expense increases and profit decreases")
         };
     }
 
-    /* ---------------- CREDIT CONTROL PURPOSE ---------------- */
+    /* ---------------- MULTI-STEP 3: CREDIT TERMS → CASH FLOW TIMING ---------------- */
 
     if(type === 3){
 
-        const correct = "Reduce risk of late or non-payment";
+        const creditDays = rand(15,90);
+        const cashDelay =
+            creditDays > 60
+            ? "Severe cash flow delay"
+            : "Moderate cash delay";
 
         const options = shuffle([
-            correct,
-            "Increase sales automatically",
-            "Eliminate all debt",
-            "Remove accounting system"
+            cashDelay,
+            "Immediate cash inflow",
+            "No effect on liquidity",
+            "Profit increases instantly"
         ]);
 
         return {
             question:
-            `What is the purpose of credit control?`,
+            `${business} offers ${creditDays} days credit to customers.
+
+Step 1: Identify timing of cash inflow.
+Step 2: Assess liquidity impact.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(cashDelay)
         };
     }
 
-    /* ---------------- CREDIT RISK ---------------- */
+    /* ---------------- MULTI-STEP 4: CREDIT CONTROL DECISION ---------------- */
 
     if(type === 4){
 
-        const correct = "Customer's ability to pay on time";
+        const overdue = rand(1000,9000);
+
+        const decision =
+            overdue > 5000
+            ? "Tighten credit control and chase debts"
+            : "Maintain current credit policy";
 
         const options = shuffle([
-            correct,
-            "Business profit level",
-            "Tax rate",
-            "Stock level"
-        ]);
-
-        return {
-            question:
-            `What is credit risk?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- PAYMENT TERMS ---------------- */
-
-    if(type === 5){
-
-        const correct = "Shorter credit terms improve cash flow";
-
-        const options = shuffle([
-            correct,
-            "Longer credit improves cash flow",
-            "Credit has no effect on cash",
-            "Credit removes profit"
-        ]);
-
-        return {
-            question:
-            `What is the effect of shorter credit terms?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- RECEIVABLES COLLECTION ---------------- */
-
-    if(type === 6){
-
-        const correct = "Send reminders and chase overdue invoices";
-
-        const options = shuffle([
-            correct,
-            "Ignore customers",
-            "Delete invoices",
-            "Increase tax"
-        ]);
-
-        return {
-            question:
-            `What is a method of collecting receivables?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- CASH FLOW IMPACT ---------------- */
-
-    if(type === 7){
-
-        const correct = "Delayed cash inflow due to credit sales";
-
-        const options = shuffle([
-            correct,
-            "Immediate cash increase",
-            "Profit elimination",
-            "Tax reduction"
-        ]);
-
-        return {
-            question:
-            `What is the impact of credit sales on cash flow?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- BAD DEBT PREVENTION ---------------- */
-
-    if(type === 8){
-
-        const correct = "Assess customer creditworthiness before selling on credit";
-
-        const options = shuffle([
-            correct,
-            "Sell to anyone",
-            "Ignore payment history",
-            "Avoid invoices"
-        ]);
-
-        return {
-            question:
-            `How can bad debts be reduced?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
-
-    /* ---------------- OVERDUE ACCOUNTS ---------------- */
-
-    if(type === 9){
-
-        const overdue = rand(500,5000);
-
-        const options = shuffle([
-            "Increase risk of bad debts",
-            "Increase profit automatically",
-            "Increase tax",
-            "Reduce expenses"
+            decision,
+            "Stop issuing invoices",
+            "Ignore receivables",
+            "Increase tax rates"
         ]);
 
         return {
             question:
             `${business} has £${overdue} overdue receivables.
 
-What is the main risk?`,
+Step 1: Evaluate situation.
+Step 2: Recommend action.`,
             options,
-            correct: options.indexOf("Increase risk of bad debts")
+            correct: options.indexOf(decision)
         };
     }
 
-    /* ---------------- CREDIT LIMIT ---------------- */
+    /* ---------------- MULTI-STEP 5: CREDIT LIMIT + SALES STRATEGY ---------------- */
+
+    if(type === 5){
+
+        const limit = rand(1000,10000);
+        const request = rand(2000,12000);
+
+        const decision =
+            request > limit
+            ? "Reject or reduce credit sale"
+            : "Approve credit sale";
+
+        const options = shuffle([
+            decision,
+            "Always approve all sales",
+            "Ignore credit limits",
+            "Convert all sales to cash immediately"
+        ]);
+
+        return {
+            question:
+            `${business} sets a credit limit of £${limit}.
+Customer requests £${request} credit.
+
+Step 1: Compare request to limit.
+Step 2: Decide action.`,
+            options,
+            correct: options.indexOf(decision)
+        };
+    }
+
+    /* ---------------- MULTI-STEP 6: CASH IMPACT OF CREDIT SALES ---------------- */
+
+    if(type === 6){
+
+        const sales = rand(3000,15000);
+        const cash = rand(1000,6000);
+
+        const netCash = cash - (sales - cash);
+
+        const interpretation =
+            netCash < 0
+            ? "Negative cash flow due to credit sales"
+            : "Positive but delayed liquidity impact";
+
+        const options = shuffle([
+            interpretation,
+            "Cash increases immediately",
+            "Profit equals cash",
+            "No financial impact"
+        ]);
+
+        return {
+            question:
+            `${business} makes £${sales} sales, but only £${cash} is received in cash.
+
+Step 1: Determine cash flow effect.
+Step 2: Interpret liquidity position.`,
+            options,
+            correct: options.indexOf(interpretation)
+        };
+    }
+
+    /* ---------------- MULTI-STEP 7: COLLECTION STRATEGY ---------------- */
+
+    if(type === 7){
+
+        const overdue = rand(500,7000);
+
+        const action =
+            overdue > 3000
+            ? "Send reminders and escalate collection process"
+            : "Monitor account normally";
+
+        const options = shuffle([
+            action,
+            "Write off immediately",
+            "Ignore customer",
+            "Increase credit limit automatically"
+        ]);
+
+        return {
+            question:
+            `${business} has overdue debt of £${overdue}.
+
+Step 1: Assess severity.
+Step 2: Choose collection method.`,
+            options,
+            correct: options.indexOf(action)
+        };
+    }
+
+    /* ---------------- MULTI-STEP 8: CREDIT POLICY IMPACT ---------------- */
+
+    if(type === 8){
+
+        const policy = rand(1,2);
+
+        const result =
+            policy === 1
+            ? "Strict credit policy reduces risk but may reduce sales"
+            : "Lenient credit policy increases sales but raises risk";
+
+        const options = shuffle([
+            result,
+            "Credit policy has no effect",
+            "Profit is unaffected",
+            "Cash is immediate in all cases"
+        ]);
+
+        return {
+            question:
+            `Step 1: Evaluate impact of credit policy.
+Step 2: Identify business trade-off.`,
+            options,
+            correct: options.indexOf(result)
+        };
+    }
+
+    /* ---------------- FINAL MULTI-STEP EXAM SCENARIO ---------------- */
+
+    if(type === 9){
+
+        const sales = rand(5000,20000);
+        const paid = rand(1000,8000);
+        const overdue = sales - paid;
+
+        const conclusion =
+            overdue > 8000
+            ? "High credit risk, poor cash flow control"
+            : "Controlled credit environment with acceptable risk";
+
+        const options = shuffle([
+            conclusion,
+            "No receivables exist",
+            "Cash equals profit",
+            "Tax eliminates debt"
+        ]);
+
+        return {
+            question:
+            `${business} reports:
+Credit sales £${sales}
+Cash received £${paid}
+
+Step 1: Calculate receivables.
+Step 2: Evaluate credit health.`,
+            options,
+            correct: options.indexOf(conclusion)
+        };
+    }
+    /* ---------------- MULTI-STEP 10: AGEING ANALYSIS ---------------- */
 
     if(type === 10){
 
-        const correct = "Maximum amount a customer can owe";
+        const current = rand(1000,4000);
+        const over30 = rand(1000,5000);
+        const over60 = rand(1000,5000);
+
+        const highRisk =
+            over60 > current;
+
+        const answer =
+            highRisk
+            ? "Receivables collection requires urgent action"
+            : "Receivables position appears manageable";
 
         const options = shuffle([
-            correct,
-            "Minimum wage level",
-            "Tax threshold",
-            "Profit limit"
+            answer,
+            "All debts will be collected immediately",
+            "Cash flow is guaranteed",
+            "Credit control is unnecessary"
         ]);
 
         return {
             question:
-            `What is a credit limit?`,
+            `${business} receivables ageing report:
+
+Current: £${current}
+31–60 days: £${over30}
+Over 60 days: £${over60}
+
+Step 1: Review ageing profile.
+Step 2: Assess collection risk.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(answer)
         };
     }
 
-    /* ---------------- CASH VS CREDIT SALES ---------------- */
+    /* ---------------- MULTI-STEP 11: EARLY PAYMENT DISCOUNT ---------------- */
 
     if(type === 11){
 
-        const correct = "Cash sales improve liquidity faster than credit sales";
+        const invoice = rand(2000,10000);
+        const discount = rand(2,10);
+
+        const discountValue =
+            Math.round(invoice * discount / 100);
+
+        const answer =
+            "Improve cash collection speed";
 
         const options = shuffle([
-            correct,
-            "Credit sales improve liquidity faster",
-            "Both are identical always",
-            "Cash sales reduce revenue"
+            answer,
+            "Increase bad debts",
+            "Delay customer payments",
+            "Remove receivables completely"
         ]);
 
         return {
             question:
-            `What is the difference between cash and credit sales?`,
+            `${business} offers ${discount}% discount
+for early payment on an invoice of £${invoice}.
+
+Step 1: Calculate benefit offered (£${discountValue}).
+Step 2: Identify business objective.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(answer)
         };
     }
 
-    /* ---------------- RECEIVABLES CONTROL ---------------- */
+    /* ---------------- MULTI-STEP 12: CUSTOMER CREDIT ASSESSMENT ---------------- */
 
     if(type === 12){
 
-        const correct = "Monitor and manage outstanding customer balances";
+        const latePayments = rand(0,12);
+
+        const decision =
+            latePayments > 6
+            ? "Refuse or restrict credit"
+            : "Credit may be approved";
 
         const options = shuffle([
-            correct,
-            "Ignore invoices",
-            "Remove records",
-            "Increase expenses"
+            decision,
+            "Always grant unlimited credit",
+            "Ignore payment history",
+            "Increase credit automatically"
         ]);
 
         return {
             question:
-            `What is receivables control?`,
+            `A customer has made ${latePayments}
+late payments during the last year.
+
+Step 1: Assess creditworthiness.
+Step 2: Decide whether credit should be granted.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(decision)
         };
     }
 
-    /* ---------------- CREDIT POLICY ---------------- */
+    /* ---------------- MULTI-STEP 13: CASH COLLECTION PERFORMANCE ---------------- */
 
     if(type === 13){
 
-        const correct = "Rules for offering credit to customers";
+        const invoices = rand(10000,30000);
+        const collected = rand(5000,25000);
+
+        const rate =
+            Math.round(
+                collected / invoices * 100
+            );
+
+        const result =
+            rate >= 80
+            ? "Collection performance is strong"
+            : "Collection performance needs improvement";
 
         const options = shuffle([
-            correct,
-            "Rules for paying employees",
-            "Rules for taxation",
-            "Rules for stock control"
+            result,
+            "All debts have been written off",
+            "Cash flow is irrelevant",
+            "Credit sales should stop immediately"
         ]);
 
         return {
             question:
-            `What is a credit policy?`,
+            `${business} issued invoices of £${invoices}.
+Cash collected was £${collected}.
+
+Step 1: Assess collection rate.
+Step 2: Evaluate performance.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(result)
         };
     }
 
-    /* ---------------- CASH COLLECTION DELAY ---------------- */
+    /* ---------------- MULTI-STEP 14: DEBT RECOVERY DECISION ---------------- */
 
     if(type === 14){
 
-        const correct = "Cash inflow is delayed due to credit terms";
+        const overdue = rand(3000,12000);
+        const months = rand(3,12);
+
+        const action =
+            months > 6
+            ? "Escalate debt recovery procedures"
+            : "Continue standard collection process";
 
         const options = shuffle([
-            correct,
-            "Cash inflow increases instantly",
-            "Profit increases automatically",
-            "Expenses disappear"
+            action,
+            "Ignore overdue balance",
+            "Increase customer's credit limit",
+            "Issue refund"
         ]);
 
         return {
             question:
-            `What is the effect of allowing credit to customers?`,
+            `${business} is owed £${overdue}.
+The balance has been overdue for ${months} months.
+
+Step 1: Assess seriousness.
+Step 2: Select recovery action.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(action)
         };
     }
 
-    /* ---------------- FINAL EXAM STYLE ---------------- */
+    /* ---------------- MULTI-STEP 15: FULL EXAM SCENARIO ---------------- */
 
     if(type === 15){
 
-        const correct = "Effective credit control improves cash flow and reduces risk";
+        const sales = rand(10000,25000);
+        const collected = rand(4000,15000);
+
+        const receivables =
+            sales - collected;
+
+        const answer =
+            receivables > sales * 0.5
+            ? "Credit control performance is weak"
+            : "Credit control performance is acceptable";
 
         const options = shuffle([
-            correct,
-            "Credit control increases tax",
-            "Credit control removes revenue",
-            "Credit control eliminates accounting"
+            answer,
+            "No receivables exist",
+            "Profit equals cash collected",
+            "Bad debts cannot occur"
         ]);
 
         return {
             question:
-            `Why is credit control important?`,
+            `${business} reports:
+
+Credit sales: £${sales}
+Cash collected: £${collected}
+
+Step 1: Calculate outstanding receivables.
+Step 2: Evaluate overall credit control effectiveness.`,
             options,
-            correct: options.indexOf(correct)
+            correct: options.indexOf(answer)
         };
     }
-
-    throw new Error("L4-CH8 type not implemented: " + type);
+    throw new Error("L4-CH8 multi-step type not implemented: " + type);
 }
