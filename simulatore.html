@@ -957,7 +957,7 @@ function generateL4CH5(){
 
     function generateDynamicL2CH1(){
 
-    const type = rand(1,5);
+    const type = rand(1,20);
 
     const business = randomBusiness();
 
@@ -1088,7 +1088,77 @@ function generateL4CH5(){
         options.indexOf(correct)
 
     };
+if(type === 5){
 
+    const amount = rand(1000,10000);
+
+    const options = shuffle([
+        "Owner's capital",
+        "Sales revenue",
+        "Trade payable",
+        "Administrative expense"
+    ]);
+
+    return {
+        question:
+        `An owner introduces £${amount} of personal funds into the business bank account. Which account increases?`,
+        options,
+        correct: options.indexOf("Owner's capital")
+    };
+}
+
+if(type === 6){
+
+    const amount = rand(100,2500);
+
+    const options = shuffle([
+        "Drawings",
+        "Sales",
+        "Purchases",
+        "Capital"
+    ]);
+
+    return {
+        question:
+        `The owner withdraws £${amount} from the business for personal use. Which account should be debited?`,
+        options,
+        correct: options.indexOf("Drawings")
+    };
+}
+
+if(type === 7){
+
+    const options = shuffle([
+        "Asset",
+        "Liability",
+        "Expense",
+        "Income"
+    ]);
+
+    return {
+        question:
+        `A trade receivable balance is classified as which type of account?`,
+        options,
+        correct: options.indexOf("Asset")
+    };
+}
+
+if(type === 8){
+
+    const options = shuffle([
+        "Purchase invoice",
+        "Sales invoice",
+        "Credit note",
+        "Receipt"
+    ]);
+
+    return {
+        question:
+        `Which source document is normally received when inventory is purchased on credit from a supplier?`,
+        options,
+        correct: options.indexOf("Purchase invoice")
+    };
+}
 }
 /* ------------------------
    QUESTION GENERATOR
