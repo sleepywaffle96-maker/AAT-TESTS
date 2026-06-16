@@ -620,6 +620,302 @@ if(type === 5){
         options.indexOf("Error of omission")
     };
 }
+        if(type === 6){
+
+    const options = shuffle([
+        "Error of principle",
+        "Error of omission",
+        "Compensating error",
+        "Casting error"
+    ]);
+
+    return {
+        question:
+        `A van purchase was incorrectly recorded as a motor expense. What type of error is this?`,
+
+        options,
+
+        correct:
+        options.indexOf("Error of principle")
+    };
+}
+        if(type === 7){
+
+    const options = shuffle([
+        "A suspense account",
+        "A bank account",
+        "A control account",
+        "A VAT account"
+    ]);
+
+    return {
+        question:
+        `When the trial balance does not agree temporarily, which account may be used until the error is found?`,
+
+        options,
+
+        correct:
+        options.indexOf("A suspense account")
+    };
+}
+        if(type === 8){
+
+    const options = shuffle([
+        "Journal entry",
+        "Bank reconciliation",
+        "Petty cash voucher",
+        "Credit note"
+    ]);
+
+    return {
+        question:
+        `Which accounting record is normally used to correct bookkeeping errors?`,
+
+        options,
+
+        correct:
+        options.indexOf("Journal entry")
+    };
+}
+        if(type === 9){
+
+    const options = shuffle([
+        "A customer is also a supplier",
+        "Inventory is damaged",
+        "Cash is stolen",
+        "VAT is overdue"
+    ]);
+
+    return {
+        question:
+        `${business} owes £500 to a supplier who also owes £500 as a customer. When can a contra entry be used?`,
+
+        options,
+
+        correct:
+        options.indexOf("A customer is also a supplier")
+    };
+}
+        if(type === 10){
+
+    const options = shuffle([
+        "The arithmetic accuracy of ledger entries",
+        "Business profitability",
+        "Inventory valuation",
+        "Future cash flow"
+    ]);
+
+    return {
+        question:
+        `What is the main purpose of preparing a trial balance?`,
+
+        options,
+
+        correct:
+        options.indexOf("The arithmetic accuracy of ledger entries")
+    };
+}
+        if(type === 11){
+
+    const customer = randomPerson();
+
+    const options = shuffle([
+        "Irrecoverable debt",
+        "Accrual",
+        "Prepayment",
+        "Contra entry"
+    ]);
+
+    return {
+        question:
+        `${customer} owes the business £800 but has gone into liquidation and is unlikely to pay. How should this be classified?`,
+
+        options,
+
+        correct:
+        options.indexOf("Irrecoverable debt")
+    };
+}
+        if(type === 12){
+
+    const options = shuffle([
+        "To estimate future bad debts",
+        "To calculate VAT",
+        "To reconcile the bank account",
+        "To value inventory"
+    ]);
+
+    return {
+        question:
+        `Why is an allowance for doubtful debts maintained?`,
+
+        options,
+
+        correct:
+        options.indexOf("To estimate future bad debts")
+    };
+}
+        if(type === 13){
+
+    const options = shuffle([
+        "Small routine business expenses",
+        "Supplier payments over £10,000",
+        "Corporation tax payments",
+        "Customer refunds only"
+    ]);
+
+    return {
+        question:
+        `What is petty cash primarily used for?`,
+
+        options,
+
+        correct:
+        options.indexOf("Small routine business expenses")
+    };
+}
+        if(type === 14){
+
+    const fund = rand(100,500);
+
+    const options = shuffle([
+        "Maintain a fixed petty cash balance",
+        "Calculate depreciation",
+        "Reconcile VAT",
+        "Record payroll"
+    ]);
+
+    return {
+        question:
+        `A petty cash float is maintained at £${fund}. What is the purpose of the imprest system?`,
+
+        options,
+
+        correct:
+        options.indexOf("Maintain a fixed petty cash balance")
+    };
+}
+        if(type === 15){
+
+    const options = shuffle([
+        "Compensating error",
+        "Error of omission",
+        "Error of principle",
+        "Casting error"
+    ]);
+
+    return {
+        question:
+        `Two independent errors cancel each other out, causing the trial balance to still agree. What type of error is this?`,
+
+        options,
+
+        correct:
+        options.indexOf("Compensating error")
+    };
+}
+        if(type === 16){
+
+    const cashbook = rand(5000,15000);
+    const diff = rand(100,900);
+    const bank = cashbook + diff;
+
+    const options = shuffle([
+        "Outstanding lodgement",
+        "Error of principle",
+        "Contra entry",
+        "Petty cash shortage"
+    ]);
+
+    return {
+        question:
+        `The cash book shows £${cashbook} but the bank statement shows £${bank}. A deposit was made just before the month end but has not yet appeared on the bank statement. What explains the difference?`,
+
+        options,
+
+        correct:
+        options.indexOf("Outstanding lodgement")
+    };
+}
+        if(type === 17){
+
+    const options = shuffle([
+        "Total receivables balance",
+        "Total payables balance",
+        "Bank balance",
+        "VAT liability"
+    ]);
+
+    return {
+        question:
+        `What should the balance on a sales ledger control account normally represent?`,
+
+        options,
+
+        correct:
+        options.indexOf("Total receivables balance")
+    };
+}
+        if(type === 18){
+
+    const options = shuffle([
+        "Total payables balance",
+        "Total receivables balance",
+        "Cash sales",
+        "Petty cash expenditure"
+    ]);
+
+    return {
+        question:
+        `What should the balance on a purchase ledger control account normally represent?`,
+
+        options,
+
+        correct:
+        options.indexOf("Total payables balance")
+    };
+}
+        if(type === 19){
+
+    const diff = rand(50,500);
+
+    const options = shuffle([
+        "Open a suspense account for £" + diff,
+        "Ignore the difference",
+        "Adjust the bank account",
+        "Write off the difference"
+    ]);
+
+    return {
+        question:
+        `The trial balance totals differ by £${diff} and the error cannot immediately be found. What is the appropriate temporary action?`,
+
+        options,
+
+        correct:
+        options.indexOf("Open a suspense account for £" + diff)
+    };
+}
+        if(type === 20){
+
+    const options = shuffle([
+        "A journal entry",
+        "A bank reconciliation",
+        "A petty cash voucher",
+        "A statement of account"
+    ]);
+
+    return {
+        question:
+        `An accountant discovers that rent expense was posted to the repairs account. Which document is normally used to correct the error?`,
+
+        options,
+
+        correct:
+        options.indexOf("A journal entry")
+    };
+}
+        throw new Error("L2-CH2 type not implemented: " + type);
 }
     function generateL2CH3(){
 
