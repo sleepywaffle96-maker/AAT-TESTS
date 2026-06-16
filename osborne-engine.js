@@ -67,436 +67,373 @@ function randomBusiness(){
 
 function generateL2CH1(){
 
-```
-const type = rand(1,15);
-const business = randomBusiness();
+    const type = rand(1,15);
+    const business = randomBusiness();
 
-/* ---------------- CAPITAL INTRODUCED ---------------- */
+    if(type === 1){
 
-if(type === 1){
+        const amount = rand(2000,15000);
 
-    const amount = rand(2000,15000);
+        const correct =
+            "Assets increase and capital increases";
 
-    const correct =
-        "Assets increase and capital increases";
+        const options = shuffle([
+            correct,
+            "Assets decrease and capital increases",
+            "Liabilities increase only",
+            "Expenses increase"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "Assets decrease and capital increases",
-        "Liabilities increase only",
-        "Expenses increase"
-    ]);
-
-    return {
-        question:
-        `${business} owner introduces £${amount} into the business bank account.
-```
+        return {
+            question:
+            `${business} owner introduces ${currency(amount)} into the business bank account.
 
 What is the effect on the accounting equation?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- DRAWINGS ---------------- */
+    if(type === 2){
 
-if(type === 2){
+        const amount = rand(100,2000);
 
-    const amount = rand(100,2000);
+        const correct =
+            "Assets decrease and owner's equity decreases";
 
-    const correct =
-        "Assets decrease and drawings increase";
+        const options = shuffle([
+            correct,
+            "Assets increase and income increases",
+            "Liabilities increase",
+            "Expenses decrease"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "Assets increase and capital increases",
-        "Income increases",
-        "Liabilities increase"
-    ]);
-
-    return {
-        question:
-        `The owner withdraws £${amount} from the business bank account for personal use.
-```
-
-What is the effect?`,
-options,
-correct: options.indexOf(correct)
-};
-}
-
-```
-/* ---------------- CASH SALE ---------------- */
-
-if(type === 3){
-
-    const amount = rand(200,5000);
-
-    const correct =
-        "Cash increases and income increases";
-
-    const options = shuffle([
-        correct,
-        "Cash decreases and income increases",
-        "Liabilities increase",
-        "Expenses increase"
-    ]);
-
-    return {
-        question:
-        `${business} makes a cash sale of £${amount}.
-```
-
-What happens in the accounting records?`,
-options,
-correct: options.indexOf(correct)
-};
-}
-
-```
-/* ---------------- CASH PURCHASE ---------------- */
-
-if(type === 4){
-
-    const amount = rand(100,3000);
-
-    const correct =
-        "Cash decreases and expenses increase";
-
-    const options = shuffle([
-        correct,
-        "Cash increases and expenses increase",
-        "Income increases",
-        "Capital increases"
-    ]);
-
-    return {
-        question:
-        `${business} purchases office supplies for cash costing £${amount}.
-```
-
-What happens in the accounts?`,
-options,
-correct: options.indexOf(correct)
-};
-}
-
-```
-/* ---------------- EQUIPMENT PURCHASE ---------------- */
-
-if(type === 5){
-
-    const amount = rand(1000,12000);
-
-    const correct =
-        "One asset increases and another asset decreases";
-
-    const options = shuffle([
-        correct,
-        "Income increases",
-        "Capital increases",
-        "Expenses increase immediately"
-    ]);
-
-    return {
-        question:
-        `${business} buys equipment for £${amount} using money from the business bank account.
-```
+        return {
+            question:
+            `The owner withdraws ${currency(amount)} from the business bank account for personal use.
 
 Which statement is correct?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- CAPITAL CALCULATION ---------------- */
+    if(type === 3){
 
-if(type === 6){
+        const amount = rand(300,5000);
 
-    const assets = rand(8000,25000);
-    const liabilities = rand(1000,7000);
+        const correct =
+            "Cash increases and sales income increases";
 
-    const capital =
-        assets - liabilities;
+        const options = shuffle([
+            correct,
+            "Cash decreases and sales increase",
+            "Liabilities increase",
+            "Expenses increase"
+        ]);
 
-    const options = shuffle([
-        capital,
-        capital + 1000,
-        capital - 1000,
-        capital + 2000
-    ]);
+        return {
+            question:
+            `${business} makes a cash sale of ${currency(amount)}.
 
-    return {
-        question:
-        `Assets = ${currency(assets)}
-```
+What is the effect on the records?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
+    if(type === 4){
+
+        const amount = rand(100,2500);
+
+        const correct =
+            "Cash decreases and expenses increase";
+
+        const options = shuffle([
+            correct,
+            "Cash increases and expenses increase",
+            "Income increases",
+            "Capital increases"
+        ]);
+
+        return {
+            question:
+            `${business} purchases office supplies for cash costing ${currency(amount)}.
+
+What happens in the accounts?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 5){
+
+        const amount = rand(2000,12000);
+
+        const correct =
+            "Equipment increases and cash decreases";
+
+        const options = shuffle([
+            correct,
+            "Income increases",
+            "Expenses increase immediately",
+            "Liabilities increase"
+        ]);
+
+        return {
+            question:
+            `${business} purchases equipment costing ${currency(amount)} using the business bank account.
+
+What is the immediate effect?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
+
+    if(type === 6){
+
+        const assets = rand(12000,30000);
+        const liabilities = rand(2000,8000);
+
+        const capital =
+            assets - liabilities;
+
+        const options = shuffle([
+            capital,
+            capital + 1000,
+            capital - 1000,
+            capital + 2000
+        ]);
+
+        return {
+            question:
+            `Assets = ${currency(assets)}
 Liabilities = ${currency(liabilities)}
 
 Calculate capital.`,
-options: options.map(v => currency(v)),
-correct: options.indexOf(capital)
-};
-}
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(capital)
+        };
+    }
 
-```
-/* ---------------- ASSETS CALCULATION ---------------- */
+    if(type === 7){
 
-if(type === 7){
+        const capital = rand(5000,18000);
+        const liabilities = rand(1000,7000);
 
-    const capital = rand(5000,15000);
-    const liabilities = rand(1000,6000);
+        const assets =
+            capital + liabilities;
 
-    const assets =
-        capital + liabilities;
+        const options = shuffle([
+            assets,
+            assets + 1000,
+            assets - 1000,
+            assets + 1500
+        ]);
 
-    const options = shuffle([
-        assets,
-        assets + 1000,
-        assets - 1000,
-        assets + 1500
-    ]);
-
-    return {
-        question:
-        `Capital = ${currency(capital)}
-```
-
+        return {
+            question:
+            `Capital = ${currency(capital)}
 Liabilities = ${currency(liabilities)}
 
 Calculate total assets.`,
-options: options.map(v => currency(v)),
-correct: options.indexOf(assets)
-};
-}
+            options: options.map(v => currency(v)),
+            correct: options.indexOf(assets)
+        };
+    }
 
-```
-/* ---------------- ACCOUNTING EQUATION EFFECT ---------------- */
+    if(type === 8){
 
-if(type === 8){
+        const correct =
+            "Assets increase and liabilities increase";
 
-    const correct =
-        "Assets increase and liabilities increase";
+        const options = shuffle([
+            correct,
+            "Assets decrease and income increases",
+            "Capital decreases",
+            "Expenses decrease"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "Assets decrease and income increases",
-        "Capital decreases",
-        "Expenses decrease"
-    ]);
+        return {
+            question:
+            `${business} purchases inventory on credit from a supplier.
 
-    return {
-        question:
-        `${business} purchases inventory on credit from a supplier.
-```
+What is the immediate effect on the accounting equation?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-What is the immediate effect?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+    if(type === 9){
 
-```
-/* ---------------- ASSET CLASSIFICATION ---------------- */
+        const correct =
+            "Asset";
 
-if(type === 9){
+        const options = shuffle([
+            correct,
+            "Liability",
+            "Income",
+            "Expense"
+        ]);
 
-    const correct = "Asset";
-
-    const options = shuffle([
-        correct,
-        "Liability",
-        "Income",
-        "Expense"
-    ]);
-
-    return {
-        question:
-        `${business} purchases a delivery van.
-```
+        return {
+            question:
+            `${business} buys a delivery van for business use.
 
 How should the van be classified?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- LIABILITY CLASSIFICATION ---------------- */
+    if(type === 10){
 
-if(type === 10){
+        const correct =
+            "Liability";
 
-    const correct = "Liability";
+        const options = shuffle([
+            correct,
+            "Asset",
+            "Income",
+            "Expense"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "Asset",
-        "Income",
-        "Expense"
-    ]);
-
-    return {
-        question:
-        `${business} owes money to a supplier for goods purchased on credit.
-```
+        return {
+            question:
+            `${business} owes a supplier money for goods purchased on credit.
 
 How should this balance be classified?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- MULTI-STEP START-UP ---------------- */
+    if(type === 11){
 
-if(type === 11){
+        const capital = rand(8000,15000);
+        const equipment = rand(1000,5000);
 
-    const capital = rand(8000,15000);
-    const equipment = rand(1000,4000);
+        const correct =
+            "Total assets remain greater than zero";
 
-    const correct =
-        "Assets remain higher than liabilities";
+        const options = shuffle([
+            correct,
+            "All assets disappear",
+            "Capital becomes zero",
+            "Liabilities automatically increase"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "No assets remain",
-        "Capital becomes zero",
-        "Liabilities increase automatically"
-    ]);
-
-    return {
-        question:
-        `${business} starts trading.
-```
+        return {
+            question:
+            `${business} starts trading.
 
 Step 1:
-Owner introduces £${capital}.
+The owner introduces ${currency(capital)}.
 
 Step 2:
-Equipment costing £${equipment} is purchased using business cash.
+Equipment costing ${currency(equipment)} is purchased using business cash.
 
 Which statement is correct?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- MULTI-STEP TRADING ---------------- */
+    if(type === 12){
 
-if(type === 12){
+        const sales = rand(1000,5000);
+        const expenses = rand(200,1500);
 
-    const sale = rand(1000,4000);
-    const expense = rand(200,1000);
+        const correct =
+            "Income exceeds expenses";
 
-    const correct =
-        "Income exceeds expenses";
+        const options = shuffle([
+            correct,
+            "Expenses exceed income",
+            "Assets become zero",
+            "Liabilities must increase"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "Expenses exceed income",
-        "Assets become zero",
-        "Liabilities must increase"
-    ]);
-
-    return {
-        question:
-        `${business} makes cash sales of £${sale} and pays expenses of £${expense}.
-```
+        return {
+            question:
+            `${business} makes cash sales of ${currency(sales)} and pays expenses of ${currency(expenses)}.
 
 Which statement is correct?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- MULTI-STEP ACCOUNTING EQUATION ---------------- */
+    if(type === 13){
 
-if(type === 13){
+        const capital = rand(5000,12000);
+        const drawings = rand(500,2000);
 
-    const capital = rand(5000,12000);
-    const drawings = rand(200,1500);
+        const correct =
+            "Owner's equity decreases";
 
-    const correct =
-        "Owner's interest in the business decreases";
+        const options = shuffle([
+            correct,
+            "Income increases",
+            "Liabilities increase",
+            "Sales increase"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "Business income increases",
-        "Liabilities increase",
-        "Expenses increase automatically"
-    ]);
-
-    return {
-        question:
-        `The owner introduces £${capital} and later withdraws £${drawings} for personal use.
-```
+        return {
+            question:
+            `A business owner introduces ${currency(capital)} and later withdraws ${currency(drawings)} for personal use.
 
 What is the overall effect?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-/* ---------------- PURPOSE OF BOOKKEEPING ---------------- */
+    if(type === 14){
 
-if(type === 14){
+        const correct =
+            "To record business transactions accurately";
 
-    const correct =
-        "To record business transactions accurately";
+        const options = shuffle([
+            correct,
+            "To increase profits automatically",
+            "To remove liabilities",
+            "To reduce taxes automatically"
+        ]);
 
-    const options = shuffle([
-        correct,
-        "To increase profit automatically",
-        "To reduce liabilities",
-        "To remove taxes"
-    ]);
+        return {
+            question:
+            `${business} wants reliable financial records.
 
-    return {
-        question:
-        `${business} wants reliable financial records.
-```
+What is the primary purpose of bookkeeping?`,
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-What is the main purpose of bookkeeping?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+    if(type === 15){
 
-```
-/* ---------------- BUSINESS ENTITY CONCEPT ---------------- */
+        const correct =
+            "The business and owner are treated separately";
 
-if(type === 15){
+        const options = shuffle([
+            correct,
+            "Personal expenses belong in business records",
+            "The owner and business are the same accounting entity",
+            "Only companies apply bookkeeping rules"
+        ]);
 
-    const correct =
-        "The business and owner are treated separately";
-
-    const options = shuffle([
-        correct,
-        "The owner and business are the same entity",
-        "Personal expenses belong in business records",
-        "Only companies apply bookkeeping rules"
-    ]);
-
-    return {
-        question:
-        `The owner pays for a family holiday using a personal bank account.
-```
+        return {
+            question:
+            `The owner pays for a personal holiday using a personal bank account.
 
 How should this be treated under the business entity concept?`,
-options,
-correct: options.indexOf(correct)
-};
-}
+            options,
+            correct: options.indexOf(correct)
+        };
+    }
 
-```
-throw new Error("L2-CH1 type not implemented: " + type);
-```
-
+    throw new Error("L2-CH1 type not implemented: " + type);
 }
 
 function generateL2CH2(){
