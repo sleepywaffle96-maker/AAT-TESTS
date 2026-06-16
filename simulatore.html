@@ -1067,27 +1067,6 @@ function generateL4CH5(){
 
     }
 
-    const correct =
-        "Owner's capital";
-
-    const options = shuffle([
-        correct,
-        "Sales revenue",
-        "Trade payable",
-        "Administrative expense"
-    ]);
-
-    return {
-
-        question:
-        `${business} owner invests personal funds into the business. Which account increases?`,
-
-        options,
-
-        correct:
-        options.indexOf(correct)
-
-    };
 if(type === 5){
 
     const amount = rand(1000,10000);
