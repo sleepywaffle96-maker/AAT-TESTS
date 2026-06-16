@@ -512,6 +512,115 @@ function generateL2CH2(){
         correct:
         options.indexOf(correct)
     };
+    }
+    function generateDynamicL2CH2(){
+
+    const type = rand(1,20);
+
+    const business = randomBusiness();
+        if(type === 1){
+
+    const cashbook = rand(5000,15000);
+    const bank = cashbook - rand(50,500);
+
+    const options = shuffle([
+        "Outstanding cheque",
+        "Duplicate payment",
+        "Fraud",
+        "Inventory error"
+    ]);
+
+    return {
+        question:
+        `The cash book shows £${cashbook} but the bank statement shows £${bank}. What is the most likely reason for the difference?`,
+
+        options,
+
+        correct:
+        options.indexOf("Outstanding cheque")
+    };
+}
+
+if(type === 2){
+
+    const options = shuffle([
+        "To identify differences between cash book and bank statement",
+        "To calculate VAT",
+        "To value inventory",
+        "To prepare payroll"
+    ]);
+
+    return {
+        question:
+        `What is the main purpose of a bank reconciliation?`,
+
+        options,
+
+        correct:
+        options.indexOf("To identify differences between cash book and bank statement")
+    };
+}
+
+if(type === 3){
+
+    const options = shuffle([
+        "Sales ledger control account",
+        "Inventory account",
+        "Cash account",
+        "Capital account"
+    ]);
+
+    return {
+        question:
+        `Which account is used to check the accuracy of individual customer balances?`,
+
+        options,
+
+        correct:
+        options.indexOf("Sales ledger control account")
+    };
+}
+
+if(type === 4){
+
+    const options = shuffle([
+        "Purchase ledger control account",
+        "Bank account",
+        "Cash account",
+        "Drawings account"
+    ]);
+
+    return {
+        question:
+        `Which control account helps verify supplier balances?`,
+
+        options,
+
+        correct:
+        options.indexOf("Purchase ledger control account")
+    };
+}
+
+if(type === 5){
+
+    const options = shuffle([
+        "Error of omission",
+        "Error of principle",
+        "Compensating error",
+        "Casting error"
+    ]);
+
+    return {
+        question:
+        `A transaction was completely left out of the accounting records. What type of error is this?`,
+
+        options,
+
+        correct:
+        options.indexOf("Error of omission")
+    };
+}
+}
 }
     function generateL2CH3(){
 
@@ -1364,7 +1473,7 @@ function buildQuestionPool(){
     return {
 
         "L2-CH1": generateDynamicL2CH1,
-        "L2-CH2": generateL2CH2,
+        "L2-CH2": generateDynamicL2CH2,
         "L2-CH3": generateL2CH3,
         "L2-CH4": generateL2CH4,
         "L2-CH5": generateL2CH5,
