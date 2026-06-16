@@ -434,7 +434,22 @@ function currency(v){
     return "£" +
     Number(v).toFixed(2);
 }
+function pick(arr){
+    return arr[rand(0, arr.length - 1)];
+}
 
+function randomBusiness(){
+    return pick([
+        "Green Ltd",
+        "Alpha Traders",
+        "Blue Services",
+        "North Supplies",
+        "Delta Retail",
+        "Prime Solutions",
+        "Oak Enterprises",
+        "River Trading"
+    ]);
+}
 /* ------------------------
    LEVEL 2 QUESTION BANK
 ------------------------ */
@@ -940,6 +955,141 @@ function generateL4CH5(){
     };
 }
 
+    function generateDynamicL2CH1(){
+
+    const type = rand(1,5);
+
+    const business = randomBusiness();
+
+    if(type === 1){
+
+        const amount = rand(100,5000);
+
+        const correct =
+            `£${amount.toFixed(2)}`;
+
+        const options = shuffle([
+            correct,
+            `£${(amount+100).toFixed(2)}`,
+            `£${(amount-50).toFixed(2)}`,
+            `£${(amount+250).toFixed(2)}`
+        ]);
+
+        return {
+
+            question:
+            `${business} completed a cash sale of £${amount}. What value should be recorded in the sales account?`,
+
+            options,
+
+            correct:
+            options.indexOf(correct)
+
+        };
+
+    }
+
+    if(type === 2){
+
+        const correct =
+            "Recording financial transactions";
+
+        const options = shuffle([
+            correct,
+            "Preparing audit reports",
+            "Calculating corporation tax",
+            "Managing payroll only"
+        ]);
+
+        return {
+
+            question:
+            `What is the primary purpose of bookkeeping?`,
+
+            options,
+
+            correct:
+            options.indexOf(correct)
+
+        };
+
+    }
+
+    if(type === 3){
+
+        const correct =
+            "Assets";
+
+        const options = shuffle([
+            correct,
+            "Liabilities",
+            "Expenses",
+            "Revenue"
+        ]);
+
+        return {
+
+            question:
+            `${business} purchased equipment. Which accounting category does the equipment belong to?`,
+
+            options,
+
+            correct:
+            options.indexOf(correct)
+
+        };
+
+    }
+
+    if(type === 4){
+
+        const correct =
+            "Double-entry bookkeeping";
+
+        const options = shuffle([
+            correct,
+            "Single-entry bookkeeping",
+            "Cash accounting",
+            "Inventory valuation"
+        ]);
+
+        return {
+
+            question:
+            `A transaction affects two accounts. Which bookkeeping principle is being applied?`,
+
+            options,
+
+            correct:
+            options.indexOf(correct)
+
+        };
+
+    }
+
+    const correct =
+        "Owner's capital";
+
+    const options = shuffle([
+        correct,
+        "Sales revenue",
+        "Trade payable",
+        "Administrative expense"
+    ]);
+
+    return {
+
+        question:
+        `${business} owner invests personal funds into the business. Which account increases?`,
+
+        options,
+
+        correct:
+        options.indexOf(correct)
+
+    };
+
+}
 /* ------------------------
    QUESTION GENERATOR
 ------------------------ */
@@ -948,7 +1098,7 @@ function buildQuestionPool(){
 
     return {
 
-        "L2-CH1": generateL2CH1,
+        "L2-CH1": generateDynamicL2CH1,
         "L2-CH2": generateL2CH2,
         "L2-CH3": generateL2CH3,
         "L2-CH4": generateL2CH4,
@@ -964,9 +1114,9 @@ function buildQuestionPool(){
         "L4-CH3": generateL4CH3,
         "L4-CH4": generateL4CH4,
         "L4-CH5": generateL4CH5,
-        "L4-CH6": generateL4CH6,
-        "L4-CH7": generateL4CH7,
-        "L4-CH8": generateL4CH8
+        "L4-CH6": generateL4CH3,
+        "L4-CH7": generateL4CH4,
+        "L4-CH8": generateL4CH5
     };
 }
 
