@@ -1159,6 +1159,222 @@ if(type === 8){
         correct: options.indexOf("Purchase invoice")
     };
 }
+        if(type === 9){
+
+    const amount = rand(500,5000);
+
+    const options = shuffle([
+        "Assets increase and capital increases",
+        "Assets decrease and liabilities increase",
+        "Expenses increase and assets increase",
+        "Income decreases and capital decreases"
+    ]);
+
+    return {
+        question:
+        `${business} receives £${amount} cash as capital introduced by the owner. What is the effect on the accounting equation?`,
+        options,
+        correct: options.indexOf("Assets increase and capital increases")
+    };
+}
+        if(type === 10){
+
+    const options = shuffle([
+        "Liability",
+        "Asset",
+        "Income",
+        "Expense"
+    ]);
+
+    return {
+        question:
+        `A trade payable balance should be classified as which type of account?`,
+        options,
+        correct: options.indexOf("Liability")
+    };
+}
+        if(type === 11){
+
+    const options = shuffle([
+        "To record financial transactions accurately",
+        "To increase sales revenue",
+        "To reduce taxation automatically",
+        "To eliminate liabilities"
+    ]);
+
+    return {
+        question:
+        `What is the primary purpose of bookkeeping within a business?`,
+        options,
+        correct: options.indexOf("To record financial transactions accurately")
+    };
+}
+        if(type === 12){
+
+    const options = shuffle([
+        "Receipt",
+        "Credit note",
+        "Purchase invoice",
+        "Statement of account"
+    ]);
+
+    return {
+        question:
+        `${business} purchases office supplies and immediately pays in cash. Which source document is most likely to be issued?`,
+        options,
+        correct: options.indexOf("Receipt")
+    };
+}
+        if(type === 12){
+
+    const options = shuffle([
+        "Receipt",
+        "Credit note",
+        "Purchase invoice",
+        "Statement of account"
+    ]);
+
+    return {
+        question:
+        `${business} purchases office supplies and immediately pays in cash. Which source document is most likely to be issued?`,
+        options,
+        correct: options.indexOf("Receipt")
+    };
+}
+        if(type === 14){
+
+    const amount = rand(200,4000);
+
+    const options = shuffle([
+        "Sales revenue",
+        "Owner's capital",
+        "Trade payable",
+        "Administrative expense"
+    ]);
+
+    return {
+        question:
+        `${business} sells goods to a customer for £${amount}. Which account is credited?`,
+        options,
+        correct: options.indexOf("Sales revenue")
+    };
+}
+        if(type === 15){
+
+    const options = shuffle([
+        "Every transaction affects at least two accounts",
+        "Every transaction affects only one account",
+        "Assets and liabilities are always equal to zero",
+        "Only cash transactions are recorded"
+    ]);
+
+    return {
+        question:
+        `Which statement best describes the principle of double-entry bookkeeping?`,
+        options,
+        correct: options.indexOf("Every transaction affects at least two accounts")
+    };
+}
+        if(type === 16){
+
+    const options = shuffle([
+        "The business and owner are treated separately",
+        "The owner and business are the same accounting entity",
+        "Only limited companies keep records",
+        "Personal transactions must be included in sales"
+    ]);
+
+    return {
+        question:
+        `${business} owner pays a personal holiday expense from a personal bank account. How should this be treated in the business records?`,
+        options,
+        correct: options.indexOf("The business and owner are treated separately")
+    };
+}
+        if(type === 16){
+
+    const options = shuffle([
+        "The business and owner are treated separately",
+        "The owner and business are the same accounting entity",
+        "Only limited companies keep records",
+        "Personal transactions must be included in sales"
+    ]);
+
+    return {
+        question:
+        `${business} owner pays a personal holiday expense from a personal bank account. How should this be treated in the business records?`,
+        options,
+        correct: options.indexOf("The business and owner are treated separately")
+    };
+}
+        if(type === 18){
+
+    const amount = rand(100,3000);
+
+    const options = shuffle([
+        "Bank asset increases",
+        "Trade payable increases",
+        "Sales revenue decreases",
+        "Capital decreases"
+    ]);
+
+    return {
+        question:
+        `${business} receives £${amount} from a customer directly into the business bank account. What is the immediate effect?`,
+        options,
+        correct: options.indexOf("Bank asset increases")
+    };
+}
+        if(type === 18){
+
+    const amount = rand(100,3000);
+
+    const options = shuffle([
+        "Bank asset increases",
+        "Trade payable increases",
+        "Sales revenue decreases",
+        "Capital decreases"
+    ]);
+
+    return {
+        question:
+        `${business} receives £${amount} from a customer directly into the business bank account. What is the immediate effect?`,
+        options,
+        correct: options.indexOf("Bank asset increases")
+    };
+}
+        if(type === 19){
+
+    const options = shuffle([
+        "To organise transactions into individual accounts",
+        "To calculate tax automatically",
+        "To replace source documents",
+        "To eliminate bookkeeping errors"
+    ]);
+
+    return {
+        question:
+        `What is the main purpose of a ledger within a bookkeeping system?`,
+        options,
+        correct: options.indexOf("To organise transactions into individual accounts")
+    };
+}
+        if(type === 20){
+
+    const options = shuffle([
+        "To provide reliable financial information",
+        "To increase profits automatically",
+        "To guarantee business growth",
+        "To remove all business risks"
+    ]);
+
+    return {
+        question:
+        `Why is it important for a business to maintain accurate accounting records?`,
+        options,
+        correct: options.indexOf("To provide reliable financial information")
+    };
+}
 }
 /* ------------------------
    QUESTION GENERATOR
