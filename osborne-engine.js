@@ -452,8 +452,8 @@ What is the primary purpose of bookkeeping?`,
         "SI" + rand(1000,9999),
 
         customer:
-        "Alpha Traders",
-
+randomBusiness(),
+        
         quantity,
 
         unitPrice,
