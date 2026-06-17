@@ -468,9 +468,19 @@ function createExamQuestions(){
 
     else if(chapter && !chapter.includes("random")){
 
-        generators = [
-            safeGetGenerator(pool, chapter)
-        ];
+        const generator =
+            safeGetGenerator(pool, chapter);
+
+        const questions = [];
+
+        for(let type=1; type<=15; type++){
+
+            questions.push(
+                generator(type)
+            );
+        }
+
+        return shuffle(questions);
     }
 
     else if(level){
@@ -482,7 +492,9 @@ function createExamQuestions(){
     }
 
     if(generators.length === 0){
-        throw new Error("No question generators available for selection");
+        throw new Error(
+            "No question generators available for selection"
+        );
     }
 
     const questions = [];
@@ -491,10 +503,12 @@ function createExamQuestions(){
 
         const generator =
             generators[
-                rand(0, generators.length - 1)
+                rand(0,generators.length-1)
             ];
 
-        questions.push(generator());
+        questions.push(
+            generator()
+        );
     }
 
     return questions;
