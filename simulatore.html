@@ -1176,6 +1176,79 @@ else if(q.taskType === "invoice"){
 
 function checkAnswer(){
 
+    const q =
+    questions[currentQuestion];
+
+    if(q.taskType === "invoice"){
+
+        const net =
+        Number(
+            document.getElementById(
+                "net-answer"
+            ).value
+        );
+
+        const vat =
+        Number(
+            document.getElementById(
+                "vat-answer"
+            ).value
+        );
+
+        const gross =
+        Number(
+            document.getElementById(
+                "gross-answer"
+            ).value
+        );
+
+        const checks = [
+
+            {
+                user: net,
+                correct: q.answers.net,
+                marker: "net-marker"
+            },
+
+            {
+                user: vat,
+                correct: q.answers.vat,
+                marker: "vat-marker"
+            },
+
+            {
+                user: gross,
+                correct: q.answers.gross,
+                marker: "gross-marker"
+            }
+        ];
+
+        checks.forEach(item=>{
+
+            const marker =
+            document.getElementById(
+                item.marker
+            );
+
+            const ok =
+            Math.abs(
+                item.user -
+                item.correct
+            ) < 0.01;
+
+            marker.textContent =
+            ok ? "✔" : "✖";
+
+            marker.style.color =
+            ok ? "#16A34A" : "#DC2626";
+
+            marker.style.fontWeight =
+            "700";
+        });
+
+        return;
+    }
+
     const selected =
 
     document.querySelector(
@@ -1190,8 +1263,7 @@ function checkAnswer(){
     Number(selected.value);
 
     const correct =
-    questions[currentQuestion]
-    .correct;
+    q.correct;
 
     const marker =
 
@@ -1205,7 +1277,7 @@ function checkAnswer(){
 
     ? "✔"
 
-    : "❌";
+    : "✖";
 
     marker.style.color =
 
@@ -1215,7 +1287,6 @@ function checkAnswer(){
 
     : "#DC2626";
 }
-
 function showSolution(){
 
     const correct =
