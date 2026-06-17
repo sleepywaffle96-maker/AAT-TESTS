@@ -32,19 +32,24 @@ function pick(arr){
     return arr[(0, arr.length - 1)];
 }
 
-function RandomBusiness(){
-    return pick([
-        "Green Ltd",
-        "Alpha Traders",
-        "Blue Services",
-        "North Supplies",
-        "Delta Retail",
-        "Prime Solutions",
-        "Oak Enterprises",
-        "River Trading"
-    ]);
+function randomBusiness(){
+
+    const businesses = [
+        "GreenTech Ltd",
+        "BlueWave Services",
+        "Northstar Trading",
+        "Prime Retail Ltd",
+        "Summit Solutions",
+        "Oakwood Supplies",
+        "Pioneer Manufacturing",
+        "Vertex Consulting"
+    ];
+
+    return businesses[
+        rand(0, businesses.length - 1)
+    ];
 }
-    function RandomPerson(){
+   function RandomPerson(){
 
     const names = [
         "James Smith",
@@ -59,7 +64,9 @@ function RandomBusiness(){
         "Amelia Green"
     ];
 
-    return names[(0, names.length - 1)];
+    return names[
+        rand(0, names.length - 1)
+    ];
 }
 /* ------------------------
    LEVEL 2 QUESTION BANK
