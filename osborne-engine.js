@@ -423,25 +423,26 @@ What is the primary purpose of bookkeeping?`,
 
     if(type === 15){
 
-        const correct =
-            "The business and owner are treated separately";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Personal expenses belong in business records",
-            "The owner and business are the same accounting entity",
-            "Only companies apply bookkeeping rules"
-        ]);
+        taskType:"invoice",
 
-        return {
-            question:
-            `The owner pays for a personal holiday using a personal bank account.
+        question:"Complete the sales invoice.",
 
-How should this be treated under the business entity concept?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        invoiceNumber:"SI1001",
+
+        customer:"Green Ltd",
+
+        netAmount:400,
+
+        vatRate:20,
+
+        answers:{
+            vat:80,
+            gross:480
+        }
+    };
+}
 
     throw new Error("L2-CH1 type not implemented: " + type);
 }
@@ -6507,24 +6508,4 @@ Step 2: Evaluate overall credit control effectiveness.`,
         };
     }
     throw new Error("L4-CH8 multi-step type not implemented: " + type);
-}
-function generateInvoiceDemo(){
-
-    return {
-
-        taskType:"invoice",
-
-        invoiceNumber:"SI1001",
-
-        customer:"Green Ltd",
-
-        netAmount:400,
-
-        vatRate:20,
-
-        answers:{
-            vat:80,
-            gross:480
-        }
-    };
 }
