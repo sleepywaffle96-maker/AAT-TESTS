@@ -32,7 +32,7 @@ function pick(arr){
     return arr[(0, arr.length - 1)];
 }
 
-function omBusiness(){
+function RandomBusiness(){
     return pick([
         "Green Ltd",
         "Alpha Traders",
@@ -44,7 +44,7 @@ function omBusiness(){
         "River Trading"
     ]);
 }
-    function omPerson(){
+    function RandomPerson(){
 
     const names = [
         "James Smith",
