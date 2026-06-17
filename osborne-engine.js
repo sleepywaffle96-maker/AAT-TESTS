@@ -421,29 +421,47 @@ What is the primary purpose of bookkeeping?`,
         };
     }
 
-    if(type === 15){
+   if(type === 15){
+
+    const quantity =
+        rand(5,20);
+
+    const unitPrice =
+        rand(20,80);
+
+    const netAmount =
+        quantity * unitPrice;
+
+    const vat =
+        +(netAmount * 0.20).toFixed(2);
+
+    const gross =
+        +(netAmount + vat).toFixed(2);
 
     return {
 
         taskType:"invoice",
 
-        question:"Complete the sales invoice.",
+        question:
+        "Green Ltd sold goods to Alpha Traders. Complete the sales invoice below.",
 
         invoiceNumber:"SI1001",
 
-        customer:"Green Ltd",
+        customer:"Alpha Traders",
 
-        netAmount:400,
+        quantity,
+
+        unitPrice,
 
         vatRate:20,
 
         answers:{
-            vat:80,
-            gross:480
+            net:netAmount,
+            vat,
+            gross
         }
     };
 }
-
     throw new Error("L2-CH1 type not implemented: " + type);
 }
 
