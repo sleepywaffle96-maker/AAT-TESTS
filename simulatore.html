@@ -1147,7 +1147,7 @@ else if(q.taskType === "deliveryInvoice"){
         '<tr>' +
         '<td><strong>Net Amount</strong></td>' +
         '<td>' +
-        '<input id="net-answer" type="number">' +
+        '<input id="net-answer" type="text">' +
         '<span class="feedback-marker" id="net-marker"></span>' +
         '</td>' +
         '</tr>' +
@@ -1155,7 +1155,7 @@ else if(q.taskType === "deliveryInvoice"){
         '<tr>' +
         '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
         '<td>' +
-        '<input id="vat-answer" type="number">' +
+        '<input id="vat-answer" type="text">' +
         '<span class="feedback-marker" id="vat-marker"></span>' +
         '</td>' +
         '</tr>' +
@@ -1163,7 +1163,7 @@ else if(q.taskType === "deliveryInvoice"){
         '<tr>' +
         '<td><strong>Gross Total</strong></td>' +
         '<td>' +
-        '<input id="gross-answer" type="number">' +
+        '<input id="gross-answer" type="text">' +
         '<span class="feedback-marker" id="gross-marker"></span>' +
         '</td>' +
         '</tr>' +
@@ -1300,26 +1300,35 @@ if(
 
     console.log("INVOICE MODE");
 
-        const net =
-        Number(
-            document.getElementById(
-                "net-answer"
-            ).value
-        );
+        const netText =
+document.getElementById(
+    "net-answer"
+).value.trim();
 
-        const vat =
-        Number(
-            document.getElementById(
-                "vat-answer"
-            ).value
-        );
+const vatText =
+document.getElementById(
+    "vat-answer"
+).value.trim();
 
-        const gross =
-        Number(
-            document.getElementById(
-                "gross-answer"
-            ).value
-        );
+const grossText =
+document.getElementById(
+    "gross-answer"
+).value.trim();
+
+if(
+    netText.includes(",") ||
+    vatText.includes(",") ||
+    grossText.includes(",")
+){
+    alert(
+        "Use a decimal point (.) not a comma (,)."
+    );
+    return;
+}
+
+const net = Number(netText);
+const vat = Number(vatText);
+const gross = Number(grossText);
 
         const checks = [
 
