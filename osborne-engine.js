@@ -202,30 +202,64 @@ What is the immediate effect?`,
 
     if(type === 6){
 
-        const assets = rand(12000,30000);
-        const liabilities = rand(2000,8000);
+    const opening =
+    rand(1000,5000);
 
-        const capital =
-            assets - liabilities;
+    const sales =
+    rand(500,3000);
 
-        const options = shuffle([
-            capital,
-            capital + 1000,
-            capital - 1000,
-            capital + 2000
-        ]);
+    const receipts =
+    rand(300,2000);
 
-        return {
-            question:
-            `Assets = ${currency(assets)}
-Liabilities = ${currency(liabilities)}
+    const creditNotes =
+    rand(100,800);
 
-Calculate capital.`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(capital)
-        };
-    }
+    const balance =
 
+    opening +
+    sales -
+    receipts -
+    creditNotes;
+
+    return {
+
+        taskType:"ledger",
+
+        question:
+
+        "Complete the Sales Ledger Control Account and calculate the balance carried down.",
+
+        accountName:
+
+        "Sales Ledger Control Account",
+
+        rows:[
+
+            {
+                description:"Balance b/d",
+                debit:opening.toFixed(2)
+            },
+
+            {
+                description:"Credit Sales",
+                debit:sales.toFixed(2)
+            },
+
+            {
+                description:"Cash Received",
+                credit:receipts.toFixed(2)
+            },
+
+            {
+                description:"Credit Notes Issued",
+                credit:creditNotes.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(balance.toFixed(2))
+    };
+}
     if(type === 7){
 
         const capital = rand(5000,18000);
