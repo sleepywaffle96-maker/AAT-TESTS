@@ -1062,6 +1062,29 @@ else if(q.taskType === "invoice"){
 }
 else if(q.taskType === "deliveryInvoice"){
 
+    let itemRows = "";
+
+    q.items.forEach(item=>{
+
+        itemRows +=
+
+        '<tr>' +
+
+        '<td>' +
+        item.description +
+        '</td>' +
+
+        '<td>' +
+        item.qty +
+        '</td>' +
+
+        '<td>£' +
+        item.price.toFixed(2) +
+        '</td>' +
+
+        '</tr>';
+    });
+
     optionsHTML =
 
     '<div class="invoice-box">' +
@@ -1080,15 +1103,19 @@ else if(q.taskType === "deliveryInvoice"){
         '<td>' + q.customer + '</td>' +
         '</tr>' +
 
-        '<tr>' +
-        '<td><strong>Quantity</strong></td>' +
-        '<td>' + q.quantity + '</td>' +
-        '</tr>' +
+        '</table>' +
+
+        '<br>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
 
         '<tr>' +
-        '<td><strong>Unit Price</strong></td>' +
-        '<td>£' + q.unitPrice.toFixed(2) + '</td>' +
+        '<th>Description</th>' +
+        '<th>Qty</th>' +
+        '<th>Unit Price</th>' +
         '</tr>' +
+
+        itemRows +
 
         '</table>' +
 
