@@ -1293,10 +1293,32 @@ if(q.taskType === "invoice"){
 }
 function showSolution(){
 
+    const q =
+    questions[currentQuestion];
+
+    if(q.taskType === "invoice"){
+
+        document.getElementById(
+            "net-answer"
+        ).value =
+        q.answers.net;
+
+        document.getElementById(
+            "vat-answer"
+        ).value =
+        q.answers.vat;
+
+        document.getElementById(
+            "gross-answer"
+        ).value =
+        q.answers.gross;
+
+        return;
+    }
+
     const correct =
 
-    questions[currentQuestion]
-    .correct;
+    q.correct;
 
     const rows =
 
@@ -1304,13 +1326,48 @@ function showSolution(){
         ".option-row"
     );
 
-    rows[correct]
-    .classList.add(
-        "reveal-correct"
-    );
+    if(rows[correct]){
+
+        rows[correct]
+        .classList.add(
+            "reveal-correct"
+        );
+    }
 }
 
 function resetQuestion(){
+
+    const q =
+    questions[currentQuestion];
+
+    if(q.taskType === "invoice"){
+
+        document.getElementById(
+            "net-answer"
+        ).value = "";
+
+        document.getElementById(
+            "vat-answer"
+        ).value = "";
+
+        document.getElementById(
+            "gross-answer"
+        ).value = "";
+
+        document.getElementById(
+            "net-marker"
+        ).textContent = "";
+
+        document.getElementById(
+            "vat-marker"
+        ).textContent = "";
+
+        document.getElementById(
+            "gross-marker"
+        ).textContent = "";
+
+        return;
+    }
 
     document
 
