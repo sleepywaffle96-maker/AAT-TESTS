@@ -426,26 +426,42 @@ What is the primary purpose of bookkeeping?`,
     const customer =
     randomBusiness();
 
-    const items = [
+    const catalogue = [
 
-        {
-            description:"Office Chairs",
-            qty:rand(5,20),
-            price:rand(30,80)
-        },
+    "Office Chairs",
+    "Office Desks",
+    "Computer Monitors",
+    "Printer Paper",
+    "Stationery Packs",
+    "Filing Cabinets",
+    "Desk Lamps",
+    "Keyboards",
+    "Mouse Devices",
+    "Storage Boxes"
+];
 
-        {
-            description:"Printer Paper",
-            qty:rand(10,50),
-            price:rand(2,10)
-        },
+shuffle(catalogue);
 
-        {
-            description:"Stationery Packs",
-            qty:rand(5,25),
-            price:rand(5,20)
-        }
-    ];
+const items = [
+
+    {
+        description:catalogue[0],
+        qty:rand(5,50),
+        price:rand(5,250)
+    },
+
+    {
+        description:catalogue[1],
+        qty:rand(5,50),
+        price:rand(5,250)
+    },
+
+    {
+        description:catalogue[2],
+        qty:rand(5,50),
+        price:rand(5,250)
+    }
+];
 
     const net =
     items.reduce(
