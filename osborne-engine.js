@@ -29,10 +29,10 @@ function currency(v){
     Number(v).toFixed(2);
 }
 function pick(arr){
-    return arr[rand(0, arr.length - 1)];
+    return arr[(0, arr.length - 1)];
 }
 
-function randomBusiness(){
+function omBusiness(){
     return pick([
         "Green Ltd",
         "Alpha Traders",
@@ -44,7 +44,7 @@ function randomBusiness(){
         "River Trading"
     ]);
 }
-    function randomPerson(){
+    function omPerson(){
 
     const names = [
         "James Smith",
@@ -59,15 +59,18 @@ function randomBusiness(){
         "Amelia Green"
     ];
 
-    return names[rand(0, names.length - 1)];
+    return names[(0, names.length - 1)];
 }
 /* ------------------------
    LEVEL 2 QUESTION BANK
 ------------------------ */
 
-function generateL2CH1(){
+function generateL2CH1(type = null){
 
-    const type = rand(1,15);
+    if(type === null){
+        type = rand(1,15);
+    }
+
     const business = randomBusiness();
 
     if(type === 1){
@@ -436,9 +439,10 @@ How should this be treated under the business entity concept?`,
     throw new Error("L2-CH1 type not implemented: " + type);
 }
 
-function generateL2CH2(){
-
-    const type = rand(1,15);
+function generateL2CH2(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- CONTROL ACCOUNTS + PRACTICAL ---------------- */
@@ -783,9 +787,10 @@ What is the correct closing balance?`,
 
     throw new Error("L2-CH2 type not implemented: " + type);
 }
-function generateL2CH3(){
-
-    const type = rand(1,15);
+function generateL2CH3(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- UNIT COSTING BASIC ---------------- */
@@ -1072,9 +1077,10 @@ What is selling price?`,
 
     throw new Error("L2-CH3 type not implemented: " + type);
 }
-function generateL2CH4(){
-
-    const type = rand(1,15);
+function generateL2CH4(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- BUSINESS DECISIONS ---------------- */
@@ -1380,9 +1386,10 @@ function generateL2CH4(){
 
     throw new Error("L2-CH4 type not implemented: " + type);
 }
-function generateL2CH5(){
-
-    const type = rand(1,15);
+function generateL2CH5(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- SCENARIO 1: BUSINESS GROWTH ---------------- */
@@ -1734,9 +1741,10 @@ What is the best overall response?`,
    LEVEL 3 QUESTION BANK
 ------------------------ */
 
-function generateL3CH1(){
-
-    const type = rand(1,15);
+function generateL3CH1(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- BASIC ACCOUNTING UNDERSTANDING ---------------- */
@@ -2089,9 +2097,10 @@ What is net profit?`,
     throw new Error("L3-CH1 type not implemented: " + type);
 }
 
-function generateL3CH2(){
-
-    const type = rand(1,15);
+function generateL3CH2(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- DOUBLE ENTRY BASICS ---------------- */
@@ -2428,9 +2437,10 @@ What is profit?`,
 
     throw new Error("L3-CH2 type not implemented: " + type);
 }
-    function generateL3CH3(){
-
-    const type = rand(1,15);
+    function generateL3CH3(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- COST TYPES ---------------- */
@@ -2799,9 +2809,10 @@ What is profit?`,
     throw new Error("L3-CH3 type not implemented: " + type);
 }
 
-function generateL3CH4(){
-
-    const type = rand(1,15);
+function generateL3CH4(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- VAT BASICS ---------------- */
@@ -3481,9 +3492,10 @@ What is the total cost?`,
 
     throw new Error("L3-CH4 type not implemented: " + type);
 }
-function generateL4CH1(){
-
-    const type = rand(1,15);
+function generateL4CH1(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     if(type === 1){
@@ -3909,9 +3921,10 @@ Step 2: Recommend the stronger option.`,
 
     throw new Error("L4-CH1 type not implemented: " + type);
 }
-function generateL4CH2(){
-
-    const type = rand(1,15);
+function generateL4CH2(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- GROSS PROFIT ---------------- */
@@ -4287,9 +4300,11 @@ What is gross profit?`,
     }
 
     throw new Error("L4-CH2 type not implemented: " + type);
-}function generateL4CH3(){
-
-    const type = rand(1,15);
+}
+function generateL4CH3(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- INTERNAL CONTROL PURPOSE ---------------- */
@@ -4614,9 +4629,10 @@ What is the most likely control weakness?`,
     throw new Error("L4-CH3 type not implemented: " + type);
 }
 
-function generateL4CH4(){
-
-    const type = rand(1,15);
+function generateL4CH4(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- TAXABLE PROFIT ---------------- */
@@ -4974,9 +4990,10 @@ What is taxable profit?`,
 
     throw new Error("L4-CH4 type not implemented: " + type);
 }
-function generateL4CH5(){
-
-    const type = rand(1,15);
+function generateL4CH5(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- GROSS TO NET PAY ---------------- */
@@ -5342,9 +5359,10 @@ What is net pay?`,
 
     throw new Error("L4-CH5 type not implemented: " + type);
 }
-function generateL4CH6(){
-
-    const type = rand(1,15);
+function generateL4CH6(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- PURPOSE OF AUDIT ---------------- */
@@ -5666,9 +5684,10 @@ What is the main risk?`,
 
     throw new Error("L4-CH6 type not implemented: " + type);
 }
-function generateL4CH7(){
-
-    const type = rand(1,15);
+function generateL4CH7(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- CASH POSITION ---------------- */
@@ -6006,9 +6025,10 @@ What is net cash flow?`,
 
     throw new Error("L4-CH7 type not implemented: " + type);
 }
-function generateL4CH8(){
-
-    const type = rand(1,15);
+function generateL4CH8(type = null){
+    if(type === null){
+        type = rand(1,15);
+    }
     const business = randomBusiness();
 
     /* ---------------- MULTI-STEP 1: CREDIT SALES → RECEIVABLES → RISK ---------------- */
