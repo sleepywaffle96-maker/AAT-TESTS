@@ -82,52 +82,160 @@ function generateL2CH1(type = null){
 
     if(type === 1){
 
-        const amount = rand(2000,15000);
+    const customer =
+    randomBusiness();
 
-        const correct =
-            "Assets increase and capital increases";
+    const catalogue = [
 
-        const options = shuffle([
-            correct,
-            "Assets decrease and capital increases",
-            "Liabilities increase only",
-            "Expenses increase"
-        ]);
+        "Office Chairs",
+        "Office Desks",
+        "Computer Monitors",
+        "Printer Paper",
+        "Stationery Packs",
+        "Desk Lamps",
+        "Keyboards",
+        "Storage Boxes"
+    ];
 
-        return {
-            question:
-            `${business} owner introduces ${currency(amount)} into the business bank account.
+    shuffle(catalogue);
 
-What is the effect on the accounting equation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const items = [
 
+        {
+            description:catalogue[0],
+            qty:rand(5,30),
+            price:rand(10,250)
+        },
+
+        {
+            description:catalogue[1],
+            qty:rand(5,30),
+            price:rand(10,250)
+        },
+
+        {
+            description:catalogue[2],
+            qty:rand(5,30),
+            price:rand(10,250)
+        }
+    ];
+
+    const net =
+
+    items.reduce(
+        (t,i)=>t+(i.qty*i.price),
+        0
+    );
+
+    const vat =
+    +(net * 0.20).toFixed(2);
+
+    const gross =
+    +(net + vat).toFixed(2);
+
+    return {
+
+        taskType:"invoice",
+
+        question:
+
+        "Prepare the sales invoice using the information below.",
+
+        invoiceNumber:
+
+        "SI" + rand(1000,9999),
+
+        customer,
+
+        items,
+
+        vatRate:20,
+
+        answers:{
+            net,
+            vat,
+            gross
+        }
+    };
+}
     if(type === 2){
 
-        const amount = rand(100,2000);
+    const supplier =
+    randomBusiness();
 
-        const correct =
-            "Assets decrease and owner's equity decreases";
+    const catalogue = [
 
-        const options = shuffle([
-            correct,
-            "Assets increase and income increases",
-            "Liabilities increase",
-            "Expenses decrease"
-        ]);
+        "Office Chairs",
+        "Office Desks",
+        "Computer Monitors",
+        "Printer Paper",
+        "Stationery Packs",
+        "Desk Lamps",
+        "Keyboards",
+        "Storage Boxes"
+    ];
 
-        return {
-            question:
-            `The owner withdraws ${currency(amount)} from the business bank account for personal use.
+    shuffle(catalogue);
 
-Which statement is correct?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const items = [
 
+        {
+            description:catalogue[0],
+            qty:rand(5,30),
+            price:rand(10,250)
+        },
+
+        {
+            description:catalogue[1],
+            qty:rand(5,30),
+            price:rand(10,250)
+        },
+
+        {
+            description:catalogue[2],
+            qty:rand(5,30),
+            price:rand(10,250)
+        }
+    ];
+
+    const net =
+
+    items.reduce(
+        (t,i)=>t+(i.qty*i.price),
+        0
+    );
+
+    const vat =
+    +(net * 0.20).toFixed(2);
+
+    const gross =
+    +(net + vat).toFixed(2);
+
+    return {
+
+        taskType:"purchaseInvoice",
+
+        question:
+
+        "Prepare the purchase invoice using the information below.",
+
+        invoiceNumber:
+
+        "PI" + rand(1000,9999),
+
+        supplier,
+
+        items,
+
+        vatRate:20,
+
+        answers:{
+            net,
+            vat,
+            gross
+        }
+    };
+}
     if(type === 3){
 
     const customer =
