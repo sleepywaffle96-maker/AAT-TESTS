@@ -475,13 +475,14 @@ function createExamQuestions(){
 
         for(let type=1; type<=15; type++){
 
-            questions.push(
-                generator(type)
-            );
-        }
+    questions.push(
+        generator(type)
+    );
+}
 
-        return shuffle(questions);
-    }
+console.log(questions);
+
+return shuffle(questions);
 
     else if(level){
 
