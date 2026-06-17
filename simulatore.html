@@ -962,8 +962,8 @@ let currentQuestion = 0;
 
 function renderQuestion(){
 
-   const q =
-generateInvoiceDemo();
+  const q =
+questions[currentQuestion];
     if(!q.taskType){
     q.taskType = "mcq";
 }
