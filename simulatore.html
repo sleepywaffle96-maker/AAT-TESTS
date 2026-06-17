@@ -1023,19 +1023,38 @@ else if(q.taskType === "invoice"){
         '</tr>' +
 
         '<tr>' +
-        '<td><strong>Net Amount</strong></td>' +
-        '<td>£' + q.netAmount.toFixed(2) + '</td>' +
-        '</tr>' +
+'<td><strong>Quantity</strong></td>' +
+'<td>' + q.quantity + '</td>' +
+'</tr>' +
 
-        '<tr>' +
-        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
-        '<td><input id="vat-answer" type="number"></td>' +
-        '</tr>' +
+'<tr>' +
+'<td><strong>Unit Price</strong></td>' +
+'<td>£' + q.unitPrice.toFixed(2) + '</td>' +
+'</tr>' +
 
-        '<tr>' +
-        '<td><strong>Gross Total</strong></td>' +
-        '<td><input id="gross-answer" type="number"></td>' +
-        '</tr>' +
+'<tr>' +
+'<td><strong>Net Amount</strong></td>' +
+'<td>' +
+'<input id="net-answer" type="number">' +
+'<span class="feedback-marker" id="net-marker"></span>' +
+'</td>' +
+'</tr>' +
+
+'<tr>' +
+'<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+'<td>' +
+'<input id="vat-answer" type="number">' +
+'<span class="feedback-marker" id="vat-marker"></span>' +
+'</td>' +
+'</tr>' +
+
+'<tr>' +
+'<td><strong>Gross Total</strong></td>' +
+'<td>' +
+'<input id="gross-answer" type="number">' +
+'<span class="feedback-marker" id="gross-marker"></span>' +
+'</td>' +
+'</tr>' +
 
         '</table>' +
 
