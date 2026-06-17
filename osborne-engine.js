@@ -130,27 +130,51 @@ Which statement is correct?`,
 
     if(type === 3){
 
-        const amount = rand(300,5000);
+    const customer =
+    randomBusiness();
 
-        const correct =
-            "Cash increases and sales income increases";
+    const quantity =
+    rand(1,10);
 
-        const options = shuffle([
-            correct,
-            "Cash decreases and sales increase",
-            "Liabilities increase",
-            "Expenses increase"
-        ]);
+    const unitPrice =
+    rand(20,150);
 
-        return {
-            question:
-            `${business} makes a cash sale of ${currency(amount)}.
+    const net =
+    quantity * unitPrice;
 
-What is the effect on the records?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const vat =
+    +(net * 0.20).toFixed(2);
+
+    const gross =
+    +(net + vat).toFixed(2);
+
+    return {
+
+        taskType:"creditNote",
+
+        question:
+
+        "The customer has returned goods. Complete the credit note.",
+
+        creditNoteNumber:
+
+        "CN" + rand(1000,9999),
+
+        customer,
+
+        quantity,
+
+        unitPrice,
+
+        vatRate:20,
+
+        answers:{
+            net,
+            vat,
+            gross
+        }
+    };
+}
 
     if(type === 4){
 
@@ -224,27 +248,73 @@ What is the effect on the records?`,
 
     if(type === 5){
 
-        const amount = rand(2000,12000);
+    const opening =
+    rand(500,3000);
 
-        const correct =
-            "Equipment increases and cash decreases";
+    const invoice1 =
+    rand(200,1500);
 
-        const options = shuffle([
-            correct,
-            "Income increases",
-            "Expenses increase immediately",
-            "Liabilities increase"
-        ]);
+    const invoice2 =
+    rand(200,1500);
 
-        return {
-            question:
-            `${business} purchases equipment costing ${currency(amount)} using the business bank account.
+    const payment =
+    rand(200,1200);
 
-What is the immediate effect?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const creditNote =
+    rand(100,500);
+
+    const balance =
+
+    opening +
+    invoice1 +
+    invoice2 -
+    payment -
+    creditNote;
+
+    return {
+
+        taskType:"statement",
+
+        question:
+
+        "A supplier has sent the following statement. Calculate the closing balance payable.",
+
+        statementTitle:
+
+        "SUPPLIER STATEMENT",
+
+        rows:[
+
+            {
+                description:"Opening Balance",
+                amount:opening.toFixed(2)
+            },
+
+            {
+                description:"Purchase Invoice",
+                amount:invoice1.toFixed(2)
+            },
+
+            {
+                description:"Purchase Invoice",
+                amount:invoice2.toFixed(2)
+            },
+
+            {
+                description:"Payment Made",
+                amount:"-" + payment.toFixed(2)
+            },
+
+            {
+                description:"Credit Note Received",
+                amount:"-" + creditNote.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(balance.toFixed(2))
+    };
+}
 
     if(type === 6){
 
@@ -368,47 +438,94 @@ What is the immediate effect?`,
 }
     if(type === 8){
 
-        const correct =
-            "Assets increase and liabilities increase";
+    const a1 = rand(100,800);
+    const a2 = rand(100,800);
+    const a3 = rand(100,800);
 
-        const options = shuffle([
-            correct,
-            "Assets decrease and income increases",
-            "Capital decreases",
-            "Expenses decrease"
-        ]);
+    return {
 
-        return {
-            question:
-            `${business} purchases inventory on credit from a supplier.
+        taskType:"journal",
 
-What is the immediate effect on the accounting equation?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
 
+        "Calculate the total cash receipts recorded in the journal.",
+
+        journalTitle:
+
+        "CASH RECEIPTS JOURNAL",
+
+        rows:[
+
+            {
+                date:"03 Apr",
+                name:randomBusiness(),
+                amount:a1.toFixed(2)
+            },
+
+            {
+                date:"05 Apr",
+                name:randomBusiness(),
+                amount:a2.toFixed(2)
+            },
+
+            {
+                date:"07 Apr",
+                name:randomBusiness(),
+                amount:a3.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(
+            (a1+a2+a3).toFixed(2)
+        )
+    };
+}
     if(type === 9){
 
-        const correct =
-            "Asset";
+    const a1 = rand(100,800);
+    const a2 = rand(100,800);
+    const a3 = rand(100,800);
 
-        const options = shuffle([
-            correct,
-            "Liability",
-            "Income",
-            "Expense"
-        ]);
+    return {
 
-        return {
-            question:
-            `${business} buys a delivery van for business use.
+        taskType:"journal",
 
-How should the van be classified?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
+
+        "Calculate the total cash payments recorded in the journal.",
+
+        journalTitle:
+
+        "CASH PAYMENTS JOURNAL",
+
+        rows:[
+
+            {
+                date:"03 Apr",
+                name:randomBusiness(),
+                amount:a1.toFixed(2)
+            },
+
+            {
+                date:"06 Apr",
+                name:randomBusiness(),
+                amount:a2.toFixed(2)
+            },
+
+            {
+                date:"09 Apr",
+                name:randomBusiness(),
+                amount:a3.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(
+            (a1+a2+a3).toFixed(2)
+        )
+    };
+}
 
     if(type === 10){
 
