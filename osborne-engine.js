@@ -423,40 +423,58 @@ What is the primary purpose of bookkeeping?`,
 
    if(type === 15){
 
-    const quantity =
-        rand(5,20);
+    const customer =
+    randomBusiness();
 
-    const unitPrice =
-        rand(20,80);
+    const items = [
+
+        {
+            description:"Office Chairs",
+            qty:rand(5,20),
+            price:rand(30,80)
+        },
+
+        {
+            description:"Printer Paper",
+            qty:rand(10,50),
+            price:rand(2,10)
+        },
+
+        {
+            description:"Stationery Packs",
+            qty:rand(5,25),
+            price:rand(5,20)
+        }
+    ];
 
     const net =
-        quantity * unitPrice;
+    items.reduce(
+        (t,i)=>t+(i.qty*i.price),
+        0
+    );
 
     const vat =
-        +(net * 0.20).toFixed(2);
+    +(net*0.20).toFixed(2);
 
     const gross =
-        +(net + vat).toFixed(2);
+    +(net+vat).toFixed(2);
 
     return {
 
         taskType:"deliveryInvoice",
 
         question:
-        "Use the delivery note below to complete the sales invoice.",
+        "Use the delivery note to complete the sales invoice.",
 
         deliveryNumber:
-        "DN" + rand(1000,9999),
+        "DN"+rand(1000,9999),
 
         invoiceNumber:
-        "SI" + rand(1000,9999),
+        "SI"+rand(1000,9999),
 
-        customer:
-randomBusiness(),
-        
-        quantity,
+        customer,
 
-        unitPrice,
+        items,
 
         vatRate:20,
 
