@@ -1445,6 +1445,156 @@ else if(q.taskType === "statement"){
     '</div>';
 }
 
+else if(q.taskType === "creditNote"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>CREDIT NOTE</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+        '<td><strong>Credit Note No</strong></td>' +
+        '<td>' + q.creditNoteNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Goods Returned</strong></td>' +
+        '<td>' + q.quantity + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Unit Price</strong></td>' +
+        '<td>£' + q.unitPrice.toFixed(2) + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Net Value</strong></td>' +
+
+        '<td>' +
+
+        '<input id="net-answer" type="text">' +
+
+        '<span class="feedback-marker" id="net-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '<tr>' +
+
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+
+        '<td>' +
+
+        '<input id="vat-answer" type="text">' +
+
+        '<span class="feedback-marker" id="vat-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '<tr>' +
+
+        '<td><strong>Total Credit</strong></td>' +
+
+        '<td>' +
+
+        '<input id="gross-answer" type="text">' +
+
+        '<span class="feedback-marker" id="gross-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "journal"){
+
+    let rows = "";
+
+    q.rows.forEach(row=>{
+
+        rows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.date +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.name +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        row.amount +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>' +
+        q.journalTitle +
+        '</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Date</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Details</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Amount (£)</th>' +
+
+        '</tr>' +
+
+        rows +
+
+        '<tr>' +
+
+        '<td colspan="2" style="border:1px solid #000;padding:6px;"><strong>Total</strong></td>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+
+        '<input id="journal-answer" type="text">' +
+
+        '<span class="feedback-marker" id="journal-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
     document
     .getElementById(
         "quiz-root"
@@ -1567,7 +1717,8 @@ console.log("CHECK", q);
 
 if(
     q.taskType === "invoice" ||
-    q.taskType === "deliveryInvoice"
+    q.taskType === "deliveryInvoice" ||
+    q.taskType === "creditNote"
 ){
 
     console.log("INVOICE MODE");
@@ -1718,6 +1869,41 @@ if(q.taskType === "statement"){
     return;
 }
 
+if(q.taskType === "journal"){
+
+    const value =
+
+    Number(
+        document
+        .getElementById(
+            "journal-answer"
+        )
+        .value
+    );
+
+    const marker =
+
+    document.getElementById(
+        "journal-marker"
+    );
+
+    const ok =
+
+    Math.abs(
+        value - q.answer
+    ) < 0.01;
+
+    marker.textContent =
+
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     const selected =
 
     document.querySelector(
@@ -1763,7 +1949,8 @@ function showSolution(){
 
     if(
     q.taskType === "invoice" ||
-    q.taskType === "deliveryInvoice"
+    q.taskType === "deliveryInvoice" ||
+    q.taskType === "creditNote"
 ){
 
         document.getElementById(
@@ -1808,6 +1995,18 @@ function showSolution(){
     return;
 }
 
+if(q.taskType === "journal"){
+
+    document
+    .getElementById(
+        "journal-answer"
+    )
+    .value =
+    q.answer.toFixed(2);
+
+    return;
+}
+
     const correct =
 
     q.correct;
@@ -1834,9 +2033,9 @@ function resetQuestion(){
 
     if(
     q.taskType === "invoice" ||
-    q.taskType === "deliveryInvoice"
+    q.taskType === "deliveryInvoice" ||
+    q.taskType === "creditNote"
 ){
-
         document.getElementById(
             "net-answer"
         ).value = "";
@@ -1891,6 +2090,23 @@ if(q.taskType === "statement"){
     document
     .getElementById(
         "statement-marker"
+    )
+    .textContent = "";
+
+    return;
+}
+
+if(q.taskType === "journal"){
+
+    document
+    .getElementById(
+        "journal-answer"
+    )
+    .value = "";
+
+    document
+    .getElementById(
+        "journal-marker"
     )
     .textContent = "";
 
