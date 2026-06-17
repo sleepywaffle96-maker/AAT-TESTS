@@ -1176,10 +1176,14 @@ else if(q.taskType === "invoice"){
 
 function checkAnswer(){
 
-    const q =
-    questions[currentQuestion];
+  const q =
+questions[currentQuestion];
 
-    if(q.taskType === "invoice"){
+console.log("CHECK", q);
+
+if(q.taskType === "invoice"){
+
+    console.log("INVOICE MODE");
 
         const net =
         Number(
