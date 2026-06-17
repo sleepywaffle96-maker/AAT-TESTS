@@ -1060,6 +1060,77 @@ else if(q.taskType === "invoice"){
 
     '</div>';
 }
+else if(q.taskType === "deliveryInvoice"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Delivery Note</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Delivery No</strong></td>' +
+        '<td>' + q.deliveryNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Quantity</strong></td>' +
+        '<td>' + q.quantity + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Unit Price</strong></td>' +
+        '<td>£' + q.unitPrice.toFixed(2) + '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<h3>Sales Invoice</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Invoice No</strong></td>' +
+        '<td>' + q.invoiceNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Net Amount</strong></td>' +
+        '<td>' +
+        '<input id="net-answer" type="number">' +
+        '<span class="feedback-marker" id="net-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+        '<td>' +
+        '<input id="vat-answer" type="number">' +
+        '<span class="feedback-marker" id="vat-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Gross Total</strong></td>' +
+        '<td>' +
+        '<input id="gross-answer" type="number">' +
+        '<span class="feedback-marker" id="gross-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
 
     document
     .getElementById(
@@ -1181,7 +1252,10 @@ questions[currentQuestion];
 
 console.log("CHECK", q);
 
-if(q.taskType === "invoice"){
+if(
+    q.taskType === "invoice" ||
+    q.taskType === "deliveryInvoice"
+){
 
     console.log("INVOICE MODE");
 
@@ -1296,7 +1370,10 @@ function showSolution(){
     const q =
     questions[currentQuestion];
 
-    if(q.taskType === "invoice"){
+    if(
+    q.taskType === "invoice" ||
+    q.taskType === "deliveryInvoice"
+){
 
         document.getElementById(
             "net-answer"
@@ -1340,7 +1417,10 @@ function resetQuestion(){
     const q =
     questions[currentQuestion];
 
-    if(q.taskType === "invoice"){
+    if(
+    q.taskType === "invoice" ||
+    q.taskType === "deliveryInvoice"
+){
 
         document.getElementById(
             "net-answer"
