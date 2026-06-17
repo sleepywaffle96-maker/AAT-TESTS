@@ -6508,3 +6508,23 @@ Step 2: Evaluate overall credit control effectiveness.`,
     }
     throw new Error("L4-CH8 multi-step type not implemented: " + type);
 }
+function generateInvoiceDemo(){
+
+    return {
+
+        taskType:"invoice",
+
+        invoiceNumber:"SI1001",
+
+        customer:"Green Ltd",
+
+        netAmount:400,
+
+        vatRate:20,
+
+        answers:{
+            vat:80,
+            gross:480
+        }
+    };
+}
