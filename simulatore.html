@@ -962,14 +962,19 @@ let currentQuestion = 0;
 
 function renderQuestion(){
 
-    const q =
-    questions[currentQuestion];
+   const q =
+generateInvoiceDemo();
+    if(!q.taskType){
+    q.taskType = "mcq";
+}
 
     const lastQuestion =
     currentQuestion ===
     questions.length - 1;
 
     let optionsHTML = "";
+
+if(q.taskType === "mcq"){
 
     q.options.forEach(
         (option,index)=>{
@@ -994,6 +999,47 @@ function renderQuestion(){
 
         '</div>';
     });
+}
+
+else if(q.taskType === "invoice"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Sales Invoice</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Invoice No</strong></td>' +
+        '<td>' + q.invoiceNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Net Amount</strong></td>' +
+        '<td>' + currency(q.netAmount) + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+        '<td><input id="vat-answer" type="number"></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Gross Total</strong></td>' +
+        '<td><input id="gross-answer" type="number"></td>' +
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
 
     document
     .getElementById(
