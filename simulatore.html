@@ -960,6 +960,136 @@ ${JSON.stringify(examQuestions)};
 
 let currentQuestion = 0;
 
+function renderDocumentHeader(title){
+
+    return (
+
+        '<h3 style="' +
+
+        'text-align:center;' +
+        'margin-bottom:15px;' +
+        'font-size:18px;' +
+        'font-weight:700;' +
+
+        '">' +
+
+        title +
+
+        '</h3>'
+    );
+}
+
+function renderBusinessTable(
+    headers,
+    rows
+){
+
+    let html =
+
+    '<table style="' +
+
+    'width:100%;' +
+    'border-collapse:collapse;' +
+    'border:1px solid #000;' +
+
+    '">';
+
+    html += '<tr>';
+
+    headers.forEach(h=>{
+
+        html +=
+
+        '<th style="' +
+
+        'border:1px solid #000;' +
+        'padding:6px;' +
+
+        '">' +
+
+        h +
+
+        '</th>';
+    });
+
+    html += '</tr>';
+
+    rows.forEach(row=>{
+
+        html += '<tr>';
+
+        row.forEach(cell=>{
+
+            html +=
+
+            '<td style="' +
+
+            'border:1px solid #000;' +
+            'padding:6px;' +
+
+            '">' +
+
+            cell +
+
+            '</td>';
+        });
+
+        html += '</tr>';
+    });
+
+    html += '</table>';
+
+    return html;
+}
+
+function moneyInput(
+    id,
+    markerId
+){
+
+    return (
+
+        '<input ' +
+
+        'id="' + id + '" ' +
+
+        'type="text" ' +
+
+        'style="' +
+
+        'width:140px;' +
+        'padding:6px;' +
+
+        '">' +
+
+        '<span ' +
+
+        'class="feedback-marker" ' +
+
+        'id="' + markerId + '">' +
+
+        '</span>'
+    );
+}
+
+function documentSection(
+    title,
+    html
+){
+
+    return (
+
+        '<div class="invoice-box">' +
+
+        renderDocumentHeader(
+            title
+        ) +
+
+        html +
+
+        '</div>'
+    );
+}
 
 function renderQuestion(){
 
@@ -1196,11 +1326,11 @@ else if(q.taskType === "ledger"){
         '</td>' +
 
         '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
-        (row.debit || "") +
+        (row.debit ?? "") +
         '</td>' +
 
         '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
-        (row.credit || "") +
+        (row.credit ?? "") +
         '</td>' +
 
         '</tr>';
@@ -1241,6 +1371,70 @@ else if(q.taskType === "ledger"){
         '<input id="ledger-answer" type="text">' +
 
         '<span class="feedback-marker" id="ledger-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "statement"){
+
+    let rows = "";
+
+    q.rows.forEach(row=>{
+
+        rows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.description +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        row.amount +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>' +
+        q.statementTitle +
+        '</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Description</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Amount (£)</th>' +
+
+        '</tr>' +
+
+        rows +
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;"><strong>Closing Balance</strong></td>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+
+        '<input id="statement-answer" type="text">' +
+
+        '<span class="feedback-marker" id="statement-marker"></span>' +
 
         '</td>' +
 
@@ -1488,6 +1682,42 @@ if(q.taskType === "ledger"){
 
     return;
 }
+
+if(q.taskType === "statement"){
+
+    const value =
+
+    Number(
+        document
+        .getElementById(
+            "statement-answer"
+        )
+        .value
+    );
+
+    const marker =
+
+    document.getElementById(
+        "statement-marker"
+    );
+
+    const ok =
+
+    Math.abs(
+        value - q.answer
+    ) < 0.01;
+
+    marker.textContent =
+
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     const selected =
 
     document.querySelector(
@@ -1566,6 +1796,18 @@ function showSolution(){
         return;
     }
 
+    if(q.taskType === "statement"){
+
+    document
+    .getElementById(
+        "statement-answer"
+    )
+    .value =
+    q.answer.toFixed(2);
+
+    return;
+}
+
     const correct =
 
     q.correct;
@@ -1637,6 +1879,24 @@ if(q.taskType === "ledger"){
 
     return;
 }
+
+if(q.taskType === "statement"){
+
+    document
+    .getElementById(
+        "statement-answer"
+    )
+    .value = "";
+
+    document
+    .getElementById(
+        "statement-marker"
+    )
+    .textContent = "";
+
+    return;
+}
+
     document
 
     .querySelectorAll(
