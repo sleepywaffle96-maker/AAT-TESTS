@@ -429,25 +429,30 @@ What is the primary purpose of bookkeeping?`,
     const unitPrice =
         rand(20,80);
 
-    const netAmount =
+    const net =
         quantity * unitPrice;
 
     const vat =
-        +(netAmount * 0.20).toFixed(2);
+        +(net * 0.20).toFixed(2);
 
     const gross =
-        +(netAmount + vat).toFixed(2);
+        +(net + vat).toFixed(2);
 
     return {
 
-        taskType:"invoice",
+        taskType:"deliveryInvoice",
 
         question:
-        "Green Ltd sold goods to Alpha Traders. Complete the sales invoice below.",
+        "Use the delivery note below to complete the sales invoice.",
 
-        invoiceNumber:"SI1001",
+        deliveryNumber:
+        "DN" + rand(1000,9999),
 
-        customer:"Alpha Traders",
+        invoiceNumber:
+        "SI" + rand(1000,9999),
+
+        customer:
+        "Alpha Traders",
 
         quantity,
 
@@ -456,7 +461,7 @@ What is the primary purpose of bookkeeping?`,
         vatRate:20,
 
         answers:{
-            net:netAmount,
+            net,
             vat,
             gross
         }
