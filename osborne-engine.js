@@ -154,27 +154,73 @@ What is the effect on the records?`,
 
     if(type === 4){
 
-        const amount = rand(100,2500);
+    const opening =
+    rand(500,3000);
 
-        const correct =
-            "Cash decreases and expenses increase";
+    const invoice1 =
+    rand(200,1500);
 
-        const options = shuffle([
-            correct,
-            "Cash increases and expenses increase",
-            "Income increases",
-            "Capital increases"
-        ]);
+    const invoice2 =
+    rand(200,1500);
 
-        return {
-            question:
-            `${business} purchases office supplies for cash costing ${currency(amount)}.
+    const payment =
+    rand(200,1200);
 
-What happens in the accounts?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const creditNote =
+    rand(100,500);
+
+    const balance =
+
+    opening +
+    invoice1 +
+    invoice2 -
+    payment -
+    creditNote;
+
+    return {
+
+        taskType:"statement",
+
+        question:
+
+        "Green Ltd sends the following statement to a customer. Calculate the closing balance.",
+
+        statementTitle:
+
+        "CUSTOMER STATEMENT",
+
+        rows:[
+
+            {
+                description:"Opening Balance",
+                amount:opening.toFixed(2)
+            },
+
+            {
+                description:"Invoice",
+                amount:invoice1.toFixed(2)
+            },
+
+            {
+                description:"Invoice",
+                amount:invoice2.toFixed(2)
+            },
+
+            {
+                description:"Payment Received",
+                amount:"-" + payment.toFixed(2)
+            },
+
+            {
+                description:"Credit Note",
+                amount:"-" + creditNote.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(balance.toFixed(2))
+    };
+}
 
     if(type === 5){
 
@@ -262,30 +308,64 @@ What is the immediate effect?`,
 }
     if(type === 7){
 
-        const capital = rand(5000,18000);
-        const liabilities = rand(1000,7000);
+    const opening =
+    rand(1000,5000);
 
-        const assets =
-            capital + liabilities;
+    const purchases =
+    rand(500,3000);
 
-        const options = shuffle([
-            assets,
-            assets + 1000,
-            assets - 1000,
-            assets + 1500
-        ]);
+    const payments =
+    rand(300,2000);
 
-        return {
-            question:
-            `Capital = ${currency(capital)}
-Liabilities = ${currency(liabilities)}
+    const returns =
+    rand(100,800);
 
-Calculate total assets.`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(assets)
-        };
-    }
+    const balance =
 
+    opening +
+    purchases -
+    payments -
+    returns;
+
+    return {
+
+        taskType:"ledger",
+
+        question:
+
+        "Complete the Purchase Ledger Control Account and calculate the balance carried down.",
+
+        accountName:
+
+        "Purchase Ledger Control Account",
+
+        rows:[
+
+            {
+                description:"Balance b/d",
+                credit:opening.toFixed(2)
+            },
+
+            {
+                description:"Credit Purchases",
+                credit:purchases.toFixed(2)
+            },
+
+            {
+                description:"Payments Made",
+                debit:payments.toFixed(2)
+            },
+
+            {
+                description:"Purchase Returns",
+                debit:returns.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(balance.toFixed(2))
+    };
+}
     if(type === 8){
 
         const correct =
