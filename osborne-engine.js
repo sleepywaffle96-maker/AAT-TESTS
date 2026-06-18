@@ -447,43 +447,46 @@ function generateL2CH1(type = null){
 
     return {
 
-        taskType:"ledger",
+    taskType:"ledger",
 
-        question:
+    question:
 
-        "Complete the Sales Ledger Control Account and calculate the balance carried down.",
+    "Complete the Purchase Ledger Control Account and calculate the balance carried down.",
 
-        accountName:
+    accountName:
 
-        "Sales Ledger Control Account",
+    "Purchase Ledger Control Account",
 
-        rows:[
+    rows:[
 
-            {
-                description:"Balance b/d",
-                debit:opening.toFixed(2)
-            },
+        {
+            description:"Balance b/d",
+            credit:opening.toFixed(2)
+        },
 
-            {
-                description:"Credit Sales",
-                debit:sales.toFixed(2)
-            },
+        {
+            description:"Credit Purchases",
+            credit:purchases.toFixed(2)
+        },
 
-            {
-                description:"Cash Received",
-                credit:receipts.toFixed(2)
-            },
+        {
+            description:"Payments Made",
+            debit:payments.toFixed(2)
+        },
 
-            {
-                description:"Credit Notes Issued",
-                credit:creditNotes.toFixed(2)
-            }
-        ],
+        {
+            description:"Purchase Returns",
+            debit:returns.toFixed(2)
+        }
+    ],
 
-        answer:
-        Number(balance.toFixed(2))
-    };
-}
+    answer:
+    Number(balance.toFixed(2)),
+
+    balanceSide:
+    "Debit"
+};
+        
     if(type === 7){
 
     const opening =
