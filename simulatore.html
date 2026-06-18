@@ -1362,6 +1362,7 @@ item.qty +
 
     '</div>';
 }
+
 else if(q.taskType === "ledger"){
 
     let rows = "";
@@ -2246,25 +2247,32 @@ if(q.taskType === "statement"){
 
 if(q.taskType === "journalEntry"){
 
-    const debit =
+    const row1Account =
     document.getElementById(
-        "journal-debit"
-    ).value.trim().toLowerCase();
+        "journal-account-1"
+    ).value;
 
-    const credit =
+    const row1Side =
     document.getElementById(
-        "journal-credit"
-    ).value.trim().toLowerCase();
+        "journal-side-1"
+    ).value;
+
+    const row2Account =
+    document.getElementById(
+        "journal-account-2"
+    ).value;
+
+    const row2Side =
+    document.getElementById(
+        "journal-side-2"
+    ).value;
 
     const ok =
 
-    debit ===
-    q.answers.debit.toLowerCase()
-
-    &&
-
-    credit ===
-    q.answers.credit.toLowerCase();
+        row1Account === q.answers.row1Account &&
+        row1Side === q.answers.row1Side &&
+        row2Account === q.answers.row2Account &&
+        row2Side === q.answers.row2Side;
 
     const marker =
     document.getElementById(
@@ -2354,14 +2362,24 @@ q.taskType === "creditNote"
 if(q.taskType === "journalEntry"){
 
     document.getElementById(
-        "journal-debit"
+        "journal-account-1"
     ).value =
-    q.answers.debit;
+    q.answers.row1Account;
 
     document.getElementById(
-        "journal-credit"
+        "journal-side-1"
     ).value =
-    q.answers.credit;
+    q.answers.row1Side;
+
+    document.getElementById(
+        "journal-account-2"
+    ).value =
+    q.answers.row2Account;
+
+    document.getElementById(
+        "journal-side-2"
+    ).value =
+    q.answers.row2Side;
 
     return;
 }
@@ -2487,11 +2505,19 @@ if(q.taskType === "journal"){
 if(q.taskType === "journalEntry"){
 
     document.getElementById(
-        "journal-debit"
+        "journal-account-1"
     ).value = "";
 
     document.getElementById(
-        "journal-credit"
+        "journal-side-1"
+    ).value = "";
+
+    document.getElementById(
+        "journal-account-2"
+    ).value = "";
+
+    document.getElementById(
+        "journal-side-2"
     ).value = "";
 
     document.getElementById(
