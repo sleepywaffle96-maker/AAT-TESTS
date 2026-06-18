@@ -486,7 +486,8 @@ function generateL2CH1(type = null){
     balanceSide:
     "Debit"
 };
-        
+}
+    
     if(type === 7){
 
     const opening =
