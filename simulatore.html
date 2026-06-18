@@ -1850,77 +1850,46 @@ else if(q.taskType === "journalEntry"){
     '</div>';
 }
 
-else if(q.taskType === "journal"){
+else if (q.taskType === "journal") {
 
     let rows = "";
 
-    q.rows.forEach(row=>{
-
+    q.rows.forEach(row => {
         rows +=
-
         '<tr>' +
-
-        '<td style="border:1px solid #000;padding:6px;">' +
-        row.description +
-        '</td>' +
-
-        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
-        (row.debit || "") +
-        '</td>' +
-
-        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
-        (row.credit || "") +
-        '</td>' +
-
+            '<td style="border:1px solid #000;padding:6px;">' +
+                row.description +
+            '</td>' +
+            '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                (row.debit || "") +
+            '</td>' +
+            '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                (row.credit || "") +
+            '</td>' +
         '</tr>';
     });
 
     optionsHTML =
-
     '<div class="invoice-box">' +
-
-        '<h3>' +
-        q.journalTitle +
-        '</h3>' +
-
-        '<p style="margin-bottom:15px;">' +
-        q.question +
-        '</p>' +
-
+        '<h3>' + q.journalTitle + '</h3>' +
+        '<p style="margin-bottom:15px;">' + q.question + '</p>' +
         '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
-
             '<tr>' +
-
                 '<th style="border:1px solid #000;padding:6px;">Details</th>' +
-
                 '<th style="border:1px solid #000;padding:6px;">Debit</th>' +
-
                 '<th style="border:1px solid #000;padding:6px;">Credit</th>' +
-
             '</tr>' +
-
             rows +
-
             '<tr>' +
-
                 '<td style="border:1px solid #000;padding:6px;"><strong>Total</strong></td>' +
-
                 '<td colspan="2" style="border:1px solid #000;padding:6px;">' +
-
                     '<input id="journal-answer" type="text">' +
-
                     '<span class="feedback-marker" id="journal-marker"></span>' +
-
                 '</td>' +
-
             '</tr>' +
-
         '</table>' +
-
     '</div>';
-    });
 }
-
     document
     .getElementById(
         "quiz-root"
@@ -2636,7 +2605,7 @@ function calculateCalc(){
     }
 }
 
-</script>
+<\/script>
 
 </body>
 </html>
