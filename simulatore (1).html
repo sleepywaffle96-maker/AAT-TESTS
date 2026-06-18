@@ -1,0 +1,2443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAT Interactive Simulator</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+
+    background:#0B0F19;
+
+    color:#E2E8F0;
+
+    min-height:100vh;
+
+    margin:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+}
+
+a{
+    color:#60A5FA;
+    text-decoration:none;
+}
+
+a:hover{
+    color:#93C5FD;
+}
+
+.back-link{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    color:#38BDF8;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+.simulator-container{
+
+    background:#FFFFFF;
+
+    border-radius:20px;
+
+    padding:32px 22px;
+
+    box-shadow:
+    0 25px 50px -12px
+    rgba(0,0,0,.6);
+
+    border:1px solid #E2E8F0;
+
+    color:#1E293B;
+
+    width:100%;
+
+    max-width:580px;
+}
+
+.simulator-container h1{
+
+    color:#0F172A;
+
+    margin:0 0 8px 0;
+
+    font-size:2.2rem;
+
+    font-weight:800;
+
+    letter-spacing:-0.5px;
+
+    text-align:center;
+}
+
+.simulator-container p{
+
+    font-size:14px;
+
+    color:#64748B;
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:24px;
+}
+
+.form-group label{
+    display:block;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    font-weight:600;
+    color:#94A3B8;
+    margin-bottom:8px;
+}
+
+.form-group select{
+
+    width:100%;
+
+    background:#F8FAFC;
+
+    border:1px solid #D1D5DB;
+
+    color:#1E293B;
+
+    font-size:14px;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    font-weight:700;
+}
+
+.form-group select:hover{
+    border-color:#60A5FA;
+}
+
+.form-group select:focus{
+    outline:none;
+    border-color:#3B82F6;
+    box-shadow:0 0 0 3px rgba(59,130,246,.3);
+}
+
+.form-group select:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.launch-btn{
+
+    width:100%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0D9488,
+        #0F766E
+    );
+
+    color:#FFFFFF;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 14px
+    rgba(13,148,136,.3);
+}
+
+.launch-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(59,130,246,.4);
+}
+
+.launch-btn:active{
+    transform:translateY(0);
+}
+    </style>
+</head>
+
+<body>
+
+<div class="simulator-container">
+
+    <a 
+        href="javascript:history.back();" 
+        class="back-link">
+← Back to Dashboard
+</a>
+
+    <h1>AAT Interactive Simulator</h1>
+
+    <p>
+        Configure your criteria parameters below to generate
+        a paginated 15-task mock assessment window.
+    </p>
+
+    <div class="form-group">
+        <label for="level-select">
+            TARGET ASSESSMENT LEVEL
+        </label>
+
+        <select id="level-select" onchange="updateChapters()">
+            <option value="">
+                Select Qualification Level...
+            </option>
+
+           <option value="random">
+🎲 Randomize All Levels - Mixed Scenario
+</option>
+
+<option value="L2">
+📊 AAT Level 2 Certificate
+</option>
+
+<option value="L3">
+🔷 AAT Level 3 Diploma
+</option>
+
+<option value="L4">
+🔶 AAT Level 4 Diploma
+</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="chapter-select">
+            SYLLABUS CHAPTER UNIT
+        </label>
+
+        <select id="chapter-select" disabled>
+            <option value="">
+                Select a level first...
+            </option>
+        </select>
+    </div>
+
+    <button
+        class="launch-btn"
+        onclick="launchPaginatedTestWindow()">
+
+        Launch Paginated Test Window →
+    </button>
+
+</div>
+<script src="osborne-engine.js"></script>
+<script>
+
+const syllabusData = {
+
+    L2: [
+        {
+            value:"L2-CH1",
+            label:"Chapter 1 – Introduction to Bookkeeping"
+        },
+        {
+            value:"L2-CH2",
+            label:"Chapter 2 – Principles of Bookkeeping Controls"
+        },
+        {
+            value:"L2-CH3",
+            label:"Chapter 3 – Principles of Costing"
+        },
+        {
+            value:"L2-CH4",
+            label:"Chapter 4 – Business Environment (BTRN - Part 1)"
+        },
+        {
+            value:"L2-CH5",
+            label:"Chapter 5 – Business Environment (BTRN - Part 2)"
+        },
+        {
+            value:"L2-random",
+            label:"🎲 Random (All L2 Chapters)"
+        }
+    ],
+
+    L3: [
+        {
+            value:"L3-CH1",
+            label:"Chapter 1 – Business Awareness (BUAW)"
+        },
+        {
+            value:"L3-CH2",
+            label:"Chapter 2 – Financial Accounting (FAPS)"
+        },
+        {
+            value:"L3-CH3",
+            label:"Chapter 3 – Management Accounting Techniques (MATS)"
+        },
+        {
+            value:"L3-CH4",
+            label:"Chapter 4 – Tax Processes for Businesses (TPFB)"
+        },
+        {
+            value:"L3-random",
+            label:"🎲 Random (All L3 Chapters)"
+        }
+    ],
+
+    L4: [
+        {
+            value:"L4-CH1",
+            label:"Chapter 1 – Applied Management Accounting (AMA)"
+        },
+        {
+            value:"L4-CH2",
+            label:"Chapter 2 – Drafting and Interpreting Financial Statements (DAIF)"
+        },
+        {
+            value:"L4-CH3",
+            label:"Chapter 3 – Internal Accounting Systems and Controls (IASC)"
+        },
+                {
+            value:"L4-CH4",
+            label:"Chapter 4 – Business Tax (BSTX)"
+        },
+        {
+            value:"L4-CH5",
+            label:"Chapter 5 – Personal Tax (PLTX)"
+        },
+        {
+            value:"L4-CH6",
+            label:"Chapter 6 – External Auditing (EXAU)"
+        },
+        {
+            value:"L4-CH7",
+            label:"Chapter 7 – Cash and Treasury Management (CTMN)"
+        },
+        {
+            value:"L4-CH8",
+            label:"Chapter 8 – Credit and Debt Management (CRDM)"
+        },
+        {
+            value:"L4-random",
+            label:"🎲 Random (All L4 Chapters)"
+        }
+    ],
+
+    random:[
+        {
+            value:"all-random",
+            label:"🎲 Random (All Levels & Chapters)"
+        }
+    ]
+};
+
+function updateChapters(){
+
+    const levelSelect =
+        document.getElementById("level-select");
+
+    const chapterSelect =
+        document.getElementById("chapter-select");
+
+    const selectedLevel =
+        levelSelect.value;
+
+    chapterSelect.innerHTML = "";
+
+    if(!selectedLevel){
+
+        chapterSelect.innerHTML =
+        '<option value="">Select a level first...</option>';
+
+        chapterSelect.disabled = true;
+        return;
+    }
+
+    chapterSelect.disabled = false;
+
+    const chapters =
+        syllabusData[selectedLevel] || [];
+
+    const defaultOption =
+        document.createElement("option");
+
+    defaultOption.value = "";
+    defaultOption.textContent =
+        "Select a chapter...";
+
+    chapterSelect.appendChild(defaultOption);
+
+    chapters.forEach(ch => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = ch.value;
+        option.textContent = ch.label;
+
+        chapterSelect.appendChild(option);
+    });
+}
+   
+/* ------------------------
+   QUESTION GENERATOR
+------------------------ */
+
+function buildQuestionPool(){
+
+    return {
+
+        "L2-CH1": generateL2CH1,
+        "L2-CH2": generateL2CH2,
+        "L2-CH3": generateL2CH3,
+        "L2-CH4": generateL2CH4,
+        "L2-CH5": generateL2CH5,
+
+        "L3-CH1": generateL3CH1,
+        "L3-CH2": generateL3CH2,
+        "L3-CH3": generateL3CH3,
+        "L3-CH4": generateL3CH4,
+
+        "L4-CH1": generateL4CH1,
+        "L4-CH2": generateL4CH2,
+        "L4-CH3": generateL4CH3,
+        "L4-CH4": generateL4CH4,
+        "L4-CH5": generateL4CH5,
+        "L4-CH6": generateL4CH6,
+        "L4-CH7": generateL4CH7,
+        "L4-CH8": generateL4CH8
+    };
+}
+function safeGetGenerator(pool, chapter){
+
+    const gen = pool[chapter];
+
+    if(typeof gen !== "function"){
+        throw new Error("Missing generator for " + chapter);
+    }
+
+    return gen;
+}
+function createExamQuestions(){
+
+    const level =
+        document.getElementById("level-select").value;
+
+    const chapter =
+        document.getElementById("chapter-select").value;
+
+    const pool = buildQuestionPool();
+
+    let generators = [];
+
+    if(level === "random"){
+
+        generators =
+        Object.values(pool)
+        .filter(fn => typeof fn === "function");
+    }
+
+    else if(chapter && !chapter.includes("random")){
+
+        const generator =
+            safeGetGenerator(pool, chapter);
+
+        const questions = [];
+
+        for(let type=1; type<=15; type++){
+
+    questions.push(
+        generator(type)
+    );
+}
+
+console.log(questions);
+
+return shuffle(questions);
+}
+    else if(level){
+
+        generators =
+        Object.entries(pool)
+        .filter(([key]) => key.startsWith(level))
+        .map(([,fn]) => fn);
+    }
+
+    if(generators.length === 0){
+        throw new Error(
+            "No question generators available for selection"
+        );
+    }
+
+    const questions = [];
+
+    for(let i=0;i<15;i++){
+
+        const generator =
+            generators[
+                rand(0,generators.length-1)
+            ];
+
+        questions.push(
+            generator()
+        );
+    }
+
+    return questions;
+}
+
+/* ------------------------
+   POPUP TEST WINDOW
+------------------------ */
+function launchPaginatedTestWindow(){
+
+    const level =
+    document.getElementById(
+        "level-select"
+    ).value;
+
+    if(!level){
+
+        alert(
+            "Please select a level."
+        );
+
+        return;
+    }
+
+    const examQuestions =
+        createExamQuestions();
+
+    const testWindow =
+window.open(
+    "",
+    "_blank"
+);
+
+    testWindow.document.write(`
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+AAT Interactive Assessment
+</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#0B0F19;
+
+    font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+
+    min-height:100vh;
+
+    padding:60px;
+
+    color:#0F172A;
+}
+
+#quiz-root{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+}
+
+.test-card-container{
+
+    width:100%;
+
+    max-width:980px;
+
+    background:#FFFFFF;
+
+    border-radius:14px;
+
+    padding:34px;
+
+    box-shadow:
+    0 12px 40px
+    rgba(0,0,0,.35);
+}
+
+.exam-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+    padding-bottom:14px;
+
+    border-bottom:
+    1px solid #E2E8F0;
+}
+
+.exam-title{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#0F172A;
+
+    text-transform:uppercase;
+
+    letter-spacing:.02em;
+}
+
+.question-badge{
+
+    background:#F1F5F9;
+
+    color:#64748B;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+.question-title{
+
+    font-size:20px;
+
+    font-weight:600;
+
+    color:#0F172A;
+
+    line-height:1.7;
+
+    margin-bottom:24px;
+}
+
+.scenario-box{
+
+    background:#F8FAFC;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:10px;
+
+    padding:18px;
+
+    margin-bottom:24px;
+}
+
+.option-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:8px;
+}
+
+.option-row:hover{
+
+    background:#F8FAFC;
+}
+
+.feedback-marker{
+
+    font-weight:700;
+
+    margin-left:auto;
+
+    font-size:18px;
+}
+
+.reveal-correct{
+
+    background:#DCFCE7;
+
+    border:
+    2px solid #16A34A;
+}
+
+.footer-bar{
+
+    margin-top:28px;
+
+    padding-top:20px;
+
+    border-top:
+    1px solid #E2E8F0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+}
+
+.left-actions,
+.right-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.footer-bar button{
+
+    border:none;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    font-size:13px;
+
+    padding:10px 16px;
+
+    border-radius:6px;
+}
+
+.btn-check{
+    background:#1D4ED8;
+}
+
+.btn-solution{
+    background:#047857;
+}
+
+.btn-reset{
+    background:#B91C1C;
+}
+
+.btn-nav{
+    background:#334155;
+}
+
+.btn-pdf{
+    background:#6D28D9;
+}
+
+/* 9. Widget Calcolatrice Vetrificata */
+
+#calc-widget{
+position:fixed;
+bottom:90px;
+right:30px;
+width:240px;
+background:rgba(15,23,42,.9);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:14px;
+padding:18px;
+box-shadow:0 20px 40px rgba(0,0,0,.6);
+z-index:2000;
+display:none;
+cursor:move;
+}
+
+#calc-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+padding-bottom:6px;
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+#calc-header span{
+color:#64748B;
+font-size:11px;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+#calc-close-btn{
+background:transparent;
+border:none;
+color:#EF4444;
+font-weight:bold;
+cursor:pointer;
+font-size:14px;
+}
+
+#calc-screen{
+width:100%;
+height:45px;
+background:#000;
+border-radius:8px;
+color:#00FFFF;
+text-shadow:0 0 10px #00FFFF;
+font-family:'Courier New',monospace;
+text-align:right;
+padding:12px;
+font-size:20px;
+font-weight:bold;
+margin-bottom:12px;
+border:1px solid #00FFFF;
+box-sizing:border-box;
+}
+
+.calc-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+}
+
+.calc-btn{
+background:rgba(255,255,255,.08);
+border:none;
+color:white;
+padding:12px;
+font-size:14px;
+font-weight:600;
+border-radius:6px;
+cursor:pointer;
+}
+
+.calc-btn:hover{
+background:rgba(255,255,255,.2);
+}
+
+.calc-btn.op{
+color:#00FFFF;
+background:rgba(0,255,255,.05);
+}
+
+.calc-btn.op:hover{
+background:rgba(0,255,255,.2);
+}
+
+#calc-toggle-trigger{
+position:fixed;
+bottom:30px;
+right:30px;
+width:50px;
+height:50px;
+background:#2563EB;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 4px 15px rgba(37,99,235,.4);
+cursor:pointer;
+z-index:1999;
+font-size:20px;
+}
+
+#calc-toggle-trigger:hover{
+transform:scale(1.08);
+background:#1D4ED8;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="quiz-root"></div>
+
+<!-- TRIGGER CIRCOLARE CALCOLATRICE -->
+<div id="calc-toggle-trigger" title="Open Calculator">🧮</div>
+
+<!-- WIDGET CALCOLATRICE -->
+<div id="calc-widget">
+
+    <div id="calc-header">
+        <span>Osborne Calc</span>
+        <button id="calc-close-btn">✕</button>
+    </div>
+
+    <div id="calc-screen">0</div>
+
+    <div class="calc-grid">
+
+       <button class="calc-btn op" onclick="clearCalc()">C</button>
+<button class="calc-btn op" onclick="pressCalc('sq')">x²</button>
+<button class="calc-btn op" onclick="pressCalc('rt')">√</button>
+<button class="calc-btn op" onclick="pressCalc('/')">/</button>
+
+<button class="calc-btn" onclick="pressCalc('7')">7</button>
+<button class="calc-btn" onclick="pressCalc('8')">8</button>
+<button class="calc-btn" onclick="pressCalc('9')">9</button>
+<button class="calc-btn op" onclick="pressCalc('*')">*</button>
+
+<button class="calc-btn" onclick="pressCalc('4')">4</button>
+<button class="calc-btn" onclick="pressCalc('5')">5</button>
+<button class="calc-btn" onclick="pressCalc('6')">6</button>
+<button class="calc-btn op" onclick="pressCalc('-')">-</button>
+
+<button class="calc-btn" onclick="pressCalc('1')">1</button>
+<button class="calc-btn" onclick="pressCalc('2')">2</button>
+<button class="calc-btn" onclick="pressCalc('3')">3</button>
+<button class="calc-btn op" onclick="pressCalc('+')">+</button>
+
+<button class="calc-btn" onclick="pressCalc('0')">0</button>
+<button class="calc-btn" onclick="pressCalc('.')">.</button>
+<button class="calc-btn op" onclick="pressCalc('%')">%</button>
+
+<button
+class="calc-btn op"
+style="background:#059669;color:white;"
+onclick="calculateCalc()">
+=
+</button>
+
+    </div>
+
+</div>
+
+<script>
+
+const questions =
+${JSON.stringify(examQuestions)};
+
+let currentQuestion = 0;
+
+function renderDocumentHeader(title){
+
+    return (
+
+        '<h3 style="' +
+
+        'text-align:center;' +
+        'margin-bottom:15px;' +
+        'font-size:18px;' +
+        'font-weight:700;' +
+
+        '">' +
+
+        title +
+
+        '</h3>'
+    );
+}
+
+function renderBusinessTable(
+    headers,
+    rows
+){
+
+    let html =
+
+    '<table style="' +
+
+    'width:100%;' +
+    'border-collapse:collapse;' +
+    'border:1px solid #000;' +
+
+    '">';
+
+    html += '<tr>';
+
+    headers.forEach(h=>{
+
+        html +=
+
+        '<th style="' +
+
+        'border:1px solid #000;' +
+        'padding:6px;' +
+
+        '">' +
+
+        h +
+
+        '</th>';
+    });
+
+    html += '</tr>';
+
+    rows.forEach(row=>{
+
+        html += '<tr>';
+
+        row.forEach(cell=>{
+
+            html +=
+
+            '<td style="' +
+
+            'border:1px solid #000;' +
+            'padding:6px;' +
+
+            '">' +
+
+            cell +
+
+            '</td>';
+        });
+
+        html += '</tr>';
+    });
+
+    html += '</table>';
+
+    return html;
+}
+
+function moneyInput(
+    id,
+    markerId
+){
+
+    return (
+
+        '<input ' +
+
+        'id="' + id + '" ' +
+
+        'type="text" ' +
+
+        'style="' +
+
+        'width:140px;' +
+        'padding:6px;' +
+
+        '">' +
+
+        '<span ' +
+
+        'class="feedback-marker" ' +
+
+        'id="' + markerId + '">' +
+
+        '</span>'
+    );
+}
+
+function documentSection(
+    title,
+    html
+){
+
+    return (
+
+        '<div class="invoice-box">' +
+
+        renderDocumentHeader(
+            title
+        ) +
+
+        html +
+
+        '</div>'
+    );
+}
+
+function renderQuestion(){
+
+  const q =
+questions[currentQuestion];
+
+
+    if(!q.taskType){
+    q.taskType = "mcq";
+}
+
+    const lastQuestion =
+    currentQuestion ===
+    questions.length - 1;
+
+    let optionsHTML = "";
+
+if(q.taskType === "mcq"){
+
+    q.options.forEach(
+        (option,index)=>{
+
+        optionsHTML +=
+
+        '<div class="option-row">' +
+
+        '<input ' +
+        'type="radio" ' +
+        'name="answer" ' +
+        'value="'+index+'">' +
+
+        '<span>' +
+        option +
+        '</span>' +
+
+        '<span ' +
+        'class="feedback-marker" ' +
+        'id="marker-'+index+'">' +
+        '</span>' +
+
+        '</div>';
+    });
+}
+
+else if(q.taskType === "invoice"){
+
+    let itemRows = "";
+
+    q.items.forEach(item=>{
+
+        itemRows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        item.description +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+        item.qty +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        '£' + item.price.toFixed(2) +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+
+        'Green Ltd has supplied the following goods to ' +
+
+        q.customer +
+
+        '.<br><br>' +
+
+        'Prepare the sales invoice.' +
+
+        '</p>' +
+
+        '<h3>SALES INVOICE</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Invoice No</strong></td>' +
+        '<td>' + q.invoiceNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Description</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Qty</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Unit Price</th>' +
+
+        '</tr>' +
+
+        itemRows +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Net Amount</strong></td>' +
+        '<td>' +
+        '<input id="net-answer" type="text">' +
+        '<span class="feedback-marker" id="net-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+        '<td>' +
+        '<input id="vat-answer" type="text">' +
+        '<span class="feedback-marker" id="vat-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Gross Total</strong></td>' +
+        '<td>' +
+        '<input id="gross-answer" type="text">' +
+        '<span class="feedback-marker" id="gross-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+else if(q.taskType === "deliveryInvoice"){
+
+    let itemRows = "";
+
+    q.items.forEach(item=>{
+
+        itemRows +=
+
+'<tr>' +
+
+'<td style="border:1px solid #000;padding:6px;text-align:left;">' +
+item.description +
+'</td>' +
+
+'<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+item.qty +
+'</td>' +
+
+'<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+'£' + item.price.toFixed(2) +
+'</td>' +
+
+'</tr>';
+    });
+
+    optionsHTML =
+
+'<div class="invoice-box">' +
+
+    '<p>' +
+
+    'Green Ltd is a supplier of office equipment.<br><br>' +
+
+    'Goods have been dispatched to ' +
+
+    q.customer +
+
+    '.<br><br>' +
+
+    'Prepare the sales invoice using the delivery note below.' +
+
+    '</p>' +
+
+    '<h3>DELIVERY NOTE</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Delivery No</strong></td>' +
+        '<td>' + q.deliveryNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+'<tr>' +
+
+'<th style="border:1px solid #000;padding:6px;text-align:left;width:60%;">' +
+'Description' +
+'</th>' +
+
+'<th style="border:1px solid #000;padding:6px;text-align:center;width:20%;">' +
+'Qty' +
+'</th>' +
+
+'<th style="border:1px solid #000;padding:6px;text-align:right;width:20%;">' +
+'Unit Price' +
+'</th>' +
+
+'</tr>' +
+        itemRows +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<h3>Sales Invoice</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Invoice No</strong></td>' +
+        '<td>' + q.invoiceNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Net Amount</strong></td>' +
+        '<td>' +
+        '<input id="net-answer" type="text">' +
+        '<span class="feedback-marker" id="net-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+        '<td>' +
+        '<input id="vat-answer" type="text">' +
+        '<span class="feedback-marker" id="vat-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Gross Total</strong></td>' +
+        '<td>' +
+        '<input id="gross-answer" type="text">' +
+        '<span class="feedback-marker" id="gross-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+else if(q.taskType === "ledger"){
+
+    let rows = "";
+
+    q.rows.forEach(row=>{
+
+        rows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.description +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        (row.debit ?? "") +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        (row.credit ?? "") +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>' +
+        q.accountName +
+        '</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Details</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Debit</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Credit</th>' +
+
+        '</tr>' +
+
+        rows +
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;"><strong>Balance c/d</strong></td>' +
+
+        '<td colspan="2" style="border:1px solid #000;padding:6px;">' +
+
+        '<input id="ledger-answer" type="text">' +
+
+        '<span class="feedback-marker" id="ledger-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "statement"){
+
+    let rows = "";
+
+    q.rows.forEach(row=>{
+
+        rows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.description +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        row.amount +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>' +
+        q.statementTitle +
+        '</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Description</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Amount (£)</th>' +
+
+        '</tr>' +
+
+        rows +
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;"><strong>Closing Balance</strong></td>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+
+        '<input id="statement-answer" type="text">' +
+
+        '<span class="feedback-marker" id="statement-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "creditNote"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>CREDIT NOTE</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+        '<td><strong>Credit Note No</strong></td>' +
+        '<td>' + q.creditNoteNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Goods Returned</strong></td>' +
+        '<td>' + q.quantity + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Unit Price</strong></td>' +
+        '<td>£' + q.unitPrice.toFixed(2) + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Net Value</strong></td>' +
+
+        '<td>' +
+
+        '<input id="net-answer" type="text">' +
+
+        '<span class="feedback-marker" id="net-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '<tr>' +
+
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+
+        '<td>' +
+
+        '<input id="vat-answer" type="text">' +
+
+        '<span class="feedback-marker" id="vat-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '<tr>' +
+
+        '<td><strong>Total Credit</strong></td>' +
+
+        '<td>' +
+
+        '<input id="gross-answer" type="text">' +
+
+        '<span class="feedback-marker" id="gross-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "journal"){
+
+    let rows = "";
+
+    q.rows.forEach(row=>{
+
+        rows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.date +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        row.name +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        row.amount +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<h3>' +
+        q.journalTitle +
+        '</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Date</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Details</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Amount (£)</th>' +
+
+        '</tr>' +
+
+        rows +
+
+        '<tr>' +
+
+        '<td colspan="2" style="border:1px solid #000;padding:6px;"><strong>Total</strong></td>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+
+        '<input id="journal-answer" type="text">' +
+
+        '<span class="feedback-marker" id="journal-marker"></span>' +
+
+        '</td>' +
+
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "purchaseInvoice"){
+
+    let itemRows = "";
+
+    q.items.forEach(item=>{
+
+        itemRows +=
+
+        '<tr>' +
+
+        '<td style="border:1px solid #000;padding:6px;">' +
+        item.description +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+        item.qty +
+        '</td>' +
+
+        '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+        '£' + item.price.toFixed(2) +
+        '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+
+        'Green Ltd has received the following goods from ' +
+
+        q.customer +
+
+        '.<br><br>' +
+
+        'Prepare the sales invoice.' +
+
+        '</p>' +
+
+        '<h3>PURCHASE INVOICE</h3>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Invoice No</strong></td>' +
+        '<td>' + q.invoiceNumber + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Customer</strong></td>' +
+        '<td>' + q.customer + '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+        '<tr>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Description</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Qty</th>' +
+
+        '<th style="border:1px solid #000;padding:6px;">Unit Price</th>' +
+
+        '</tr>' +
+
+        itemRows +
+
+        '</table>' +
+
+        '<br>' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+        '<tr>' +
+        '<td><strong>Net Amount</strong></td>' +
+        '<td>' +
+        '<input id="net-answer" type="text">' +
+        '<span class="feedback-marker" id="net-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>VAT (' + q.vatRate + '%)</strong></td>' +
+        '<td>' +
+        '<input id="vat-answer" type="text">' +
+        '<span class="feedback-marker" id="vat-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td><strong>Gross Total</strong></td>' +
+        '<td>' +
+        '<input id="gross-answer" type="text">' +
+        '<span class="feedback-marker" id="gross-marker"></span>' +
+        '</td>' +
+        '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "documentIdentification"){
+
+    optionsHTML =
+
+    '<div style="' +
+
+    'background:#FFFFFF;' +
+    'border:2px solid #1E293B;' +
+    'padding:25px;' +
+    'margin-bottom:20px;' +
+    'font-family:Arial,sans-serif;' +
+    'line-height:1.8;' +
+    'color:#111827;' +
+
+    '">' +
+
+    q.documentBody +
+
+    '</div>';
+
+    q.options.forEach(
+        (option,index)=>{
+
+        optionsHTML +=
+
+        '<div class="option-row">' +
+
+        '<input ' +
+        'type="radio" ' +
+        'name="answer" ' +
+        'value="'+index+'">' +
+
+        '<span>' +
+        option +
+        '</span>' +
+
+        '<span ' +
+        'class="feedback-marker" ' +
+        'id="marker-'+index+'">' +
+        '</span>' +
+
+        '</div>';
+    });
+}
+
+    document
+    .getElementById(
+        "quiz-root"
+    ).innerHTML =
+
+    '<div class="test-card-container">' +
+
+        '<div class="exam-header">' +
+
+            '<div class="exam-title">' +
+
+            'AAT Interactive Assessment Simulator' +
+
+            '</div>' +
+
+            '<div class="question-badge">' +
+
+            'Question ' +
+
+            (currentQuestion + 1) +
+
+            ' of ' +
+
+            questions.length +
+
+            '</div>' +
+
+        '</div>' +
+
+        '<div class="question-title">' +
+
+        q.question +
+
+        '</div>' +
+
+        '<div class="scenario-box">' +
+
+        optionsHTML +
+
+        '</div>' +
+
+        '<div class="footer-bar">' +
+
+            '<div class="left-actions">' +
+
+                '<button ' +
+                'class="btn-check" ' +
+                'onclick="checkAnswer()">' +
+
+                'Am I Right?' +
+
+                '</button>' +
+
+                '<button ' +
+                'class="btn-solution" ' +
+                'onclick="showSolution()">' +
+
+                'Show Solution' +
+
+                '</button>' +
+
+                '<button ' +
+                'class="btn-reset" ' +
+                'onclick="resetQuestion()">' +
+
+                'Reset' +
+
+                '</button>' +
+
+            '</div>' +
+
+            '<div class="right-actions">' +
+
+                '<button ' +
+                'class="btn-nav" ' +
+                'onclick="previousQuestion()">' +
+
+                'Previous Question' +
+
+                '</button>' +
+
+                (
+
+                    lastQuestion
+
+                    ?
+
+                    '<button ' +
+                    'class="btn-pdf" ' +
+                    'onclick="window.print()">' +
+
+                    'Download as PDF' +
+
+                    '</button>'
+
+                    :
+
+                    '<button ' +
+                    'class="btn-nav" ' +
+                    'onclick="nextQuestion()">' +
+
+                    'Next Question' +
+
+                    '</button>'
+                ) +
+
+            '</div>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+function checkAnswer(){
+
+  const q =
+questions[currentQuestion];
+
+console.log("CHECK", q);
+
+if(
+    q.taskType === "invoice" ||
+q.taskType === "purchaseInvoice" ||
+q.taskType === "deliveryInvoice" ||
+q.taskType === "creditNote"
+){
+
+    console.log("INVOICE MODE");
+
+        const netText =
+document.getElementById(
+    "net-answer"
+).value.trim();
+
+const vatText =
+document.getElementById(
+    "vat-answer"
+).value.trim();
+
+const grossText =
+document.getElementById(
+    "gross-answer"
+).value.trim();
+
+if(
+    netText.includes(",") ||
+    vatText.includes(",") ||
+    grossText.includes(",")
+){
+    alert(
+        "Use a decimal point (.) not a comma (,)."
+    );
+    return;
+}
+
+const net = Number(netText);
+const vat = Number(vatText);
+const gross = Number(grossText);
+
+        const checks = [
+
+            {
+                user: net,
+                correct: q.answers.net,
+                marker: "net-marker"
+            },
+
+            {
+                user: vat,
+                correct: q.answers.vat,
+                marker: "vat-marker"
+            },
+
+            {
+                user: gross,
+                correct: q.answers.gross,
+                marker: "gross-marker"
+            }
+        ];
+
+        checks.forEach(item=>{
+
+            const marker =
+            document.getElementById(
+                item.marker
+            );
+
+            const ok =
+            Math.abs(
+                item.user -
+                item.correct
+            ) < 0.01;
+
+            marker.textContent =
+            ok ? "✔" : "✖";
+
+            marker.style.color =
+            ok ? "#16A34A" : "#DC2626";
+
+            marker.style.fontWeight =
+            "700";
+        });
+
+        return;
+    }
+if(q.taskType === "ledger"){
+
+    const value =
+
+    Number(
+        document
+        .getElementById(
+            "ledger-answer"
+        )
+        .value
+    );
+
+    const marker =
+
+    document.getElementById(
+        "ledger-marker"
+    );
+
+    const ok =
+
+    Math.abs(
+        value - q.answer
+    ) < 0.01;
+
+    marker.textContent =
+
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "statement"){
+
+    const value =
+
+    Number(
+        document
+        .getElementById(
+            "statement-answer"
+        )
+        .value
+    );
+
+    const marker =
+
+    document.getElementById(
+        "statement-marker"
+    );
+
+    const ok =
+
+    Math.abs(
+        value - q.answer
+    ) < 0.01;
+
+    marker.textContent =
+
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "journal"){
+
+    const value =
+
+    Number(
+        document
+        .getElementById(
+            "journal-answer"
+        )
+        .value
+    );
+
+    const marker =
+
+    document.getElementById(
+        "journal-marker"
+    );
+
+    const ok =
+
+    Math.abs(
+        value - q.answer
+    ) < 0.01;
+
+    marker.textContent =
+
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+    const selected =
+
+    document.querySelector(
+        'input[name="answer"]:checked'
+    );
+
+    if(!selected){
+        return;
+    }
+
+    const chosen =
+    Number(selected.value);
+
+    const correct =
+    q.correct;
+
+    const marker =
+
+    document.getElementById(
+        "marker-" + chosen
+    );
+
+    marker.textContent =
+
+    chosen === correct
+
+    ? "✔"
+
+    : "✖";
+
+    marker.style.color =
+
+    chosen === correct
+
+    ? "#16A34A"
+
+    : "#DC2626";
+}
+function showSolution(){
+
+    const q =
+    questions[currentQuestion];
+
+    if(
+    q.taskType === "invoice" ||
+q.taskType === "purchaseInvoice" ||
+q.taskType === "deliveryInvoice" ||
+q.taskType === "creditNote"
+){
+
+        document.getElementById(
+            "net-answer"
+        ).value =
+        q.answers.net;
+
+        document.getElementById(
+            "vat-answer"
+        ).value =
+        q.answers.vat;
+
+        document.getElementById(
+            "gross-answer"
+        ).value =
+        q.answers.gross;
+
+        return;
+    }
+
+    if(q.taskType === "ledger"){
+
+        document
+        .getElementById(
+            "ledger-answer"
+        )
+        .value =
+        q.answer.toFixed(2);
+
+        return;
+    }
+
+    if(q.taskType === "statement"){
+
+    document
+    .getElementById(
+        "statement-answer"
+    )
+    .value =
+    q.answer.toFixed(2);
+
+    return;
+}
+
+if(q.taskType === "journal"){
+
+    document
+    .getElementById(
+        "journal-answer"
+    )
+    .value =
+    q.answer.toFixed(2);
+
+    return;
+}
+
+    const correct =
+
+    q.correct;
+
+    const rows =
+
+    document.querySelectorAll(
+        ".option-row"
+    );
+
+    if(rows[correct]){
+
+        rows[correct]
+        .classList.add(
+            "reveal-correct"
+        );
+    }
+}
+
+function resetQuestion(){
+
+    const q =
+    questions[currentQuestion];
+
+    if(
+    q.taskType === "invoice" ||
+q.taskType === "purchaseInvoice" ||
+q.taskType === "deliveryInvoice" ||
+q.taskType === "creditNote"
+){
+        document.getElementById(
+            "net-answer"
+        ).value = "";
+
+        document.getElementById(
+            "vat-answer"
+        ).value = "";
+
+        document.getElementById(
+            "gross-answer"
+        ).value = "";
+
+        document.getElementById(
+            "net-marker"
+        ).textContent = "";
+
+        document.getElementById(
+            "vat-marker"
+        ).textContent = "";
+
+        document.getElementById(
+            "gross-marker"
+        ).textContent = "";
+
+        return;
+    }
+if(q.taskType === "ledger"){
+
+    document
+    .getElementById(
+        "ledger-answer"
+    )
+    .value = "";
+
+    document
+    .getElementById(
+        "ledger-marker"
+    )
+    .textContent = "";
+
+    return;
+}
+
+if(q.taskType === "statement"){
+
+    document
+    .getElementById(
+        "statement-answer"
+    )
+    .value = "";
+
+    document
+    .getElementById(
+        "statement-marker"
+    )
+    .textContent = "";
+
+    return;
+}
+
+if(q.taskType === "journal"){
+
+    document
+    .getElementById(
+        "journal-answer"
+    )
+    .value = "";
+
+    document
+    .getElementById(
+        "journal-marker"
+    )
+    .textContent = "";
+
+    return;
+}
+
+    document
+
+    .querySelectorAll(
+        'input[name="answer"]'
+    )
+
+    .forEach(el=>{
+
+        el.checked = false;
+    });
+
+    document
+
+    .querySelectorAll(
+        ".feedback-marker"
+    )
+
+    .forEach(el=>{
+
+        el.textContent = "";
+    });
+
+    document
+
+    .querySelectorAll(
+        ".option-row"
+    )
+
+    .forEach(el=>{
+
+        el.classList.remove(
+            "reveal-correct"
+        );
+    });
+}
+
+function previousQuestion(){
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        renderQuestion();
+    }
+}
+
+function nextQuestion(){
+
+    if(
+        currentQuestion <
+        questions.length - 1
+    ){
+
+        currentQuestion++;
+
+        renderQuestion();
+    }
+}
+
+renderQuestion();
+
+/* CALCOLATRICE */
+
+const calcWidget = document.getElementById("calc-widget");
+const calcTrigger = document.getElementById("calc-toggle-trigger");
+const calcClose = document.getElementById("calc-close-btn");
+const calcDisplay = document.getElementById("calc-screen");
+
+calcTrigger.onclick = () => {
+    calcWidget.style.display = "block";
+};
+
+calcClose.onclick = () => {
+    calcWidget.style.display = "none";
+};
+
+function pressCalc(val){
+    if(calcDisplay.innerText === "0" && !isNaN(val)){
+        calcDisplay.innerText = "";
+    }
+
+    if(val === "sq"){
+        calcDisplay.innerText =
+            Math.pow(eval(calcDisplay.innerText),2);
+    }
+    else if(val === "rt"){
+        calcDisplay.innerText =
+            Math.sqrt(eval(calcDisplay.innerText));
+    }
+    else{
+        calcDisplay.innerText += val;
+    }
+}
+
+function clearCalc(){
+    calcDisplay.innerText = "0";
+}
+
+function calculateCalc(){
+    try{
+        calcDisplay.innerText =
+            eval(calcDisplay.innerText);
+    }
+    catch(e){
+        calcDisplay.innerText = "Error";
+    }
+}
+
+<\/script>
+
+</body>
+</html>
+
+`);
+
+testWindow.document.close();
+
+}
+</script>
+</body>
+</html>
