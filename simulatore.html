@@ -1731,6 +1731,35 @@ else if(q.taskType === "documentIdentification"){
 
 else if(q.taskType === "journalEntry"){
 
+    const accountOptions = [
+
+        "Purchases",
+        "Trade Payables",
+        "Insurance Expense",
+        "Bank",
+        "Capital",
+        "Trade Receivables"
+    ];
+
+    let accountDropdown =
+
+        '<option value=""></option>';
+
+    accountOptions.forEach(acc=>{
+
+        accountDropdown +=
+
+        '<option value="' +
+
+        acc +
+
+        '">' +
+
+        acc +
+
+        '</option>';
+    });
+
     optionsHTML =
 
     '<div class="invoice-box">' +
@@ -1747,11 +1776,9 @@ else if(q.taskType === "journalEntry"){
 
             '<tr>' +
 
-                '<th style="border:1px solid #000;padding:6px;">Details</th>' +
+                '<th style="border:1px solid #000;padding:6px;">Account</th>' +
 
-                '<th style="border:1px solid #000;padding:6px;">Debit</th>' +
-
-                '<th style="border:1px solid #000;padding:6px;">Credit</th>' +
+                '<th style="border:1px solid #000;padding:6px;">Entry</th>' +
 
             '</tr>' +
 
@@ -1759,13 +1786,27 @@ else if(q.taskType === "journalEntry"){
 
                 '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<input id="journal-debit" type="text">' +
+                '<select id="journal-account-1">' +
+
+                accountDropdown +
+
+                '</select>' +
 
                 '</td>' +
 
-                '<td style="border:1px solid #000;padding:6px;">✓</td>' +
+                '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<td style="border:1px solid #000;padding:6px;"></td>' +
+                '<select id="journal-side-1">' +
+
+                '<option value=""></option>' +
+
+                '<option value="Debit">Debit</option>' +
+
+                '<option value="Credit">Credit</option>' +
+
+                '</select>' +
+
+                '</td>' +
 
             '</tr>' +
 
@@ -1773,13 +1814,27 @@ else if(q.taskType === "journalEntry"){
 
                 '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<input id="journal-credit" type="text">' +
+                '<select id="journal-account-2">' +
+
+                accountDropdown +
+
+                '</select>' +
 
                 '</td>' +
 
-                '<td style="border:1px solid #000;padding:6px;"></td>' +
+                '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<td style="border:1px solid #000;padding:6px;">✓</td>' +
+                '<select id="journal-side-2">' +
+
+                '<option value=""></option>' +
+
+                '<option value="Debit">Debit</option>' +
+
+                '<option value="Credit">Credit</option>' +
+
+                '</select>' +
+
+                '</td>' +
 
             '</tr>' +
 
