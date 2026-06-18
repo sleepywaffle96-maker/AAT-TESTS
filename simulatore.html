@@ -1096,7 +1096,18 @@ function renderQuestion(){
   const q =
 questions[currentQuestion];
 
-if(q.taskType === "documentIdentification"){
+
+    if(!q.taskType){
+    q.taskType = "mcq";
+}
+
+    const lastQuestion =
+    currentQuestion ===
+    questions.length - 1;
+
+    let optionsHTML = "";
+
+    if(q.taskType === "documentIdentification"){
 
     optionsHTML =
 
@@ -1146,16 +1157,6 @@ if(q.taskType === "documentIdentification"){
         '</div>';
     });
 }
-
-    if(!q.taskType){
-    q.taskType = "mcq";
-}
-
-    const lastQuestion =
-    currentQuestion ===
-    questions.length - 1;
-
-    let optionsHTML = "";
 
 if(q.taskType === "mcq"){
 
