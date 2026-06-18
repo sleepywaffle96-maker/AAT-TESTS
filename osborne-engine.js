@@ -715,28 +715,101 @@ Which statement is correct?`,
 
     if(type === 13){
 
-        const capital = rand(5000,12000);
-        const drawings = rand(500,2000);
+    const documentTypes = [
 
-        const correct =
-            "Owner's equity decreases";
+        {
+            name:"Sales Invoice",
 
-        const options = shuffle([
-            correct,
-            "Income increases",
-            "Liabilities increase",
-            "Sales increase"
-        ]);
+            title:"SALES INVOICE",
 
-        return {
-            question:
-            `A business owner introduces ${currency(capital)} and later withdraws ${currency(drawings)} for personal use.
+            body:
 
-What is the overall effect?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            "Invoice No: SI" + rand(1000,9999) +
+
+            "<br>Customer: " + randomBusiness() +
+
+            "<br>Goods supplied"
+        },
+
+        {
+            name:"Credit Note",
+
+            title:"CREDIT NOTE",
+
+            body:
+
+            "Credit Note No: CN" + rand(1000,9999) +
+
+            "<br>Customer: " + randomBusiness() +
+
+            "<br>Goods returned"
+        },
+
+        {
+            name:"Delivery Note",
+
+            title:"DELIVERY NOTE",
+
+            body:
+
+            "Delivery No: DN" + rand(1000,9999) +
+
+            "<br>Customer: " + randomBusiness() +
+
+            "<br>Goods dispatched"
+        },
+
+        {
+            name:"Supplier Statement",
+
+            title:"SUPPLIER STATEMENT",
+
+            body:
+
+            "Opening Balance" +
+
+            "<br>Purchases" +
+
+            "<br>Payments" +
+
+            "<br>Closing Balance"
+        }
+    ];
+
+    const doc =
+
+    documentTypes[
+        rand(0,documentTypes.length-1)
+    ];
+
+    const options = shuffle([
+
+        "Sales Invoice",
+        "Credit Note",
+        "Delivery Note",
+        "Supplier Statement"
+    ]);
+
+    return {
+
+        taskType:"documentIdentification",
+
+        question:
+
+        "Identify the document shown below.",
+
+        documentTitle:
+        doc.title,
+
+        documentBody:
+        doc.body,
+
+        options,
+
+        correct:
+        options.indexOf(doc.name)
+    };
+}
 
     if(type === 14){
 
