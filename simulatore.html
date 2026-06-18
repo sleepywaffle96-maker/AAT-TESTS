@@ -1846,21 +1846,25 @@ else if(q.taskType === "journalEntry"){
 
                 '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<select id="journal-account-1">' +
-                accountDropdown +
-                '</select>' +
+                    '<select id="journal-account-1">' +
+                    accountDropdown +
+                    '</select>' +
+
+                    '<span id="journal-account-marker-1" class="feedback-marker"></span>' +
 
                 '</td>' +
 
                 '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<select id="journal-side-1">' +
+                    '<select id="journal-side-1">' +
 
-                    '<option value=""></option>' +
-                    '<option value="Debit">Debit</option>' +
-                    '<option value="Credit">Credit</option>' +
+                        '<option value=""></option>' +
+                        '<option value="Debit">Debit</option>' +
+                        '<option value="Credit">Credit</option>' +
 
-                '</select>' +
+                    '</select>' +
+
+                    '<span id="journal-side-marker-1" class="feedback-marker"></span>' +
 
                 '</td>' +
 
@@ -1870,21 +1874,25 @@ else if(q.taskType === "journalEntry"){
 
                 '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<select id="journal-account-2">' +
-                accountDropdown +
-                '</select>' +
+                    '<select id="journal-account-2">' +
+                    accountDropdown +
+                    '</select>' +
+
+                    '<span id="journal-account-marker-2" class="feedback-marker"></span>' +
 
                 '</td>' +
 
                 '<td style="border:1px solid #000;padding:6px;">' +
 
-                '<select id="journal-side-2">' +
+                    '<select id="journal-side-2">' +
 
-                    '<option value=""></option>' +
-                    '<option value="Debit">Debit</option>' +
-                    '<option value="Credit">Credit</option>' +
+                        '<option value=""></option>' +
+                        '<option value="Debit">Debit</option>' +
+                        '<option value="Credit">Credit</option>' +
 
-                '</select>' +
+                    '</select>' +
+
+                    '<span id="journal-side-marker-2" class="feedback-marker"></span>' +
 
                 '</td>' +
 
@@ -2233,27 +2241,73 @@ if(q.taskType === "journalEntry"){
         "journal-side-2"
     ).value;
 
-    const ok =
+    const checks = [
 
-        row1Account === q.answers.row1Account &&
-        row1Side === q.answers.row1Side &&
-        row2Account === q.answers.row2Account &&
-        row2Side === q.answers.row2Side;
+        {
+            value: row1Account,
+            correct: q.answers.row1Account,
+            marker:
+            "journal-account-marker-1"
+        },
 
-    const marker =
+        {
+            value: row1Side,
+            correct: q.answers.row1Side,
+            marker:
+            "journal-side-marker-1"
+        },
+
+        {
+            value: row2Account,
+            correct: q.answers.row2Account,
+            marker:
+            "journal-account-marker-2"
+        },
+
+        {
+            value: row2Side,
+            correct: q.answers.row2Side,
+            marker:
+            "journal-side-marker-2"
+        }
+    ];
+
+    let allCorrect = true;
+
+    checks.forEach(item=>{
+
+        const ok =
+        item.value === item.correct;
+
+        const marker =
+        document.getElementById(
+            item.marker
+        );
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+
+        if(!ok){
+            allCorrect = false;
+        }
+    });
+
+    const finalMarker =
     document.getElementById(
         "journal-marker"
     );
 
-    marker.textContent =
-    ok ? "✔" : "✖";
+    finalMarker.textContent =
+    allCorrect ? "✔" : "✖";
 
-    marker.style.color =
-    ok ? "#16A34A" : "#DC2626";
+    finalMarker.style.color =
+    allCorrect ? "#16A34A" : "#DC2626";
 
     return;
 }
-
     const selected =
 
     document.querySelector(
@@ -2507,6 +2561,22 @@ if(q.taskType === "journalEntry"){
     document.getElementById(
         "journal-side-2"
     ).value = "";
+
+    document.getElementById(
+        "journal-account-marker-1"
+    ).textContent = "";
+
+    document.getElementById(
+        "journal-side-marker-1"
+    ).textContent = "";
+
+    document.getElementById(
+        "journal-account-marker-2"
+    ).textContent = "";
+
+    document.getElementById(
+        "journal-side-marker-2"
+    ).textContent = "";
 
     document.getElementById(
         "journal-marker"
