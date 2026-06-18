@@ -1245,21 +1245,27 @@ else if (q.taskType === "balance_sheet") {
 
     optionsHTML =
         '<div class="balance-sheet-box">' +
+
             '<p>' + q.question + '</p>' +
 
-            '<label>Assets</label><br>' +
-            '<input id="assetsInput" type="number">' +
-            '<span class="feedback-marker" id="assets-marker"></span><br><br>' +
+            '<div style="margin-top:15px;">' +
 
-            '<label>Liabilities</label><br>' +
-            '<input id="liabilitiesInput" type="number">' +
-            '<span class="feedback-marker" id="liabilities-marker"></span><br><br>' +
+                '<label>Assets</label><br>' +
+                '<input id="assetsInput" type="number" style="margin-bottom:10px;"><br>' +
 
-            '<label>Capital</label><br>' +
-            '<input id="capitalInput" type="number">' +
-            '<span class="feedback-marker" id="capital-marker"></span><br><br>' +
+                '<label>Liabilities</label><br>' +
+                '<input id="liabilitiesInput" type="number" style="margin-bottom:10px;"><br>' +
+
+                '<label>Capital</label><br>' +
+                '<input id="capitalInput" type="number" style="margin-bottom:10px;"><br>' +
+
+                '<button onclick="checkBalanceSheet()">Submit</button>' +
+
+            '</div>' +
+
         '</div>';
 }
+
 else if(q.taskType === "deliveryInvoice"){
 
     let itemRows = "";
@@ -2216,11 +2222,13 @@ const gross = Number(grossText);
 
 else if (q.taskType === "balance_sheet") {
 
-    const correct = q.solution;
+    const userAssets = Number(document.getElementById("assetsInput").value);
+    const userLiabilities = Number(document.getElementById("liabilitiesInput").value);
+    const userCapital = Number(document.getElementById("capitalInput").value);
 
-    const userAssets = Number(document.getElementById("assetsInput")?.value);
-    const userLiabilities = Number(document.getElementById("liabilitiesInput")?.value);
-    const userCapital = Number(document.getElementById("capitalInput")?.value);
+    const correctAssets = q.solution.assets;
+    const correctLiabilities = q.solution.liabilities;
+    const correctCapital = q.solution.capital;
 
     q.userAnswer = {
         assets: userAssets,
@@ -2228,12 +2236,14 @@ else if (q.taskType === "balance_sheet") {
         capital: userCapital
     };
 
-    q.isCorrect =
-        userAssets === Number(correct.assets) &&
-        userLiabilities === Number(correct.liabilities) &&
-        userCapital === Number(correct.capital);
+    q.correctAnswer = q.solution;
 
-    showSolution(q);
+    q.isCorrect =
+        userAssets === correctAssets &&
+        userLiabilities === correctLiabilities &&
+        userCapital === correctCapital;
+
+    showSolution();
 }
 
 if(q.taskType === "accountingEquation"){
@@ -2574,31 +2584,26 @@ q.taskType === "creditNote"
     return;
 }
 
-function showSolution(q) {
+else if (q.taskType === "balance_sheet") {
 
-    const container = document.getElementById("questionContainer");
+    const container = document.getElementById("solutionBox");
 
-    let html = "";
+    container.innerHTML =
+        '<h3>Solution</h3>' +
 
-    if (q.taskType === "balance_sheet") {
+        '<p><strong>Correct Answers:</strong></p>' +
 
-        html =
-            '<h3>Solution</h3>' +
+        '<p>Assets: £' + q.solution.assets + '</p>' +
+        '<p>Liabilities: £' + q.solution.liabilities + '</p>' +
+        '<p>Capital: £' + q.solution.capital + '</p>' +
 
-            '<p><strong>Correct Answers:</strong></p>' +
-            '<p>Assets: £' + q.solution.assets + '</p>' +
-            '<p>Liabilities: £' + q.solution.liabilities + '</p>' +
-            '<p>Capital: £' + q.solution.capital + '</p>' +
+        '<hr>' +
 
-            '<hr>' +
+        '<p><strong>Your Answers:</strong></p>' +
 
-            '<p><strong>Your Answers:</strong></p>' +
-            '<p>Assets: £' + q.userAnswer.assets + '</p>' +
-            '<p>Liabilities: £' + q.userAnswer.liabilities + '</p>' +
-            '<p>Capital: £' + q.userAnswer.capital + '</p>';
-    }
-
-    container.innerHTML += html;
+        '<p>Assets: £' + q.userAnswer.assets + '</p>' +
+        '<p>Liabilities: £' + q.userAnswer.liabilities + '</p>' +
+        '<p>Capital: £' + q.userAnswer.capital + '</p>';
 }
 
     if(q.taskType === "ledger"){
@@ -2747,13 +2752,9 @@ if(q.taskType === "accountingEquation"){
 
 else if (q.taskType === "balance_sheet") {
 
-    const assetsInput = document.getElementById("assetsInput");
-    const liabilitiesInput = document.getElementById("liabilitiesInput");
-    const capitalInput = document.getElementById("capitalInput");
-
-    if (assetsInput) assetsInput.value = "";
-    if (liabilitiesInput) liabilitiesInput.value = "";
-    if (capitalInput) capitalInput.value = "";
+    document.getElementById("assetsInput").value = "";
+    document.getElementById("liabilitiesInput").value = "";
+    document.getElementById("capitalInput").value = "";
 
     const solutionBox = document.getElementById("solutionBox");
     if (solutionBox) solutionBox.innerHTML = "";
