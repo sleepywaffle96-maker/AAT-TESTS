@@ -725,59 +725,131 @@ function generateL2CH1(type = null){
     
     if(type === 11){
 
-        const capital = rand(8000,15000);
-        const equipment = rand(1000,5000);
+    const opening =
+    rand(1000,5000);
 
-        const correct =
-            "Total assets remain greater than zero";
+    const sales =
+    rand(500,3000);
 
-        const options = shuffle([
-            correct,
-            "All assets disappear",
-            "Capital becomes zero",
-            "Liabilities automatically increase"
-        ]);
+    const receipts =
+    rand(300,2000);
 
-        return {
-            question:
-            `${business} starts trading.
+    const returns =
+    rand(100,800);
 
-Step 1:
-The owner introduces ${currency(capital)}.
+    const balance =
 
-Step 2:
-Equipment costing ${currency(equipment)} is purchased using business cash.
+    opening +
+    sales -
+    receipts -
+    returns;
 
-Which statement is correct?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
+
+        taskType:"ledger",
+
+        question:
+
+        "Calculate the closing Trade Receivables balance.",
+
+        accountName:
+
+        "Trade Receivables",
+
+        rows:[
+
+            {
+                description:"Opening Balance",
+                debit:opening.toFixed(2)
+            },
+
+            {
+                description:"Credit Sales",
+                debit:sales.toFixed(2)
+            },
+
+            {
+                description:"Receipts",
+                credit:receipts.toFixed(2)
+            },
+
+            {
+                description:"Credit Notes",
+                credit:returns.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(balance.toFixed(2)),
+
+        balanceSide:
+        "Debit"
+    };
+}
 
     if(type === 12){
 
-        const sales = rand(1000,5000);
-        const expenses = rand(200,1500);
+    const opening =
+    rand(1000,5000);
 
-        const correct =
-            "Income exceeds expenses";
+    const purchases =
+    rand(500,3000);
 
-        const options = shuffle([
-            correct,
-            "Expenses exceed income",
-            "Assets become zero",
-            "Liabilities must increase"
-        ]);
+    const payments =
+    rand(300,2000);
 
-        return {
-            question:
-            `${business} makes cash sales of ${currency(sales)} and pays expenses of ${currency(expenses)}.
+    const returns =
+    rand(100,800);
 
-Which statement is correct?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const balance =
+
+    opening +
+    purchases -
+    payments -
+    returns;
+
+    return {
+
+        taskType:"ledger",
+
+        question:
+
+        "Calculate the closing Trade Payables balance.",
+
+        accountName:
+
+        "Trade Payables",
+
+        rows:[
+
+            {
+                description:"Opening Balance",
+                credit:opening.toFixed(2)
+            },
+
+            {
+                description:"Credit Purchases",
+                credit:purchases.toFixed(2)
+            },
+
+            {
+                description:"Payments",
+                debit:payments.toFixed(2)
+            },
+
+            {
+                description:"Purchase Returns",
+                debit:returns.toFixed(2)
+            }
+        ],
+
+        answer:
+        Number(balance.toFixed(2)),
+
+        balanceSide:
+        "Credit"
+    };
+}
 
     if(type === 13){
 
@@ -864,25 +936,69 @@ Which statement is correct?`,
 }
     if(type === 14){
 
-        const correct =
-            "To record business transactions accurately";
+    const capital =
+    rand(5000,15000);
 
-        const options = shuffle([
-            correct,
-            "To increase profits automatically",
-            "To remove liabilities",
-            "To reduce taxes automatically"
-        ]);
+    const inventory =
+    rand(1000,4000);
 
-        return {
-            question:
-            `${business} wants reliable financial records.
+    const sales =
+    rand(500,2000);
 
-What is the primary purpose of bookkeeping?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const supplier =
+    rand(300,1500);
+
+    const assets =
+
+        capital -
+        inventory +
+        sales -
+        supplier +
+        inventory;
+
+    const liabilities = 0;
+
+    const equity =
+
+        capital +
+        sales -
+        supplier;
+
+    const correct =
+
+        "Assets = Liabilities + Capital";
+
+    const options = shuffle([
+
+        correct,
+
+        "Assets are less than Capital",
+
+        "Liabilities exceed Assets",
+
+        "Capital becomes zero"
+
+    ]);
+
+    return {
+
+        question:
+
+`${business} completes the following transactions:
+
+• Owner introduces ${currency(capital)}
+• Inventory purchased for ${currency(inventory)}
+• Cash sales made ${currency(sales)}
+• Supplier paid ${currency(supplier)}
+
+After recording all transactions, which statement is correct?`,
+
+        options,
+
+        correct:
+        options.indexOf(correct)
+    };
+}
 
    if(type === 15){
 
