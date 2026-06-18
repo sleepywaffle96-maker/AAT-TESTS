@@ -934,57 +934,75 @@ function generateL2CH1(type = null){
         )
     };
 }
-    else if (type === 14) {
-
-    const capitalIntroduced = 8000 + Math.floor(Math.random() * 4000);
-    const inventoryOnCredit = 2000 + Math.floor(Math.random() * 3000);
-    const creditSales = 1500 + Math.floor(Math.random() * 3000);
-    const cashSales = 1000 + Math.floor(Math.random() * 2000);
-    const cashReceived = 500 + Math.floor(Math.random() * 1500);
-    const costOfSales = Math.floor(creditSales * 0.5);
-    const expenses = 800 + Math.floor(Math.random() * 1200);
-
-    const receivables = creditSales - cashReceived;
-
-    const inventory = inventoryOnCredit - costOfSales;
-
-    const cash =
-        capitalIntroduced +
-        cashSales +
-        cashReceived -
-        expenses;
-
-    const assets =
-        cash + inventory + receivables;
-
-    const liabilities =
-        inventoryOnCredit;
-
-    const netProfit =
-        (creditSales + cashSales - costOfSales) - expenses;
+   if(type === 14){
 
     const capital =
-        capitalIntroduced + netProfit;
+    rand(5000,15000);
+
+    const inventoryOnCredit =
+    rand(1000,4000);
+
+    const creditSales =
+    rand(1000,3000);
+
+    const customerReceipt =
+    rand(
+        500,
+        creditSales
+    );
+
+    const assets =
+
+        capital +
+
+        inventoryOnCredit +
+
+        creditSales;
+
+    const liabilities =
+
+        inventoryOnCredit;
+
+    const equity =
+
+        capital +
+
+        creditSales;
 
     return {
-        taskType: "balance_sheet",
-        question: `
-A business has the following transactions:
 
-- Owner introduces capital £${capitalIntroduced}
-- Purchases inventory on credit £${inventoryOnCredit}
-- Credit sales £${creditSales}
-- Cash sales £${cashSales}
-- Receives £${cashReceived} from customers
-- Cost of sales £${costOfSales}
-- Expenses £${expenses}
+        taskType:"accountingEquation",
 
-Calculate Assets, Liabilities and Capital.
-        `,
-        solution: {
-            assets,
-            liabilities,
-            capital
+        question:
+
+        `${business} completes the following transactions.
+
+Owner introduces ${currency(capital)}
+
+Inventory purchased on credit ${currency(inventoryOnCredit)}
+
+Credit sales made ${currency(creditSales)}
+
+Customer pays ${currency(customerReceipt)}
+
+Complete the accounting equation.`,
+
+        answers:{
+
+            assets:
+            Number(
+                assets.toFixed(2)
+            ),
+
+            liabilities:
+            Number(
+                liabilities.toFixed(2)
+            ),
+
+            capital:
+            Number(
+                equity.toFixed(2)
+            )
         }
     };
 }
