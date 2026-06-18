@@ -1241,29 +1241,73 @@ else if(q.taskType === "invoice"){
     '</div>';
 }
 
-else if (q.taskType === "balance_sheet") {
+else if(q.taskType === "accountingEquation"){
 
     optionsHTML =
-        '<div class="balance-sheet-box">' +
 
-            '<p>' + q.question + '</p>' +
+    '<div class="invoice-box">' +
 
-            '<div style="margin-top:15px;">' +
+        '<p style="margin-bottom:20px;">' +
 
-                '<label>Assets</label><br>' +
-                '<input id="assetsInput" type="number" style="margin-bottom:10px;"><br>' +
+        q.question +
 
-                '<label>Liabilities</label><br>' +
-                '<input id="liabilitiesInput" type="number" style="margin-bottom:10px;"><br>' +
+        '</p>' +
 
-                '<label>Capital</label><br>' +
-                '<input id="capitalInput" type="number" style="margin-bottom:10px;"><br>' +
+        '<table style="width:450px;border-collapse:collapse;border:1px solid #000;">' +
 
-                '<button onclick="checkBalanceSheet()">Submit</button>' +
+            '<tr>' +
 
-            '</div>' +
+                '<th style="border:1px solid #000;padding:8px;">Category</th>' +
 
-        '</div>';
+                '<th style="border:1px solid #000;padding:8px;">Amount</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;">Assets</td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                    '<input id="eq-assets" type="text">' +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;">Liabilities</td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                    '<input id="eq-liabilities" type="text">' +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;">Capital</td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                    '<input id="eq-capital" type="text">' +
+
+                '</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:10px;">' +
+
+            '<span id="eq-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
 }
 
 else if(q.taskType === "deliveryInvoice"){
@@ -1384,75 +1428,6 @@ item.qty +
         '</tr>' +
 
         '</table>' +
-
-    '</div>';
-}
-
-else if(q.taskType === "accountingEquation"){
-
-    optionsHTML =
-
-    '<div class="invoice-box">' +
-
-        '<p style="margin-bottom:20px;">' +
-
-        q.question +
-
-        '</p>' +
-
-        '<table style="width:450px;border-collapse:collapse;border:1px solid #000;">' +
-
-            '<tr>' +
-
-                '<th style="border:1px solid #000;padding:8px;">Category</th>' +
-
-                '<th style="border:1px solid #000;padding:8px;">Amount</th>' +
-
-            '</tr>' +
-
-            '<tr>' +
-
-                '<td style="border:1px solid #000;padding:8px;">Assets</td>' +
-
-                '<td style="border:1px solid #000;padding:8px;">' +
-
-                    '<input id="eq-assets" type="text">' +
-
-                '</td>' +
-
-            '</tr>' +
-
-            '<tr>' +
-
-                '<td style="border:1px solid #000;padding:8px;">Liabilities</td>' +
-
-                '<td style="border:1px solid #000;padding:8px;">' +
-
-                    '<input id="eq-liabilities" type="text">' +
-
-                '</td>' +
-
-            '</tr>' +
-
-            '<tr>' +
-
-                '<td style="border:1px solid #000;padding:8px;">Capital</td>' +
-
-                '<td style="border:1px solid #000;padding:8px;">' +
-
-                    '<input id="eq-capital" type="text">' +
-
-                '</td>' +
-
-            '</tr>' +
-
-        '</table>' +
-
-        '<div style="margin-top:10px;">' +
-
-            '<span id="eq-marker" class="feedback-marker"></span>' +
-
-        '</div>' +
 
     '</div>';
 }
@@ -2220,31 +2195,6 @@ const gross = Number(grossText);
         return;
     }
 
-else if (q.taskType === "balance_sheet") {
-
-    const userAssets = Number(document.getElementById("assetsInput").value);
-    const userLiabilities = Number(document.getElementById("liabilitiesInput").value);
-    const userCapital = Number(document.getElementById("capitalInput").value);
-
-    const correctAssets = q.solution.assets;
-    const correctLiabilities = q.solution.liabilities;
-    const correctCapital = q.solution.capital;
-
-    q.userAnswer = {
-        assets: userAssets,
-        liabilities: userLiabilities,
-        capital: userCapital
-    };
-
-    q.correctAnswer = q.solution;
-
-    q.isCorrect =
-        userAssets === correctAssets &&
-        userLiabilities === correctLiabilities &&
-        userCapital === correctCapital;
-
-    showSolution();
-}
 
 if(q.taskType === "accountingEquation"){
 
@@ -2584,28 +2534,6 @@ q.taskType === "creditNote"
     return;
 }
 
-else if (q.taskType === "balance_sheet") {
-
-    const container = document.getElementById("solutionBox");
-
-    container.innerHTML =
-        '<h3>Solution</h3>' +
-
-        '<p><strong>Correct Answers:</strong></p>' +
-
-        '<p>Assets: £' + q.solution.assets + '</p>' +
-        '<p>Liabilities: £' + q.solution.liabilities + '</p>' +
-        '<p>Capital: £' + q.solution.capital + '</p>' +
-
-        '<hr>' +
-
-        '<p><strong>Your Answers:</strong></p>' +
-
-        '<p>Assets: £' + q.userAnswer.assets + '</p>' +
-        '<p>Liabilities: £' + q.userAnswer.liabilities + '</p>' +
-        '<p>Capital: £' + q.userAnswer.capital + '</p>';
-}
-
     if(q.taskType === "ledger"){
 
      console.log(q);
@@ -2749,16 +2677,6 @@ if(q.taskType === "accountingEquation"){
 
     return;
 }
-
-else if (q.taskType === "balance_sheet") {
-
-    document.getElementById("assetsInput").value = "";
-    document.getElementById("liabilitiesInput").value = "";
-    document.getElementById("capitalInput").value = "";
-
-    const solutionBox = document.getElementById("solutionBox");
-    if (solutionBox) solutionBox.innerHTML = "";
-}
     
 if(q.taskType === "ledger"){
 
@@ -2776,6 +2694,7 @@ if(q.taskType === "ledger"){
 
     return;
 }
+
 if(q.taskType === "statement"){
 
     document
