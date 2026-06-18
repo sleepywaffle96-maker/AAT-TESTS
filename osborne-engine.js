@@ -982,7 +982,7 @@ A business has the following transactions:
 
 Calculate Assets, Liabilities and Capital.
         `,
-        solution: {
+        answer: {
             assets,
             liabilities,
             capital
