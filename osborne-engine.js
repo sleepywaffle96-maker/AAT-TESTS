@@ -936,66 +936,62 @@ function generateL2CH1(type = null){
 }
     if(type === 14){
 
-    const capital =
-    rand(5000,15000);
+    const capitalIntroduced = 8000 + Math.floor(Math.random() * 4000);
+    const inventoryOnCredit = 2000 + Math.floor(Math.random() * 3000);
+    const creditSales = 1500 + Math.floor(Math.random() * 3000);
+    const cashSales = 1000 + Math.floor(Math.random() * 2000);
+    const cashReceived = 500 + Math.floor(Math.random() * 1500);
+    const costOfSales = Math.floor(creditSales * 0.5);
+    const expenses = 800 + Math.floor(Math.random() * 1200);
+
+    const revenue = creditSales + cashSales;
+    const grossProfit = revenue - costOfSales;
+    const netProfit = grossProfit - expenses;
+
+    const cash =
+        capitalIntroduced +
+        cashSales +
+        cashReceived -
+        expenses;
 
     const inventory =
-    rand(1000,4000);
+        inventoryOnCredit - costOfSales;
 
-    const sales =
-    rand(500,2500);
-
-    const supplierPayment =
-    rand(300,1500);
+    const receivables =
+        creditSales - cashReceived;
 
     const assets =
+        cash + inventory + receivables;
 
-    capital +
-    sales -
-    supplierPayment;
+    const liabilities = inventoryOnCredit;
 
-    const liabilities = 0;
-
-    const equity =
-
-    capital +
-    sales -
-    supplierPayment;
+    const capital =
+        capitalIntroduced + netProfit;
 
     return {
+        taskType: "ledger",
+        question: `
+A business has the following transactions:
 
-        taskType:"accountingEquation",
+- Owner introduces capital £${capitalIntroduced}
+- Purchases inventory on credit £${inventoryOnCredit}
+- Credit sales £${creditSales}
+- Cash sales £${cashSales}
+- Receives £${cashReceived} from customers
+- Cost of sales £${costOfSales}
+- Expenses £${expenses}
 
-        question:
-
-        `${business} completes the following transactions.
-
-Owner introduces ${currency(capital)}
-
-Inventory purchased for ${currency(inventory)}
-
-Cash sales made ${currency(sales)}
-
-Supplier paid ${currency(supplierPayment)}
-
-Complete the accounting equation.`,
-
-        answers:{
-
-            assets:
-            Number(
-                assets.toFixed(2)
-            ),
-
-            liabilities:
-            Number(
-                liabilities.toFixed(2)
-            ),
-
-            capital:
-            Number(
-                equity.toFixed(2)
-            )
+Calculate Assets, Liabilities and Capital.
+        `,
+        rows: [
+            { description: "Assets", debit: assets },
+            { description: "Liabilities", debit: liabilities },
+            { description: "Capital", debit: capital }
+        ],
+        answer: {
+            assets,
+            liabilities,
+            capital
         }
     };
 }
