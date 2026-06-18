@@ -1799,6 +1799,71 @@ else if(q.taskType === "documentIdentification"){
     });
 }
 
+else if(q.taskType === "journal"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>GENERAL JOURNAL</h3>' +
+
+        '<p style="margin-bottom:15px;">' +
+
+        q.transaction +
+
+        '</p>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Details</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Debit</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Credit</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;">' +
+
+                '<input id="journal-debit" type="text">' +
+
+                '</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;">✓</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;"></td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;">' +
+
+                '<input id="journal-credit" type="text">' +
+
+                '</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;"></td>' +
+
+                '<td style="border:1px solid #000;padding:6px;">✓</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:10px;">' +
+
+        '<span id="journal-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
     document
     .getElementById(
         "quiz-root"
@@ -1918,6 +1983,56 @@ function checkAnswer(){
 questions[currentQuestion];
 
 console.log("CHECK", q);
+
+if(q.taskType === "journal"){
+
+    const debit =
+
+    document
+    .getElementById(
+        "journal-debit"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+    const credit =
+
+    document
+    .getElementById(
+        "journal-credit"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+    const ok =
+
+    debit ===
+    q.answers.debit
+    .toLowerCase()
+
+    &&
+
+    credit ===
+    q.answers.credit
+    .toLowerCase();
+
+    const marker =
+
+    document
+    .getElementById(
+        "journal-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔ Correct" : "✖ Incorrect";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
 
 if(
     q.taskType === "invoice" ||
@@ -2152,6 +2267,23 @@ function showSolution(){
     const q =
     questions[currentQuestion];
 
+if(q.taskType === "journal"){
+
+    document
+    .getElementById(
+        "journal-debit"
+    ).value =
+    q.answers.debit;
+
+    document
+    .getElementById(
+        "journal-credit"
+    ).value =
+    q.answers.credit;
+
+    return;
+}
+
     if(
     q.taskType === "invoice" ||
 q.taskType === "purchaseInvoice" ||
@@ -2236,6 +2368,36 @@ function resetQuestion(){
 
     const q =
     questions[currentQuestion];
+
+if(
+document.getElementById(
+    "journal-debit"
+)){
+    document
+    .getElementById(
+        "journal-debit"
+    ).value = "";
+}
+
+if(
+document.getElementById(
+    "journal-credit"
+)){
+    document
+    .getElementById(
+        "journal-credit"
+    ).value = "";
+}
+
+if(
+document.getElementById(
+    "journal-marker"
+)){
+    document
+    .getElementById(
+        "journal-marker"
+    ).textContent = "";
+}
 
     if(
     q.taskType === "invoice" ||
