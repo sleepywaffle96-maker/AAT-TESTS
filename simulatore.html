@@ -1259,8 +1259,6 @@ else if (q.taskType === "balance_sheet") {
                 '<label>Capital</label><br>' +
                 '<input id="capitalInput" type="number" style="margin-bottom:10px;"><br>' +
 
-                '<button onclick="checkBalanceSheet()">Submit</button>' +
-
             '</div>' +
 
         '</div>';
@@ -2222,13 +2220,16 @@ const gross = Number(grossText);
 
 else if (q.taskType === "balance_sheet") {
 
-    const userAssets = Number(document.getElementById("assetsInput").value);
-    const userLiabilities = Number(document.getElementById("liabilitiesInput").value);
-    const userCapital = Number(document.getElementById("capitalInput").value);
+    const userAssets = Number(document.getElementById("assetsInput")?.value);
+    const userLiabilities = Number(document.getElementById("liabilitiesInput")?.value);
+    const userCapital = Number(document.getElementById("capitalInput")?.value);
 
-    const correctAssets = q.solution.assets;
-    const correctLiabilities = q.solution.liabilities;
-    const correctCapital = q.solution.capital;
+    const correct = q.solution;
+
+    if (!correct) {
+        console.error("Missing solution for balance_sheet:", q);
+        return;
+    }
 
     q.userAnswer = {
         assets: userAssets,
@@ -2236,12 +2237,12 @@ else if (q.taskType === "balance_sheet") {
         capital: userCapital
     };
 
-    q.correctAnswer = q.solution;
+    q.correctAnswer = correct;
 
     q.isCorrect =
-        userAssets === correctAssets &&
-        userLiabilities === correctLiabilities &&
-        userCapital === correctCapital;
+        userAssets === Number(correct.assets) &&
+        userLiabilities === Number(correct.liabilities) &&
+        userCapital === Number(correct.capital);
 
     showSolution();
 }
@@ -2588,22 +2589,35 @@ else if (q.taskType === "balance_sheet") {
 
     const container = document.getElementById("solutionBox");
 
+    if (!container) {
+        console.error("Missing #solutionBox in DOM");
+        return;
+    }
+
+    const correct = q.solution;
+    const user = q.userAnswer;
+
+    if (!correct) {
+        console.error("Missing solution for question:", q);
+        return;
+    }
+
     container.innerHTML =
         '<h3>Solution</h3>' +
 
         '<p><strong>Correct Answers:</strong></p>' +
 
-        '<p>Assets: £' + q.solution.assets + '</p>' +
-        '<p>Liabilities: £' + q.solution.liabilities + '</p>' +
-        '<p>Capital: £' + q.solution.capital + '</p>' +
+        '<p>Assets: £' + correct.assets + '</p>' +
+        '<p>Liabilities: £' + correct.liabilities + '</p>' +
+        '<p>Capital: £' + correct.capital + '</p>' +
 
         '<hr>' +
 
         '<p><strong>Your Answers:</strong></p>' +
 
-        '<p>Assets: £' + q.userAnswer.assets + '</p>' +
-        '<p>Liabilities: £' + q.userAnswer.liabilities + '</p>' +
-        '<p>Capital: £' + q.userAnswer.capital + '</p>';
+        '<p>Assets: £' + (user?.assets ?? "-") + '</p>' +
+        '<p>Liabilities: £' + (user?.liabilities ?? "-") + '</p>' +
+        '<p>Capital: £' + (user?.capital ?? "-") + '</p>';
 }
 
     if(q.taskType === "ledger"){
@@ -2752,9 +2766,13 @@ if(q.taskType === "accountingEquation"){
 
 else if (q.taskType === "balance_sheet") {
 
-    document.getElementById("assetsInput").value = "";
-    document.getElementById("liabilitiesInput").value = "";
-    document.getElementById("capitalInput").value = "";
+    const assetsInput = document.getElementById("assetsInput");
+    const liabilitiesInput = document.getElementById("liabilitiesInput");
+    const capitalInput = document.getElementById("capitalInput");
+
+    if (assetsInput) assetsInput.value = "";
+    if (liabilitiesInput) liabilitiesInput.value = "";
+    if (capitalInput) capitalInput.value = "";
 
     const solutionBox = document.getElementById("solutionBox");
     if (solutionBox) solutionBox.innerHTML = "";
