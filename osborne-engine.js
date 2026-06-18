@@ -969,7 +969,7 @@ function generateL2CH1(type = null){
         capitalIntroduced + netProfit;
 
     return {
-        taskType: "ledger",
+        taskType: "mcq",   // 🔥 FIX IMPORTANTE
         question: `
 A business has the following transactions:
 
@@ -983,11 +983,6 @@ A business has the following transactions:
 
 Calculate Assets, Liabilities and Capital.
         `,
-        rows: [
-            { description: "Assets", debit: assets },
-            { description: "Liabilities", debit: liabilities },
-            { description: "Capital", debit: capital }
-        ],
         answer: {
             assets,
             liabilities,
