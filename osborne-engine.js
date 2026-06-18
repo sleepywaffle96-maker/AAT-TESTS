@@ -482,6 +482,8 @@ function generateL2CH1(type = null){
 
         answer:
         Number(balance.toFixed(2))
+        balanceSide:
+"Debit"
     };
 }
     
