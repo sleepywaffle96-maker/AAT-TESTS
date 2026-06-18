@@ -1248,18 +1248,18 @@ else if (q.taskType === "balance_sheet") {
             '<p>' + q.question + '</p>' +
 
             '<label>Assets</label><br>' +
-            '<input id="assetsInput" type="number"><br><br>' +
+            '<input id="assetsInput" type="number">' +
+            '<span class="feedback-marker" id="assets-marker"></span><br><br>' +
 
             '<label>Liabilities</label><br>' +
-            '<input id="liabilitiesInput" type="number"><br><br>' +
+            '<input id="liabilitiesInput" type="number">' +
+            '<span class="feedback-marker" id="liabilities-marker"></span><br><br>' +
 
             '<label>Capital</label><br>' +
-            '<input id="capitalInput" type="number"><br><br>' +
-
-            '<button onclick="checkAnswer()">Submit</button>' +
+            '<input id="capitalInput" type="number">' +
+            '<span class="feedback-marker" id="capital-marker"></span><br><br>' +
         '</div>';
 }
-
 else if(q.taskType === "deliveryInvoice"){
 
     let itemRows = "";
