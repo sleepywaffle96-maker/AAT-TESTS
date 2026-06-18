@@ -637,26 +637,78 @@ function generateL2CH1(type = null){
 
     if(type === 10){
 
-        const correct =
-            "Liability";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Asset",
-            "Income",
-            "Expense"
-        ]);
+        {
+            text:
+            "Purchased inventory on credit.",
 
-        return {
-            question:
-            `${business} owes a supplier money for goods purchased on credit.
+            debit:
+            "Purchases",
 
-How should this balance be classified?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            credit:
+            "Trade Payables"
+        },
 
+        {
+            text:
+            "Paid insurance by bank.",
+
+            debit:
+            "Insurance Expense",
+
+            credit:
+            "Bank"
+        },
+
+        {
+            text:
+            "Owner introduced cash into the business.",
+
+            debit:
+            "Bank",
+
+            credit:
+            "Capital"
+        },
+
+        {
+            text:
+            "Received payment from a customer.",
+
+            debit:
+            "Bank",
+
+            credit:
+            "Trade Receivables"
+        }
+    ];
+
+    const entry =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return {
+
+        taskType:"journal",
+
+        question:
+        "Complete the journal entry.",
+
+        transaction:
+        entry.text,
+
+        answers:{
+
+            debit:
+            entry.debit,
+
+            credit:
+            entry.credit
+        }
+    };
+}
     if(type === 11){
 
         const capital = rand(8000,15000);
