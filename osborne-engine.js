@@ -686,29 +686,36 @@ function generateL2CH1(type = null){
 
     const entry =
     scenarios[
-        rand(0,scenarios.length-1)
+        rand(0, scenarios.length - 1)
     ];
 
     return {
 
-        taskType:"journal",
+        taskType:"journalEntry",
 
         question:
-        "Complete the journal entry.",
+        "Complete the journal entry by selecting the correct accounts and whether each entry is a debit or a credit.",
 
         transaction:
         entry.text,
 
         answers:{
 
-            debit:
+            row1Account:
             entry.debit,
 
-            credit:
-            entry.credit
+            row1Side:
+            "Debit",
+
+            row2Account:
+            entry.credit,
+
+            row2Side:
+            "Credit"
         }
     };
 }
+    
     if(type === 11){
 
         const capital = rand(8000,15000);
