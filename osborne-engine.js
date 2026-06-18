@@ -944,22 +944,21 @@ function generateL2CH1(type = null){
     const costOfSales = Math.floor(creditSales * 0.5);
     const expenses = 800 + Math.floor(Math.random() * 1200);
 
+    const receivables = creditSales - cashReceived;
+
+    const inventory = inventoryOnCredit - costOfSales;
+
     const cash =
         capitalIntroduced +
         cashSales +
         cashReceived -
         expenses;
 
-    const inventory =
-        inventoryOnCredit - costOfSales;
-
-    const receivables =
-        creditSales - cashReceived;
-
     const assets =
         cash + inventory + receivables;
 
-    const liabilities = inventoryOnCredit;
+    const liabilities =
+        inventoryOnCredit;
 
     const netProfit =
         (creditSales + cashSales - costOfSales) - expenses;
