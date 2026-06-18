@@ -1107,31 +1107,25 @@ questions[currentQuestion];
 
     let optionsHTML = "";
 
-    if(q.taskType === "documentIdentification"){
+    else if(q.taskType === "documentIdentification"){
 
     optionsHTML =
 
     '<div style="' +
 
-    'border:2px solid #000;' +
-    'padding:20px;' +
-    'background:white;' +
+    'background:#FFFFFF;' +
+    'border:2px solid #1E293B;' +
+    'padding:25px;' +
+    'margin-bottom:20px;' +
+    'font-family:Arial,sans-serif;' +
+    'line-height:1.8;' +
+    'color:#111827;' +
 
     '">' +
 
-    '<h3 style="text-align:center;">' +
-
-    q.documentTitle +
-
-    '</h3>' +
-
-    '<br>' +
-
     q.documentBody +
 
-    '</div>' +
-
-    '<br>';
+    '</div>';
 
     q.options.forEach(
         (option,index)=>{
