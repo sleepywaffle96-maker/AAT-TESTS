@@ -715,102 +715,87 @@ Which statement is correct?`,
 
     if(type === 13){
 
-    const documentTypes = [
+    const docs = [
 
         {
-            name:"Sales Invoice",
-
-            title:"SALES INVOICE",
-
             body:
 
-            "Invoice No: SI" + rand(1000,9999) +
+            'Invoice No: SI' + rand(1000,9999) + '<br>' +
+            'Customer: ' + randomBusiness() + '<br>' +
+            'VAT Included<br>' +
+            'Amount Due: £' + rand(500,5000) + '<br>' +
+            'Payment Terms: 30 Days',
 
-            "<br>Customer: " + randomBusiness() +
-
-            "<br>Goods supplied"
+            correct:"Sales Invoice"
         },
 
         {
-            name:"Credit Note",
-
-            title:"CREDIT NOTE",
-
             body:
 
-            "Credit Note No: CN" + rand(1000,9999) +
+            'Delivery No: DN' + rand(1000,9999) + '<br>' +
+            'Items Delivered<br>' +
+            'Quantity Checked<br>' +
+            'Received By: __________',
 
-            "<br>Customer: " + randomBusiness() +
-
-            "<br>Goods returned"
+            correct:"Delivery Note"
         },
 
         {
-            name:"Delivery Note",
-
-            title:"DELIVERY NOTE",
-
             body:
 
-            "Delivery No: DN" + rand(1000,9999) +
+            'Credit Note No: CN' + rand(1000,9999) + '<br>' +
+            'Goods Returned<br>' +
+            'Credit Value: £' + rand(100,1500) + '<br>' +
+            'Customer Account Adjustment',
 
-            "<br>Customer: " + randomBusiness() +
-
-            "<br>Goods dispatched"
+            correct:"Credit Note"
         },
 
         {
-            name:"Supplier Statement",
-
-            title:"SUPPLIER STATEMENT",
-
             body:
 
-            "Opening Balance" +
+            'Opening Balance: £' + rand(1000,5000) + '<br>' +
+            'Invoices Outstanding<br>' +
+            'Payments Received<br>' +
+            'Closing Balance: £' + rand(500,4000),
 
-            "<br>Purchases" +
-
-            "<br>Payments" +
-
-            "<br>Closing Balance"
+            correct:"Supplier Statement"
         }
     ];
 
-    const doc =
-
-    documentTypes[
-        rand(0,documentTypes.length-1)
-    ];
+    const chosen =
+    docs[rand(0, docs.length - 1)];
 
     const options = shuffle([
 
+        chosen.correct,
         "Sales Invoice",
-        "Credit Note",
         "Delivery Note",
+        "Credit Note",
         "Supplier Statement"
-    ]);
+
+    ].filter(
+        (v,i,a)=>a.indexOf(v)===i
+    ));
 
     return {
 
         taskType:"documentIdentification",
 
         question:
-
         "Identify the document shown below.",
 
-        documentTitle:
-        doc.title,
-
         documentBody:
-        doc.body,
+        chosen.body,
 
         options,
 
         correct:
-        options.indexOf(doc.name)
+        options.indexOf(
+            chosen.correct
+        )
     };
 }
-
     if(type === 14){
 
         const correct =
