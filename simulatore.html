@@ -1109,8 +1109,7 @@ questions[currentQuestion];
 
 if(q.taskType === "mcq"){
 
-    q.options.forEach(
-        (option,index)=>{
+    (q.options || []).forEach((option, index) => {
 
         optionsHTML +=
 
@@ -1241,6 +1240,32 @@ else if(q.taskType === "invoice"){
 
     '</div>';
 }
+
+else if (q.taskType === "balance_sheet") {
+
+    optionsHTML =
+        '<div class="balance-sheet-box">' +
+
+            '<p>' + q.question + '</p>' +
+
+            '<div style="margin-top:15px;">' +
+
+                '<label>Assets</label><br>' +
+                '<input id="assetsInput" type="number" style="margin-bottom:10px;"><br>' +
+
+                '<label>Liabilities</label><br>' +
+                '<input id="liabilitiesInput" type="number" style="margin-bottom:10px;"><br>' +
+
+                '<label>Capital</label><br>' +
+                '<input id="capitalInput" type="number" style="margin-bottom:10px;"><br>' +
+
+                '<button onclick="checkBalanceSheet()">Submit</button>' +
+
+            '</div>' +
+
+        '</div>';
+}
+
 else if(q.taskType === "deliveryInvoice"){
 
     let itemRows = "";
@@ -2195,6 +2220,32 @@ const gross = Number(grossText);
         return;
     }
 
+else if (q.taskType === "balance_sheet") {
+
+    const userAssets = Number(document.getElementById("assetsInput").value);
+    const userLiabilities = Number(document.getElementById("liabilitiesInput").value);
+    const userCapital = Number(document.getElementById("capitalInput").value);
+
+    const correctAssets = q.solution.assets;
+    const correctLiabilities = q.solution.liabilities;
+    const correctCapital = q.solution.capital;
+
+    q.userAnswer = {
+        assets: userAssets,
+        liabilities: userLiabilities,
+        capital: userCapital
+    };
+
+    q.correctAnswer = q.solution;
+
+    q.isCorrect =
+        userAssets === correctAssets &&
+        userLiabilities === correctLiabilities &&
+        userCapital === correctCapital;
+
+    showSolution();
+}
+
 if(q.taskType === "accountingEquation"){
 
     const assets =
@@ -2533,6 +2584,28 @@ q.taskType === "creditNote"
     return;
 }
 
+else if (q.taskType === "balance_sheet") {
+
+    const container = document.getElementById("solutionBox");
+
+    container.innerHTML =
+        '<h3>Solution</h3>' +
+
+        '<p><strong>Correct Answers:</strong></p>' +
+
+        '<p>Assets: £' + q.solution.assets + '</p>' +
+        '<p>Liabilities: £' + q.solution.liabilities + '</p>' +
+        '<p>Capital: £' + q.solution.capital + '</p>' +
+
+        '<hr>' +
+
+        '<p><strong>Your Answers:</strong></p>' +
+
+        '<p>Assets: £' + q.userAnswer.assets + '</p>' +
+        '<p>Liabilities: £' + q.userAnswer.liabilities + '</p>' +
+        '<p>Capital: £' + q.userAnswer.capital + '</p>';
+}
+
     if(q.taskType === "ledger"){
 
      console.log(q);
@@ -2675,6 +2748,16 @@ if(q.taskType === "accountingEquation"){
     ).textContent = "";
 
     return;
+}
+
+else if (q.taskType === "balance_sheet") {
+
+    document.getElementById("assetsInput").value = "";
+    document.getElementById("liabilitiesInput").value = "";
+    document.getElementById("capitalInput").value = "";
+
+    const solutionBox = document.getElementById("solutionBox");
+    if (solutionBox) solutionBox.innerHTML = "";
 }
     
 if(q.taskType === "ledger"){
