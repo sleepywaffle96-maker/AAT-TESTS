@@ -943,63 +943,63 @@ function generateL2CH1(type = null){
     rand(1000,4000);
 
     const sales =
-    rand(500,2000);
+    rand(500,2500);
 
-    const supplier =
+    const supplierPayment =
     rand(300,1500);
 
     const assets =
 
-        capital -
-        inventory +
-        sales -
-        supplier +
-        inventory;
+    capital +
+    sales -
+    supplierPayment;
 
     const liabilities = 0;
 
     const equity =
 
-        capital +
-        sales -
-        supplier;
-
-    const correct =
-
-        "Assets = Liabilities + Capital";
-
-    const options = shuffle([
-
-        correct,
-
-        "Assets are less than Capital",
-
-        "Liabilities exceed Assets",
-
-        "Capital becomes zero"
-
-    ]);
+    capital +
+    sales -
+    supplierPayment;
 
     return {
 
+        taskType:"accountingEquation",
+
         question:
 
-`${business} completes the following transactions:
+        `${business} completes the following transactions.
 
-• Owner introduces ${currency(capital)}
-• Inventory purchased for ${currency(inventory)}
-• Cash sales made ${currency(sales)}
-• Supplier paid ${currency(supplier)}
+Owner introduces ${currency(capital)}
 
-After recording all transactions, which statement is correct?`,
+Inventory purchased for ${currency(inventory)}
 
-        options,
+Cash sales made ${currency(sales)}
 
-        correct:
-        options.indexOf(correct)
+Supplier paid ${currency(supplierPayment)}
+
+Complete the accounting equation.`,
+
+        answers:{
+
+            assets:
+            Number(
+                assets.toFixed(2)
+            ),
+
+            liabilities:
+            Number(
+                liabilities.toFixed(2)
+            ),
+
+            capital:
+            Number(
+                equity.toFixed(2)
+            )
+        }
     };
 }
-
+    
    if(type === 15){
 
     const customer =
