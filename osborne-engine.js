@@ -934,7 +934,7 @@ function generateL2CH1(type = null){
         )
     };
 }
-    if(type === 14){
+    else if (type === 14) {
 
     const capitalIntroduced = 8000 + Math.floor(Math.random() * 4000);
     const inventoryOnCredit = 2000 + Math.floor(Math.random() * 3000);
@@ -943,10 +943,6 @@ function generateL2CH1(type = null){
     const cashReceived = 500 + Math.floor(Math.random() * 1500);
     const costOfSales = Math.floor(creditSales * 0.5);
     const expenses = 800 + Math.floor(Math.random() * 1200);
-
-    const revenue = creditSales + cashSales;
-    const grossProfit = revenue - costOfSales;
-    const netProfit = grossProfit - expenses;
 
     const cash =
         capitalIntroduced +
@@ -965,11 +961,14 @@ function generateL2CH1(type = null){
 
     const liabilities = inventoryOnCredit;
 
+    const netProfit =
+        (creditSales + cashSales - costOfSales) - expenses;
+
     const capital =
         capitalIntroduced + netProfit;
 
     return {
-        taskType: "mcq",   // 🔥 FIX IMPORTANTE
+        taskType: "balance_sheet",
         question: `
 A business has the following transactions:
 
@@ -983,7 +982,7 @@ A business has the following transactions:
 
 Calculate Assets, Liabilities and Capital.
         `,
-        answer: {
+        solution: {
             assets,
             liabilities,
             capital
