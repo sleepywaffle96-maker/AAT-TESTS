@@ -1095,6 +1095,58 @@ function renderQuestion(){
 
   const q =
 questions[currentQuestion];
+
+if(q.taskType === "documentIdentification"){
+
+    optionsHTML =
+
+    '<div style="' +
+
+    'border:2px solid #000;' +
+    'padding:20px;' +
+    'background:white;' +
+
+    '">' +
+
+    '<h3 style="text-align:center;">' +
+
+    q.documentTitle +
+
+    '</h3>' +
+
+    '<br>' +
+
+    q.documentBody +
+
+    '</div>' +
+
+    '<br>';
+
+    q.options.forEach(
+        (option,index)=>{
+
+        optionsHTML +=
+
+        '<div class="option-row">' +
+
+        '<input ' +
+        'type="radio" ' +
+        'name="answer" ' +
+        'value="'+index+'">' +
+
+        '<span>' +
+        option +
+        '</span>' +
+
+        '<span ' +
+        'class="feedback-marker" ' +
+        'id="marker-'+index+'">' +
+        '</span>' +
+
+        '</div>';
+    });
+}
+
     if(!q.taskType){
     q.taskType = "mcq";
 }
