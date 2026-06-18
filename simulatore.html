@@ -1107,52 +1107,7 @@ questions[currentQuestion];
 
     let optionsHTML = "";
 
-    else if(q.taskType === "documentIdentification"){
-
-    optionsHTML =
-
-    '<div style="' +
-
-    'background:#FFFFFF;' +
-    'border:2px solid #1E293B;' +
-    'padding:25px;' +
-    'margin-bottom:20px;' +
-    'font-family:Arial,sans-serif;' +
-    'line-height:1.8;' +
-    'color:#111827;' +
-
-    '">' +
-
-    q.documentBody +
-
-    '</div>';
-
-    q.options.forEach(
-        (option,index)=>{
-
-        optionsHTML +=
-
-        '<div class="option-row">' +
-
-        '<input ' +
-        'type="radio" ' +
-        'name="answer" ' +
-        'value="'+index+'">' +
-
-        '<span>' +
-        option +
-        '</span>' +
-
-        '<span ' +
-        'class="feedback-marker" ' +
-        'id="marker-'+index+'">' +
-        '</span>' +
-
-        '</div>';
-    });
-}
-
-else if(q.taskType === "mcq"){
+if(q.taskType === "mcq"){
 
     q.options.forEach(
         (option,index)=>{
@@ -1797,6 +1752,51 @@ else if(q.taskType === "purchaseInvoice"){
         '</table>' +
 
     '</div>';
+}
+
+else if(q.taskType === "documentIdentification"){
+
+    optionsHTML =
+
+    '<div style="' +
+
+    'background:#FFFFFF;' +
+    'border:2px solid #1E293B;' +
+    'padding:25px;' +
+    'margin-bottom:20px;' +
+    'font-family:Arial,sans-serif;' +
+    'line-height:1.8;' +
+    'color:#111827;' +
+
+    '">' +
+
+    q.documentBody +
+
+    '</div>';
+
+    q.options.forEach(
+        (option,index)=>{
+
+        optionsHTML +=
+
+        '<div class="option-row">' +
+
+        '<input ' +
+        'type="radio" ' +
+        'name="answer" ' +
+        'value="'+index+'">' +
+
+        '<span>' +
+        option +
+        '</span>' +
+
+        '<span ' +
+        'class="feedback-marker" ' +
+        'id="marker-'+index+'">' +
+        '</span>' +
+
+        '</div>';
+    });
 }
 
     document
