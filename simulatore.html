@@ -473,7 +473,7 @@ function createExamQuestions(){
 
         const questions = [];
 
-        for(let type=1; type<=11; type++){
+        for(let type=1; type<=12; type++){
 
     questions.push(
         generator(type)
@@ -1131,6 +1131,153 @@ if(q.taskType === "mcq"){
 
         '</div>';
     });
+}
+
+else if(q.taskType === "purchaseReturnsPosting"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Purchase Returns Credit Note</h3>' +
+
+        '<p><strong>Supplier:</strong> ' +
+        q.supplier +
+        '</p>' +
+
+        '<p><strong>Goods Returned:</strong> £' +
+        q.goodsReturned.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>VAT:</strong> £' +
+        q.vat.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Credit Note Total:</strong> £' +
+        q.creditNoteTotal.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'DR Trade Payables: ' +
+
+            '<input id="prp-payables" type="text">' +
+
+            '<span id="prp-payables-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'CR Purchase Returns: ' +
+
+            '<input id="prp-returns" type="text">' +
+
+            '<span id="prp-returns-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'CR VAT: ' +
+
+            '<input id="prp-vat" type="text">' +
+
+            '<span id="prp-vat-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+if(q.taskType === "purchaseReturnsPosting"){
+
+    const payables =
+    Number(document.getElementById("prp-payables").value);
+
+    const returnsValue =
+    Number(document.getElementById("prp-returns").value);
+
+    const vat =
+    Number(document.getElementById("prp-vat").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "prp-payables-marker",
+        payables === q.answers.debitPayables
+    );
+
+    mark(
+        "prp-returns-marker",
+        returnsValue === q.answers.creditPurchaseReturns
+    );
+
+    mark(
+        "prp-vat-marker",
+        vat === q.answers.creditVAT
+    );
+
+    return;
+}
+
+else if(q.taskType === "salesReturnsPosting"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Sales Returns Credit Note</h3>' +
+
+        '<p><strong>Customer:</strong> ' +
+        q.customer +
+        '</p>' +
+
+        '<p><strong>Goods Returned:</strong> £' +
+        q.goodsReturned.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>VAT:</strong> £' +
+        q.vat.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Credit Note Total:</strong> £' +
+        q.creditNoteTotal.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'DR Sales Returns: ' +
+
+            '<input id="srp-returns" type="text">' +
+
+            '<span id="srp-returns-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'DR VAT: ' +
+
+            '<input id="srp-vat" type="text">' +
+
+            '<span id="srp-vat-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'CR Trade Receivables: ' +
+
+            '<input id="srp-receivables" type="text">' +
+
+            '<span id="srp-receivables-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
 }
 
 else if(q.taskType === "purchaseInvoicePosting"){
@@ -3283,6 +3430,47 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "salesReturnsPosting"){
+
+    const returnsValue =
+    Number(document.getElementById("srp-returns").value);
+
+    const vat =
+    Number(document.getElementById("srp-vat").value);
+
+    const receivables =
+    Number(document.getElementById("srp-receivables").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "srp-returns-marker",
+        returnsValue === q.answers.debitSalesReturns
+    );
+
+    mark(
+        "srp-vat-marker",
+        vat === q.answers.debitVAT
+    );
+
+    mark(
+        "srp-receivables-marker",
+        receivables === q.answers.creditReceivables
+    );
+
+    return;
+}
+
 if(q.taskType === "purchaseInvoicePosting"){
 
     const purchases =
@@ -4338,6 +4526,20 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "salesReturnsPosting"){
+
+    document.getElementById("srp-returns").value =
+    q.answers.debitSalesReturns;
+
+    document.getElementById("srp-vat").value =
+    q.answers.debitVAT;
+
+    document.getElementById("srp-receivables").value =
+    q.answers.creditReceivables;
+
+    return;
+}
+
     if(q.taskType === "purchaseInvoicePosting"){
 
     document.getElementById("pip-purchases").value =
@@ -4348,6 +4550,20 @@ q.taskType === "creditNote"
 
     document.getElementById("pip-payables").value =
     q.answers.creditPayables;
+
+    return;
+}
+
+    if(q.taskType === "purchaseReturnsPosting"){
+
+    document.getElementById("prp-payables").value =
+    q.answers.debitPayables;
+
+    document.getElementById("prp-returns").value =
+    q.answers.creditPurchaseReturns;
+
+    document.getElementById("prp-vat").value =
+    q.answers.creditVAT;
 
     return;
 }
@@ -4768,6 +4984,32 @@ q.taskType === "creditNote"
     document.getElementById("pip-purchases-marker").textContent = "";
     document.getElementById("pip-vat-marker").textContent = "";
     document.getElementById("pip-payables-marker").textContent = "";
+
+    return;
+}
+
+    if(q.taskType === "purchaseReturnsPosting"){
+
+    document.getElementById("prp-payables").value = "";
+    document.getElementById("prp-returns").value = "";
+    document.getElementById("prp-vat").value = "";
+
+    document.getElementById("prp-payables-marker").textContent = "";
+    document.getElementById("prp-returns-marker").textContent = "";
+    document.getElementById("prp-vat-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "salesReturnsPosting"){
+
+    document.getElementById("srp-returns").value = "";
+    document.getElementById("srp-vat").value = "";
+    document.getElementById("srp-receivables").value = "";
+
+    document.getElementById("srp-returns-marker").textContent = "";
+    document.getElementById("srp-vat-marker").textContent = "";
+    document.getElementById("srp-receivables-marker").textContent = "";
 
     return;
 }
