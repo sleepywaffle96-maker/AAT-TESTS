@@ -1133,6 +1133,133 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "csrActivity"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'CSR Area: ' +
+
+            '<input id="csr-answer" type="text">' +
+
+            '<span id="csr-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "communicationMethod"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Best communication method: ' +
+
+            '<input id="comm-answer" type="text">' +
+
+            '<span id="comm-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "teamworkScenario"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Key issue: ' +
+
+            '<input id="team-answer" type="text">' +
+
+            '<span id="team-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "conflictResolution"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Best action: ' +
+
+            '<input id="conflict-answer" type="text">' +
+
+            '<span id="conflict-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "businessCaseStudy"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        'Main Objective: ' +
+
+        '<input id="case-objective" type="text">' +
+
+        '<span id="case-objective-marker" class="feedback-marker"></span>' +
+
+        '<br><br>' +
+
+        'Most Important Stakeholder: ' +
+
+        '<input id="case-stakeholder" type="text">' +
+
+        '<span id="case-stakeholder-marker" class="feedback-marker"></span>' +
+
+        '<br><br>' +
+
+        'Main Risk: ' +
+
+        '<input id="case-risk" type="text">' +
+
+        '<span id="case-risk-marker" class="feedback-marker"></span>' +
+
+        '<br><br>' +
+
+        'Recommended Action: ' +
+
+        '<input id="case-action" type="text">' +
+
+        '<span id="case-action-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "stakeholderPriority"){
 
     optionsHTML =
@@ -3805,6 +3932,131 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "csrActivity"){
+
+    const answer =
+    document.getElementById("csr-answer")
+    .value.trim().toLowerCase();
+
+    const marker =
+    document.getElementById("csr-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "communicationMethod"){
+
+    const answer =
+    document.getElementById("comm-answer")
+    .value.trim().toLowerCase();
+
+    const marker =
+    document.getElementById("comm-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "teamworkScenario"){
+
+    const answer =
+    document.getElementById("team-answer")
+    .value.trim().toLowerCase();
+
+    const marker =
+    document.getElementById("team-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "conflictResolution"){
+
+    const answer =
+    document.getElementById("conflict-answer")
+    .value.trim().toLowerCase();
+
+    const marker =
+    document.getElementById("conflict-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "businessCaseStudy"){
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "case-objective-marker",
+        document.getElementById("case-objective")
+        .value.trim().toLowerCase() === q.answers.objective
+    );
+
+    mark(
+        "case-stakeholder-marker",
+        document.getElementById("case-stakeholder")
+        .value.trim().toLowerCase() === q.answers.stakeholder
+    );
+
+    mark(
+        "case-risk-marker",
+        document.getElementById("case-risk")
+        .value.trim().toLowerCase() === q.answers.risk
+    );
+
+    mark(
+        "case-action-marker",
+        document.getElementById("case-action")
+        .value.trim().toLowerCase() === q.answers.action
+    );
+
+    return;
+}
+
     if(q.taskType === "pestClassification"){
 
     q.items.forEach((item,index)=>{
@@ -5271,6 +5523,63 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "csrActivity"){
+
+    document.getElementById(
+        "csr-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "communicationMethod"){
+
+    document.getElementById(
+        "comm-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "teamworkScenario"){
+
+    document.getElementById(
+        "team-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "conflictResolution"){
+
+    document.getElementById(
+        "conflict-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "businessCaseStudy"){
+
+    document.getElementById("case-objective").value =
+    q.answers.objective;
+
+    document.getElementById("case-stakeholder").value =
+    q.answers.stakeholder;
+
+    document.getElementById("case-risk").value =
+    q.answers.risk;
+
+    document.getElementById("case-action").value =
+    q.answers.action;
+
+    return;
+}
+
     if(q.taskType === "stakeholderPriority"){
 
     document.getElementById(
@@ -5858,6 +6167,53 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "csrActivity"){
+
+    document.getElementById("csr-answer").value = "";
+    document.getElementById("csr-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "communicationMethod"){
+
+    document.getElementById("comm-answer").value = "";
+    document.getElementById("comm-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "teamworkScenario"){
+
+    document.getElementById("team-answer").value = "";
+    document.getElementById("team-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "conflictResolution"){
+
+    document.getElementById("conflict-answer").value = "";
+    document.getElementById("conflict-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "businessCaseStudy"){
+
+    document.getElementById("case-objective").value = "";
+    document.getElementById("case-stakeholder").value = "";
+    document.getElementById("case-risk").value = "";
+    document.getElementById("case-action").value = "";
+
+    document.getElementById("case-objective-marker").textContent = "";
+    document.getElementById("case-stakeholder-marker").textContent = "";
+    document.getElementById("case-risk-marker").textContent = "";
+    document.getElementById("case-action-marker").textContent = "";
+
+    return;
+}
 
     if(q.taskType === "stakeholderPriority"){
 
