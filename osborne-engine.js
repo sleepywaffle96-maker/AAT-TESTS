@@ -2613,102 +2613,110 @@ function generateL2CH4(type = null){
 
     if(type === 1){
 
-        const correct = "Increase sales revenue";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Increase fixed costs",
-            "Reduce assets",
-            "Ignore customers"
-        ]);
+        taskType:
+        "stakeholderPriority",
 
-        return {
-            question:
-            `${business} wants to improve profitability. What is the most appropriate objective?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
+        "ABC Ltd wants to increase dividends paid to investors. Which stakeholder group is most interested?",
 
-    if(type === 2){
+        answer:
+        "shareholders"
+    };
+}
 
-        const correct = "Higher demand for products";
+if(type === 2){
 
-        const options = shuffle([
-            correct,
-            "Lower customer base",
-            "Reduced competition only",
-            "Higher taxes"
-        ]);
+    return {
 
-        return {
-            question:
-            `What is most likely to improve a business's revenue?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        taskType:
+        "stakeholderClassification",
 
-    /* ---------------- BUSINESS TYPES ---------------- */
+        question:
+        "Classify each stakeholder as Internal or External.",
 
-    if(type === 3){
+        rows:[
 
-        const correct = "Sole trader";
+            {
+                stakeholder:"Employee",
+                answer:"internal"
+            },
 
-        const options = shuffle([
-            correct,
-            "Public limited company",
-            "Government agency",
-            "Charity only"
-        ]);
+            {
+                stakeholder:"Supplier",
+                answer:"external"
+            },
 
-        return {
-            question:
-            `${business} is owned and controlled by one person. What type of business is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            {
+                stakeholder:"Manager",
+                answer:"internal"
+            }
+        ]
+    };
+}
 
-    if(type === 4){
+if(type === 3){
 
-        const correct = "Limited liability";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Unlimited liability",
-            "No liability",
-            "Government protection"
-        ]);
+        taskType:
+        "businessObjective",
 
-        return {
-            question:
-            `What is a key advantage of a limited company?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
+        "A business is focused on staying operational during a recession and avoiding closure. Identify the business objective.",
 
-    /* ---------------- STAKEHOLDERS ---------------- */
+        answer:
+        "survival"
+    };
+}
 
-    if(type === 5){
+if(type === 4){
 
-        const correct = "Customers";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Banks only",
-            "Government only",
-            "Suppliers only"
-        ]);
+        taskType:
+        "missionStatement",
 
-        return {
-            question:
-            `Who is most affected by product quality?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        mission:
+        "To provide the highest quality customer service and build long-term customer relationships.",
+
+        answer:
+        "customer satisfaction"
+    };
+}
+
+if(type === 5){
+
+    return {
+
+        taskType:
+        "swotClassification",
+
+        items:[
+
+            {
+                text:"Strong brand reputation",
+                answer:"S"
+            },
+
+            {
+                text:"New competitor enters market",
+                answer:"T"
+            },
+
+            {
+                text:"Growing customer demand",
+                answer:"O"
+            },
+
+            {
+                text:"Outdated equipment",
+                answer:"W"
+            }
+        ]
+    };
+}
 
     if(type === 6){
 
