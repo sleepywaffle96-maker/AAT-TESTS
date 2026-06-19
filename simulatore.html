@@ -1133,6 +1133,77 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "bankReconciliation"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<table style="width:500px;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:8px;">Item</th>' +
+
+                '<th style="border:1px solid #000;padding:8px;">Amount (£)</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;">Cash Book Balance</td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                q.scenario.cashBook.toFixed(2) +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;">Outstanding Lodgements</td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                q.scenario.outstandingLodgements.toFixed(2) +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;">Unpresented Cheques</td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                q.scenario.unpresentedCheques.toFixed(2) +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:8px;"><strong>Revised Bank Balance</strong></td>' +
+
+                '<td style="border:1px solid #000;padding:8px;">' +
+
+                    '<input id="bankrec-answer" type="text">' +
+
+                    '<span id="bankrec-marker" class="feedback-marker"></span>' +
+
+                '</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "invoice"){
 
     let itemRows = "";
@@ -2189,6 +2260,33 @@ const gross = Number(grossText);
         return;
     }
 
+if(q.taskType === "bankReconciliation"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "bankrec-answer"
+        ).value
+    );
+
+    const ok =
+
+        answer ===
+        q.answer;
+
+    const marker =
+    document.getElementById(
+        "bankrec-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
 
 if(q.taskType === "accountingEquation"){
 
@@ -2528,6 +2626,16 @@ q.taskType === "creditNote"
     return;
 }
 
+if(q.taskType === "bankReconciliation"){
+
+    document.getElementById(
+        "bankrec-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
     if(q.taskType === "ledger"){
 
      console.log(q);
@@ -2667,6 +2775,19 @@ if(q.taskType === "accountingEquation"){
 
     document.getElementById(
         "eq-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "bankReconciliation"){
+
+    document.getElementById(
+        "bankrec-answer"
+    ).value = "";
+
+    document.getElementById(
+        "bankrec-marker"
     ).textContent = "";
 
     return;
