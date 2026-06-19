@@ -1133,6 +1133,63 @@ if(q.taskType === "mcq"){
     });
 }
 
+if(q.taskType === "purchaseInvoiceTradeDiscount"){
+
+    const net =
+    Number(document.getElementById("pid-net").value);
+
+    const discount =
+    Number(document.getElementById("pid-discount").value);
+
+    const discounted =
+    Number(document.getElementById("pid-discounted").value);
+
+    const vat =
+    Number(document.getElementById("pid-vat").value);
+
+    const gross =
+    Number(document.getElementById("pid-gross").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "pid-net-marker",
+        net === q.answers.netValue
+    );
+
+    mark(
+        "pid-discount-marker",
+        discount === q.answers.tradeDiscount
+    );
+
+    mark(
+        "pid-discounted-marker",
+        discounted === q.answers.discountedValue
+    );
+
+    mark(
+        "pid-vat-marker",
+        vat === q.answers.vat
+    );
+
+    mark(
+        "pid-gross-marker",
+        gross === q.answers.gross
+    );
+
+    return;
+}
+
 else if(q.taskType === "cashBookAdjustment"){
 
     optionsHTML =
@@ -2842,6 +2899,63 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "purchaseInvoiceTradeDiscount"){
+
+    const net =
+    Number(document.getElementById("pid-net").value);
+
+    const discount =
+    Number(document.getElementById("pid-discount").value);
+
+    const discounted =
+    Number(document.getElementById("pid-discounted").value);
+
+    const vat =
+    Number(document.getElementById("pid-vat").value);
+
+    const gross =
+    Number(document.getElementById("pid-gross").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "pid-net-marker",
+        net === q.answers.netValue
+    );
+
+    mark(
+        "pid-discount-marker",
+        discount === q.answers.tradeDiscount
+    );
+
+    mark(
+        "pid-discounted-marker",
+        discounted === q.answers.discountedValue
+    );
+
+    mark(
+        "pid-vat-marker",
+        vat === q.answers.vat
+    );
+
+    mark(
+        "pid-gross-marker",
+        gross === q.answers.gross
+    );
+
+    return;
+}
+
     if(q.taskType === "salesInvoiceTradeDiscount"){
 
     const net =
@@ -3512,6 +3626,26 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "purchaseInvoiceTradeDiscount"){
+
+    document.getElementById("pid-net").value =
+    q.answers.netValue;
+
+    document.getElementById("pid-discount").value =
+    q.answers.tradeDiscount;
+
+    document.getElementById("pid-discounted").value =
+    q.answers.discountedValue;
+
+    document.getElementById("pid-vat").value =
+    q.answers.vat;
+
+    document.getElementById("pid-gross").value =
+    q.answers.gross;
+
+    return;
+}
+
     if(q.taskType === "advancedBankReconciliation"){
 
     document.getElementById(
@@ -3794,6 +3928,23 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "purchaseInvoiceTradeDiscount"){
+
+    document.getElementById("pid-net").value = "";
+    document.getElementById("pid-discount").value = "";
+    document.getElementById("pid-discounted").value = "";
+    document.getElementById("pid-vat").value = "";
+    document.getElementById("pid-gross").value = "";
+
+    document.getElementById("pid-net-marker").textContent = "";
+    document.getElementById("pid-discount-marker").textContent = "";
+    document.getElementById("pid-discounted-marker").textContent = "";
+    document.getElementById("pid-vat-marker").textContent = "";
+    document.getElementById("pid-gross-marker").textContent = "";
+
+    return;
+}
 
     if(q.taskType === "errorCaseStudy"){
 
