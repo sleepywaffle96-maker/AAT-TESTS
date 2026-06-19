@@ -1100,32 +1100,49 @@ function generateL2CH2(type = null){
 
     if(type === 1){
 
-        const opening = rand(8000,15000);
-        const sales = rand(2000,6000);
-        const cash = rand(1000,4000);
+    const cashBook =
+    rand(1500,5000);
 
-        const closing = opening + sales - cash;
+    const outstandingLodgements =
+    rand(100,800);
 
-        const options = shuffle([
-            closing,
-            closing + 200,
-            closing - 300,
-            closing + 500
-        ]);
+    const unpresentedCheques =
+    rand(100,800);
 
-        return {
-            question:
-            `${business} has:
-Opening balance £${opening}
-Sales £${sales}
-Cash received £${cash}
+    const revisedBalance =
 
-What is the closing balance of the sales ledger control account?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(closing)
-        };
-    }
+        cashBook +
 
+        outstandingLodgements -
+
+        unpresentedCheques;
+
+    return {
+
+        taskType:"bankReconciliation",
+
+        question:
+
+        "Complete the bank reconciliation and calculate the revised bank balance.",
+
+        scenario:{
+
+            cashBook:
+            cashBook,
+
+            outstandingLodgements:
+            outstandingLodgements,
+
+            unpresentedCheques:
+            unpresentedCheques
+        },
+
+        answer:
+        Number(
+            revisedBalance.toFixed(2)
+        )
+    };
+}
     if(type === 2){
 
         const opening = rand(5000,12000);
