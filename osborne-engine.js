@@ -1227,29 +1227,55 @@ What is the closing balance?`,
 
     if(type === 4){
 
-        const cashbook = rand(3000,8000);
-        const bank = cashbook + rand(100,600);
+    const supplier1 =
+    rand(500,2000);
 
-        const correct = "Outstanding lodgements";
+    const supplier2 =
+    rand(500,2000);
 
-        const options = shuffle([
-            correct,
-            "Bank charges error",
-            "Overstated capital",
-            "Sales return"
-        ]);
+    const supplier3 =
+    rand(500,2000);
 
-        return {
-            question:
-            `Cash book £${cashbook}
-Bank statement £${bank}
+    const supplierTotal =
 
-What explains the difference?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        supplier1 +
+        supplier2 +
+        supplier3;
 
+    const difference =
+    rand(50,300);
+
+    const controlAccount =
+
+        supplierTotal +
+        difference;
+
+    return {
+
+        taskType:"purchaseLedgerReconciliation",
+
+        question:
+
+        "Calculate the difference between the Purchase Ledger Control Account and the total of supplier balances.",
+
+        accountName:
+
+        "Purchase Ledger Reconciliation",
+
+        controlAccount:
+        controlAccount,
+
+        balances:[
+
+            supplier1,
+            supplier2,
+            supplier3
+        ],
+
+        answer:
+        difference
+    };
+}
     /* ---------------- ERRORS (HIGH PRACTICAL) ---------------- */
 
    if(type === 5){
