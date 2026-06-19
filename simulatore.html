@@ -1186,47 +1186,6 @@ else if(q.taskType === "purchaseReturnsPosting"){
     '</div>';
 }
 
-if(q.taskType === "purchaseReturnsPosting"){
-
-    const payables =
-    Number(document.getElementById("prp-payables").value);
-
-    const returnsValue =
-    Number(document.getElementById("prp-returns").value);
-
-    const vat =
-    Number(document.getElementById("prp-vat").value);
-
-    function mark(id, ok){
-
-        const marker =
-        document.getElementById(id);
-
-        marker.textContent =
-        ok ? "✔" : "✖";
-
-        marker.style.color =
-        ok ? "#16A34A" : "#DC2626";
-    }
-
-    mark(
-        "prp-payables-marker",
-        payables === q.answers.debitPayables
-    );
-
-    mark(
-        "prp-returns-marker",
-        returnsValue === q.answers.creditPurchaseReturns
-    );
-
-    mark(
-        "prp-vat-marker",
-        vat === q.answers.creditVAT
-    );
-
-    return;
-}
-
 else if(q.taskType === "salesReturnsPosting"){
 
     optionsHTML =
