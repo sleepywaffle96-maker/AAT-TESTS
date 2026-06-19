@@ -1133,6 +1133,39 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "vatExtraction"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>VAT Extraction</h3>' +
+
+        '<p><strong>Gross Amount:</strong> £' +
+        q.grossAmount.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'VAT Amount: ' +
+
+            '<input id="vatex-vat" type="text">' +
+
+            '<span id="vatex-vat-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'Net Value: ' +
+
+            '<input id="vatex-net" type="text">' +
+
+            '<span id="vatex-net-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "vatCalculation"){
 
     optionsHTML =
@@ -3144,6 +3177,47 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "vatExtraction"){
+
+    const vat =
+    Number(
+        document.getElementById(
+            "vatex-vat"
+        ).value
+    );
+
+    const net =
+    Number(
+        document.getElementById(
+            "vatex-net"
+        ).value
+    );
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "vatex-vat-marker",
+        vat === q.answers.vatAmount
+    );
+
+    mark(
+        "vatex-net-marker",
+        net === q.answers.netValue
+    );
+
+    return;
+}
+
     if(q.taskType === "vatCalculation"){
 
     const vat =
@@ -4076,6 +4150,21 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "vatExtraction"){
+
+    document.getElementById(
+        "vatex-vat"
+    ).value =
+    q.answers.vatAmount;
+
+    document.getElementById(
+        "vatex-net"
+    ).value =
+    q.answers.netValue;
+
+    return;
+}
+
     if(q.taskType === "promptPaymentDiscount"){
 
     document.getElementById(
@@ -4470,6 +4559,27 @@ q.taskType === "creditNote"
 
     document.getElementById(
         "ppd-payable-marker"
+    ).textContent = "";
+
+    return;
+}
+
+    if(q.taskType === "vatExtraction"){
+
+    document.getElementById(
+        "vatex-vat"
+    ).value = "";
+
+    document.getElementById(
+        "vatex-net"
+    ).value = "";
+
+    document.getElementById(
+        "vatex-vat-marker"
+    ).textContent = "";
+
+    document.getElementById(
+        "vatex-net-marker"
     ).textContent = "";
 
     return;
