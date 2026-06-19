@@ -1939,79 +1939,81 @@ function generateL2CH3(type = null){
         }
     };
 }
-    else if(q.taskType === "purchaseInvoiceTradeDiscount"){
+    if(type === 2){
 
-    optionsHTML =
+    const qty =
+    rand(5,50);
 
-    '<div class="invoice-box">' +
+    const unitPrice =
+    rand(20,200);
 
-        '<h3>Purchase Invoice</h3>' +
+    const tradeDiscountRate =
+    [5,10,15,20][rand(0,3)];
 
-        '<p><strong>Invoice No:</strong> ' +
-        q.invoiceNumber +
-        '</p>' +
+    const netValue =
 
-        '<p><strong>Supplier:</strong> ' +
-        q.supplier +
-        '</p>' +
+        qty *
+        unitPrice;
 
-        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+    const tradeDiscount =
 
-            '<tr>' +
+        +(netValue *
+        tradeDiscountRate / 100)
+        .toFixed(2);
 
-                '<th style="border:1px solid #000;padding:6px;">Quantity</th>' +
+    const discountedValue =
 
-                '<th style="border:1px solid #000;padding:6px;">Unit Price (£)</th>' +
+        +(netValue -
+        tradeDiscount)
+        .toFixed(2);
 
-                '<th style="border:1px solid #000;padding:6px;">Trade Discount</th>' +
+    const vat =
 
-            '</tr>' +
+        +(discountedValue *
+        0.20)
+        .toFixed(2);
 
-            '<tr>' +
+    const gross =
 
-                '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
-                q.qty +
-                '</td>' +
+        +(discountedValue +
+        vat)
+        .toFixed(2);
 
-                '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
-                q.unitPrice.toFixed(2) +
-                '</td>' +
+    return {
 
-                '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
-                q.tradeDiscountRate +
-                '%</td>' +
+        taskType:
+        "purchaseInvoiceTradeDiscount",
 
-            '</tr>' +
+        question:
 
-        '</table>' +
+        "Complete the purchase invoice.",
 
-        '<div style="margin-top:15px;">' +
+        supplier:
+        randomBusiness(),
 
-            'Net Value: ' +
-            '<input id="pid-net" type="text">' +
-            '<span id="pid-net-marker" class="feedback-marker"></span><br><br>' +
+        invoiceNumber:
+        "PI" +
+        rand(1000,9999),
 
-            'Trade Discount: ' +
-            '<input id="pid-discount" type="text">' +
-            '<span id="pid-discount-marker" class="feedback-marker"></span><br><br>' +
+        qty:
+        qty,
 
-            'Discounted Value: ' +
-            '<input id="pid-discounted" type="text">' +
-            '<span id="pid-discounted-marker" class="feedback-marker"></span><br><br>' +
+        unitPrice:
+        unitPrice,
 
-            'VAT (20%): ' +
-            '<input id="pid-vat" type="text">' +
-            '<span id="pid-vat-marker" class="feedback-marker"></span><br><br>' +
+        tradeDiscountRate:
+        tradeDiscountRate,
 
-            'Gross Total: ' +
-            '<input id="pid-gross" type="text">' +
-            '<span id="pid-gross-marker" class="feedback-marker"></span>' +
+        answers:{
 
-        '</div>' +
-
-    '</div>';
+            netValue,
+            tradeDiscount,
+            discountedValue,
+            vat,
+            gross
+        }
+    };
 }
-
     /* ---------------- LABOUR COSTING ---------------- */
 
     if(type === 3){
