@@ -2134,27 +2134,47 @@ What is total material input?`,
 
     if(type === 6){
 
-        const cost = rand(5,30);
-        const selling = cost + rand(5,20);
+    const goodsReturned =
+    rand(500,5000);
 
-        const profit = selling - cost;
+    const vat =
 
-        const options = shuffle([
-            profit,
-            profit + 2,
-            profit - 1,
-            profit + 3
-        ]);
+        +(goodsReturned *
+        0.20)
+        .toFixed(2);
 
-        return {
-            question:
-            `A product costs £${cost} and sells for £${selling}.
+    const creditNoteTotal =
 
-What is the profit per unit?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(profit)
-        };
-    }
+        +(goodsReturned +
+        vat)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "purchaseReturnsCreditNote",
+
+        question:
+
+        "Complete the purchase returns credit note.",
+
+        supplier:
+        randomBusiness(),
+
+        creditNoteNumber:
+        "PCN" +
+        rand(1000,9999),
+
+        goodsReturned:
+        goodsReturned,
+
+        answers:{
+
+            vat,
+            creditNoteTotal
+        }
+    };
+}
 
     /* ---------------- OVERHEADS ---------------- */
 
