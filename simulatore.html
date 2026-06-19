@@ -1228,6 +1228,37 @@ else if(q.taskType === "advancedBankReconciliation"){
     '</div>';
 }
 
+else if(q.taskType === "dishonouredCheque"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Trade Receivables Balance:</strong> £' +
+
+        q.receivables.toFixed(2) +
+
+        '</p>' +
+
+        '<p><strong>Dishonoured Cheque:</strong> £' +
+
+        q.dishonouredCheque.toFixed(2) +
+
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Revised Balance: ' +
+
+            '<input id="dishonoured-answer" type="text">' +
+
+            '<span id="dishonoured-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "bankCharges"){
 
     optionsHTML =
@@ -2567,6 +2598,32 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "dishonouredCheque"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "dishonoured-answer"
+        ).value
+    );
+
+    const ok =
+    answer === q.answer;
+
+    const marker =
+    document.getElementById(
+        "dishonoured-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "bankCharges"){
 
     const answer =
@@ -3081,6 +3138,16 @@ if(q.taskType === "ledgerReconciliation"){
     return;
 }
 
+if(q.taskType === "dishonouredCheque"){
+
+    document.getElementById(
+        "dishonoured-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "bankCharges"){
 
     document.getElementById(
@@ -3270,6 +3337,19 @@ if(q.taskType === "accountingEquation"){
 
     document.getElementById(
         "eq-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "dishonouredCheque"){
+
+    document.getElementById(
+        "dishonoured-answer"
+    ).value = "";
+
+    document.getElementById(
+        "dishonoured-marker"
     ).textContent = "";
 
     return;
