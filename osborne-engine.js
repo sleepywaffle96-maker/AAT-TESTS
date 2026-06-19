@@ -1175,28 +1175,55 @@ What is the closing balance?`,
 
     if(type === 3){
 
-        const cashbook = rand(4000,9000);
-        const bank = cashbook - rand(100,800);
+    const customer1 =
+    rand(500,2000);
 
-        const correct = "Unpresented cheques";
+    const customer2 =
+    rand(500,2000);
 
-        const options = shuffle([
-            correct,
-            "Capital injection",
-            "Inventory error",
-            "Depreciation"
-        ]);
+    const customer3 =
+    rand(500,2000);
 
-        return {
-            question:
-            `Cash book balance £${cashbook}
-Bank statement £${bank}
+    const customerTotal =
 
-What is the most likely reason for the difference?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        customer1 +
+        customer2 +
+        customer3;
+
+    const difference =
+    rand(50,300);
+
+    const controlAccount =
+
+        customerTotal +
+        difference;
+
+    return {
+
+        taskType:"ledgerReconciliation",
+
+        question:
+
+        "Calculate the difference between the Sales Ledger Control Account and the total of customer balances.",
+
+        accountName:
+
+        "Sales Ledger Reconciliation",
+
+        controlAccount:
+        controlAccount,
+
+        balances:[
+
+            customer1,
+            customer2,
+            customer3
+        ],
+
+        answer:
+        difference
+    };
+}
 
     if(type === 4){
 
@@ -1225,24 +1252,83 @@ What explains the difference?`,
 
     /* ---------------- ERRORS (HIGH PRACTICAL) ---------------- */
 
-    if(type === 5){
+   if(type === 5){
 
-        const correct = "Error of omission";
+    const difference =
+    rand(100,500);
 
-        const options = shuffle([
-            correct,
-            "Error of principle",
-            "Bank reconciliation error",
-            "VAT error"
-        ]);
+    const scenarios = [
 
-        return {
+        {
             question:
-            `${business} completely forgot to record a purchase invoice. What type of error is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+
+            `The trial balance does not balance.
+
+A difference of ${currency(difference)} is placed in a suspense account.
+
+Which account must be debited to clear the suspense account if Purchases was understated by this amount?`,
+
+            correct:
+            "Purchases"
+        },
+
+        {
+            question:
+
+            `The trial balance does not balance.
+
+A difference of ${currency(difference)} is placed in a suspense account.
+
+Which account must be debited to clear the suspense account if Rent Expense was omitted?`,
+
+            correct:
+            "Rent Expense"
+        },
+
+        {
+            question:
+
+            `The trial balance does not balance.
+
+A difference of ${currency(difference)} is placed in a suspense account.
+
+Which account must be debited to clear the suspense account if Insurance Expense was omitted?`,
+
+            correct:
+            "Insurance Expense"
+        }
+    ];
+
+    const chosen =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    const options = shuffle([
+
+        chosen.correct,
+
+        "Trade Payables",
+
+        "Capital",
+
+        "Bank"
+
+    ]);
+
+    return {
+
+        question:
+        chosen.question,
+
+        options,
+
+        correct:
+        options.indexOf(
+            chosen.correct
+        )
+    };
+}
 
     if(type === 6){
 
