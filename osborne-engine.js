@@ -1939,29 +1939,78 @@ function generateL2CH3(type = null){
         }
     };
 }
-    if(type === 2){
+    else if(q.taskType === "purchaseInvoiceTradeDiscount"){
 
-        const cost = rand(10,50);
-        const markup = rand(20,100);
+    optionsHTML =
 
-        const selling = cost + (cost * markup / 100);
+    '<div class="invoice-box">' +
 
-        const options = shuffle([
-            Math.round(selling),
-            Math.round(selling + 5),
-            Math.round(selling - 5),
-            Math.round(selling + 10)
-        ]);
+        '<h3>Purchase Invoice</h3>' +
 
-        return {
-            question:
-            `A product costs £${cost} and has a markup of ${markup}%.
+        '<p><strong>Invoice No:</strong> ' +
+        q.invoiceNumber +
+        '</p>' +
 
-What is the selling price (approx.)?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(Math.round(selling))
-        };
-    }
+        '<p><strong>Supplier:</strong> ' +
+        q.supplier +
+        '</p>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Quantity</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Unit Price (£)</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Trade Discount</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+                q.qty +
+                '</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                q.unitPrice.toFixed(2) +
+                '</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+                q.tradeDiscountRate +
+                '%</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Net Value: ' +
+            '<input id="pid-net" type="text">' +
+            '<span id="pid-net-marker" class="feedback-marker"></span><br><br>' +
+
+            'Trade Discount: ' +
+            '<input id="pid-discount" type="text">' +
+            '<span id="pid-discount-marker" class="feedback-marker"></span><br><br>' +
+
+            'Discounted Value: ' +
+            '<input id="pid-discounted" type="text">' +
+            '<span id="pid-discounted-marker" class="feedback-marker"></span><br><br>' +
+
+            'VAT (20%): ' +
+            '<input id="pid-vat" type="text">' +
+            '<span id="pid-vat-marker" class="feedback-marker"></span><br><br>' +
+
+            'Gross Total: ' +
+            '<input id="pid-gross" type="text">' +
+            '<span id="pid-gross-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
 
     /* ---------------- LABOUR COSTING ---------------- */
 
