@@ -2818,102 +2818,91 @@ if(type === 10){
 
     if(type === 11){
 
-        const correct = "Ethical behaviour";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Tax avoidance",
-            "Misreporting profits",
-            "Ignoring laws"
-        ]);
+        taskType:
+        "csrActivity",
 
-        return {
-            question:
-            `What is expected from businesses in society?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        scenario:
+        "A company replaces plastic packaging with recyclable materials.",
 
-    if(type === 12){
+        answer:
+        "environment"
+    };
+}
 
-        const correct = "Corporate Social Responsibility (CSR)";
+if(type === 12){
 
-        const options = shuffle([
-            correct,
-            "Profit hiding",
-            "Expense inflation",
-            "Tax evasion"
-        ]);
+    return {
 
-        return {
-            question:
-            `What term describes a business acting responsibly towards society?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        taskType:
+        "communicationMethod",
 
-    /* ---------------- BASIC SCENARIOS ---------------- */
+        scenario:
+        "A cyber attack has occurred and all employees must be informed immediately.",
 
-    if(type === 13){
+        answer:
+        "meeting"
+    };
+}
 
-        const correct = "Increase marketing";
+if(type === 13){
 
-        const options = shuffle([
-            correct,
-            "Reduce customers",
-            "Ignore sales",
-            "Close business"
-        ]);
+    return {
 
-        return {
-            question:
-            `${business} wants to increase awareness of its products. What should it do?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        taskType:
+        "teamworkScenario",
 
-    if(type === 14){
+        scenario:
+        "A project team is missing deadlines because members are not sharing information.",
 
-        const correct = "Expand market share";
+        answer:
+        "communication"
+    };
+}
 
-        const options = shuffle([
-            correct,
-            "Reduce output",
-            "Stop advertising",
-            "Increase losses"
-        ]);
+if(type === 14){
 
-        return {
-            question:
-            `What does a business aim to achieve in growth strategy?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
 
-    /* ---------------- FINAL APPLICATION ---------------- */
+        taskType:
+        "conflictResolution",
 
-    if(type === 15){
+        scenario:
+        "Two employees disagree about how a task should be completed.",
 
-        const correct = "Improve efficiency and reduce costs";
+        answer:
+        "discussion"
+    };
+}
 
-        const options = shuffle([
-            correct,
-            "Increase waste",
-            "Ignore competition",
-            "Reduce customers"
-        ]);
+if(type === 15){
 
-        return {
-            question:
-            `${business} wants to improve performance. What is the best strategy?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
+
+        taskType:
+        "businessCaseStudy",
+
+        scenario:
+
+        "Sales are falling, customer complaints are increasing and a new competitor has entered the market.",
+
+        answers:{
+
+            objective:
+            "survival",
+
+            stakeholder:
+            "customers",
+
+            risk:
+            "competition",
+
+            action:
+            "improve service"
+        }
+    };
+}
 
     throw new Error("L2-CH4 type not implemented: " + type);
 }
