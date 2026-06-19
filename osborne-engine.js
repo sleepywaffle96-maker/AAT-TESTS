@@ -1858,7 +1858,7 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
 function generateL2CH3(type = null){
     if(type === null){
-        type = rand(1,15);
+        type = rand(1,11);
     }
     const business = randomBusiness();
 
@@ -1866,32 +1866,79 @@ function generateL2CH3(type = null){
 
     if(type === 1){
 
-        const materials = rand(2,15);
-        const labour = rand(3,20);
-        const overhead = rand(1,10);
+    const qty =
+    rand(5,50);
 
-        const total = materials + labour + overhead;
+    const unitPrice =
+    rand(20,200);
 
-        const options = shuffle([
-            total,
-            total + 2,
-            total - 3,
-            total + 5
-        ]);
+    const tradeDiscountRate =
+    [5,10,15,20][rand(0,3)];
 
-        return {
-            question:
-            `A product has:
-Materials £${materials}
-Labour £${labour}
-Overheads £${overhead}
+    const netValue =
 
-What is the total cost per unit?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(total)
-        };
-    }
+        qty *
+        unitPrice;
 
+    const tradeDiscount =
+
+        +(netValue *
+        tradeDiscountRate / 100)
+        .toFixed(2);
+
+    const discountedValue =
+
+        +(netValue -
+        tradeDiscount)
+        .toFixed(2);
+
+    const vat =
+
+        +(discountedValue *
+        0.20)
+        .toFixed(2);
+
+    const gross =
+
+        +(discountedValue +
+        vat)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "salesInvoiceTradeDiscount",
+
+        question:
+
+        "Complete the sales invoice.",
+
+        customer:
+        randomBusiness(),
+
+        invoiceNumber:
+        "SI" +
+        rand(1000,9999),
+
+        qty:
+        qty,
+
+        unitPrice:
+        unitPrice,
+
+        tradeDiscountRate:
+        tradeDiscountRate,
+
+        answers:{
+
+            netValue,
+            tradeDiscount,
+            discountedValue,
+            vat,
+            gross
+        }
+    };
+}
     if(type === 2){
 
         const cost = rand(10,50);
