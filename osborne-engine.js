@@ -72,7 +72,7 @@ function randomBusiness(){
    LEVEL 2 QUESTION BANK
 ------------------------ */
 
-function generateL2CH1(type = null){
+function L2CH1(type = null){
 
     if(type === null){
         type = rand(1,15);
@@ -1090,7 +1090,7 @@ const items = [
     throw new Error("L2-CH1 type not implemented: " + type);
 }
 
-function generateL2CH2(type = null){
+function L2CH2(type = null){
     if(type === null){
         type = rand(1,15);
     }
@@ -1856,7 +1856,7 @@ Which account must be debited to clear the suspense account if Insurance Expense
     throw new Error("L2-CH2 type not implemented: " + type);
 }
 
-function generateL2CH3(type = null){
+function L2CH3(type = null){
     if(type === null){
         type = rand(1,15);
     }
@@ -2860,7 +2860,7 @@ What is the best overall response?`,
 
 function generateL3CH1(type = null){
     if(type === null){
-        type = rand(1,15);
+        type = rand(1,11);
     }
     const business = randomBusiness();
 
