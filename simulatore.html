@@ -1914,6 +1914,61 @@ else if(q.taskType === "ledger"){
     '</div>';
 }
 
+else if(q.taskType === "trialBalanceDifference"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<table style="width:400px;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Trial Balance</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">£</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;">Total Debits</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;">' +
+
+                q.debitTotal.toFixed(2) +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;">Total Credits</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;">' +
+
+                q.creditTotal.toFixed(2) +
+
+                '</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Difference: ' +
+
+            '<input id="trialbalance-answer" type="text">' +
+
+            '<span id="trialbalance-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "statement"){
 
     let rows = "";
@@ -2598,6 +2653,32 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "trialBalanceDifference"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "trialbalance-answer"
+        ).value
+    );
+
+    const ok =
+    answer === q.answer;
+
+    const marker =
+    document.getElementById(
+        "trialbalance-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "dishonouredCheque"){
 
     const answer =
@@ -3118,6 +3199,16 @@ q.taskType === "creditNote"
     return;
 }
 
+if(q.taskType === "trialBalanceDifference"){
+
+    document.getElementById(
+        "trialbalance-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "controlAccount"){
 
     document.getElementById(
@@ -3320,6 +3411,19 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "trialBalanceDifference"){
+
+    document.getElementById(
+        "trialbalance-answer"
+    ).value = "";
+
+    document.getElementById(
+        "trialbalance-marker"
+    ).textContent = "";
+
+    return;
+}
 
 if(q.taskType === "accountingEquation"){
 
