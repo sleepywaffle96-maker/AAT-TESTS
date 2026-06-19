@@ -1133,6 +1133,65 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "purchaseReturnsCreditNote"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Purchase Returns Credit Note</h3>' +
+
+        '<p><strong>Credit Note No:</strong> ' +
+        q.creditNoteNumber +
+        '</p>' +
+
+        '<p><strong>Supplier:</strong> ' +
+        q.supplier +
+        '</p>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Description</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Amount (£)</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;">Goods Returned</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                q.goodsReturned.toFixed(2) +
+                '</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'VAT (20%): ' +
+
+            '<input id="prcn-vat" type="text">' +
+
+            '<span id="prcn-vat-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'Credit Note Total: ' +
+
+            '<input id="prcn-total" type="text">' +
+
+            '<span id="prcn-total-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "salesReturnsCreditNote"){
 
     optionsHTML =
@@ -3011,6 +3070,47 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "purchaseReturnsCreditNote"){
+
+    const vat =
+    Number(
+        document.getElementById(
+            "prcn-vat"
+        ).value
+    );
+
+    const total =
+    Number(
+        document.getElementById(
+            "prcn-total"
+        ).value
+    );
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "prcn-vat-marker",
+        vat === q.answers.vat
+    );
+
+    mark(
+        "prcn-total-marker",
+        total === q.answers.creditNoteTotal
+    );
+
+    return;
+}
+
     if(q.taskType === "salesReturnsCreditNote"){
 
     const vat =
@@ -3820,6 +3920,21 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "purchaseReturnsCreditNote"){
+
+    document.getElementById(
+        "prcn-vat"
+    ).value =
+    q.answers.vat;
+
+    document.getElementById(
+        "prcn-total"
+    ).value =
+    q.answers.creditNoteTotal;
+
+    return;
+}
+
     if(q.taskType === "salesReturnsCreditNote"){
 
     document.getElementById(
@@ -4152,6 +4267,27 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "purchaseReturnsCreditNote"){
+
+    document.getElementById(
+        "prcn-vat"
+    ).value = "";
+
+    document.getElementById(
+        "prcn-total"
+    ).value = "";
+
+    document.getElementById(
+        "prcn-vat-marker"
+    ).textContent = "";
+
+    document.getElementById(
+        "prcn-total-marker"
+    ).textContent = "";
+
+    return;
+}
 
     if(q.taskType === "salesReturnsCreditNote"){
 
