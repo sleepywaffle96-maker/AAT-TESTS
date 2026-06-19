@@ -2063,28 +2063,46 @@ function generateL2CH3(type = null){
 
     if(type === 4){
 
-        const used = rand(10,40);
-        const waste = rand(1,5);
+    const invoiceTotal =
+    rand(1000,10000);
 
-        const total = used + waste;
+    const discountRate =
+    [2,3,5,10][rand(0,3)];
 
-        const options = shuffle([
-            total,
-            total + 2,
-            total - 1,
-            total + 4
-        ]);
+    const discountAmount =
 
-        return {
-            question:
-            `A process uses ${used}kg of material and wastes ${waste}kg.
+        +(invoiceTotal *
+        discountRate / 100)
+        .toFixed(2);
 
-What is total material input?`,
-            options: options.map(v => total + " kg"),
-            correct: options.indexOf(total)
-        };
-    }
+    const amountPayable =
 
+        +(invoiceTotal -
+        discountAmount)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "promptPaymentDiscount",
+
+        question:
+
+        "Calculate the prompt payment discount and amount payable.",
+
+        invoiceTotal:
+        invoiceTotal,
+
+        discountRate:
+        discountRate,
+
+        answers:{
+
+            discountAmount,
+            amountPayable
+        }
+    };
+}
     /* ---------------- COST PER UNIT ---------------- */
 
     if(type === 5){
