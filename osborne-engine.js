@@ -1265,24 +1265,65 @@ What explains the difference?`,
 
     if(type === 7){
 
-        const correct = "Suspense account";
+    const scenarios = [
 
-        const diff = rand(50,500);
+        {
+            transaction:
+            "Rent Expense was incorrectly posted to Purchases.",
 
-        const options = shuffle([
-            correct,
-            "Capital account",
-            "Sales account",
-            "Bank account"
-        ]);
+            answers:{
+                row1Account:"Rent Expense",
+                row1Side:"Debit",
+                row2Account:"Purchases",
+                row2Side:"Credit"
+            }
+        },
 
-        return {
-            question:
-            `A trial balance does not balance by £${diff}. Where is the difference temporarily recorded?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        {
+            transaction:
+            "Insurance Expense was incorrectly posted to Purchases.",
+
+            answers:{
+                row1Account:"Insurance Expense",
+                row1Side:"Debit",
+                row2Account:"Purchases",
+                row2Side:"Credit"
+            }
+        },
+
+        {
+            transaction:
+            "A payment from a customer was incorrectly posted to Capital.",
+
+            answers:{
+                row1Account:"Trade Receivables",
+                row1Side:"Debit",
+                row2Account:"Capital",
+                row2Side:"Credit"
+            }
+        }
+    ];
+
+    const chosen =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return {
+
+        taskType:"journalEntry",
+
+        question:
+
+        "Complete the correcting journal entry.",
+
+        transaction:
+        chosen.transaction,
+
+        answers:
+        chosen.answers
+    };
+}
 
     /* ---------------- CONTROL ACCOUNT LOGIC ---------------- */
 
