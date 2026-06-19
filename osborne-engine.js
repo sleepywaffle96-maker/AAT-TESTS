@@ -2089,28 +2089,47 @@ What is total material input?`,
 
     if(type === 5){
 
-        const totalCost = rand(200,800);
-        const units = rand(20,80);
+    const goodsReturned =
+    rand(500,5000);
 
-        const unitCost = totalCost / units;
+    const vat =
 
-        const options = shuffle([
-            unitCost,
-            unitCost + 2,
-            unitCost - 1,
-            unitCost + 3
-        ]);
+        +(goodsReturned *
+        0.20)
+        .toFixed(2);
 
-        return {
-            question:
-            `Total production cost is £${totalCost} for ${units} units.
+    const creditNoteTotal =
 
-What is cost per unit (approx.)?`,
-            options: options.map(v => currency(v.toFixed(2))),
-            correct: options.indexOf(unitCost)
-        };
-    }
+        +(goodsReturned +
+        vat)
+        .toFixed(2);
 
+    return {
+
+        taskType:
+        "salesReturnsCreditNote",
+
+        question:
+
+        "Complete the sales returns credit note.",
+
+        customer:
+        randomBusiness(),
+
+        creditNoteNumber:
+        "CN" +
+        rand(1000,9999),
+
+        goodsReturned:
+        goodsReturned,
+
+        answers:{
+
+            vat,
+            creditNoteTotal
+        }
+    };
+}
     /* ---------------- SIMPLE PROFIT ---------------- */
 
     if(type === 6){
