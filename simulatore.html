@@ -1133,6 +1133,59 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "purchaseInvoicePosting"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Purchase Invoice</h3>' +
+
+        '<p><strong>Supplier:</strong> ' +
+        q.supplier +
+        '</p>' +
+
+        '<p><strong>Net Purchases:</strong> £' +
+        q.netPurchases.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>VAT:</strong> £' +
+        q.vat.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Total Invoice:</strong> £' +
+        q.totalInvoice.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'DR Purchases: ' +
+
+            '<input id="pip-purchases" type="text">' +
+
+            '<span id="pip-purchases-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'DR VAT: ' +
+
+            '<input id="pip-vat" type="text">' +
+
+            '<span id="pip-vat-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'CR Trade Payables: ' +
+
+            '<input id="pip-payables" type="text">' +
+
+            '<span id="pip-payables-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "vatExtraction"){
 
     optionsHTML =
@@ -1160,6 +1213,59 @@ else if(q.taskType === "vatExtraction"){
             '<input id="vatex-net" type="text">' +
 
             '<span id="vatex-net-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "salesInvoicePosting"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Sales Invoice</h3>' +
+
+        '<p><strong>Customer:</strong> ' +
+        q.customer +
+        '</p>' +
+
+        '<p><strong>Net Sales:</strong> £' +
+        q.netSales.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>VAT:</strong> £' +
+        q.vat.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Total Invoice:</strong> £' +
+        q.totalInvoice.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'DR Trade Receivables: ' +
+
+            '<input id="sip-dr" type="text">' +
+
+            '<span id="sip-dr-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'CR Sales Revenue: ' +
+
+            '<input id="sip-sales" type="text">' +
+
+            '<span id="sip-sales-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'CR VAT: ' +
+
+            '<input id="sip-vat" type="text">' +
+
+            '<span id="sip-vat-marker" class="feedback-marker"></span>' +
 
         '</div>' +
 
@@ -3177,6 +3283,88 @@ const gross = Number(grossText);
         return;
     }
 
+if(q.taskType === "purchaseInvoicePosting"){
+
+    const purchases =
+    Number(document.getElementById("pip-purchases").value);
+
+    const vat =
+    Number(document.getElementById("pip-vat").value);
+
+    const payables =
+    Number(document.getElementById("pip-payables").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "pip-purchases-marker",
+        purchases === q.answers.debitPurchases
+    );
+
+    mark(
+        "pip-vat-marker",
+        vat === q.answers.debitVAT
+    );
+
+    mark(
+        "pip-payables-marker",
+        payables === q.answers.creditPayables
+    );
+
+    return;
+}
+
+    if(q.taskType === "salesInvoicePosting"){
+
+    const dr =
+    Number(document.getElementById("sip-dr").value);
+
+    const sales =
+    Number(document.getElementById("sip-sales").value);
+
+    const vat =
+    Number(document.getElementById("sip-vat").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "sip-dr-marker",
+        dr === q.answers.debitReceivables
+    );
+
+    mark(
+        "sip-sales-marker",
+        sales === q.answers.creditSales
+    );
+
+    mark(
+        "sip-vat-marker",
+        vat === q.answers.creditVAT
+    );
+
+    return;
+}
+
     if(q.taskType === "vatExtraction"){
 
     const vat =
@@ -4150,6 +4338,34 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "purchaseInvoicePosting"){
+
+    document.getElementById("pip-purchases").value =
+    q.answers.debitPurchases;
+
+    document.getElementById("pip-vat").value =
+    q.answers.debitVAT;
+
+    document.getElementById("pip-payables").value =
+    q.answers.creditPayables;
+
+    return;
+}
+
+    if(q.taskType === "salesInvoicePosting"){
+
+    document.getElementById("sip-dr").value =
+    q.answers.debitReceivables;
+
+    document.getElementById("sip-sales").value =
+    q.answers.creditSales;
+
+    document.getElementById("sip-vat").value =
+    q.answers.creditVAT;
+
+    return;
+}
+
     if(q.taskType === "vatExtraction"){
 
     document.getElementById(
@@ -4543,6 +4759,19 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "purchaseInvoicePosting"){
+
+    document.getElementById("pip-purchases").value = "";
+    document.getElementById("pip-vat").value = "";
+    document.getElementById("pip-payables").value = "";
+
+    document.getElementById("pip-purchases-marker").textContent = "";
+    document.getElementById("pip-vat-marker").textContent = "";
+    document.getElementById("pip-payables-marker").textContent = "";
+
+    return;
+}
+
     if(q.taskType === "promptPaymentDiscount"){
 
     document.getElementById(
@@ -4560,6 +4789,19 @@ q.taskType === "creditNote"
     document.getElementById(
         "ppd-payable-marker"
     ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "salesInvoicePosting"){
+
+    document.getElementById("sip-dr").value = "";
+    document.getElementById("sip-sales").value = "";
+    document.getElementById("sip-vat").value = "";
+
+    document.getElementById("sip-dr-marker").textContent = "";
+    document.getElementById("sip-sales-marker").textContent = "";
+    document.getElementById("sip-vat-marker").textContent = "";
 
     return;
 }
