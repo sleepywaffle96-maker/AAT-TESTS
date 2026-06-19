@@ -1228,6 +1228,37 @@ else if(q.taskType === "advancedBankReconciliation"){
     '</div>';
 }
 
+else if(q.taskType === "errorCaseStudy"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+
+        q.question +
+
+        '</p>' +
+
+        '<p><strong>Amount:</strong> £' +
+
+        q.amount.toFixed(2) +
+
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Correction Required: ' +
+
+            '<input id="errorcase-answer" type="text">' +
+
+            '<span id="errorcase-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "dishonouredCheque"){
 
     optionsHTML =
@@ -2679,6 +2710,32 @@ const gross = Number(grossText);
     return;
 }
 
+if(q.taskType === "errorCaseStudy"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "errorcase-answer"
+        ).value
+    );
+
+    const ok =
+    answer === q.answer;
+
+    const marker =
+    document.getElementById(
+        "errorcase-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "dishonouredCheque"){
 
     const answer =
@@ -3199,6 +3256,16 @@ q.taskType === "creditNote"
     return;
 }
 
+if(q.taskType === "errorCaseStudy"){
+
+    document.getElementById(
+        "errorcase-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "trialBalanceDifference"){
 
     document.getElementById(
@@ -3411,6 +3478,19 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "errorCaseStudy"){
+
+    document.getElementById(
+        "errorcase-answer"
+    ).value = "";
+
+    document.getElementById(
+        "errorcase-marker"
+    ).textContent = "";
+
+    return;
+}
 
     if(q.taskType === "trialBalanceDifference"){
 
