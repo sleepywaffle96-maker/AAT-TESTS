@@ -1133,6 +1133,181 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "stakeholderPriority"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Stakeholder: ' +
+
+            '<input id="stakeholder-answer" type="text">' +
+
+            '<span id="stakeholder-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "stakeholderClassification"){
+
+    let rows = "";
+
+    q.rows.forEach((row,index)=>{
+
+        rows +=
+
+        '<tr>' +
+
+            '<td style="padding:8px;border:1px solid #ccc;">' +
+            row.stakeholder +
+            '</td>' +
+
+            '<td style="padding:8px;border:1px solid #ccc;">' +
+
+                '<select id="stakeholder-' +
+                index +
+                '">' +
+
+                    '<option value=""></option>' +
+
+                    '<option value="internal">Internal</option>' +
+
+                    '<option value="external">External</option>' +
+
+                '</select>' +
+
+                '<span id="stakeholder-marker-' +
+                index +
+                '" class="feedback-marker"></span>' +
+
+            '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+            rows +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "businessObjective"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.question +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Objective: ' +
+
+            '<input id="objective-answer" type="text">' +
+
+            '<span id="objective-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "missionStatement"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Mission Statement</strong></p>' +
+
+        '<p>' +
+        q.mission +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Main Objective: ' +
+
+            '<input id="mission-answer" type="text">' +
+
+            '<span id="mission-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "swotClassification"){
+
+    let rows = "";
+
+    q.items.forEach((item,index)=>{
+
+        rows +=
+
+        '<tr>' +
+
+            '<td style="padding:8px;border:1px solid #ccc;">' +
+            item.text +
+            '</td>' +
+
+            '<td style="padding:8px;border:1px solid #ccc;">' +
+
+                '<select id="swot-' +
+                index +
+                '">' +
+
+                    '<option value=""></option>' +
+
+                    '<option value="S">S</option>' +
+
+                    '<option value="W">W</option>' +
+
+                    '<option value="O">O</option>' +
+
+                    '<option value="T">T</option>' +
+
+                '</select>' +
+
+                '<span id="swot-marker-' +
+                index +
+                '" class="feedback-marker"></span>' +
+
+            '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+            rows +
+
+        '</table>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "vatLedgerPosting"){
 
     optionsHTML =
@@ -3492,6 +3667,138 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "stakeholderPriority"){
+
+    const answer =
+    document.getElementById(
+        "stakeholder-answer"
+    ).value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById(
+        "stakeholder-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "stakeholderClassification"){
+
+    q.rows.forEach((row,index)=>{
+
+        const value =
+        document.getElementById(
+            "stakeholder-" + index
+        ).value;
+
+        const marker =
+        document.getElementById(
+            "stakeholder-marker-" + index
+        );
+
+        const correct =
+        value === row.answer;
+
+        marker.textContent =
+        correct ? "✔" : "✖";
+
+        marker.style.color =
+        correct ? "#16A34A" : "#DC2626";
+    });
+
+    return;
+}
+
+if(q.taskType === "businessObjective"){
+
+    const answer =
+    document.getElementById(
+        "objective-answer"
+    ).value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById(
+        "objective-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "missionStatement"){
+
+    const answer =
+    document.getElementById(
+        "mission-answer"
+    ).value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById(
+        "mission-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "swotClassification"){
+
+    q.items.forEach((item,index)=>{
+
+        const value =
+        document.getElementById(
+            "swot-" + index
+        ).value;
+
+        const marker =
+        document.getElementById(
+            "swot-marker-" + index
+        );
+
+        const correct =
+        value === item.answer;
+
+        marker.textContent =
+        correct ? "✔" : "✖";
+
+        marker.style.color =
+        correct ? "#16A34A" : "#DC2626";
+    });
+
+    return;
+}
+
     if(q.taskType === "vatLedgerPosting"){
 
     const value =
@@ -4707,6 +5014,62 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "stakeholderPriority"){
+
+    document.getElementById(
+        "stakeholder-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "stakeholderClassification"){
+
+    q.rows.forEach((row,index)=>{
+
+        document.getElementById(
+            "stakeholder-" + index
+        ).value =
+        row.answer;
+    });
+
+    return;
+}
+
+if(q.taskType === "businessObjective"){
+
+    document.getElementById(
+        "objective-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "missionStatement"){
+
+    document.getElementById(
+        "mission-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "swotClassification"){
+
+    q.items.forEach((item,index)=>{
+
+        document.getElementById(
+            "swot-" + index
+        ).value =
+        item.answer;
+    });
+
+    return;
+}
+
     if(q.taskType === "salesReturnsPosting"){
 
     document.getElementById("srp-returns").value =
@@ -5185,6 +5548,77 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "stakeholderPriority"){
+
+    document.getElementById(
+        "stakeholder-answer"
+    ).value = "";
+
+    document.getElementById(
+        "stakeholder-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "stakeholderClassification"){
+
+    q.rows.forEach((row,index)=>{
+
+        document.getElementById(
+            "stakeholder-" + index
+        ).value = "";
+
+        document.getElementById(
+            "stakeholder-marker-" + index
+        ).textContent = "";
+    });
+
+    return;
+}
+
+if(q.taskType === "businessObjective"){
+
+    document.getElementById(
+        "objective-answer"
+    ).value = "";
+
+    document.getElementById(
+        "objective-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "missionStatement"){
+
+    document.getElementById(
+        "mission-answer"
+    ).value = "";
+
+    document.getElementById(
+        "mission-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "swotClassification"){
+
+    q.items.forEach((item,index)=>{
+
+        document.getElementById(
+            "swot-" + index
+        ).value = "";
+
+        document.getElementById(
+            "swot-marker-" + index
+        ).textContent = "";
+    });
+
+    return;
+}
 
     if(q.taskType === "vatLedgerPosting"){
 
