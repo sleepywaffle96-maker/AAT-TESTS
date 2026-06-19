@@ -2198,30 +2198,46 @@ function generateL2CH3(type = null){
 
     if(type === 7){
 
-        const rent = rand(100,500);
-        const utilities = rand(50,200);
+    const netValue =
+    rand(1000,10000);
 
-        const total = rent + utilities;
+    const vatRate =
+    20;
 
-        const options = shuffle([
-            total,
-            total + 10,
-            total - 20,
-            total + 30
-        ]);
+    const vatAmount =
 
-        return {
-            question:
-            `A business has:
-Rent £${rent}
-Utilities £${utilities}
+        +(netValue *
+        vatRate / 100)
+        .toFixed(2);
 
-What are total overhead costs?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(total)
-        };
-    }
+    const grossAmount =
 
+        +(netValue +
+        vatAmount)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "vatCalculation",
+
+        question:
+
+        "Calculate the VAT amount and gross amount.",
+
+        netValue:
+        netValue,
+
+        vatRate:
+        vatRate,
+
+        answers:{
+
+            vatAmount,
+            grossAmount
+        }
+    };
+}
     /* ---------------- BREAK EVEN BASIC ---------------- */
 
     if(type === 8){
