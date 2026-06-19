@@ -1231,21 +1231,24 @@ else if(q.taskType === "salesInvoiceTradeDiscount"){
         '<div style="margin-top:15px;">' +
 
             'Net Value: ' +
-            '<input id="sid-net" type="text"><br><br>' +
+            '<input id="sid-net" type="text">' +
+            '<span id="sid-net-marker" class="feedback-marker"></span><br><br>' +
 
             'Trade Discount: ' +
-            '<input id="sid-discount" type="text"><br><br>' +
+            '<input id="sid-discount" type="text">' +
+            '<span id="sid-discount-marker" class="feedback-marker"></span><br><br>' +
 
             'Discounted Value: ' +
-            '<input id="sid-discounted" type="text"><br><br>' +
+            '<input id="sid-discounted" type="text">' +
+            '<span id="sid-discounted-marker" class="feedback-marker"></span><br><br>' +
 
             'VAT (20%): ' +
-            '<input id="sid-vat" type="text"><br><br>' +
+            '<input id="sid-vat" type="text">' +
+            '<span id="sid-vat-marker" class="feedback-marker"></span><br><br>' +
 
             'Gross Total: ' +
             '<input id="sid-gross" type="text">' +
-
-            '<span id="sid-marker" class="feedback-marker"></span>' +
+            '<span id="sid-gross-marker" class="feedback-marker"></span>' +
 
         '</div>' +
 
@@ -2842,58 +2845,56 @@ const gross = Number(grossText);
     if(q.taskType === "salesInvoiceTradeDiscount"){
 
     const net =
-    Number(
-        document.getElementById(
-            "sid-net"
-        ).value
-    );
+    Number(document.getElementById("sid-net").value);
 
     const discount =
-    Number(
-        document.getElementById(
-            "sid-discount"
-        ).value
-    );
+    Number(document.getElementById("sid-discount").value);
 
     const discounted =
-    Number(
-        document.getElementById(
-            "sid-discounted"
-        ).value
-    );
+    Number(document.getElementById("sid-discounted").value);
 
     const vat =
-    Number(
-        document.getElementById(
-            "sid-vat"
-        ).value
-    );
+    Number(document.getElementById("sid-vat").value);
 
     const gross =
-    Number(
-        document.getElementById(
-            "sid-gross"
-        ).value
+    Number(document.getElementById("sid-gross").value);
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "sid-net-marker",
+        net === q.answers.netValue
     );
 
-    const ok =
-
-        net === q.answers.netValue &&
-        discount === q.answers.tradeDiscount &&
-        discounted === q.answers.discountedValue &&
-        vat === q.answers.vat &&
-        gross === q.answers.gross;
-
-    const marker =
-    document.getElementById(
-        "sid-marker"
+    mark(
+        "sid-discount-marker",
+        discount === q.answers.tradeDiscount
     );
 
-    marker.textContent =
-    ok ? "✔" : "✖";
+    mark(
+        "sid-discounted-marker",
+        discounted === q.answers.discountedValue
+    );
 
-    marker.style.color =
-    ok ? "#16A34A" : "#DC2626";
+    mark(
+        "sid-vat-marker",
+        vat === q.answers.vat
+    );
+
+    mark(
+        "sid-gross-marker",
+        gross === q.answers.gross
+    );
 
     return;
 }
@@ -3828,9 +3829,11 @@ if(q.taskType === "salesInvoiceTradeDiscount"){
     document.getElementById("sid-vat").value = "";
     document.getElementById("sid-gross").value = "";
 
-    document.getElementById(
-        "sid-marker"
-    ).textContent = "";
+    document.getElementById("sid-net-marker").textContent = "";
+    document.getElementById("sid-discount-marker").textContent = "";
+    document.getElementById("sid-discounted-marker").textContent = "";
+    document.getElementById("sid-vat-marker").textContent = "";
+    document.getElementById("sid-gross-marker").textContent = "";
 
     return;
 }
