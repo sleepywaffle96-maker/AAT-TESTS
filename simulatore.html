@@ -1156,6 +1156,144 @@ else if(q.taskType === "stakeholderPriority"){
     '</div>';
 }
 
+else if(q.taskType === "pestClassification"){
+
+    let rows = "";
+
+    q.items.forEach((item,index)=>{
+
+        rows +=
+
+        '<tr>' +
+
+            '<td style="padding:8px;border:1px solid #ccc;">' +
+            item.text +
+            '</td>' +
+
+            '<td style="padding:8px;border:1px solid #ccc;">' +
+
+                '<select id="pest-' +
+                index +
+                '">' +
+
+                    '<option value=""></option>' +
+
+                    '<option value="P">P</option>' +
+
+                    '<option value="E">E</option>' +
+
+                    '<option value="S">S</option>' +
+
+                    '<option value="T">T</option>' +
+
+                '</select>' +
+
+                '<span id="pest-marker-' +
+                index +
+                '" class="feedback-marker"></span>' +
+
+            '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<table style="width:100%;border-collapse:collapse;">' +
+
+            rows +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "ethicalIssue"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Ethical principle breached: ' +
+
+            '<input id="ethics-answer" type="text">' +
+
+            '<span id="ethics-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "dataProtection"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Key principle breached: ' +
+
+            '<input id="dp-answer" type="text">' +
+
+            '<span id="dp-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "healthSafety"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Identify the risk: ' +
+
+            '<input id="hs-answer" type="text">' +
+
+            '<span id="hs-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "professionalBehaviour"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Most professional action: ' +
+
+            '<input id="pb-answer" type="text">' +
+
+            '<span id="pb-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "stakeholderClassification"){
 
     let rows = "";
@@ -3667,6 +3805,125 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "pestClassification"){
+
+    q.items.forEach((item,index)=>{
+
+        const value =
+        document.getElementById(
+            "pest-" + index
+        ).value;
+
+        const marker =
+        document.getElementById(
+            "pest-marker-" + index
+        );
+
+        const correct =
+        value === item.answer;
+
+        marker.textContent =
+        correct ? "✔" : "✖";
+
+        marker.style.color =
+        correct ? "#16A34A" : "#DC2626";
+    });
+
+    return;
+}
+
+if(q.taskType === "ethicalIssue"){
+
+    const answer =
+    document.getElementById("ethics-answer")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById("ethics-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "dataProtection"){
+
+    const answer =
+    document.getElementById("dp-answer")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById("dp-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "healthSafety"){
+
+    const answer =
+    document.getElementById("hs-answer")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById("hs-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "professionalBehaviour"){
+
+    const answer =
+    document.getElementById("pb-answer")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const marker =
+    document.getElementById("pb-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "stakeholderPriority"){
 
     const answer =
@@ -5024,6 +5281,59 @@ q.taskType === "creditNote"
     return;
 }
 
+    if(q.taskType === "pestClassification"){
+
+    q.items.forEach((item,index)=>{
+
+        document.getElementById(
+            "pest-" + index
+        ).value =
+        item.answer;
+    });
+
+    return;
+}
+
+if(q.taskType === "ethicalIssue"){
+
+    document.getElementById(
+        "ethics-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "dataProtection"){
+
+    document.getElementById(
+        "dp-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "healthSafety"){
+
+    document.getElementById(
+        "hs-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "professionalBehaviour"){
+
+    document.getElementById(
+        "pb-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "stakeholderClassification"){
 
     q.rows.forEach((row,index)=>{
@@ -5557,6 +5867,74 @@ q.taskType === "creditNote"
 
     document.getElementById(
         "stakeholder-marker"
+    ).textContent = "";
+
+    return;
+}
+
+    if(q.taskType === "pestClassification"){
+
+    q.items.forEach((item,index)=>{
+
+        document.getElementById(
+            "pest-" + index
+        ).value = "";
+
+        document.getElementById(
+            "pest-marker-" + index
+        ).textContent = "";
+    });
+
+    return;
+}
+
+if(q.taskType === "ethicalIssue"){
+
+    document.getElementById(
+        "ethics-answer"
+    ).value = "";
+
+    document.getElementById(
+        "ethics-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "dataProtection"){
+
+    document.getElementById(
+        "dp-answer"
+    ).value = "";
+
+    document.getElementById(
+        "dp-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "healthSafety"){
+
+    document.getElementById(
+        "hs-answer"
+    ).value = "";
+
+    document.getElementById(
+        "hs-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "professionalBehaviour"){
+
+    document.getElementById(
+        "pb-answer"
+    ).value = "";
+
+    document.getElementById(
+        "pb-marker"
     ).textContent = "";
 
     return;
