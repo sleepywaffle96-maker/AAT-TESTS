@@ -1133,6 +1133,43 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "promptPaymentDiscount"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Prompt Payment Discount</h3>' +
+
+        '<p><strong>Invoice Total:</strong> £' +
+        q.invoiceTotal.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Discount Available:</strong> ' +
+        q.discountRate +
+        '%</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Discount Amount: ' +
+
+            '<input id="ppd-discount" type="text">' +
+
+            '<span id="ppd-discount-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'Amount Payable: ' +
+
+            '<input id="ppd-payable" type="text">' +
+
+            '<span id="ppd-payable-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "purchaseReturnsCreditNote"){
 
     optionsHTML =
@@ -3070,6 +3107,47 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "promptPaymentDiscount"){
+
+    const discount =
+    Number(
+        document.getElementById(
+            "ppd-discount"
+        ).value
+    );
+
+    const payable =
+    Number(
+        document.getElementById(
+            "ppd-payable"
+        ).value
+    );
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "ppd-discount-marker",
+        discount === q.answers.discountAmount
+    );
+
+    mark(
+        "ppd-payable-marker",
+        payable === q.answers.amountPayable
+    );
+
+    return;
+}
+
     if(q.taskType === "purchaseReturnsCreditNote"){
 
     const vat =
@@ -3920,6 +3998,21 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "promptPaymentDiscount"){
+
+    document.getElementById(
+        "ppd-discount"
+    ).value =
+    q.answers.discountAmount;
+
+    document.getElementById(
+        "ppd-payable"
+    ).value =
+    q.answers.amountPayable;
+
+    return;
+}
+
     if(q.taskType === "purchaseReturnsCreditNote"){
 
     document.getElementById(
@@ -4267,6 +4360,27 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "promptPaymentDiscount"){
+
+    document.getElementById(
+        "ppd-discount"
+    ).value = "";
+
+    document.getElementById(
+        "ppd-payable"
+    ).value = "";
+
+    document.getElementById(
+        "ppd-discount-marker"
+    ).textContent = "";
+
+    document.getElementById(
+        "ppd-payable-marker"
+    ).textContent = "";
+
+    return;
+}
 
     if(q.taskType === "purchaseReturnsCreditNote"){
 
