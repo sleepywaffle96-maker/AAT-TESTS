@@ -1542,22 +1542,37 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
     if(type === 11){
 
-        const correct = "Reconciliation between control accounts and subsidiary ledgers";
+    const cashBook =
+    rand(1000,5000);
 
-        const options = shuffle([
-            correct,
-            "Tax calculation",
-            "Payroll processing",
-            "Budget preparation"
-        ]);
+    const bankCharges =
+    rand(10,150);
 
-        return {
-            question:
-            `What is the purpose of reconciling control accounts?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const revisedBalance =
+
+        cashBook -
+        bankCharges;
+
+    return {
+
+        taskType:"bankCharges",
+
+        question:
+
+        "Calculate the revised cash book balance after entering the bank charges.",
+
+        cashBook:
+        cashBook,
+
+        bankCharges:
+        bankCharges,
+
+        answer:
+        Number(
+            revisedBalance.toFixed(2)
+        )
+    };
+}
 
     if(type === 12){
 
