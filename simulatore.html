@@ -1228,6 +1228,68 @@ else if(q.taskType === "advancedBankReconciliation"){
     '</div>';
 }
 
+else if(q.taskType === "purchaseLedgerReconciliation"){
+
+    let rows = "";
+
+    q.balances.forEach((value,index)=>{
+
+        rows +=
+
+        '<tr>' +
+
+            '<td style="border:1px solid #000;padding:6px;">Supplier ' +
+
+            (index+1) +
+
+            '</td>' +
+
+            '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+
+            value.toFixed(2) +
+
+            '</td>' +
+
+        '</tr>';
+    });
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Purchase Ledger Control Account:</strong> £' +
+
+        q.controlAccount.toFixed(2) +
+
+        '</p>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;margin-top:15px;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Supplier</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Balance (£)</th>' +
+
+            '</tr>' +
+
+            rows +
+
+        '</table>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Difference: ' +
+
+            '<input id="purchase-reconciliation-answer" type="text">' +
+
+            '<span id="purchase-reconciliation-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "ledgerReconciliation"){
 
     let rows = "";
@@ -2418,6 +2480,34 @@ const gross = Number(grossText);
         return;
     }
 
+if(q.taskType === "purchaseLedgerReconciliation"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "purchase-reconciliation-answer"
+        ).value
+    );
+
+    const ok =
+
+        answer ===
+        q.answer;
+
+    const marker =
+    document.getElementById(
+        "purchase-reconciliation-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
 if(q.taskType === "ledgerReconciliation"){
 
     const answer =
@@ -2840,6 +2930,16 @@ if(q.taskType === "ledgerReconciliation"){
     return;
 }
 
+if(q.taskType === "purchaseLedgerReconciliation"){
+
+    document.getElementById(
+        "purchase-reconciliation-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
     if(q.taskType === "accountingEquation"){
 
     document.getElementById(
@@ -3009,6 +3109,19 @@ if(q.taskType === "accountingEquation"){
 
     document.getElementById(
         "eq-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "purchaseLedgerReconciliation"){
+
+    document.getElementById(
+        "purchase-reconciliation-answer"
+    ).value = "";
+
+    document.getElementById(
+        "purchase-reconciliation-marker"
     ).textContent = "";
 
     return;
