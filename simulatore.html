@@ -1133,6 +1133,43 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "tradeDiscountCalculation"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Trade Discount Calculation</h3>' +
+
+        '<p><strong>List Price:</strong> £' +
+        q.listPrice.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Trade Discount:</strong> ' +
+        q.tradeDiscountRate +
+        '%</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Discount Amount: ' +
+
+            '<input id="tdc-discount" type="text">' +
+
+            '<span id="tdc-discount-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'Net Invoice Value: ' +
+
+            '<input id="tdc-net" type="text">' +
+
+            '<span id="tdc-net-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "purchaseInvoiceTradeDiscount"){
 
     optionsHTML =
@@ -2915,6 +2952,47 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "tradeDiscountCalculation"){
+
+    const discount =
+    Number(
+        document.getElementById(
+            "tdc-discount"
+        ).value
+    );
+
+    const net =
+    Number(
+        document.getElementById(
+            "tdc-net"
+        ).value
+    );
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "tdc-discount-marker",
+        discount === q.answers.discountAmount
+    );
+
+    mark(
+        "tdc-net-marker",
+        net === q.answers.netInvoiceValue
+    );
+
+    return;
+}
+
     if(q.taskType === "purchaseInvoiceTradeDiscount"){
 
     const net =
@@ -3642,6 +3720,21 @@ q.taskType === "creditNote"
         return;
     }
 
+    if(q.taskType === "tradeDiscountCalculation"){
+
+    document.getElementById(
+        "tdc-discount"
+    ).value =
+    q.answers.discountAmount;
+
+    document.getElementById(
+        "tdc-net"
+    ).value =
+    q.answers.netInvoiceValue;
+
+    return;
+}
+
     if(q.taskType === "purchaseInvoiceTradeDiscount"){
 
     document.getElementById("pid-net").value =
@@ -3944,6 +4037,27 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "tradeDiscountCalculation"){
+
+    document.getElementById(
+        "tdc-discount"
+    ).value = "";
+
+    document.getElementById(
+        "tdc-net"
+    ).value = "";
+
+    document.getElementById(
+        "tdc-discount-marker"
+    ).textContent = "";
+
+    document.getElementById(
+        "tdc-net-marker"
+    ).textContent = "";
+
+    return;
+}
 
     if(q.taskType === "purchaseInvoiceTradeDiscount"){
 
