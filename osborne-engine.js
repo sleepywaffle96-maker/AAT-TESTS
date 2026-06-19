@@ -1858,7 +1858,7 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
 function generateL2CH3(type = null){
     if(type === null){
-        type = rand(1,12);
+        type = rand(1,15);
     }
     const business = randomBusiness();
 
@@ -2484,6 +2484,118 @@ function generateL2CH3(type = null){
             creditVAT:
             vat
         }
+    };
+}
+    if(type === 13){
+
+    const vatOnSales =
+    rand(1000,8000);
+
+    const vatOnPurchases =
+    rand(500,4000);
+
+    const vatPayable =
+
+        vatOnSales -
+        vatOnPurchases;
+
+    return {
+
+        taskType:
+        "vatLedgerPosting",
+
+        question:
+
+        "Calculate the VAT payable to the tax authority.",
+
+        vatOnSales:
+        vatOnSales,
+
+        vatOnPurchases:
+        vatOnPurchases,
+
+        answer:
+        vatPayable
+    };
+}
+
+if(type === 14){
+
+    const opening =
+    rand(1000,5000);
+
+    const creditSales =
+    rand(1000,5000);
+
+    const cashReceived =
+    rand(500,3000);
+
+    const returnsValue =
+    rand(100,1000);
+
+    const closing =
+
+        opening +
+        creditSales -
+        cashReceived -
+        returnsValue;
+
+    return {
+
+        taskType:
+        "tradeReceivablesLedger",
+
+        question:
+
+        "Calculate the closing balance on the Trade Receivables account.",
+
+        opening,
+        creditSales,
+        cashReceived,
+        returnsValue,
+
+        answer:
+        closing
+    };
+}
+
+if(type === 15){
+
+    const opening =
+    rand(1000,5000);
+
+    const creditPurchases =
+    rand(1000,5000);
+
+    const payments =
+    rand(500,3000);
+
+    const purchaseReturns =
+    rand(100,1000);
+
+    const closing =
+
+        opening +
+        creditPurchases -
+        payments -
+        purchaseReturns;
+
+    return {
+
+        taskType:
+        "tradePayablesLedger",
+
+        question:
+
+        "Calculate the closing balance on the Trade Payables account.",
+
+        opening,
+        creditPurchases,
+        payments,
+        purchaseReturns,
+
+        answer:
+        closing
     };
 }
 
