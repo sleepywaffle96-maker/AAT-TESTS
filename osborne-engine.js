@@ -2018,27 +2018,46 @@ function generateL2CH3(type = null){
 
     if(type === 3){
 
-        const hours = rand(5,20);
-        const rate = rand(8,25);
+    const listPrice =
+    rand(1000,10000);
 
-        const cost = hours * rate;
+    const tradeDiscountRate =
+    [5,10,15,20,25][rand(0,4)];
 
-        const options = shuffle([
-            cost,
-            cost + 10,
-            cost - 15,
-            cost + 20
-        ]);
+    const discountAmount =
 
-        return {
-            question:
-            `A worker is paid £${rate} per hour for ${hours} hours.
+        +(listPrice *
+        tradeDiscountRate / 100)
+        .toFixed(2);
 
-What is the total labour cost?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(cost)
-        };
-    }
+    const netInvoiceValue =
+
+        +(listPrice -
+        discountAmount)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "tradeDiscountCalculation",
+
+        question:
+
+        "Calculate the trade discount and net invoice value.",
+
+        listPrice:
+        listPrice,
+
+        tradeDiscountRate:
+        tradeDiscountRate,
+
+        answers:{
+
+            discountAmount,
+            netInvoiceValue
+        }
+    };
+}
 
     /* ---------------- MATERIAL WASTE ---------------- */
 
