@@ -2280,23 +2280,55 @@ function generateL2CH3(type = null){
 
     if(type === 9){
 
-        const correct = "Direct cost";
+    const netSales =
+    rand(1000,10000);
 
-        const options = shuffle([
-            correct,
-            "Indirect cost",
-            "Fixed cost only",
-            "Capital cost"
-        ]);
+    const vat =
 
-        return {
-            question:
-            `Raw materials used in production are classified as what type of cost?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        +(netSales *
+        0.20)
+        .toFixed(2);
 
+    const totalInvoice =
+
+        +(netSales +
+        vat)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "salesInvoicePosting",
+
+        question:
+
+        "Complete the double entry for the sales invoice.",
+
+        customer:
+        randomBusiness(),
+
+        netSales:
+        netSales,
+
+        vat:
+        vat,
+
+        totalInvoice:
+        totalInvoice,
+
+        answers:{
+
+            debitReceivables:
+            totalInvoice,
+
+            creditSales:
+            netSales,
+
+            creditVAT:
+            vat
+        }
+    };
+}
     if(type === 10){
 
         const correct = "Indirect cost";
