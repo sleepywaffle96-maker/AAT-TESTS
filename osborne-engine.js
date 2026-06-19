@@ -1358,23 +1358,76 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
     if(type === 6){
 
-        const correct = "Error of principle";
+    const questions = [
 
-        const options = shuffle([
-            correct,
-            "Error of omission",
-            "Compensating error",
-            "Cash error"
-        ]);
-
-        return {
+        {
             question:
-            `A non-current asset purchase has been recorded as an expense. What type of error is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
 
+            "A purchase of inventory was recorded in Motor Expenses. What type of error is this?",
+
+            correct:
+            "Error of Principle"
+        },
+
+        {
+            question:
+
+            "A transaction was entered twice in the accounts. What type of error is this?",
+
+            correct:
+            "Error of Commission"
+        },
+
+        {
+            question:
+
+            "A transaction was completely omitted from the accounting records. What type of error is this?",
+
+            correct:
+            "Error of Omission"
+        },
+
+        {
+            question:
+
+            "An amount of £540 was entered as £450. What type of error is this?",
+
+            correct:
+            "Error of Original Entry"
+        }
+    ];
+
+    const chosen =
+    questions[
+        rand(0,questions.length-1)
+    ];
+
+    const options = shuffle([
+
+        chosen.correct,
+
+        "Error of Principle",
+        "Error of Commission",
+        "Error of Omission",
+        "Error of Original Entry"
+
+    ].filter(
+        (v,i,a)=>a.indexOf(v)===i
+    ));
+
+    return {
+
+        question:
+        chosen.question,
+
+        options,
+
+        correct:
+        options.indexOf(
+            chosen.correct
+        )
+    };
+}
     if(type === 7){
 
     const scenarios = [
@@ -1621,41 +1674,149 @@ Which account must be debited to clear the suspense account if Insurance Expense
 }
     if(type === 13){
 
-        const correct = "Ledger accuracy";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Profit maximisation",
-            "Tax avoidance",
-            "Cash generation"
-        ]);
-
-        return {
+        {
             question:
-            `What is the main purpose of control accounts?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+
+            "Which internal control helps prevent fraud in cash handling?",
+
+            correct:
+            "Segregation of duties"
+        },
+
+        {
+            question:
+
+            "Which control reduces the risk of errors in bank balances?",
+
+            correct:
+            "Regular bank reconciliations"
+        },
+
+        {
+            question:
+
+            "Which control helps verify the accuracy of supplier balances?",
+
+            correct:
+            "Supplier statement reconciliation"
+        },
+
+        {
+            question:
+
+            "Which control helps detect mistakes in the accounting records?",
+
+            correct:
+            "Independent review"
+        }
+    ];
+
+    const chosen =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    const options = shuffle([
+
+        chosen.correct,
+
+        "Segregation of duties",
+        "Regular bank reconciliations",
+        "Supplier statement reconciliation",
+        "Independent review"
+
+    ].filter(
+        (v,i,a)=>a.indexOf(v)===i
+    ));
+
+    return {
+
+        question:
+        chosen.question,
+
+        options,
+
+        correct:
+        options.indexOf(
+            chosen.correct
+        )
+    };
+}
 
     if(type === 14){
 
-        const correct = "At least two accounts are affected";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Only one account is affected",
-            "Only cash accounts",
-            "Only expense accounts"
-        ]);
-
-        return {
+        {
             question:
-            `In double-entry bookkeeping, what is always true?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+
+            "Which procedure is most effective at preventing employee fraud?",
+
+            correct:
+            "Segregation of duties"
+        },
+
+        {
+            question:
+
+            "Which procedure helps prevent unauthorised payments?",
+
+            correct:
+            "Authorisation controls"
+        },
+
+        {
+            question:
+
+            "Which procedure helps detect fraudulent transactions?",
+
+            correct:
+            "Independent review"
+        },
+
+        {
+            question:
+
+            "Which procedure reduces the risk of missing cash receipts?",
+
+            correct:
+            "Regular reconciliation"
+        }
+    ];
+
+    const chosen =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    const options = shuffle([
+
+        chosen.correct,
+
+        "Segregation of duties",
+        "Authorisation controls",
+        "Independent review",
+        "Regular reconciliation"
+
+    ].filter(
+        (v,i,a)=>a.indexOf(v)===i
+    ));
+
+    return {
+
+        question:
+        chosen.question,
+
+        options,
+
+        correct:
+        options.indexOf(
+            chosen.correct
+        )
+    };
+}
 
     /* ---------------- HARD PRACTICAL FINAL ---------------- */
 
