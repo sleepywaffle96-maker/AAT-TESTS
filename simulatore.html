@@ -1182,6 +1182,48 @@ else if(q.taskType === "cashBookAdjustment"){
     '</div>';
 }
 
+else if(q.taskType === "controlAccountReconciliation"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+                '<th style="border:1px solid #000;padding:6px;">Item</th>' +
+                '<th style="border:1px solid #000;padding:6px;">Amount (£)</th>' +
+            '</tr>' +
+
+            '<tr>' +
+                '<td style="border:1px solid #000;padding:6px;">Control Account Balance</td>' +
+                '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                q.controlBalance.toFixed(2) +
+                '</td>' +
+            '</tr>' +
+
+            '<tr>' +
+                '<td style="border:1px solid #000;padding:6px;">Adjustment Required</td>' +
+                '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                q.adjustment.toFixed(2) +
+                '</td>' +
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Corrected Balance: ' +
+
+            '<input id="controlrecon-answer" type="text">' +
+
+            '<span id="controlrecon-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "advancedBankReconciliation"){
 
     optionsHTML =
@@ -2727,6 +2769,57 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "cashBookAdjustment"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "cashbookadjustment-answer"
+        ).value
+    );
+
+    const ok =
+    answer === q.answer;
+
+    const marker =
+    document.getElementById(
+        "cashbookadjustment-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+    if(q.taskType === "controlAccountReconciliation"){
+
+    const answer = Number(
+        document.getElementById(
+            "controlrecon-answer"
+        ).value
+    );
+
+    const ok =
+    answer === q.answer;
+
+    const marker =
+    document.getElementById(
+        "controlrecon-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "trialBalanceDifference"){
 
     const answer =
@@ -3319,6 +3412,16 @@ if(q.taskType === "errorCaseStudy"){
     return;
 }
 
+if(q.taskType === "controlAccountReconciliation"){
+
+    document.getElementById(
+        "controlrecon-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "trialBalanceDifference"){
 
     document.getElementById(
@@ -3540,6 +3643,32 @@ q.taskType === "creditNote"
 
     document.getElementById(
         "errorcase-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "cashBookAdjustment"){
+
+    document.getElementById(
+        "cashbookadjustment-answer"
+    ).value = "";
+
+    document.getElementById(
+        "cashbookadjustment-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "controlAccountReconciliation"){
+
+    document.getElementById(
+        "controlrecon-answer"
+    ).value = "";
+
+    document.getElementById(
+        "controlrecon-marker"
     ).textContent = "";
 
     return;
