@@ -1858,7 +1858,7 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
 function generateL2CH3(type = null){
     if(type === null){
-        type = rand(1,11);
+        type = rand(1,12);
     }
     const business = randomBusiness();
 
@@ -2385,28 +2385,107 @@ function generateL2CH3(type = null){
 
     if(type === 11){
 
-        const cost = rand(20,60);
-        const markup = 50;
+    const goodsReturned =
+    rand(1000,10000);
 
-        const selling = cost * 1.5;
+    const vat =
 
-        const options = shuffle([
-            Math.round(selling),
-            Math.round(selling + 5),
-            Math.round(selling - 5),
-            Math.round(selling + 10)
-        ]);
+        +(goodsReturned *
+        0.20)
+        .toFixed(2);
 
-        return {
-            question:
-            `${business} applies a 50% markup.
-Cost is £${cost}.
+    const creditNoteTotal =
 
-What is selling price?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(Math.round(selling))
-        };
-    }
+        +(goodsReturned +
+        vat)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "salesReturnsPosting",
+
+        question:
+
+        "Complete the double entry for the sales returns credit note.",
+
+        customer:
+        randomBusiness(),
+
+        goodsReturned:
+        goodsReturned,
+
+        vat:
+        vat,
+
+        creditNoteTotal:
+        creditNoteTotal,
+
+        answers:{
+
+            debitSalesReturns:
+            goodsReturned,
+
+            debitVAT:
+            vat,
+
+            creditReceivables:
+            creditNoteTotal
+        }
+    };
+}
+
+    if(type === 12){
+
+    const goodsReturned =
+    rand(1000,10000);
+
+    const vat =
+
+        +(goodsReturned *
+        0.20)
+        .toFixed(2);
+
+    const creditNoteTotal =
+
+        +(goodsReturned +
+        vat)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "purchaseReturnsPosting",
+
+        question:
+
+        "Complete the double entry for the purchase returns credit note.",
+
+        supplier:
+        randomBusiness(),
+
+        goodsReturned:
+        goodsReturned,
+
+        vat:
+        vat,
+
+        creditNoteTotal:
+        creditNoteTotal,
+
+        answers:{
+
+            debitPayables:
+            creditNoteTotal,
+
+            creditPurchaseReturns:
+            goodsReturned,
+
+            creditVAT:
+            vat
+        }
+    };
+}
 
     /* ---------------- SAFETY ---------------- */
 
