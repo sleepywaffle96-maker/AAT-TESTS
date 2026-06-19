@@ -1228,6 +1228,37 @@ else if(q.taskType === "advancedBankReconciliation"){
     '</div>';
 }
 
+else if(q.taskType === "bankCharges"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Cash Book Balance:</strong> £' +
+
+        q.cashBook.toFixed(2) +
+
+        '</p>' +
+
+        '<p><strong>Bank Charges:</strong> £' +
+
+        q.bankCharges.toFixed(2) +
+
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Revised Balance: ' +
+
+            '<input id="bankcharges-answer" type="text">' +
+
+            '<span id="bankcharges-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "controlAccount"){
 
     let rows = "";
@@ -2536,6 +2567,32 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "bankCharges"){
+
+    const answer =
+    Number(
+        document.getElementById(
+            "bankcharges-answer"
+        ).value
+    );
+
+    const ok =
+    answer === q.answer;
+
+    const marker =
+    document.getElementById(
+        "bankcharges-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
 if(q.taskType === "purchaseLedgerReconciliation"){
 
     const answer =
@@ -3024,6 +3081,16 @@ if(q.taskType === "ledgerReconciliation"){
     return;
 }
 
+if(q.taskType === "bankCharges"){
+
+    document.getElementById(
+        "bankcharges-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "purchaseLedgerReconciliation"){
 
     document.getElementById(
@@ -3203,6 +3270,19 @@ if(q.taskType === "accountingEquation"){
 
     document.getElementById(
         "eq-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "bankCharges"){
+
+    document.getElementById(
+        "bankcharges-answer"
+    ).value = "";
+
+    document.getElementById(
+        "bankcharges-marker"
     ).textContent = "";
 
     return;
