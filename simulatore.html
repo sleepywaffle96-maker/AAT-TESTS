@@ -1133,6 +1133,109 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "vatLedgerPosting"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>VAT Ledger</h3>' +
+
+        '<p><strong>VAT on Sales:</strong> £' +
+        q.vatOnSales.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>VAT on Purchases:</strong> £' +
+        q.vatOnPurchases.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'VAT Payable: ' +
+
+            '<input id="vat-ledger-answer" type="text">' +
+
+            '<span id="vat-ledger-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "tradeReceivablesLedger"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Trade Receivables Account</h3>' +
+
+        '<p>Opening Balance: £' +
+        q.opening.toFixed(2) +
+        '</p>' +
+
+        '<p>Credit Sales: £' +
+        q.creditSales.toFixed(2) +
+        '</p>' +
+
+        '<p>Cash Received: £' +
+        q.cashReceived.toFixed(2) +
+        '</p>' +
+
+        '<p>Sales Returns: £' +
+        q.returnsValue.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Closing Balance: ' +
+
+            '<input id="trl-answer" type="text">' +
+
+            '<span id="trl-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "tradePayablesLedger"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Trade Payables Account</h3>' +
+
+        '<p>Opening Balance: £' +
+        q.opening.toFixed(2) +
+        '</p>' +
+
+        '<p>Credit Purchases: £' +
+        q.creditPurchases.toFixed(2) +
+        '</p>' +
+
+        '<p>Payments: £' +
+        q.payments.toFixed(2) +
+        '</p>' +
+
+        '<p>Purchase Returns: £' +
+        q.purchaseReturns.toFixed(2) +
+        '</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Closing Balance: ' +
+
+            '<input id="tpl-answer" type="text">' +
+
+            '<span id="tpl-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "purchaseReturnsPosting"){
 
     optionsHTML =
@@ -3389,6 +3492,84 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "vatLedgerPosting"){
+
+    const value =
+    Number(
+        document.getElementById(
+            "vat-ledger-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "vat-ledger-marker"
+    );
+
+    const correct =
+    value === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "tradeReceivablesLedger"){
+
+    const value =
+    Number(
+        document.getElementById(
+            "trl-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "trl-marker"
+    );
+
+    const correct =
+    value === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "tradePayablesLedger"){
+
+    const value =
+    Number(
+        document.getElementById(
+            "tpl-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "tpl-marker"
+    );
+
+    const correct =
+    value === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "purchaseReturnsPosting"){
 
     const payables =
@@ -4540,6 +4721,36 @@ q.taskType === "creditNote"
     return;
 }
 
+    if(q.taskType === "vatLedgerPosting"){
+
+    document.getElementById(
+        "vat-ledger-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "tradeReceivablesLedger"){
+
+    document.getElementById(
+        "trl-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "tradePayablesLedger"){
+
+    document.getElementById(
+        "tpl-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
     if(q.taskType === "purchaseInvoicePosting"){
 
     document.getElementById("pip-purchases").value =
@@ -4974,6 +5185,45 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "vatLedgerPosting"){
+
+    document.getElementById(
+        "vat-ledger-answer"
+    ).value = "";
+
+    document.getElementById(
+        "vat-ledger-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "tradeReceivablesLedger"){
+
+    document.getElementById(
+        "trl-answer"
+    ).value = "";
+
+    document.getElementById(
+        "trl-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "tradePayablesLedger"){
+
+    document.getElementById(
+        "tpl-answer"
+    ).value = "";
+
+    document.getElementById(
+        "tpl-marker"
+    ).textContent = "";
+
+    return;
+}
 
     if(q.taskType === "purchaseInvoicePosting"){
 
