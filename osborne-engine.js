@@ -1441,23 +1441,35 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
     if(type === 8){
 
-        const correct = "Sales invoices";
+    const credits =
+    rand(8000,15000);
 
-        const options = shuffle([
-            correct,
-            "Bank statements",
-            "Payroll reports",
-            "VAT returns"
-        ]);
+    const difference =
+    rand(50,500);
 
-        return {
-            question:
-            `What increases the sales ledger control account?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const debits =
 
+        credits +
+        difference;
+
+    return {
+
+        taskType:"trialBalanceDifference",
+
+        question:
+
+        "Calculate the difference in the trial balance.",
+
+        debitTotal:
+        debits,
+
+        creditTotal:
+        credits,
+
+        answer:
+        difference
+    };
+}
     if(type === 9){
 
         const correct = "Purchase invoices";
