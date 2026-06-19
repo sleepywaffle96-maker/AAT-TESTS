@@ -1481,22 +1481,62 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
     if(type === 10){
 
-        const diff = rand(100,800);
+    const opening =
+    rand(500,3000);
 
-        const options = shuffle([
-            "Investigate differences in control accounts",
-            "Ignore difference",
-            "Adjust profit immediately",
-            "Write off balance"
-        ]);
+    const sales =
+    rand(1000,4000);
 
-        return {
-            question:
-            `A control account differs from subsidiary records by £${diff}. What should be done first?`,
-            options,
-            correct: options.indexOf("Investigate differences in control accounts")
-        };
-    }
+    const receipts =
+    rand(500,2500);
+
+    const returns =
+    rand(100,800);
+
+    const balance =
+
+        opening +
+        sales -
+        receipts -
+        returns;
+
+    return {
+
+        taskType:"controlAccount",
+
+        question:
+
+        "Calculate the closing balance on the Sales Ledger Control Account.",
+
+        rows:[
+
+            {
+                description:"Opening Balance",
+                amount:opening
+            },
+
+            {
+                description:"Credit Sales",
+                amount:sales
+            },
+
+            {
+                description:"Receipts",
+                amount:-receipts
+            },
+
+            {
+                description:"Sales Returns",
+                amount:-returns
+            }
+        ],
+
+        answer:
+        Number(
+            balance.toFixed(2)
+        )
+    };
+}
 
     /* ---------------- FINAL PRACTICAL UNDERSTANDING ---------------- */
 
