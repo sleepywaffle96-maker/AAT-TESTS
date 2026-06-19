@@ -2242,29 +2242,40 @@ function generateL2CH3(type = null){
 
     if(type === 8){
 
-        const fixed = rand(100,500);
-        const contrib = rand(5,20);
+    const netValue =
+    rand(1000,10000);
 
-        const breakEven = Math.round(fixed / contrib);
+    const vatAmount =
 
-        const options = shuffle([
-            breakEven,
-            breakEven + 2,
-            breakEven - 3,
-            breakEven + 5
-        ]);
+        +(netValue *
+        0.20)
+        .toFixed(2);
 
-        return {
-            question:
-            `Fixed costs are £${fixed}.
-Contribution per unit is £${contrib}.
+    const grossAmount =
 
-What is the break-even point (units)?`,
-            options: options.map(v => options),
-            correct: options.indexOf(breakEven)
-        };
-    }
+        +(netValue +
+        vatAmount)
+        .toFixed(2);
 
+    return {
+
+        taskType:
+        "vatExtraction",
+
+        question:
+
+        "Extract the VAT and net value from the gross amount.",
+
+        grossAmount:
+        grossAmount,
+
+        answers:{
+
+            vatAmount,
+            netValue
+        }
+    };
+}
     /* ---------------- COST CLASSIFICATION ---------------- */
 
     if(type === 9){
