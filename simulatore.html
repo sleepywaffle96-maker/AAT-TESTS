@@ -1133,6 +1133,43 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "vatCalculation"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>VAT Calculation</h3>' +
+
+        '<p><strong>Net Value:</strong> £' +
+        q.netValue.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>VAT Rate:</strong> ' +
+        q.vatRate +
+        '%</p>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'VAT Amount: ' +
+
+            '<input id="vat-amount" type="text">' +
+
+            '<span id="vat-amount-marker" class="feedback-marker"></span>' +
+
+            '<br><br>' +
+
+            'Gross Amount: ' +
+
+            '<input id="vat-gross" type="text">' +
+
+            '<span id="vat-gross-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "promptPaymentDiscount"){
 
     optionsHTML =
@@ -3107,6 +3144,47 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "vatCalculation"){
+
+    const vat =
+    Number(
+        document.getElementById(
+            "vat-amount"
+        ).value
+    );
+
+    const gross =
+    Number(
+        document.getElementById(
+            "vat-gross"
+        ).value
+    );
+
+    function mark(id, ok){
+
+        const marker =
+        document.getElementById(id);
+
+        marker.textContent =
+        ok ? "✔" : "✖";
+
+        marker.style.color =
+        ok ? "#16A34A" : "#DC2626";
+    }
+
+    mark(
+        "vat-amount-marker",
+        vat === q.answers.vatAmount
+    );
+
+    mark(
+        "vat-gross-marker",
+        gross === q.answers.grossAmount
+    );
+
+    return;
+}
+
     if(q.taskType === "promptPaymentDiscount"){
 
     const discount =
@@ -4013,6 +4091,21 @@ q.taskType === "creditNote"
     return;
 }
 
+    if(q.taskType === "vatCalculation"){
+
+    document.getElementById(
+        "vat-amount"
+    ).value =
+    q.answers.vatAmount;
+
+    document.getElementById(
+        "vat-gross"
+    ).value =
+    q.answers.grossAmount;
+
+    return;
+}
+
     if(q.taskType === "purchaseReturnsCreditNote"){
 
     document.getElementById(
@@ -4377,6 +4470,27 @@ q.taskType === "creditNote"
 
     document.getElementById(
         "ppd-payable-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "vatCalculation"){
+
+    document.getElementById(
+        "vat-amount"
+    ).value = "";
+
+    document.getElementById(
+        "vat-gross"
+    ).value = "";
+
+    document.getElementById(
+        "vat-amount-marker"
+    ).textContent = "";
+
+    document.getElementById(
+        "vat-gross-marker"
     ).textContent = "";
 
     return;
