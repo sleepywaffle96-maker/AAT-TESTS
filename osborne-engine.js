@@ -2720,102 +2720,99 @@ if(type === 5){
 
     if(type === 6){
 
-        const correct = "Suppliers";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Customers",
-            "Employees only",
-            "Competitors only"
-        ]);
+        taskType:
+        "pestClassification",
 
-        return {
-            question:
-            `Who provides goods or services to a business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        items:[
 
-    /* ---------------- BUSINESS OBJECTIVES ---------------- */
+            {
+                text:"Corporation tax increases",
+                answer:"P"
+            },
 
-    if(type === 7){
+            {
+                text:"Interest rates rise",
+                answer:"E"
+            },
 
-        const correct = "Profit maximisation";
+            {
+                text:"Population ageing",
+                answer:"S"
+            },
 
-        const options = shuffle([
-            correct,
-            "Random spending",
-            "Loss creation",
-            "No objectives"
-        ]);
+            {
+                text:"New AI software released",
+                answer:"T"
+            }
+        ]
+    };
+}
 
-        return {
-            question:
-            `What is a common objective of a private sector business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+if(type === 7){
 
-    if(type === 8){
+    return {
 
-        const correct = "Customer satisfaction";
+        taskType:
+        "ethicalIssue",
 
-        const options = shuffle([
-            correct,
-            "Increasing errors",
-            "Reducing quality",
-            "Ignoring feedback"
-        ]);
+        scenario:
 
-        return {
-            question:
-            `Why is customer satisfaction important?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        "A manager instructs employees to hide product defects from customers.",
 
-    /* ---------------- MARKET FACTORS ---------------- */
+        answer:
+        "honesty"
+    };
+}
 
-    if(type === 9){
+if(type === 8){
 
-        const correct = "Competition";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Weather only",
-            "Internal bookkeeping only",
-            "Accounting standards"
-        ]);
+        taskType:
+        "dataProtection",
 
-        return {
-            question:
-            `What external factor affects business pricing decisions?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        scenario:
 
-    if(type === 10){
+        "Customer information is shared with another company without permission.",
 
-        const correct = "Supply and demand";
+        answer:
+        "consent"
+    };
+}
 
-        const options = shuffle([
-            correct,
-            "Bank reconciliation",
-            "Depreciation rules",
-            "Payroll systems"
-        ]);
+if(type === 9){
 
-        return {
-            question:
-            `What determines the price of most goods in a market economy?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
+
+        taskType:
+        "healthSafety",
+
+        scenario:
+
+        "A fire exit is blocked by storage boxes.",
+
+        answer:
+        "fire exit"
+    };
+}
+
+if(type === 10){
+
+    return {
+
+        taskType:
+        "professionalBehaviour",
+
+        scenario:
+
+        "An employee receives a confidential document by mistake.",
+
+        answer:
+        "report"
+    };
+}
 
     /* ---------------- ETHICS / RESPONSIBILITY ---------------- */
 
