@@ -2331,22 +2331,55 @@ function generateL2CH3(type = null){
 }
     if(type === 10){
 
-        const correct = "Indirect cost";
+    const netPurchases =
+    rand(1000,10000);
 
-        const options = shuffle([
-            correct,
-            "Direct cost",
-            "Revenue cost",
-            "Variable income"
-        ]);
+    const vat =
 
-        return {
-            question:
-            `Electricity used in a factory is classified as what type of cost?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        +(netPurchases *
+        0.20)
+        .toFixed(2);
+
+    const totalInvoice =
+
+        +(netPurchases +
+        vat)
+        .toFixed(2);
+
+    return {
+
+        taskType:
+        "purchaseInvoicePosting",
+
+        question:
+
+        "Complete the double entry for the purchase invoice.",
+
+        supplier:
+        randomBusiness(),
+
+        netPurchases:
+        netPurchases,
+
+        vat:
+        vat,
+
+        totalInvoice:
+        totalInvoice,
+
+        answers:{
+
+            debitPurchases:
+            netPurchases,
+
+            debitVAT:
+            vat,
+
+            creditPayables:
+            totalInvoice
+        }
+    };
+}
 
     /* ---------------- FINAL APPLICATION ---------------- */
 
