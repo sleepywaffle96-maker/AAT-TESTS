@@ -1427,34 +1427,69 @@ What explains the difference?`,
 
     if(type === 15){
 
-        const opening = rand(10000,20000);
-        const sales = rand(3000,8000);
-        const cash = rand(2000,7000);
+    const cashBook =
+    rand(2000,7000);
 
-        const closing = opening + sales - cash;
+    const outstandingLodgements =
+    rand(100,800);
 
-        const options = shuffle([
-            closing,
-            closing + 300,
-            closing - 400,
-            closing + 600
-        ]);
+    const unpresentedCheques =
+    rand(100,800);
 
-        return {
-            question:
-            `${business} control account:
-Opening £${opening}
-Sales £${sales}
-Cash £${cash}
+    const bankCharges =
+    rand(20,120);
 
-What is the correct closing balance?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(closing)
-        };
-    }
+    const directDebit =
+    rand(50,300);
+
+    const revisedBalance =
+
+        cashBook +
+
+        outstandingLodgements -
+
+        unpresentedCheques -
+
+        bankCharges -
+
+        directDebit;
+
+    return {
+
+        taskType:"advancedBankReconciliation",
+
+        question:
+
+        "Complete the bank reconciliation and calculate the revised bank balance.",
+
+        scenario:{
+
+            cashBook:
+            cashBook,
+
+            outstandingLodgements:
+            outstandingLodgements,
+
+            unpresentedCheques:
+            unpresentedCheques,
+
+            bankCharges:
+            bankCharges,
+
+            directDebit:
+            directDebit
+        },
+
+        answer:
+        Number(
+            revisedBalance.toFixed(2)
+        )
+    };
+}
 
     throw new Error("L2-CH2 type not implemented: " + type);
 }
+
 function generateL2CH3(type = null){
     if(type === null){
         type = rand(1,15);
