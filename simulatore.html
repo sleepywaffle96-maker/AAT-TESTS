@@ -1182,6 +1182,76 @@ else if(q.taskType === "cashBookAdjustment"){
     '</div>';
 }
 
+else if(q.taskType === "salesInvoiceTradeDiscount"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<h3>Sales Invoice</h3>' +
+
+        '<p><strong>Invoice No:</strong> ' +
+        q.invoiceNumber +
+        '</p>' +
+
+        '<p><strong>Customer:</strong> ' +
+        q.customer +
+        '</p>' +
+
+        '<table style="width:100%;border-collapse:collapse;border:1px solid #000;">' +
+
+            '<tr>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Quantity</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Unit Price (£)</th>' +
+
+                '<th style="border:1px solid #000;padding:6px;">Trade Discount</th>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+                q.qty +
+                '</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:right;">' +
+                q.unitPrice.toFixed(2) +
+                '</td>' +
+
+                '<td style="border:1px solid #000;padding:6px;text-align:center;">' +
+                q.tradeDiscountRate +
+                '%</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+        '<div style="margin-top:15px;">' +
+
+            'Net Value: ' +
+            '<input id="sid-net" type="text"><br><br>' +
+
+            'Trade Discount: ' +
+            '<input id="sid-discount" type="text"><br><br>' +
+
+            'Discounted Value: ' +
+            '<input id="sid-discounted" type="text"><br><br>' +
+
+            'VAT (20%): ' +
+            '<input id="sid-vat" type="text"><br><br>' +
+
+            'Gross Total: ' +
+            '<input id="sid-gross" type="text">' +
+
+            '<span id="sid-marker" class="feedback-marker"></span>' +
+
+        '</div>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "controlAccountReconciliation"){
 
     optionsHTML =
@@ -2769,6 +2839,65 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "salesInvoiceTradeDiscount"){
+
+    const net =
+    Number(
+        document.getElementById(
+            "sid-net"
+        ).value
+    );
+
+    const discount =
+    Number(
+        document.getElementById(
+            "sid-discount"
+        ).value
+    );
+
+    const discounted =
+    Number(
+        document.getElementById(
+            "sid-discounted"
+        ).value
+    );
+
+    const vat =
+    Number(
+        document.getElementById(
+            "sid-vat"
+        ).value
+    );
+
+    const gross =
+    Number(
+        document.getElementById(
+            "sid-gross"
+        ).value
+    );
+
+    const ok =
+
+        net === q.answers.netValue &&
+        discount === q.answers.tradeDiscount &&
+        discounted === q.answers.discountedValue &&
+        vat === q.answers.vat &&
+        gross === q.answers.gross;
+
+    const marker =
+    document.getElementById(
+        "sid-marker"
+    );
+
+    marker.textContent =
+    ok ? "✔" : "✖";
+
+    marker.style.color =
+    ok ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "cashBookAdjustment"){
 
     const answer =
@@ -3402,6 +3531,36 @@ if(q.taskType === "cashBookAdjustment"){
     return;
 }
 
+if(q.taskType === "salesInvoiceTradeDiscount"){
+
+    document.getElementById(
+        "sid-net"
+    ).value =
+    q.answers.netValue;
+
+    document.getElementById(
+        "sid-discount"
+    ).value =
+    q.answers.tradeDiscount;
+
+    document.getElementById(
+        "sid-discounted"
+    ).value =
+    q.answers.discountedValue;
+
+    document.getElementById(
+        "sid-vat"
+    ).value =
+    q.answers.vat;
+
+    document.getElementById(
+        "sid-gross"
+    ).value =
+    q.answers.gross;
+
+    return;
+}
+
 if(q.taskType === "errorCaseStudy"){
 
     document.getElementById(
@@ -3656,6 +3815,21 @@ if(q.taskType === "cashBookAdjustment"){
 
     document.getElementById(
         "cashbookadjustment-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "salesInvoiceTradeDiscount"){
+
+    document.getElementById("sid-net").value = "";
+    document.getElementById("sid-discount").value = "";
+    document.getElementById("sid-discounted").value = "";
+    document.getElementById("sid-vat").value = "";
+    document.getElementById("sid-gross").value = "";
+
+    document.getElementById(
+        "sid-marker"
     ).textContent = "";
 
     return;
