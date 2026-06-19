@@ -1576,23 +1576,37 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
     if(type === 12){
 
-        const correct = "Timing difference";
+    const receivables =
+    rand(1000,5000);
 
-        const options = shuffle([
-            correct,
-            "Capital error",
-            "Profit manipulation",
-            "Inventory loss"
-        ]);
+    const dishonouredCheque =
+    rand(100,800);
 
-        return {
-            question:
-            `A payment has been recorded in the cash book but not yet on the bank statement. What is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const revisedBalance =
 
+        receivables +
+        dishonouredCheque;
+
+    return {
+
+        taskType:"dishonouredCheque",
+
+        question:
+
+        "Calculate the revised Trade Receivables balance after the dishonoured cheque is recorded.",
+
+        receivables:
+        receivables,
+
+        dishonouredCheque:
+        dishonouredCheque,
+
+        answer:
+        Number(
+            revisedBalance.toFixed(2)
+        )
+    };
+}
     if(type === 13){
 
         const correct = "Ledger accuracy";
