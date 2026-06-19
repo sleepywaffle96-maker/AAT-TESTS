@@ -1145,31 +1145,44 @@ function generateL2CH2(type = null){
 }
     if(type === 2){
 
-        const opening = rand(5000,12000);
-        const purchases = rand(2000,5000);
-        const payments = rand(1000,4000);
+    const opening =
+    rand(1000,5000);
 
-        const closing = opening + purchases - payments;
+    const charges =
+    rand(20,150);
 
-        const options = shuffle([
-            closing,
-            closing + 150,
-            closing - 200,
-            closing + 400
-        ]);
+    const interest =
+    rand(10,100);
 
-        return {
-            question:
-            `${business} purchase ledger control account:
-Opening £${opening}
-Purchases £${purchases}
-Payments £${payments}
+    const revised =
 
-What is the closing balance?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(closing)
-        };
-    }
+        opening -
+        charges +
+        interest;
+
+    return {
+
+        taskType:"cashBookAdjustment",
+
+        question:
+
+        "Update the cash book balance using the information provided.",
+
+        openingBalance:
+        opening,
+
+        bankCharges:
+        charges,
+
+        bankInterest:
+        interest,
+
+        answer:
+        Number(
+            revised.toFixed(2)
+        )
+    };
+}
 
     /* ---------------- BANK RECONCILIATION PRACTICAL ---------------- */
 
@@ -1525,22 +1538,32 @@ Which account must be debited to clear the suspense account if Insurance Expense
 }
     if(type === 9){
 
-        const correct = "Purchase invoices";
+    const control =
+    rand(3000,7000);
 
-        const options = shuffle([
-            correct,
-            "Sales invoices",
-            "Receipts",
-            "Cash book only"
-        ]);
+    const omission =
+    rand(100,500);
 
-        return {
-            question:
-            `What increases the purchase ledger control account?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
+
+        taskType:"controlAccountReconciliation",
+
+        question:
+
+        "Calculate the corrected control account balance.",
+
+        controlBalance:
+        control,
+
+        adjustment:
+        omission,
+
+        answer:
+        Number(
+            (control + omission).toFixed(2)
+        )
+    };
+}
 
     /* ---------------- CALCULATION + INTERPRETATION ---------------- */
 
@@ -1642,15 +1665,15 @@ Which account must be debited to clear the suspense account if Insurance Expense
     if(type === 12){
 
     const receivables =
-    rand(1000,5000);
+    rand(1500,5000);
 
-    const dishonouredCheque =
+    const cheque =
     rand(100,800);
 
-    const revisedBalance =
+    const revised =
 
         receivables +
-        dishonouredCheque;
+        cheque;
 
     return {
 
@@ -1658,17 +1681,17 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
         question:
 
-        "Calculate the revised Trade Receivables balance after the dishonoured cheque is recorded.",
+        "A customer's cheque has been dishonoured by the bank. Calculate the revised Trade Receivables balance.",
 
         receivables:
         receivables,
 
         dishonouredCheque:
-        dishonouredCheque,
+        cheque,
 
         answer:
         Number(
-            revisedBalance.toFixed(2)
+            revised.toFixed(2)
         )
     };
 }
@@ -1747,74 +1770,22 @@ Which account must be debited to clear the suspense account if Insurance Expense
 
     if(type === 14){
 
-    const scenarios = [
-
-        {
-            question:
-
-            "Which procedure is most effective at preventing employee fraud?",
-
-            correct:
-            "Segregation of duties"
-        },
-
-        {
-            question:
-
-            "Which procedure helps prevent unauthorised payments?",
-
-            correct:
-            "Authorisation controls"
-        },
-
-        {
-            question:
-
-            "Which procedure helps detect fraudulent transactions?",
-
-            correct:
-            "Independent review"
-        },
-
-        {
-            question:
-
-            "Which procedure reduces the risk of missing cash receipts?",
-
-            correct:
-            "Regular reconciliation"
-        }
-    ];
-
-    const chosen =
-    scenarios[
-        rand(0,scenarios.length-1)
-    ];
-
-    const options = shuffle([
-
-        chosen.correct,
-
-        "Segregation of duties",
-        "Authorisation controls",
-        "Independent review",
-        "Regular reconciliation"
-
-    ].filter(
-        (v,i,a)=>a.indexOf(v)===i
-    ));
+    const amount =
+    rand(100,500);
 
     return {
 
+        taskType:"errorCaseStudy",
+
         question:
-        chosen.question,
 
-        options,
+        "A purchase invoice was correctly entered in Purchases but omitted from Trade Payables. Calculate the amount required to correct the error.",
 
-        correct:
-        options.indexOf(
-            chosen.correct
-        )
+        amount:
+        amount,
+
+        answer:
+        amount
     };
 }
 
