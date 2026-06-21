@@ -1187,6 +1187,143 @@ else if(q.taskType === "trialBalanceDifference"){
     '</div>';
 }
 
+else if(q.taskType === "ledgerExtraction"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Original Balance:</strong> £' +
+        q.originalBalance.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Missing Entry:</strong> £' +
+        q.missingEntry.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Corrected Balance: ' +
+
+        '<input id="ledger-answer" type="text">' +
+
+        '<span id="ledger-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "identifyOmission"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        '<select id="omission-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="sales ledger">Sales Ledger</option>' +
+
+            '<option value="cash book">Cash Book</option>' +
+
+            '<option value="trial balance">Trial Balance</option>' +
+
+            '<option value="purchase ledger">Purchase Ledger</option>' +
+
+        '</select>' +
+
+        '<span id="omission-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "extendedAdjustment"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Current Balance:</strong> £' +
+        q.balance.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Adjustment:</strong> £' +
+        q.adjustment.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Revised Balance: ' +
+
+        '<input id="adjustment-answer" type="text">' +
+
+        '<span id="adjustment-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "locateError"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        '<select id="locate-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="day book">Day Book</option>' +
+
+            '<option value="ledger">Ledger</option>' +
+
+            '<option value="cash book">Cash Book</option>' +
+
+            '<option value="trial balance">Trial Balance</option>' +
+
+        '</select>' +
+
+        '<span id="locate-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "principleError"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        '<select id="principle-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="error of principle">Error of Principle</option>' +
+
+            '<option value="error of omission">Error of Omission</option>' +
+
+            '<option value="error of reversal">Error of Reversal</option>' +
+
+            '<option value="transposition error">Transposition Error</option>' +
+
+        '</select>' +
+
+        '<span id="principle-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "errorCorrectionAmount"){
 
     optionsHTML =
@@ -4231,6 +4368,91 @@ if(q.taskType === "identifyErrorType"){
     return;
 }
 
+    if(q.taskType === "ledgerExtraction"){
+
+    const answer =
+    parseFloat(document.getElementById("ledger-answer").value);
+
+    const marker =
+    document.getElementById("ledger-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "identifyOmission"){
+
+    const answer =
+    document.getElementById("omission-answer").value;
+
+    const marker =
+    document.getElementById("omission-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "extendedAdjustment"){
+
+    const answer =
+    parseFloat(document.getElementById("adjustment-answer").value);
+
+    const marker =
+    document.getElementById("adjustment-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "locateError"){
+
+    const answer =
+    document.getElementById("locate-answer").value;
+
+    const marker =
+    document.getElementById("locate-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "principleError"){
+
+    const answer =
+    document.getElementById("principle-answer").value;
+
+    const marker =
+    document.getElementById("principle-marker");
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
 if(q.taskType === "trialBalanceDifference"){
 
     const answer =
@@ -5965,6 +6187,46 @@ if(q.taskType === "identifyErrorType"){
     return;
 }
 
+    if(q.taskType === "ledgerExtraction"){
+
+    document.getElementById("ledger-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "identifyOmission"){
+
+    document.getElementById("omission-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "extendedAdjustment"){
+
+    document.getElementById("adjustment-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "locateError"){
+
+    document.getElementById("locate-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "principleError"){
+
+    document.getElementById("principle-answer").value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "trialBalanceDifference"){
 
     document.getElementById(
@@ -6654,6 +6916,46 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "ledgerExtraction"){
+
+    document.getElementById("ledger-answer").value = "";
+    document.getElementById("ledger-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "identifyOmission"){
+
+    document.getElementById("omission-answer").value = "";
+    document.getElementById("omission-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "extendedAdjustment"){
+
+    document.getElementById("adjustment-answer").value = "";
+    document.getElementById("adjustment-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "locateError"){
+
+    document.getElementById("locate-answer").value = "";
+    document.getElementById("locate-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "principleError"){
+
+    document.getElementById("principle-answer").value = "";
+    document.getElementById("principle-marker").textContent = "";
+
+    return;
+}
 
     if(q.taskType === "csrActivity"){
 
