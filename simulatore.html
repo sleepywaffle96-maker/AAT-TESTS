@@ -4341,10 +4341,11 @@ else if(q.taskType === "journalEntry"){
 
         '<div class="question-title">' +
 
-        q.question +
+(typeof q.question !== "undefined"
+    ? q.question
+    : "") +
 
-        '</div>' +
-
+'</div>' +
         '<div class="scenario-box">' +
 
         optionsHTML +
