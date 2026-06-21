@@ -1133,6 +1133,157 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "identifyErrorType"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        '<select id="error-type-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="error of omission">Error of Omission</option>' +
+
+            '<option value="error of principle">Error of Principle</option>' +
+
+            '<option value="transposition error">Transposition Error</option>' +
+
+            '<option value="error of reversal">Error of Reversal</option>' +
+
+        '</select>' +
+
+        '<span id="error-type-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "trialBalanceDifference"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Total Debits:</strong> £' +
+        q.debitTotal.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Total Credits:</strong> £' +
+        q.creditTotal.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Difference: ' +
+
+        '<input id="tb-difference-answer" type="text">' +
+
+        '<span id="tb-difference-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "errorCorrectionAmount"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.scenario +
+        '</p>' +
+
+        '<p><strong>Amount:</strong> £' +
+        q.amount.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Correction Required: ' +
+
+        '<input id="correction-amount-answer" type="text">' +
+
+        '<span id="correction-amount-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "journalCorrection"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.transaction +
+        '</p>' +
+
+        '<br>' +
+
+        '<table style="width:100%;">' +
+
+            '<tr>' +
+
+                '<td>Debit:</td>' +
+
+                '<td>' +
+
+                    '<input id="journal-debit-answer" type="text">' +
+
+                    '<span id="journal-debit-marker" class="feedback-marker"></span>' +
+
+                '</td>' +
+
+            '</tr>' +
+
+            '<tr>' +
+
+                '<td>Credit:</td>' +
+
+                '<td>' +
+
+                    '<input id="journal-credit-answer" type="text">' +
+
+                    '<span id="journal-credit-marker" class="feedback-marker"></span>' +
+
+                '</td>' +
+
+            '</tr>' +
+
+        '</table>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "suspenseBalance"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.scenario +
+        '</p>' +
+
+        '<p><strong>Difference:</strong> £' +
+        q.difference.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Suspense Balance: ' +
+
+        '<input id="suspense-answer" type="text">' +
+
+        '<span id="suspense-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "csrActivity"){
 
     optionsHTML =
@@ -4056,6 +4207,153 @@ const gross = Number(grossText);
         return;
     }
 
+if(q.taskType === "identifyErrorType"){
+
+    const answer =
+    document.getElementById(
+        "error-type-answer"
+    ).value;
+
+    const marker =
+    document.getElementById(
+        "error-type-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "trialBalanceDifference"){
+
+    const answer =
+    parseFloat(
+        document.getElementById(
+            "tb-difference-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "tb-difference-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "errorCorrectionAmount"){
+
+    const answer =
+    parseFloat(
+        document.getElementById(
+            "correction-amount-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "correction-amount-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "journalCorrection"){
+
+    const debit =
+    document.getElementById(
+        "journal-debit-answer"
+    ).value.trim().toLowerCase();
+
+    const credit =
+    document.getElementById(
+        "journal-credit-answer"
+    ).value.trim().toLowerCase();
+
+    const debitMarker =
+    document.getElementById(
+        "journal-debit-marker"
+    );
+
+    const creditMarker =
+    document.getElementById(
+        "journal-credit-marker"
+    );
+
+    const debitCorrect =
+    debit ===
+    q.answers.debit.toLowerCase();
+
+    const creditCorrect =
+    credit ===
+    q.answers.credit.toLowerCase();
+
+    debitMarker.textContent =
+    debitCorrect ? "✔" : "✖";
+
+    creditMarker.textContent =
+    creditCorrect ? "✔" : "✖";
+
+    debitMarker.style.color =
+    debitCorrect ? "#16A34A" : "#DC2626";
+
+    creditMarker.style.color =
+    creditCorrect ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "suspenseBalance"){
+
+    const answer =
+    parseFloat(
+        document.getElementById(
+            "suspense-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "suspense-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "csrActivity"){
 
     const answer =
@@ -5657,6 +5955,61 @@ q.taskType === "creditNote"
         return;
     }
 
+if(q.taskType === "identifyErrorType"){
+
+    document.getElementById(
+        "error-type-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "trialBalanceDifference"){
+
+    document.getElementById(
+        "tb-difference-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "errorCorrectionAmount"){
+
+    document.getElementById(
+        "correction-amount-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "journalCorrection"){
+
+    document.getElementById(
+        "journal-debit-answer"
+    ).value =
+    q.answers.debit;
+
+    document.getElementById(
+        "journal-credit-answer"
+    ).value =
+    q.answers.credit;
+
+    return;
+}
+
+if(q.taskType === "suspenseBalance"){
+
+    document.getElementById(
+        "suspense-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
     if(q.taskType === "csrActivity"){
 
     document.getElementById(
@@ -6306,6 +6659,79 @@ q.taskType === "creditNote"
 
     document.getElementById("csr-answer").value = "";
     document.getElementById("csr-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "identifyErrorType"){
+
+    document.getElementById(
+        "error-type-answer"
+    ).value = "";
+
+    document.getElementById(
+        "error-type-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "trialBalanceDifference"){
+
+    document.getElementById(
+        "tb-difference-answer"
+    ).value = "";
+
+    document.getElementById(
+        "tb-difference-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "errorCorrectionAmount"){
+
+    document.getElementById(
+        "correction-amount-answer"
+    ).value = "";
+
+    document.getElementById(
+        "correction-amount-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "journalCorrection"){
+
+    document.getElementById(
+        "journal-debit-answer"
+    ).value = "";
+
+    document.getElementById(
+        "journal-credit-answer"
+    ).value = "";
+
+    document.getElementById(
+        "journal-debit-marker"
+    ).textContent = "";
+
+    document.getElementById(
+        "journal-credit-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "suspenseBalance"){
+
+    document.getElementById(
+        "suspense-answer"
+    ).value = "";
+
+    document.getElementById(
+        "suspense-marker"
+    ).textContent = "";
 
     return;
 }
