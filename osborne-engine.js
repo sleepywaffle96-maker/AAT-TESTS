@@ -3217,114 +3217,151 @@ if(type === 10){
 
     if(type === 11){
 
-        const correct = "Build customer loyalty programmes";
+    const amount = rand(120,850);
 
-        const options = shuffle([
-            correct,
-            "Ignore existing customers",
-            "Increase complaints",
-            "Reduce service quality"
-        ]);
+    return {
 
-        return {
-            question:
-            `${business} is losing repeat customers.
+        taskType:
+        "reversalError",
 
-What should it focus on?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
+        "Identify the type of error.",
 
-    /* ---------------- SCENARIO 12: PROFIT DECLINE ---------------- */
+        scenario:
+        "A cash receipt of £" + amount +
+        " was entered on the credit side of Cash and the debit side of Sales.",
 
-    if(type === 12){
+        answer:
+        "error of reversal"
+    };
+}
 
-        const correct = "Analyse financial performance";
+if(type === 12){
 
-        const options = shuffle([
-            correct,
-            "Ignore financial reports",
-            "Increase losses",
-            "Stop accounting records"
-        ]);
+    const correct =
+    rand(300,900);
 
-        return {
-            question:
-            `Profits at ${business} have decreased significantly.
+    const wrong =
+    parseInt(
+        correct.toString().split('').reverse().join('')
+    );
 
-What is the first step?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
 
-    /* ---------------- SCENARIO 13: SUPPLY ISSUES ---------------- */
+        taskType:
+        "transpositionError",
 
-    if(type === 13){
+        question:
+        "A transaction was entered as £" +
+        wrong +
+        " instead of £" +
+        correct +
+        ". Identify the error.",
 
-        const correct = "Find alternative suppliers";
+        answer:
+        "transposition error"
+    };
+}
 
-        const options = shuffle([
-            correct,
-            "Stop production permanently",
-            "Ignore shortages",
-            "Increase delays"
-        ]);
+if(type === 13){
 
-        return {
-            question:
-            `${business} is experiencing delays from current suppliers.
+    const balance =
+    rand(3000,7000);
 
-What should it do?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const correction =
+    rand(100,500);
 
-    /* ---------------- SCENARIO 14: BUSINESS ETHICS ---------------- */
+    return {
 
-    if(type === 14){
+        taskType:
+        "controlCorrection",
 
-        const correct = "Act ethically and legally";
+        question:
+        "Calculate the corrected control account balance.",
 
-        const options = shuffle([
-            correct,
-            "Ignore laws",
-            "Reduce transparency",
-            "Increase fraud"
-        ]);
+        controlBalance:
+        balance,
 
-        return {
-            question:
-            `What should all businesses ensure in their operations?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        adjustment:
+        correction,
 
-    /* ---------------- FINAL MIXED SCENARIO ---------------- */
+        answer:
+        balance + correction
+    };
+}
 
-    if(type === 15){
+if(type === 14){
 
-        const correct = "Improve overall business efficiency";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Increase waste",
-            "Ignore performance",
-            "Reduce planning"
-        ]);
+        {
+            scenario:
+            "A purchase invoice was omitted from the Purchases Account.",
 
-        return {
-            question:
-            `${business} is facing multiple issues: declining sales, rising costs, and customer complaints.
+            answer:
+            "error of omission"
+        },
 
-What is the best overall response?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        {
+            scenario:
+            "Office equipment was recorded as Office Expenses.",
+
+            answer:
+            "error of principle"
+        },
+
+        {
+            scenario:
+            "A payment of £264 was entered as £246.",
+
+            answer:
+            "transposition error"
+        }
+
+    ];
+
+    const q =
+    choice(scenarios);
+
+    return {
+
+        taskType:
+        "multiErrorCase",
+
+        question:
+        "Identify the error type.",
+
+        scenario:
+        q.scenario,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 15){
+
+    const tbDifference =
+    rand(50,250);
+
+    return {
+
+        taskType:
+        "integratedErrorCase",
+
+        question:
+        "The trial balance does not agree. Calculate the suspense account balance and identify the error type.",
+
+        difference:
+        tbDifference,
+
+        answer:
+        tbDifference,
+
+        errorType:
+        "error of omission"
+    };
+}
 
     throw new Error("L2-CH5 type not implemented: " + type);
 }
