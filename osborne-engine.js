@@ -23,6 +23,13 @@ function shuffle(array){
     return array;
 }
 
+function choice(array){
+
+    return array[
+        rand(0, array.length - 1)
+    ];
+}
+
 function currency(v){
 
     return "£" +
