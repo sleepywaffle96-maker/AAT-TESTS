@@ -2916,117 +2916,186 @@ function generateL2CH5(type = null){
 
     if(type === 1){
 
-        const correct = "Increase advertising and marketing";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Reduce product quality",
-            "Increase waste",
-            "Stop selling products"
-        ]);
+        {
+            scenario:
+            "A sales invoice was completely omitted from the accounting records.",
+            answer: "error of omission"
+        },
 
-        return {
-            question:
-            `${business} is experiencing a decline in sales over the last 3 months.
+        {
+            scenario:
+            "Rent expense was posted to Repairs Expense.",
+            answer: "error of principle"
+        },
 
-What is the best action to improve performance?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        {
+            scenario:
+            "A payment of £540 was entered as £450.",
+            answer: "transposition error"
+        },
 
+        {
+            scenario:
+            "A receipt was entered on the credit side instead of the debit side.",
+            answer: "error of reversal"
+        }
+
+    ];
+
+    const q = choice(scenarios);
+
+    return {
+        taskType: "identifyErrorType",
+        question:
+        "Identify the type of accounting error.",
+        scenario: q.scenario,
+        answer: q.answer
+    };
+}
     /* ---------------- SCENARIO 2: CUSTOMER PROBLEMS ---------------- */
 
     if(type === 2){
 
-        const correct = "Improve customer service";
+    const difference = rand(20,250);
 
-        const options = shuffle([
-            correct,
-            "Ignore complaints",
-            "Increase prices without reason",
-            "Reduce staff training"
-        ]);
+    const debit =
+    rand(5000,9000);
 
-        return {
-            question:
-            `${business} has received many customer complaints about service delays.
+    const credit =
+    debit - difference;
 
-What should the business do?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
+
+        taskType:
+        "trialBalanceDifference",
+
+        question:
+        "Calculate the difference in the trial balance.",
+
+        debitTotal: debit,
+
+        creditTotal: credit,
+
+        answer: difference
+    };
+}
 
     /* ---------------- SCENARIO 3: COST PRESSURE ---------------- */
 
     if(type === 3){
 
-        const correct = "Reduce unnecessary costs";
+    const amount =
+    rand(150,950);
 
-        const options = shuffle([
-            correct,
-            "Increase all costs",
-            "Ignore expenses",
-            "Stop budgeting"
-        ]);
+    return {
 
-        return {
-            question:
-            `${business} profits are falling due to high operating costs.
+        taskType:
+        "errorCorrectionAmount",
 
-What is the most appropriate action?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
+        "Calculate the amount required to correct the error.",
+
+        scenario:
+        "A purchase invoice was correctly entered in Purchases but omitted from Trade Payables.",
+
+        amount: amount,
+
+        answer: amount
+    };
+}
 
     /* ---------------- SCENARIO 4: COMPETITION ---------------- */
 
     if(type === 4){
 
-        const correct = "Differentiate products";
+    const entries = [
 
-        const options = shuffle([
-            correct,
-            "Copy competitors exactly",
-            "Reduce product range to zero",
-            "Ignore competitors"
-        ]);
+        {
+            transaction:
+            "Insurance Expense was incorrectly posted to Purchases.",
 
-        return {
-            question:
-            `A new competitor has entered the market with lower prices.
+            debit:
+            "Insurance Expense",
 
-What should ${business} do?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            credit:
+            "Purchases"
+        },
+
+        {
+            transaction:
+            "Motor Expenses were incorrectly posted to Office Expenses.",
+
+            debit:
+            "Motor Expenses",
+
+            credit:
+            "Office Expenses"
+        },
+
+        {
+            transaction:
+            "Rent Expense was incorrectly posted to General Expenses.",
+
+            debit:
+            "Rent Expense",
+
+            credit:
+            "General Expenses"
+        }
+
+    ];
+
+    const q = choice(entries);
+
+    return {
+
+        taskType:
+        "journalCorrection",
+
+        question:
+        "Complete the correcting journal entry.",
+
+        transaction:
+        q.transaction,
+
+        answers: {
+
+            debit:
+            q.debit,
+
+            credit:
+            q.credit
+        }
+    };
+}
 
     /* ---------------- SCENARIO 5: EXPANSION DECISION ---------------- */
 
     if(type === 5){
 
-        const correct = "Open new markets";
+    const difference =
+    rand(30,180);
 
-        const options = shuffle([
-            correct,
-            "Close existing markets",
-            "Reduce customer base",
-            "Stop selling products"
-        ]);
+    return {
 
-        return {
-            question:
-            `${business} has stable profits and wants to grow.
+        taskType:
+        "suspenseBalance",
 
-What is the best strategy?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        question:
+        "Calculate the balance on the suspense account.",
 
+        scenario:
+        "The trial balance did not agree and a suspense account was opened.",
+
+        difference:
+        difference,
+
+        answer:
+        difference
+    };
+}
     /* ---------------- SCENARIO 6: EMPLOYEES ---------------- */
 
     if(type === 6){
