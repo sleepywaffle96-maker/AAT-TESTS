@@ -1356,47 +1356,218 @@ else if(q.taskType === "journalCorrection"){
 
     '<div class="invoice-box">' +
 
-        '<p>' +
-        q.transaction +
-        '</p>' +
+        '<p>' + q.scenario + '</p>' +
 
-        '<br>' +
+        '<br><strong>Debit account:</strong><br><br>' +
 
-        '<table style="width:100%;">' +
+        '<select id="journal-debit-answer">' +
 
-            '<tr>' +
+            '<option value=""></option>' +
 
-                '<td>Debit:</td>' +
+            '<option value="sales">Sales</option>' +
 
-                '<td>' +
+            '<option value="purchases">Purchases</option>' +
 
-                    '<input id="journal-debit-answer" type="text">' +
+            '<option value="cash">Cash</option>' +
 
-                    '<span id="journal-debit-marker" class="feedback-marker"></span>' +
+            '<option value="bank">Bank</option>' +
 
-                '</td>' +
+            '<option value="suspense">Suspense</option>' +
 
-            '</tr>' +
+            '<option value="motor expenses">Motor Expenses</option>' +
 
-            '<tr>' +
+            '<option value="motor vehicles">Motor Vehicles</option>' +
 
-                '<td>Credit:</td>' +
+            '<option value="customer account">Customer Account</option>' +
 
-                '<td>' +
+            '<option value="supplier account">Supplier Account</option>' +
 
-                    '<input id="journal-credit-answer" type="text">' +
+        '</select>' +
 
-                    '<span id="journal-credit-marker" class="feedback-marker"></span>' +
+        '<span id="journal-debit-marker" class="feedback-marker"></span>' +
 
-                '</td>' +
+        '<br><br><strong>Credit account:</strong><br><br>' +
 
-            '</tr>' +
+        '<select id="journal-credit-answer">' +
 
-        '</table>' +
+            '<option value=""></option>' +
+
+            '<option value="sales">Sales</option>' +
+
+            '<option value="purchases">Purchases</option>' +
+
+            '<option value="cash">Cash</option>' +
+
+            '<option value="bank">Bank</option>' +
+
+            '<option value="suspense">Suspense</option>' +
+
+            '<option value="motor expenses">Motor Expenses</option>' +
+
+            '<option value="motor vehicles">Motor Vehicles</option>' +
+
+            '<option value="customer account">Customer Account</option>' +
+
+            '<option value="supplier account">Supplier Account</option>' +
+
+        '</select>' +
+
+        '<span id="journal-credit-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
 
+else if(q.taskType === "reversalError"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        '<select id="reversal-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="error of reversal">Error of Reversal</option>' +
+
+            '<option value="error of omission">Error of Omission</option>' +
+
+            '<option value="error of principle">Error of Principle</option>' +
+
+            '<option value="transposition error">Transposition Error</option>' +
+
+        '</select>' +
+
+        '<span id="reversal-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "transpositionError"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.question + '</p>' +
+
+        '<br>' +
+
+        '<select id="transposition-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="transposition error">Transposition Error</option>' +
+
+            '<option value="error of reversal">Error of Reversal</option>' +
+
+            '<option value="error of principle">Error of Principle</option>' +
+
+            '<option value="error of omission">Error of Omission</option>' +
+
+        '</select>' +
+
+        '<span id="transposition-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "controlCorrection"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Control Account Balance:</strong> £' +
+        q.controlBalance.toFixed(2) +
+        '</p>' +
+
+        '<p><strong>Adjustment:</strong> £' +
+        q.adjustment.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Corrected Balance: ' +
+
+        '<input id="control-answer" type="text">' +
+
+        '<span id="control-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "multiErrorCase"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' + q.scenario + '</p>' +
+
+        '<br>' +
+
+        '<select id="multi-error-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="error of omission">Error of Omission</option>' +
+
+            '<option value="error of principle">Error of Principle</option>' +
+
+            '<option value="error of reversal">Error of Reversal</option>' +
+
+            '<option value="transposition error">Transposition Error</option>' +
+
+        '</select>' +
+
+        '<span id="multi-error-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "integratedErrorCase"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Trial Balance Difference:</strong> £' +
+        q.difference.toFixed(2) +
+        '</p>' +
+
+        '<br>' +
+
+        'Suspense Account Balance: ' +
+
+        '<input id="integrated-balance-answer" type="text">' +
+
+        '<span id="integrated-balance-marker" class="feedback-marker"></span>' +
+
+        '<br><br>' +
+
+        '<select id="integrated-error-answer">' +
+
+            '<option value=""></option>' +
+
+            '<option value="error of omission">Error of Omission</option>' +
+
+            '<option value="error of principle">Error of Principle</option>' +
+
+            '<option value="error of reversal">Error of Reversal</option>' +
+
+            '<option value="transposition error">Transposition Error</option>' +
+
+        '</select>' +
+
+        '<span id="integrated-error-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+    
 else if(q.taskType === "suspenseBalance"){
 
     optionsHTML =
@@ -4345,6 +4516,105 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "reversalError"){
+
+    const answer =
+    document.getElementById("reversal-answer").value;
+
+    const marker =
+    document.getElementById("reversal-marker");
+
+    const correct = answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "transpositionError"){
+
+    const answer =
+    document.getElementById("transposition-answer").value;
+
+    const marker =
+    document.getElementById("transposition-marker");
+
+    const correct = answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "controlCorrection"){
+
+    const answer =
+    parseFloat(document.getElementById("control-answer").value);
+
+    const marker =
+    document.getElementById("control-marker");
+
+    const correct = answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "multiErrorCase"){
+
+    const answer =
+    document.getElementById("multi-error-answer").value;
+
+    const marker =
+    document.getElementById("multi-error-marker");
+
+    const correct = answer === q.answer;
+
+    marker.textContent = correct ? "✔" : "✖";
+    marker.style.color = correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "integratedErrorCase"){
+
+    const balance =
+    parseFloat(document.getElementById("integrated-balance-answer").value);
+
+    const error =
+    document.getElementById("integrated-error-answer").value;
+
+    const balanceMarker =
+    document.getElementById("integrated-balance-marker");
+
+    const errorMarker =
+    document.getElementById("integrated-error-marker");
+
+    const balanceCorrect =
+    balance === q.answer;
+
+    const errorCorrect =
+    error === q.errorType;
+
+    balanceMarker.textContent =
+    balanceCorrect ? "✔" : "✖";
+
+    errorMarker.textContent =
+    errorCorrect ? "✔" : "✖";
+
+    balanceMarker.style.color =
+    balanceCorrect ? "#16A34A" : "#DC2626";
+
+    errorMarker.style.color =
+    errorCorrect ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
 if(q.taskType === "identifyErrorType"){
 
     const answer =
@@ -6188,6 +6458,49 @@ if(q.taskType === "identifyErrorType"){
     return;
 }
 
+    if(q.taskType === "reversalError"){
+
+    document.getElementById("reversal-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "transpositionError"){
+
+    document.getElementById("transposition-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "controlCorrection"){
+
+    document.getElementById("control-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "multiErrorCase"){
+
+    document.getElementById("multi-error-answer").value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "integratedErrorCase"){
+
+    document.getElementById("integrated-balance-answer").value =
+    q.answer;
+
+    document.getElementById("integrated-error-answer").value =
+    q.errorType;
+
+    return;
+}
+
     if(q.taskType === "ledgerExtraction"){
 
     document.getElementById("ledger-answer").value =
@@ -6917,6 +7230,49 @@ q.taskType === "creditNote"
 
         return;
     }
+
+    if(q.taskType === "reversalError"){
+
+    document.getElementById("reversal-answer").value = "";
+    document.getElementById("reversal-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "transpositionError"){
+
+    document.getElementById("transposition-answer").value = "";
+    document.getElementById("transposition-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "controlCorrection"){
+
+    document.getElementById("control-answer").value = "";
+    document.getElementById("control-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "multiErrorCase"){
+
+    document.getElementById("multi-error-answer").value = "";
+    document.getElementById("multi-error-marker").textContent = "";
+
+    return;
+}
+
+if(q.taskType === "integratedErrorCase"){
+
+    document.getElementById("integrated-balance-answer").value = "";
+    document.getElementById("integrated-error-answer").value = "";
+
+    document.getElementById("integrated-balance-marker").textContent = "";
+    document.getElementById("integrated-error-marker").textContent = "";
+
+    return;
+}
 
     if(q.taskType === "ledgerExtraction"){
 
