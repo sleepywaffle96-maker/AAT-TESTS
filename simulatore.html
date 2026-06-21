@@ -1139,17 +1139,27 @@ else if(q.taskType === "csrActivity"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'CSR Area: ' +
+        '<select id="csr-answer">' +
 
-            '<input id="csr-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="csr-marker" class="feedback-marker"></span>' +
+            '<option value="environment">Environment</option>' +
 
-        '</div>' +
+            '<option value="employees">Employees</option>' +
+
+            '<option value="community">Community</option>' +
+
+            '<option value="customers">Customers</option>' +
+
+        '</select>' +
+
+        '<span id="csr-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1160,17 +1170,27 @@ else if(q.taskType === "communicationMethod"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Best communication method: ' +
+        '<select id="comm-answer">' +
 
-            '<input id="comm-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="comm-marker" class="feedback-marker"></span>' +
+            '<option value="meeting">Emergency Meeting</option>' +
 
-        '</div>' +
+            '<option value="email">Email</option>' +
+
+            '<option value="letter">Letter</option>' +
+
+            '<option value="poster">Poster</option>' +
+
+        '</select>' +
+
+        '<span id="comm-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1181,17 +1201,27 @@ else if(q.taskType === "teamworkScenario"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Key issue: ' +
+        '<select id="team-answer">' +
 
-            '<input id="team-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="team-marker" class="feedback-marker"></span>' +
+            '<option value="communication">Poor Communication</option>' +
 
-        '</div>' +
+            '<option value="motivation">Low Motivation</option>' +
+
+            '<option value="leadership">Weak Leadership</option>' +
+
+            '<option value="training">Lack of Training</option>' +
+
+        '</select>' +
+
+        '<span id="team-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1202,17 +1232,27 @@ else if(q.taskType === "conflictResolution"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Best action: ' +
+        '<select id="conflict-answer">' +
 
-            '<input id="conflict-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="conflict-marker" class="feedback-marker"></span>' +
+            '<option value="discussion">Discussion</option>' +
 
-        '</div>' +
+            '<option value="discipline">Disciplinary Action</option>' +
+
+            '<option value="ignore">Ignore the Problem</option>' +
+
+            '<option value="dismiss">Dismiss Employee</option>' +
+
+        '</select>' +
+
+        '<span id="conflict-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1223,43 +1263,64 @@ else if(q.taskType === "businessCaseStudy"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
         '<br>' +
 
-        'Main Objective: ' +
+        'Main Objective:<br>' +
 
-        '<input id="case-objective" type="text">' +
+        '<select id="case-objective">' +
+            '<option value=""></option>' +
+            '<option value="survival">Survival</option>' +
+            '<option value="growth">Growth</option>' +
+            '<option value="profit">Profit</option>' +
+        '</select>' +
 
         '<span id="case-objective-marker" class="feedback-marker"></span>' +
 
         '<br><br>' +
 
-        'Most Important Stakeholder: ' +
+        'Most Important Stakeholder:<br>' +
 
-        '<input id="case-stakeholder" type="text">' +
+        '<select id="case-stakeholder">' +
+            '<option value=""></option>' +
+            '<option value="customers">Customers</option>' +
+            '<option value="employees">Employees</option>' +
+            '<option value="shareholders">Shareholders</option>' +
+        '</select>' +
 
         '<span id="case-stakeholder-marker" class="feedback-marker"></span>' +
 
         '<br><br>' +
 
-        'Main Risk: ' +
+        'Main Risk:<br>' +
 
-        '<input id="case-risk" type="text">' +
+        '<select id="case-risk">' +
+            '<option value=""></option>' +
+            '<option value="competition">Competition</option>' +
+            '<option value="inflation">Inflation</option>' +
+            '<option value="cash flow">Cash Flow</option>' +
+        '</select>' +
 
         '<span id="case-risk-marker" class="feedback-marker"></span>' +
 
         '<br><br>' +
 
-        'Recommended Action: ' +
+        'Recommended Action:<br>' +
 
-        '<input id="case-action" type="text">' +
+        '<select id="case-action">' +
+            '<option value=""></option>' +
+            '<option value="improve service">Improve Service</option>' +
+            '<option value="reduce staff">Reduce Staff</option>' +
+            '<option value="increase prices">Increase Prices</option>' +
+        '</select>' +
 
         '<span id="case-action-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
-
 else if(q.taskType === "stakeholderPriority"){
 
     optionsHTML =
@@ -1270,15 +1331,23 @@ else if(q.taskType === "stakeholderPriority"){
         q.question +
         '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Stakeholder: ' +
+        '<select id="stakeholder-answer">' +
 
-            '<input id="stakeholder-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="stakeholder-marker" class="feedback-marker"></span>' +
+            '<option value="shareholders">Shareholders</option>' +
 
-        '</div>' +
+            '<option value="customers">Customers</option>' +
+
+            '<option value="employees">Employees</option>' +
+
+            '<option value="suppliers">Suppliers</option>' +
+
+        '</select>' +
+
+        '<span id="stakeholder-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1343,17 +1412,27 @@ else if(q.taskType === "ethicalIssue"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Ethical principle breached: ' +
+        '<select id="ethics-answer">' +
 
-            '<input id="ethics-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="ethics-marker" class="feedback-marker"></span>' +
+            '<option value="honesty">Honesty</option>' +
 
-        '</div>' +
+            '<option value="confidentiality">Confidentiality</option>' +
+
+            '<option value="fairness">Fairness</option>' +
+
+            '<option value="integrity">Integrity</option>' +
+
+        '</select>' +
+
+        '<span id="ethics-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1364,17 +1443,27 @@ else if(q.taskType === "dataProtection"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Key principle breached: ' +
+        '<select id="dp-answer">' +
 
-            '<input id="dp-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="dp-marker" class="feedback-marker"></span>' +
+            '<option value="consent">Consent</option>' +
 
-        '</div>' +
+            '<option value="security">Security</option>' +
+
+            '<option value="accuracy">Accuracy</option>' +
+
+            '<option value="retention">Retention</option>' +
+
+        '</select>' +
+
+        '<span id="dp-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1385,17 +1474,27 @@ else if(q.taskType === "healthSafety"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Identify the risk: ' +
+        '<select id="hs-answer">' +
 
-            '<input id="hs-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="hs-marker" class="feedback-marker"></span>' +
+            '<option value="fire exit">Blocked Fire Exit</option>' +
 
-        '</div>' +
+            '<option value="slip">Slip Hazard</option>' +
+
+            '<option value="electrical">Electrical Hazard</option>' +
+
+            '<option value="manual handling">Manual Handling</option>' +
+
+        '</select>' +
+
+        '<span id="hs-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1406,21 +1505,30 @@ else if(q.taskType === "professionalBehaviour"){
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.scenario + '</p>' +
+        '<p>' +
+        q.scenario +
+        '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Most professional action: ' +
+        '<select id="pb-answer">' +
 
-            '<input id="pb-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="pb-marker" class="feedback-marker"></span>' +
+            '<option value="report">Report to manager</option>' +
 
-        '</div>' +
+            '<option value="ignore">Ignore it</option>' +
+
+            '<option value="share">Share with colleagues</option>' +
+
+            '<option value="delete">Delete immediately</option>' +
+
+        '</select>' +
+
+        '<span id="pb-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
-
 else if(q.taskType === "stakeholderClassification"){
 
     let rows = "";
@@ -1481,15 +1589,23 @@ else if(q.taskType === "businessObjective"){
         q.question +
         '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Objective: ' +
+        '<select id="objective-answer">' +
 
-            '<input id="objective-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="objective-marker" class="feedback-marker"></span>' +
+            '<option value="profit">Profit</option>' +
 
-        '</div>' +
+            '<option value="growth">Growth</option>' +
+
+            '<option value="survival">Survival</option>' +
+
+            '<option value="market share">Market Share</option>' +
+
+        '</select>' +
+
+        '<span id="objective-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -1506,15 +1622,23 @@ else if(q.taskType === "missionStatement"){
         q.mission +
         '</p>' +
 
-        '<div style="margin-top:15px;">' +
+        '<br>' +
 
-            'Main Objective: ' +
+        '<select id="mission-answer">' +
 
-            '<input id="mission-answer" type="text">' +
+            '<option value=""></option>' +
 
-            '<span id="mission-marker" class="feedback-marker"></span>' +
+            '<option value="customer satisfaction">Customer Satisfaction</option>' +
 
-        '</div>' +
+            '<option value="profit">Profit</option>' +
+
+            '<option value="growth">Growth</option>' +
+
+            '<option value="survival">Survival</option>' +
+
+        '</select>' +
+
+        '<span id="mission-marker" class="feedback-marker"></span>' +
 
     '</div>';
 }
@@ -3935,11 +4059,14 @@ const gross = Number(grossText);
     if(q.taskType === "csrActivity"){
 
     const answer =
-    document.getElementById("csr-answer")
-    .value.trim().toLowerCase();
+    document.getElementById(
+        "csr-answer"
+    ).value;
 
     const marker =
-    document.getElementById("csr-marker");
+    document.getElementById(
+        "csr-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -3956,11 +4083,14 @@ const gross = Number(grossText);
 if(q.taskType === "communicationMethod"){
 
     const answer =
-    document.getElementById("comm-answer")
-    .value.trim().toLowerCase();
+    document.getElementById(
+        "comm-answer"
+    ).value;
 
     const marker =
-    document.getElementById("comm-marker");
+    document.getElementById(
+        "comm-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -3977,11 +4107,14 @@ if(q.taskType === "communicationMethod"){
 if(q.taskType === "teamworkScenario"){
 
     const answer =
-    document.getElementById("team-answer")
-    .value.trim().toLowerCase();
+    document.getElementById(
+        "team-answer"
+    ).value;
 
     const marker =
-    document.getElementById("team-marker");
+    document.getElementById(
+        "team-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -3998,11 +4131,14 @@ if(q.taskType === "teamworkScenario"){
 if(q.taskType === "conflictResolution"){
 
     const answer =
-    document.getElementById("conflict-answer")
-    .value.trim().toLowerCase();
+    document.getElementById(
+        "conflict-answer"
+    ).value;
 
     const marker =
-    document.getElementById("conflict-marker");
+    document.getElementById(
+        "conflict-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -4087,13 +4223,14 @@ if(q.taskType === "businessCaseStudy"){
 if(q.taskType === "ethicalIssue"){
 
     const answer =
-    document.getElementById("ethics-answer")
-    .value
-    .trim()
-    .toLowerCase();
+    document.getElementById(
+        "ethics-answer"
+    ).value;
 
     const marker =
-    document.getElementById("ethics-marker");
+    document.getElementById(
+        "ethics-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -4110,13 +4247,14 @@ if(q.taskType === "ethicalIssue"){
 if(q.taskType === "dataProtection"){
 
     const answer =
-    document.getElementById("dp-answer")
-    .value
-    .trim()
-    .toLowerCase();
+    document.getElementById(
+        "dp-answer"
+    ).value;
 
     const marker =
-    document.getElementById("dp-marker");
+    document.getElementById(
+        "dp-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -4133,13 +4271,14 @@ if(q.taskType === "dataProtection"){
 if(q.taskType === "healthSafety"){
 
     const answer =
-    document.getElementById("hs-answer")
-    .value
-    .trim()
-    .toLowerCase();
+    document.getElementById(
+        "hs-answer"
+    ).value;
 
     const marker =
-    document.getElementById("hs-marker");
+    document.getElementById(
+        "hs-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -4156,13 +4295,14 @@ if(q.taskType === "healthSafety"){
 if(q.taskType === "professionalBehaviour"){
 
     const answer =
-    document.getElementById("pb-answer")
-    .value
-    .trim()
-    .toLowerCase();
+    document.getElementById(
+        "pb-answer"
+    ).value;
 
     const marker =
-    document.getElementById("pb-marker");
+    document.getElementById(
+        "pb-marker"
+    );
 
     const correct =
     answer === q.answer;
@@ -4181,9 +4321,7 @@ if(q.taskType === "professionalBehaviour"){
     const answer =
     document.getElementById(
         "stakeholder-answer"
-    ).value
-    .trim()
-    .toLowerCase();
+    ).value;
 
     const marker =
     document.getElementById(
@@ -4234,9 +4372,7 @@ if(q.taskType === "businessObjective"){
     const answer =
     document.getElementById(
         "objective-answer"
-    ).value
-    .trim()
-    .toLowerCase();
+    ).value;
 
     const marker =
     document.getElementById(
@@ -4260,9 +4396,7 @@ if(q.taskType === "missionStatement"){
     const answer =
     document.getElementById(
         "mission-answer"
-    ).value
-    .trim()
-    .toLowerCase();
+    ).value;
 
     const marker =
     document.getElementById(
