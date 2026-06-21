@@ -4794,19 +4794,30 @@ if(q.taskType === "journalCorrection"){
     const creditCorrect =
     credit === q.answers.credit;
 
+    const debitMarker =
     document.getElementById(
         "journal-debit-marker"
-    ).textContent =
-    debitCorrect ? "✔" : "✖";
+    );
 
+    const creditMarker =
     document.getElementById(
         "journal-credit-marker"
-    ).textContent =
+    );
+
+    debitMarker.textContent =
+    debitCorrect ? "✔" : "✖";
+
+    creditMarker.textContent =
     creditCorrect ? "✔" : "✖";
+
+    debitMarker.style.color =
+    debitCorrect ? "#16A34A" : "#DC2626";
+
+    creditMarker.style.color =
+    creditCorrect ? "#16A34A" : "#DC2626";
 
     return;
 }
-
 if(q.taskType === "suspenseBalance"){
 
     const answer =
