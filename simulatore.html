@@ -1352,35 +1352,53 @@ else if(q.taskType === "errorCorrectionAmount"){
 
 else if(q.taskType === "journalCorrection"){
 
+    const accounts = [
+
+        "Rent Expense",
+        "General Expenses",
+        "Motor Expenses",
+        "Motor Vehicles",
+        "Insurance Expense",
+        "Office Expenses",
+        "Sales",
+        "Purchases",
+        "Cash",
+        "Bank",
+        "Suspense"
+    ];
+
+    let debitOptions =
+    '<option value=""></option>';
+
+    let creditOptions =
+    '<option value=""></option>';
+
+    accounts.forEach(acc => {
+
+        debitOptions +=
+        '<option value="' + acc + '">' +
+        acc +
+        '</option>';
+
+        creditOptions +=
+        '<option value="' + acc + '">' +
+        acc +
+        '</option>';
+    });
+
     optionsHTML =
 
     '<div class="invoice-box">' +
 
-        '<p>' + q.transaction + '</p>' +
+        '<p>' +
+        q.transaction +
+        '</p>' +
 
         '<br><strong>Debit account:</strong><br><br>' +
 
         '<select id="journal-debit-answer">' +
 
-            '<option value=""></option>' +
-
-            '<option value="sales">Sales</option>' +
-
-            '<option value="purchases">Purchases</option>' +
-
-            '<option value="cash">Cash</option>' +
-
-            '<option value="bank">Bank</option>' +
-
-            '<option value="suspense">Suspense</option>' +
-
-            '<option value="motor expenses">Motor Expenses</option>' +
-
-            '<option value="motor vehicles">Motor Vehicles</option>' +
-
-            '<option value="customer account">Customer Account</option>' +
-
-            '<option value="supplier account">Supplier Account</option>' +
+            debitOptions +
 
         '</select>' +
 
@@ -1390,25 +1408,7 @@ else if(q.taskType === "journalCorrection"){
 
         '<select id="journal-credit-answer">' +
 
-            '<option value=""></option>' +
-
-            '<option value="sales">Sales</option>' +
-
-            '<option value="purchases">Purchases</option>' +
-
-            '<option value="cash">Cash</option>' +
-
-            '<option value="bank">Bank</option>' +
-
-            '<option value="suspense">Suspense</option>' +
-
-            '<option value="motor expenses">Motor Expenses</option>' +
-
-            '<option value="motor vehicles">Motor Vehicles</option>' +
-
-            '<option value="customer account">Customer Account</option>' +
-
-            '<option value="supplier account">Supplier Account</option>' +
+            creditOptions +
 
         '</select>' +
 
@@ -4781,42 +4781,28 @@ if(q.taskType === "journalCorrection"){
     const debit =
     document.getElementById(
         "journal-debit-answer"
-    ).value.trim().toLowerCase();
+    ).value;
 
     const credit =
     document.getElementById(
         "journal-credit-answer"
-    ).value.trim().toLowerCase();
-
-    const debitMarker =
-    document.getElementById(
-        "journal-debit-marker"
-    );
-
-    const creditMarker =
-    document.getElementById(
-        "journal-credit-marker"
-    );
+    ).value;
 
     const debitCorrect =
-    debit ===
-    q.answers.debit.toLowerCase();
+    debit === q.answers.debit;
 
     const creditCorrect =
-    credit ===
-    q.answers.credit.toLowerCase();
+    credit === q.answers.credit;
 
-    debitMarker.textContent =
+    document.getElementById(
+        "journal-debit-marker"
+    ).textContent =
     debitCorrect ? "✔" : "✖";
 
-    creditMarker.textContent =
+    document.getElementById(
+        "journal-credit-marker"
+    ).textContent =
     creditCorrect ? "✔" : "✖";
-
-    debitMarker.style.color =
-    debitCorrect ? "#16A34A" : "#DC2626";
-
-    creditMarker.style.color =
-    creditCorrect ? "#16A34A" : "#DC2626";
 
     return;
 }
