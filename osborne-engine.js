@@ -2780,8 +2780,10 @@ if(type === 8){
         taskType:
         "dataProtection",
 
-        scenario:
+        question:
+        "Identify the data protection principle being breached.",
 
+        scenario:
         "Customer information is shared with another company without permission.",
 
         answer:
@@ -2796,8 +2798,10 @@ if(type === 9){
         taskType:
         "healthSafety",
 
-        scenario:
+        question:
+        "Identify the health and safety issue.",
 
+        scenario:
         "A fire exit is blocked by storage boxes.",
 
         answer:
