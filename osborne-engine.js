@@ -3107,116 +3107,111 @@ function generateL2CH5(type = null){
 
     if(type === 6){
 
-        const correct = "Increase staff training";
+    const originalBalance =
+    rand(1000,5000);
 
-        const options = shuffle([
-            correct,
-            "Reduce employee skills",
-            "Ignore performance issues",
-            "Cut all wages"
-        ]);
+    const missingEntry =
+    rand(100,500);
 
-        return {
-            question:
-            `Productivity at ${business} has decreased due to staff errors.
+    return {
 
-What should the business do?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        taskType:
+        "ledgerExtraction",
 
-    /* ---------------- SCENARIO 7: QUALITY ISSUES ---------------- */
+        question:
+        "Calculate the corrected ledger balance.",
 
-    if(type === 7){
+        originalBalance:
+        originalBalance,
 
-        const correct = "Improve quality control systems";
+        missingEntry:
+        missingEntry,
 
-        const options = shuffle([
-            correct,
-            "Ignore defects",
-            "Increase defective products",
-            "Reduce inspections"
-        ]);
+        answer:
+        originalBalance + missingEntry
+    };
+}
 
-        return {
-            question:
-            `${business} has noticed an increase in product defects.
+if(type === 7){
 
-What is the best response?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    return {
 
-    /* ---------------- SCENARIO 8: CASH FLOW ---------------- */
+        taskType:
+        "identifyOmission",
 
-    if(type === 8){
+        question:
+        "Identify the omitted entry.",
 
-        const correct = "Improve cash flow management";
+        scenario:
+        "A credit sale has been recorded in the Sales Account but not in the customer's account.",
 
-        const options = shuffle([
-            correct,
-            "Ignore cash shortages",
-            "Spend without planning",
-            "Remove budgeting systems"
-        ]);
+        answer:
+        "sales ledger"
+    };
+}
 
-        return {
-            question:
-            `${business} is struggling to pay suppliers on time due to cash shortages.
+if(type === 8){
 
-What should be done?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const balance =
+    rand(2000,6000);
 
-    /* ---------------- SCENARIO 9: PRICING ---------------- */
+    const adjustment =
+    rand(50,250);
 
-    if(type === 9){
+    return {
 
-        const correct = "Review pricing strategy";
+        taskType:
+        "extendedAdjustment",
 
-        const options = shuffle([
-            correct,
-            "Ignore market changes",
-            "Set random prices",
-            "Eliminate pricing structure"
-        ]);
+        question:
+        "Calculate the revised balance after the adjustment.",
 
-        return {
-            question:
-            `Sales are falling because customers think prices are too high.
+        balance:
+        balance,
 
-What should ${business} do?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        adjustment:
+        adjustment,
 
-    /* ---------------- SCENARIO 10: TECHNOLOGY ---------------- */
+        answer:
+        balance + adjustment
+    };
+}
 
-    if(type === 10){
+if(type === 9){
 
-        const correct = "Invest in new technology";
+    return {
 
-        const options = shuffle([
-            correct,
-            "Avoid automation",
-            "Reduce efficiency",
-            "Ignore innovation"
-        ]);
+        taskType:
+        "locateError",
 
-        return {
-            question:
-            `${business} is using outdated systems that slow down production.
+        question:
+        "Identify where the error occurred.",
 
-What is the best action?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        scenario:
+        "A purchase invoice was entered in the Sales Day Book.",
+
+        answer:
+        "day book"
+    };
+}
+
+if(type === 10){
+
+    return {
+
+        taskType:
+        "principleError",
+
+        question:
+        "Identify the type of error.",
+
+        scenario:
+        "Motor vehicle repairs were debited to Motor Vehicles.",
+
+        answer:
+        "error of principle"
+    };
+}
 
     /* ---------------- SCENARIO 11: CUSTOMER RETENTION ---------------- */
 
