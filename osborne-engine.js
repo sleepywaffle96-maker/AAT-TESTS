@@ -3383,231 +3383,631 @@ function generateL3CH1(type = null){
 
     if(type === 1){
 
-        const correct = "Provide financial information for decision making";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Increase profit automatically",
-            "Avoid all business risks",
-            "Replace management decisions"
-        ]);
+        {
+            scenario:
+            "A business wants to maximise long-term profitability whilst maintaining customer satisfaction.",
 
-        return {
-            question:
-            `What is the main purpose of financial accounting?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            options:[
+                "Survival",
+                "Profit",
+                "Market share",
+                "Social responsibility"
+            ],
 
-    /* ---------------- BUSINESS STRUCTURE ---------------- */
+            answer:1
+        },
 
-    if(type === 2){
+        {
+            scenario:
+            "A new business has entered a highly competitive market and wants to become the largest supplier within five years.",
 
-        const correct = "Limited liability company";
+            options:[
+                "Profit",
+                "Growth",
+                "Survival",
+                "Ethics"
+            ],
 
-        const options = shuffle([
-            correct,
-            "Sole trader",
-            "Unregistered partnership",
-            "Informal group"
-        ]);
+            answer:1
+        },
 
-        return {
-            question:
-            `${business} is owned by shareholders and has separate legal identity. What type of business is this?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        {
+            scenario:
+            "A charity-owned trading company wants to generate sufficient income to continue operating.",
 
-    /* ---------------- PRACTICAL PROFIT LOGIC ---------------- */
+            options:[
+                "Market dominance",
+                "Survival",
+                "Expansion overseas",
+                "Dividend maximisation"
+            ],
 
-    if(type === 3){
+            answer:1
+        }
 
-        const revenue = rand(5000,20000);
-        const costs = rand(3000,15000);
+    ];
 
-        const profit = revenue - costs;
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
 
-        const options = shuffle([
-            profit,
-            profit + 500,
-            profit - 400,
-            profit + 800
-        ]);
+    return{
 
-        return {
-            question:
-            `${business} has revenue of £${revenue} and costs of £${costs}.
+        taskType:
+        "businessObjective",
 
-What is the profit?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(profit)
-        };
-    }
+        question:
+        "Identify the main business objective.",
 
-    /* ---------------- USERS OF ACCOUNTS ---------------- */
+        scenario:
+        q.scenario,
 
-    if(type === 4){
+        options:
+        q.options,
 
-        const correct = "Investors";
+        answer:
+        q.answer
+    };
+}
 
-        const options = shuffle([
-            correct,
-            "Only employees",
-            "Only customers",
-            "Only suppliers"
-        ]);
+if(type === 2){
 
-        return {
-            question:
-            `Who uses financial statements to decide whether to invest in a business?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+    const scenarios = [
 
-    /* ---------------- CASH VS PROFIT ---------------- */
+        {
+            scenario:
+            "Employees are requesting improved health and safety procedures.",
 
-    if(type === 5){
+            options:[
+                "Customers",
+                "Employees",
+                "Suppliers",
+                "Government"
+            ],
 
-        const correct = "Profit includes non-cash items";
+            answer:1
+        },
 
-        const options = shuffle([
-            correct,
-            "Cash equals profit always",
-            "Profit ignores revenue",
-            "Cash is never recorded"
-        ]);
+        {
+            scenario:
+            "Investors are asking why profits have fallen this year.",
 
-        return {
-            question:
-            `Why is profit different from cash?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            options:[
+                "Customers",
+                "Shareholders",
+                "Suppliers",
+                "Competitors"
+            ],
 
+            answer:1
+        },
+
+        {
+            scenario:
+            "Residents complain about noise created by a factory during the night.",
+
+            options:[
+                "Local community",
+                "Employees",
+                "Customers",
+                "Banks"
+            ],
+
+            answer:0
+        }
+
+    ];
+
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return{
+
+        taskType:
+        "stakeholder",
+
+        question:
+        "Identify the stakeholder.",
+
+        scenario:
+        q.scenario,
+
+        options:
+        q.options,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 3){
+
+    const scenarios = [
+
+        {
+            scenario:
+            "The government increases corporation tax.",
+
+            options:[
+                "Political",
+                "Economic",
+                "Social",
+                "Technological"
+            ],
+
+            answer:0
+        },
+
+        {
+            scenario:
+            "Interest rates increase significantly.",
+
+            options:[
+                "Environmental",
+                "Economic",
+                "Legal",
+                "Social"
+            ],
+
+            answer:1
+        },
+
+        {
+            scenario:
+            "Consumers increasingly prefer online shopping.",
+
+            options:[
+                "Political",
+                "Technological",
+                "Social",
+                "Legal"
+            ],
+
+            answer:2
+        }
+
+    ];
+
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return{
+
+        taskType:
+        "pestle",
+
+        question:
+        "Identify the PESTLE factor.",
+
+        scenario:
+        q.scenario,
+
+        options:
+        q.options,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 4){
+
+    const scenarios = [
+
+        {
+            scenario:
+            "A business installs solar panels to reduce carbon emissions.",
+
+            options:[
+                "CSR",
+                "Marketing",
+                "Outsourcing",
+                "Recruitment"
+            ],
+
+            answer:0
+        },
+
+        {
+            scenario:
+            "Employees receive two paid volunteering days each year.",
+
+            options:[
+                "CSR",
+                "Cost reduction",
+                "Business expansion",
+                "Automation"
+            ],
+
+            answer:0
+        },
+
+        {
+            scenario:
+            "The business removes unnecessary plastic packaging.",
+
+            options:[
+                "CSR",
+                "Pricing",
+                "Budgeting",
+                "Forecasting"
+            ],
+
+            answer:0
+        }
+
+    ];
+
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return{
+
+        taskType:
+        "csr",
+
+        question:
+        "Identify the CSR activity.",
+
+        scenario:
+        q.scenario,
+
+        options:
+        q.options,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 5){
+
+    const sales =
+    rand(180000,350000);
+
+    const lastSales =
+    sales-rand(10000,50000);
+
+    const growth =
+    (((sales-lastSales)/lastSales)*100);
+
+    return{
+
+        taskType:
+        "salesGrowth",
+
+        question:
+        "Calculate the sales growth percentage (nearest whole %).",
+
+        sales:
+        sales,
+
+        lastSales:
+        lastSales,
+
+        answer:
+        Math.round(growth)
+    };
+}
     /* ---------------- BASIC ACCOUNTING EQUATION ---------------- */
 
     if(type === 6){
 
-        const assets = rand(10000,20000);
-        const liabilities = rand(3000,8000);
+    const scenarios = [
 
-        const capital = assets - liabilities;
+        {
+            scenario:
+            "A company has separate Finance, Marketing and HR departments.",
 
-        const options = shuffle([
-            capital,
-            capital + 500,
-            capital - 300,
-            capital + 800
-        ]);
+            options:[
+                "Flat structure",
+                "Functional structure",
+                "Matrix structure",
+                "Divisional structure"
+            ],
 
-        return {
-            question:
-            `A business has assets of £${assets} and liabilities of £${liabilities}.
+            answer:1
+        },
 
-What is capital?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(capital)
-        };
-    }
+        {
+            scenario:
+            "Employees report to both a project manager and a departmental manager.",
 
-    /* ---------------- INCOME STATEMENT LOGIC ---------------- */
+            options:[
+                "Matrix structure",
+                "Flat structure",
+                "Functional structure",
+                "Tall structure"
+            ],
 
-    if(type === 7){
+            answer:0
+        },
 
-        const revenue = rand(8000,15000);
-        const expenses = rand(3000,9000);
+        {
+            scenario:
+            "Each geographical region operates as an independent business unit.",
 
-        const profit = revenue - expenses;
+            options:[
+                "Functional structure",
+                "Divisional structure",
+                "Flat structure",
+                "Centralised structure"
+            ],
 
-        const options = shuffle([
-            profit,
-            profit + 200,
-            profit - 300,
-            profit + 500
-        ]);
+            answer:1
+        }
 
-        return {
-            question:
-            `Revenue £${revenue}
-Expenses £${expenses}
+    ];
 
-What is operating profit?`,
-            options: options.map(v => currency(v)),
-            correct: options.indexOf(profit)
-        };
-    }
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
 
-    /* ---------------- ACCURACY & RECORDING ---------------- */
+    return{
 
-    if(type === 8){
+        taskType:
+        "organisationStructure",
 
-        const correct = "Reliable financial reporting";
+        question:
+        "Identify the organisational structure.",
 
-        const options = shuffle([
-            correct,
-            "Random guessing",
-            "Profit manipulation",
-            "Ignoring records"
-        ]);
+        scenario:
+        q.scenario,
 
-        return {
-            question:
-            `Why is accuracy important in accounting records?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+        options:
+        q.options,
 
-    /* ---------------- USERS OF ACCOUNTING ---------------- */
+        answer:
+        q.answer
+    };
+}
 
-    if(type === 9){
+if(type === 7){
 
-        const correct = "Managers";
+    const scenarios = [
 
-        const options = shuffle([
-            correct,
-            "Only government",
-            "Only competitors",
-            "Only customers"
-        ]);
+        {
+            scenario:
+            "Recruiting new employees.",
 
-        return {
-            question:
-            `Who uses financial information for internal decision making?`,
-            options,
-            correct: options.indexOf(correct)
-        };
-    }
+            options:[
+                "Finance",
+                "Marketing",
+                "Human Resources",
+                "Operations"
+            ],
 
-    /* ---------------- BASIC ANALYSIS ---------------- */
+            answer:2
+        },
 
-    if(type === 10){
+        {
+            scenario:
+            "Preparing the annual budget.",
 
-        const profit = rand(1000,6000);
-        const trend = "increasing";
+            options:[
+                "Finance",
+                "Sales",
+                "Operations",
+                "IT"
+            ],
 
-        const options = shuffle([
-            "Business is performing well",
-            "Business is failing immediately",
-            "No information available",
-            "Costs are zero"
-        ]);
+            answer:0
+        },
 
-        return {
-            question:
-            `A business reports increasing profits of £${profit}.
+        {
+            scenario:
+            "Launching an advertising campaign.",
 
-What can be concluded?`,
-            options,
-            correct: options.indexOf("Business is performing well")
-        };
-    }
+            options:[
+                "Marketing",
+                "Finance",
+                "HR",
+                "Operations"
+            ],
 
+            answer:0
+        }
+
+    ];
+
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return{
+
+        taskType:
+        "businessFunction",
+
+        question:
+        "Identify the department responsible.",
+
+        scenario:
+        q.scenario,
+
+        options:
+        q.options,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 8){
+
+    const scenarios = [
+
+        {
+            scenario:
+            "A competitor reduces prices.",
+
+            options:[
+                "Internal",
+                "External"
+            ],
+
+            answer:1
+        },
+
+        {
+            scenario:
+            "Staff turnover increases significantly.",
+
+            options:[
+                "Internal",
+                "External"
+            ],
+
+            answer:0
+        },
+
+        {
+            scenario:
+            "Inflation rises sharply.",
+
+            options:[
+                "Internal",
+                "External"
+            ],
+
+            answer:1
+        }
+
+    ];
+
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return{
+
+        taskType:
+        "internalExternal",
+
+        question:
+        "Identify whether the factor is internal or external.",
+
+        scenario:
+        q.scenario,
+
+        options:
+        q.options,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 9){
+
+    const scenarios = [
+
+        {
+            scenario:
+            "A supplier becomes insolvent.",
+
+            options:[
+                "Financial risk",
+                "Operational risk",
+                "Reputational risk",
+                "Compliance risk"
+            ],
+
+            answer:1
+        },
+
+        {
+            scenario:
+            "Customer data is leaked online.",
+
+            options:[
+                "Operational risk",
+                "Reputational risk",
+                "Financial risk",
+                "Strategic risk"
+            ],
+
+            answer:1
+        },
+
+        {
+            scenario:
+            "Cash flow is insufficient to pay suppliers.",
+
+            options:[
+                "Financial risk",
+                "Compliance risk",
+                "Operational risk",
+                "Environmental risk"
+            ],
+
+            answer:0
+        }
+
+    ];
+
+    const q =
+    scenarios[
+        rand(0,scenarios.length-1)
+    ];
+
+    return{
+
+        taskType:
+        "businessRisk",
+
+        question:
+        "Identify the business risk.",
+
+        scenario:
+        q.scenario,
+
+        options:
+        q.options,
+
+        answer:
+        q.answer
+    };
+}
+
+if(type === 10){
+
+    const revenue =
+    rand(450000,900000);
+
+    const expenses =
+    rand(300000,revenue-50000);
+
+    return{
+
+        taskType:
+        "profitCalculation",
+
+        question:
+        "Calculate the profit.",
+
+        revenue:
+        revenue,
+
+        expenses:
+        expenses,
+
+        answer:
+        revenue-expenses
+    };
+}
     /* ---------------- COST VS REVENUE UNDERSTANDING ---------------- */
 
     if(type === 11){
