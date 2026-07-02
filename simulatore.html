@@ -1134,6 +1134,183 @@ if(q.taskType === "mcq"){
     });
 }
 
+else if(q.taskType === "businessObjective"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.scenario +
+        '</p>' +
+
+        '<br>' +
+
+        '<select id="business-objective-answer">' +
+
+            '<option value=""></option>';
+
+    q.options.forEach((option,index)=>{
+
+        optionsHTML +=
+
+        '<option value="' +
+        index +
+        '">' +
+
+        option +
+
+        '</option>';
+    });
+
+    optionsHTML +=
+
+        '</select>' +
+
+        '<span id="business-objective-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "stakeholder"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.scenario +
+        '</p>' +
+
+        '<br>' +
+
+        '<select id="stakeholder-answer">' +
+
+            '<option value=""></option>';
+
+    q.options.forEach((option,index)=>{
+
+        optionsHTML +=
+
+        '<option value="' +
+        index +
+        '">' +
+
+        option +
+
+        '</option>';
+    });
+
+    optionsHTML +=
+
+        '</select>' +
+
+        '<span id="stakeholder-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "pestle"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.scenario +
+        '</p>' +
+
+        '<br>' +
+
+        '<select id="pestle-answer">' +
+
+            '<option value=""></option>';
+
+    q.options.forEach((option,index)=>{
+
+        optionsHTML +=
+
+        '<option value="' +
+        index +
+        '">' +
+
+        option +
+
+        '</option>';
+    });
+
+    optionsHTML +=
+
+        '</select>' +
+
+        '<span id="pestle-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "csr"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p>' +
+        q.scenario +
+        '</p>' +
+
+        '<br>' +
+
+        '<select id="csr-answer">' +
+
+            '<option value=""></option>';
+
+    q.options.forEach((option,index)=>{
+
+        optionsHTML +=
+
+        '<option value="' +
+        index +
+        '">' +
+
+        option +
+
+        '</option>';
+    });
+
+    optionsHTML +=
+
+        '</select>' +
+
+        '<span id="csr-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
+else if(q.taskType === "salesGrowth"){
+
+    optionsHTML =
+
+    '<div class="invoice-box">' +
+
+        '<p><strong>Sales this year:</strong> £' +
+        q.sales.toLocaleString() +
+        '</p>' +
+
+        '<p><strong>Sales last year:</strong> £' +
+        q.lastSales.toLocaleString() +
+        '</p>' +
+
+        '<br>' +
+
+        'Sales Growth (%): ' +
+
+        '<input id="sales-growth-answer" type="text">' +
+
+        '<span id="sales-growth-marker" class="feedback-marker"></span>' +
+
+    '</div>';
+}
+
 else if(q.taskType === "identifyErrorType"){
 
     optionsHTML =
@@ -4517,6 +4694,136 @@ const gross = Number(grossText);
         return;
     }
 
+    if(q.taskType === "businessObjective"){
+
+    const answer =
+    parseInt(
+        document.getElementById(
+            "business-objective-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "business-objective-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "stakeholder"){
+
+    const answer =
+    parseInt(
+        document.getElementById(
+            "stakeholder-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "stakeholder-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "pestle"){
+
+    const answer =
+    parseInt(
+        document.getElementById(
+            "pestle-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "pestle-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "csr"){
+
+    const answer =
+    parseInt(
+        document.getElementById(
+            "csr-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "csr-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
+if(q.taskType === "salesGrowth"){
+
+    const answer =
+    parseFloat(
+        document.getElementById(
+            "sales-growth-answer"
+        ).value
+    );
+
+    const marker =
+    document.getElementById(
+        "sales-growth-marker"
+    );
+
+    const correct =
+    answer === q.answer;
+
+    marker.textContent =
+    correct ? "✔" : "✖";
+
+    marker.style.color =
+    correct ? "#16A34A" : "#DC2626";
+
+    return;
+}
+
     if(q.taskType === "reversalError"){
 
     const answer =
@@ -6446,6 +6753,56 @@ q.taskType === "creditNote"
         return;
     }
 
+if(q.taskType === "businessObjective"){
+
+    document.getElementById(
+        "business-objective-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "stakeholder"){
+
+    document.getElementById(
+        "stakeholder-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "pestle"){
+
+    document.getElementById(
+        "pestle-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "csr"){
+
+    document.getElementById(
+        "csr-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
+if(q.taskType === "salesGrowth"){
+
+    document.getElementById(
+        "sales-growth-answer"
+    ).value =
+    q.answer;
+
+    return;
+}
+
 if(q.taskType === "identifyErrorType"){
 
     document.getElementById(
@@ -7233,6 +7590,71 @@ q.taskType === "creditNote"
 
     document.getElementById("reversal-answer").value = "";
     document.getElementById("reversal-marker").textContent = "";
+
+    return;
+}
+
+    if(q.taskType === "businessObjective"){
+
+    document.getElementById(
+        "business-objective-answer"
+    ).value = "";
+
+    document.getElementById(
+        "business-objective-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "stakeholder"){
+
+    document.getElementById(
+        "stakeholder-answer"
+    ).value = "";
+
+    document.getElementById(
+        "stakeholder-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "pestle"){
+
+    document.getElementById(
+        "pestle-answer"
+    ).value = "";
+
+    document.getElementById(
+        "pestle-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "csr"){
+
+    document.getElementById(
+        "csr-answer"
+    ).value = "";
+
+    document.getElementById(
+        "csr-marker"
+    ).textContent = "";
+
+    return;
+}
+
+if(q.taskType === "salesGrowth"){
+
+    document.getElementById(
+        "sales-growth-answer"
+    ).value = "";
+
+    document.getElementById(
+        "sales-growth-marker"
+    ).textContent = "";
 
     return;
 }
